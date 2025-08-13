@@ -1,0 +1,101 @@
+{
+  "Year": {
+    "queries": {
+      "What is the distribution of papers published each year?": "Bar chart",
+      "How has the total number of publications changed over the years?": "Line chart",
+      "Identify any years with significant increases or decreases in publication count.": "Line chart with annotations",
+      "What is the average number of papers published per year?": "Histogram",
+      "Compare the number of publications in the first half vs. the second half of the dataset's time range.": "Bar chart"
+    }
+  },
+  "PaperType": {
+    "queries": {
+      "What is the distribution of papers by type?": "Pie chart",
+      "Which paper type is most common?": "Bar chart",
+      "How do the counts of different paper types compare?": "Stacked bar chart",
+      "What proportion of the total publications does each paper type represent?": "Pie chart",
+      "Identify any paper types with significantly fewer publications.": "Bar chart"
+    }
+  },
+  "Conference": {
+    "queries": {
+      "What is the distribution of papers by conference?": "Bar chart",
+      "Which conference has the highest number of published papers?": "Bar chart",
+      "How many papers were submitted for each conference?": "Bar chart",
+      "What proportion of the total publications does each conference contribute?": "Pie chart",
+      "Compare the number of papers across different conferences.": "Stacked bar chart"
+    }
+  },
+  "CitationCount": {
+    "queries": {
+      "What is the distribution of citation counts across all papers?": "Histogram",
+      "Identify papers with the highest citation counts.": "Bar chart",
+      "What is the average citation count per paper?": "Box plot",
+      "How do citation counts vary across different quartiles?": "Box plot",
+      "Are there any outliers in citation counts?": "Box plot"
+    }
+  },
+  "AuthorCount": {
+    "queries": {
+      "What is the distribution of the number of authors per paper?": "Histogram",
+      "Identify papers with the highest number of authors.": "Bar chart",
+      "What is the average number of authors per paper?": "Box plot",
+      "How does the number of authors vary across different quartiles?": "Box plot",
+      "Are there any outliers in the number of authors per paper?": "Box plot"
+    }
+  },
+  "Year & PaperType": {
+    "queries": {
+      "How has the distribution of paper types changed over the years?": "Stacked area chart",
+      "Which type of paper was most commonly submitted each year?": "Line chart or stacked bar chart",
+      "Rank the paper types by submission count per year.": "Grouped bar chart",
+      "How many journal papers were submitted each year?": "Line chart",
+      "Compare yearly trends across all paper types.": "Multi-line chart"
+    }
+  },
+  "Year & Conference": {
+    "queries": {
+      "How has the number of papers published in each conference changed over the years?": "Stacked line chart",
+      "Which conference had the most papers published each year?": "Stacked bar chart",
+      "Identify any conferences with significant changes in publication count over time.": "Line chart with annotations",
+      "Compare the growth trends of different conferences over the years.": "Multi-line chart",
+      "What is the average number of papers published per conference each year?": "Bar chart"
+    }
+  },
+  "PaperType & CitationCount": {
+    "queries": {
+      "What is the average citation count for each paper type?": "Bar chart",
+      "Which paper type has the highest median citation count?": "Box plot",
+      "How do citation counts vary across different paper types?": "Box plot",
+      "Identify any paper types with significantly higher citation counts.": "Bar chart",
+      "Compare the distribution of citation counts across paper types.": "Violin plot"
+    }
+  },
+  "Conference & CitationCount": {
+    "queries": {
+      "What is the average citation count for papers from each conference?": "Bar chart",
+      "Which conference has the highest median citation count?": "Box plot",
+      "How do citation counts vary across different conferences?": "Box plot",
+      "Identify any conferences with significantly higher citation counts.": "Bar chart",
+      "Compare the distribution of citation counts across conferences.": "Violin plot"
+    }
+  },
+  "Year & CitationCount": {
+    "queries": {
+      "How has the average citation count per paper changed over the years?": "Line chart",
+      "Identify any years with significantly higher citation counts.": "Bar chart",
+      "What is the trend of citation counts over time?": "Line chart",
+      "Compare the distribution of citation counts across different years.": "Box plot",
+      "Are there any years with outlier citation counts?": "Box plot"
+    }
+  },
+  "AuthorCount & CitationCount": {
+    "queries": {
+      "Is there a correlation between the number of authors and citation count?": "Scatter plot",
+      "What is the average citation count for papers with different numbers of authors?": "Bar chart",
+      "How do citation counts vary with the number of authors?": "Box plot",
+      "Identify any patterns in citation counts based on author count.": "Line chart",
+      "Compare the distribution of citation counts for papers with varying author counts.": "Violin plot"
+    }
+  }
+}

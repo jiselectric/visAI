@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/studio",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/studio"
+            },
+            "python": "${workspaceFolder}/studio/mini-template-env/bin/python"
+        },
+        {
+            "name": "Python: Run Agent",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/studio/run.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/studio",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/studio"
+            },
+            "python": "${workspaceFolder}/studio/mini-template-env/bin/python"
+        }
+    ]
+}

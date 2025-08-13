@@ -224,6 +224,9 @@ $RECYCLE.BIN/
 # environment
 mini-template-env
 
+# Development tools
+format_code.py
+
 studio/output*.html
 studio/output.pdf
 

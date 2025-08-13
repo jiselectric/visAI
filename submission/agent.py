@@ -1,1 +1,1 @@
-# Please copy your agent.py file from studio/ to submission/ folder. 
+# Please copy your agent.py file from studio/ to submission/ folder.
