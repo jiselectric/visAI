@@ -1,5 +1,6 @@
 from typing import Any, Counter, Dict, List
 
+import pandas as pd
 from utils.file_operation import save_json_data
 
 
@@ -59,3 +60,55 @@ def generate_dataset_summary(state: Dict[str, Any]) -> Dict[str, Any]:
     updated_state = state.copy()
     updated_state["dataset_summary"] = summaries
     return updated_state
+
+
+def sample_data(columns, sample_size):
+    # Create DataFrame directly from the data list
+    df = pd.read_csv("dataset.csv")
+
+    samples = {}
+    for col in columns:
+        if col in df.columns:
+            n_samples = min(sample_size, len(df[col].dropna()))
+            samples[col] = df[col].dropna().sample(n=n_samples).tolist()
+
+    return samples
+
+
+def execute_pandas_query(query: str) -> Dict[str, Any]:
+    """Execute pandas code and return the computed data in the correct format"""
+    import pandas as pd
+
+    # Load the dataset
+    df = pd.read_csv("dataset.csv")
+
+    # Create a local namespace with df available
+    local_namespace = {"df": df, "pd": pd}
+
+    try:
+        # Execute the pandas code
+        exec(query, globals(), local_namespace)
+
+        # Get the result variable
+        if "result" in local_namespace:
+            result = local_namespace["result"]
+
+            # Convert pandas DataFrame to the expected format
+            if hasattr(result, "to_dict") and hasattr(result, "index"):
+                # This is a DataFrame - convert to records format (list of dicts)
+                if hasattr(result, "to_dict"):
+                    # Use 'records' orientation to get list of dicts
+                    return result.to_dict("records")
+                else:
+                    return result.to_dict()
+            elif hasattr(result, "tolist"):
+                # This is a Series or other pandas object
+                return result.tolist()
+            else:
+                # This is a regular Python object
+                return result
+        else:
+            return {"error": "No 'result' variable found in executed code"}
+
+    except Exception as e:
+        return {"error": f"Error executing pandas code: {str(e)}"}

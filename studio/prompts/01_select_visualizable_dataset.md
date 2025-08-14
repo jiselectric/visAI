@@ -10,7 +10,6 @@ The dataset summary contains the following information for each column:
 
 Based on the dataset summary provided, you need to **filter and select only the columns that are suitable for meaningful data visualization**.
 
-
 ## IMPORTANT RULES:
 1. **AVOID columns with excessive missing data** (>10% missing values)
 2. **PREFER columns with clean, complete data** for better insights

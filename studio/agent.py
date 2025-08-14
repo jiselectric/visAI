@@ -8,8 +8,9 @@ from langgraph.graph import END, START, StateGraph
 from report_html import generate_html_report
 from report_pdf import generate_pdf_report
 from typing_extensions import TypedDict
-from utils.data_utils import generate_dataset_summary
+from utils.data_utils import execute_pandas_query, generate_dataset_summary, sample_data
 from utils.file_operation import (
+    clean_pandas_query,
     load_cached_json,
     load_prompt_template,
     read_csv_data,
@@ -29,6 +30,9 @@ class State(TypedDict):
     visualizable_dataset: JSONType  # Step 1: Select visualizable columns
     visualization_queries: JSONType  # Step 2: Generate visualization queries
     top_k_visualization_queries: JSONType  # Step 3: Select top-K queries
+    computed_visualization_data: (
+        JSONType  # Step 4: Compute data for visualization queries
+    )
 
 
 # Step 1: Select appropriate columns to visualize
@@ -67,6 +71,7 @@ def select_visualizable_data(state: State):
 # Step 2: Generate queries to inspire visualization generation
 def generate_visualization_queries(state: State):
     print("Step 2 / 10: Generate Visualization Queries")
+    attributes = state["dataset_info"]["attributes"]  # type: ignore
     visualizable_dataset = state["visualizable_dataset"]
 
     # Check if cached result exists
@@ -87,11 +92,14 @@ def generate_visualization_queries(state: State):
         prompt_template=sys_prompt,
         replacements={
             "{{visualizable_dataset_json}}": visualizable_dataset_json,
+            "{{attributes}}": str(attributes),  # type: ignore
         },
     )
 
     # Extract JSON from response
     visualization_queries = extract_json_from_response(response_content)
+    # Extract all keys from visualization_queries and store them as "attributes"
+    visualization_queries["attributes"] = list(visualization_queries.keys())  # type: ignore
 
     # Save the result
     save_json_data(visualization_queries, "02_visualization_queries.json")
@@ -103,6 +111,7 @@ def generate_visualization_queries(state: State):
 def select_top_k_visualization_queries(state: State):
     print("Step 3 / 10: Select Top-K Visualization Queries")
     visualization_queries = state["visualization_queries"]
+    attributes = state["dataset_info"]["attributes"]  # type: ignore
 
     # Check if cached result exists
     cached_data = load_cached_json("03_top_k_visualization_queries.json")
@@ -124,6 +133,7 @@ def select_top_k_visualization_queries(state: State):
         replacements={
             "{{K}}": str(K),
             "{{visualization_queries_json}}": visualization_queries_json,
+            "{{attributes}}": str(attributes),  # type: ignore
         },
     )
 
@@ -139,6 +149,7 @@ def select_top_k_visualization_queries(state: State):
 # Step 4: Compute the data for each visualization query
 def compute_data_for_visualization_queries(state: State):
     print("Step 4 / 10: Compute Data for Visualization Queries")
+    dataset_info = state["dataset_info"]
     top_k_visualization_queries = state["top_k_visualization_queries"]
 
     # Check if cached result exists
@@ -147,7 +158,65 @@ def compute_data_for_visualization_queries(state: State):
         print("Using cached - 04_computed_visualization_data.json")
         return {"computed_visualization_data": cached_data}
 
-    sys_prompt = load_prompt_template("04_compute_data_for_visualization_queries.md")
+    # Extract the selected_queries list from the response structure
+    if (
+        isinstance(top_k_visualization_queries, dict)
+        and "selected_queries" in top_k_visualization_queries
+    ):
+        queries_list = top_k_visualization_queries["selected_queries"]
+    elif isinstance(top_k_visualization_queries, list):
+        queries_list = top_k_visualization_queries
+    else:
+        raise ValueError(
+            f"Unexpected structure for top_k_visualization_queries: {type(top_k_visualization_queries)}"
+        )
+
+    computed_visualization_data = {}
+    if isinstance(queries_list, list):
+        for visualization_query in queries_list:
+            query = visualization_query["query"]  # type: ignore
+            chart_type = visualization_query["chart_type"]  # type: ignore
+            columns = [
+                part.strip()
+                for part in visualization_query["source_attribute"].split(" & ")  # type: ignore
+            ]
+
+            # Sample 10 examples for each column
+            attributes_samples = sample_data(columns, 10)
+
+            sys_prompt = load_prompt_template(
+                "04_generate_pandas_query_to_compute_data.md"
+            )
+
+            # Generate response using LLM
+            attributes_samples_json = json.dumps(
+                attributes_samples, indent=2, ensure_ascii=False
+            )
+
+            pandas_query = invoke_llm_with_prompt(
+                system_content="You are a highly skilled data analyst with expertise in pandas. You are given a query, target visualization type(s), and sample data for target attribute(s). Your task is to generate a pandas query to accurately compute the data for the query.",
+                prompt_template=sys_prompt,
+                replacements={
+                    "{{num_rows}}": str(dataset_info["num_rows"]),  # type: ignore
+                    "{{attributes}}": str(dataset_info["attributes"]),  # type: ignore
+                    "{{query}}": query,
+                    "{{chart_type}}": chart_type,
+                    "{{attributes_samples_json}}": attributes_samples_json,
+                },  # type: ignore
+            )
+
+            cleaned_pandas_query = clean_pandas_query(pandas_query)
+            computed_data = execute_pandas_query(cleaned_pandas_query)
+
+            computed_visualization_data[visualization_query["source_attribute"]] = {  # type: ignore
+                "query": query,
+                "computed_data": computed_data,
+            }
+
+    # Save the result
+    save_json_data(computed_visualization_data, "04_computed_visualization_data.json")
+
+    return {"computed_visualization_data": computed_visualization_data}
 
 
 def generate_msg(state: State):
@@ -180,14 +249,19 @@ def create_workflow():
     builder.add_node(
         "select_top_k_visualization_queries", select_top_k_visualization_queries
     )
-    builder.add_node("generate_msg", generate_msg)
+    builder.add_node(
+        "compute_data_for_visualization_queries", compute_data_for_visualization_queries
+    )
 
     builder.add_edge(START, "select_visualizable_data")
     builder.add_edge("select_visualizable_data", "generate_visualization_queries")
     builder.add_edge(
         "generate_visualization_queries", "select_top_k_visualization_queries"
     )
-    builder.add_edge("select_top_k_visualization_queries", END)
+    builder.add_edge(
+        "select_top_k_visualization_queries", "compute_data_for_visualization_queries"
+    )
+    builder.add_edge("compute_data_for_visualization_queries", END)
     # builder.add_edge("generate_msg", END)
     return builder.compile()
 

@@ -73,7 +73,7 @@ Your final output **must be a JSON object** with the following structure:
   - **`order`**: Sequential number (1, 2, 3, ...)
   - **`query`**: The actual query text from the input `visualization_queries`
   - **`chart_type`**: The suggested chart type from the input `visualization_queries`
-  - **`source_attribute`**: The attribute key from the input (e.g., "PaperType", "Year & Conference")
+  - **`source_attribute`**: The attribute key from the input (e.g., "PaperType", "Year & Conference") **STRICTLY** from {{attributes}}
   - **`flow_stage`**: The logical flow stage this query belongs to
   - **`rationale`**: Why this query fits in this flow stage
 - **`logical_flow`**: A brief explanation of the narrative flow

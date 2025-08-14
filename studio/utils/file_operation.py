@@ -49,3 +49,48 @@ def read_csv_data(csv_path: str) -> Dict[str, Any]:
             "data": data_rows,
             "num_rows": len(data_rows),
         }
+
+
+def clean_pandas_query(llm_output: str) -> str:
+    import re
+
+    # Remove markdown code blocks (```python, ```, etc.)
+    code_block_pattern = r"```(?:python)?\s*\n?(.*?)\n?```"
+    code_match = re.search(code_block_pattern, llm_output, re.DOTALL)
+
+    if code_match:
+        # Extract code from code block
+        code = code_match.group(1).strip()
+    else:
+        # If no code block found, try to extract lines that look like Python code
+        lines = llm_output.split("\n")
+        code_lines = []
+
+        for line in lines:
+            line = line.strip()
+            # Skip empty lines, markdown formatting, and explanatory text
+            if (
+                line
+                and not line.startswith("#")
+                and not line.startswith("**")
+                and not line.startswith("*")
+                and not line.startswith("-")
+                and not line.startswith("##")
+                and not line.startswith("```")
+                and "=" in line
+                or "df." in line
+                or "result" in line
+            ):
+                code_lines.append(line)
+
+        code = "\n".join(code_lines)
+
+    # Clean up any remaining markdown artifacts
+    code = re.sub(r"\*\*.*?\*\*", "", code)  # Remove bold text
+    code = re.sub(r"\*.*?\*", "", code)  # Remove italic text
+    code = re.sub(r"`.*?`", "", code)  # Remove inline code
+
+    # Remove any leading/trailing whitespace and empty lines
+    code = "\n".join(line for line in code.split("\n") if line.strip())
+
+    return code

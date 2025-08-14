@@ -13,7 +13,7 @@ You are given a **summary of a structured dataset**. Your task is to generate **
 5. Use **natural language** for the queries.
 
 ## IMPORTANT RULES:
-1. **AVOID columns with excessive missing data** (>30% missing values)
+1. **AVOID columns with excessive missing data** (>20% missing values)
 2. **Focus on columns with clean, complete data**
 3. **Generate queries that lead to meaningful insights**
 4. **Consider data quality** when selecting columns to analyze
@@ -53,15 +53,14 @@ You are given a **summary of a structured dataset**. Your task is to generate **
 Please analyze the following dataset and generate queries that can help guide another LLM to produce meaningful visualizations and insights from the dataset.
 
 ```json
-{{visualization_queries}}
+{{visualizable_dataset_json}}
 ```
-
 
 ## ✅ Output Format
 
 Your final output **must be a JSON object** with the following structure:
 
-- Each **key** is either a **single column name** (e.g., `"Conference"`) or a **combined key** of multiple columns (e.g., `"Year & PaperType"`).
+- Each **key** is either a **single column name** (e.g., `"Conference"`) or a **combined key** of multiple columns (e.g., `"Year & PaperType"`) **STRICTLY** from {{attributes}}
 - Each **value** is an object `queries` with **exactly 5 key-value pairs**, where:
   - The **key** is a query string.
   - The **value** is the suggested visualization type(s).
@@ -86,6 +85,15 @@ Your final output **must be a JSON object** with the following structure:
       "Rank the paper types by submission count per year.": "Grouped bar chart",
       "How many journal papers were submitted each year?": "Line chart",
       "Compare yearly trends across all paper types.": "Multi-line chart"
+    }
+  },
+  "Year & PaperType & Citations": {
+    "queries": {
+      "How has the distribution of citation counts changed over the years?": "Stacked area chart",
+      "Which type of paper had the highest median citation count each year?": "Line chart or stacked bar chart",
+      "Rank the paper types by median citation count per year.": "Grouped bar chart",
+      "How many journal papers had the highest median citation count each year?": "Line chart",
+      "Compare yearly trends across all paper types with median citation counts.": "Multi-line chart"
     }
   }
 }
