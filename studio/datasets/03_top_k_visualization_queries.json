@@ -6,7 +6,7 @@
       "chart_type": "Bar Chart",
       "source_attribute": "Conference",
       "flow_stage": "Introduction & Overview",
-      "rationale": "Provides a high-level overview of the dataset by showing the number of papers per conference, setting the stage for deeper analysis."
+      "rationale": "This query provides a high-level overview of the dataset by showing how papers are distributed across different conferences, setting the stage for deeper analysis."
     },
     {
       "order": 2,
@@ -14,7 +14,7 @@
       "chart_type": "Pie Chart",
       "source_attribute": "PaperType",
       "flow_stage": "Introduction & Overview",
-      "rationale": "Offers insight into the composition of paper types, helping to understand the dataset's structure."
+      "rationale": "This query complements the conference distribution by showing the proportion of different paper types, providing a foundational understanding of the dataset's composition."
     },
     {
       "order": 3,
@@ -22,23 +22,23 @@
       "chart_type": "Bar Chart",
       "source_attribute": "Conference & Award",
       "flow_stage": "Distribution Analysis",
-      "rationale": "Explores how awards are distributed across different conferences, highlighting any concentration of awards."
+      "rationale": "This query explores how awards are distributed across conferences, highlighting any concentrations or patterns in award distribution."
     },
     {
       "order": 4,
       "query": "Yearly distribution of paper types",
-      "chart_type": "Stacked Bar Chart",
+      "chart_type": "Line Chart",
       "source_attribute": "Year & PaperType",
-      "flow_stage": "Distribution Analysis",
-      "rationale": "Analyzes the distribution of paper types over the years, identifying trends and shifts in focus."
+      "flow_stage": "Temporal Trends",
+      "rationale": "This query examines how the distribution of paper types has changed over time, identifying trends and shifts in research focus."
     },
     {
       "order": 5,
-      "query": "Publication trends over the years",
+      "query": "Trends in conference participation over the years",
       "chart_type": "Line Chart",
-      "source_attribute": "Year",
+      "source_attribute": "Year & Conference",
       "flow_stage": "Temporal Trends",
-      "rationale": "Examines the overall trend in publications over time, identifying growth or decline patterns."
+      "rationale": "This query analyzes participation trends in conferences over the years, providing insights into the growth or decline of conference popularity."
     },
     {
       "order": 6,
@@ -46,17 +46,17 @@
       "chart_type": "Scatter Plot",
       "source_attribute": "PaperType & Award",
       "flow_stage": "Relationship Analysis",
-      "rationale": "Investigates the relationship between paper types and the likelihood of receiving awards, uncovering potential biases or trends."
+      "rationale": "This query investigates the relationship between paper types and the likelihood of receiving awards, uncovering potential biases or trends."
     },
     {
       "order": 7,
-      "query": "Top 10 most cited papers by category",
-      "chart_type": "Bar Chart",
-      "source_attribute": "PaperType",
+      "query": "Impact of conference on award distribution over time",
+      "chart_type": "Combination Chart",
+      "source_attribute": "Year & Conference & Award",
       "flow_stage": "Advanced Insights & Conclusions",
-      "rationale": "Highlights the most impactful papers, providing insights into which categories are leading in citations."
+      "rationale": "This query synthesizes previous insights by examining how the impact of conferences on award distribution has evolved over time, leading to actionable conclusions."
     }
   ],
-  "logical_flow": "The narrative begins with an overview of the dataset, focusing on the distribution of papers by conference and paper type. It then delves into the distribution of awards across conferences and the yearly distribution of paper types, providing a deeper understanding of the dataset's structure. The analysis progresses to temporal trends, examining publication trends over the years. This is followed by a relationship analysis between paper types and awards, uncovering potential correlations. The narrative concludes with advanced insights, highlighting the top 10 most cited papers by category, offering a perspective on the dataset's impact.",
-  "flow_justification": "This order creates a compelling story by starting with a broad overview, then narrowing down to specific distributions and trends, before exploring relationships and concluding with impactful insights. Each query builds on the previous one, ensuring a logical progression and comprehensive understanding of the dataset."
+  "logical_flow": "The narrative begins with an overview of the dataset, focusing on the distribution of papers by conference and paper type. It then delves into the distribution of awards across conferences, followed by an analysis of temporal trends in paper types and conference participation. The story progresses to explore relationships between paper types and awards, culminating in a comprehensive analysis of the impact of conferences on award distribution over time.",
+  "flow_justification": "This order creates a compelling story by starting with broad insights and gradually narrowing down to specific relationships and trends. Each query builds on the previous one, ensuring a logical progression from introduction to conclusion, while maintaining diversity in chart types and analytical approaches."
 }

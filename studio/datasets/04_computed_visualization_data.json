@@ -21,157 +21,19 @@
     ]
   },
   "PaperType": {
-    "query": "Top 10 most cited papers by category",
+    "query": "Paper types distribution",
     "computed_data": [
       {
-        "PaperType": "C",
-        "Title": "Tree-maps: a space-filling approach to the visualization of hierarchical information structures",
-        "CitationCount_CrossRef": 418.0
-      },
-      {
-        "PaperType": "C",
-        "Title": "Parallel coordinates: a tool for visualizing multi-dimensional geometry",
-        "CitationCount_CrossRef": 407.0
+        "PaperType": "J",
+        "count": 1999
       },
       {
         "PaperType": "C",
-        "Title": "Efficient simplification of point-sampled surfaces",
-        "CitationCount_CrossRef": 340.0
-      },
-      {
-        "PaperType": "C",
-        "Title": "Point set surfaces",
-        "CitationCount_CrossRef": 259.0
-      },
-      {
-        "PaperType": "C",
-        "Title": "Acceleration techniques for GPU-based volume rendering",
-        "CitationCount_CrossRef": 254.0
-      },
-      {
-        "PaperType": "C",
-        "Title": "SensePlace2: GeoTwitter analytics support for situational awareness",
-        "CitationCount_CrossRef": 227.0
-      },
-      {
-        "PaperType": "C",
-        "Title": "Visualizing the non-visual: spatial analysis and interaction with information from text documents",
-        "CitationCount_CrossRef": 217.0
-      },
-      {
-        "PaperType": "C",
-        "Title": "ROAMing terrain: Real-time Optimally Adapting Meshes",
-        "CitationCount_CrossRef": 207.0
-      },
-      {
-        "PaperType": "C",
-        "Title": "Low-level components of analytic activity in information visualization",
-        "CitationCount_CrossRef": 205.0
-      },
-      {
-        "PaperType": "C",
-        "Title": "ThemeRiver: visualizing theme changes over time",
-        "CitationCount_CrossRef": 196.0
-      },
-      {
-        "PaperType": "J",
-        "Title": "D³ Data-Driven Documents",
-        "CitationCount_CrossRef": 2178.0
-      },
-      {
-        "PaperType": "J",
-        "Title": "UpSet: Visualization of Intersecting Sets",
-        "CitationCount_CrossRef": 1561.0
-      },
-      {
-        "PaperType": "J",
-        "Title": "Narrative Visualization: Telling Stories with Data",
-        "CitationCount_CrossRef": 726.0
-      },
-      {
-        "PaperType": "J",
-        "Title": "Hierarchical Edge Bundles: Visualization of Adjacency Relations in Hierarchical Data",
-        "CitationCount_CrossRef": 679.0
-      },
-      {
-        "PaperType": "J",
-        "Title": "Toward a Deeper Understanding of the Role of Interaction in Information Visualization",
-        "CitationCount_CrossRef": 674.0
-      },
-      {
-        "PaperType": "J",
-        "Title": "A Nested Model for Visualization Design and Validation",
-        "CitationCount_CrossRef": 592.0
-      },
-      {
-        "PaperType": "J",
-        "Title": "Vega-Lite: A Grammar of Interactive Graphics",
-        "CitationCount_CrossRef": 519.0
-      },
-      {
-        "PaperType": "J",
-        "Title": "Design Study Methodology: Reflections from the Trenches and the Stacks",
-        "CitationCount_CrossRef": 513.0
-      },
-      {
-        "PaperType": "J",
-        "Title": "A Multi-Level Typology of Abstract Visualization Tasks",
-        "CitationCount_CrossRef": 509.0
-      },
-      {
-        "PaperType": "J",
-        "Title": "ManyEyes: a Site for Visualization at Internet Scale",
-        "CitationCount_CrossRef": 468.0
+        "count": 1559
       },
       {
         "PaperType": "M",
-        "Title": "Visual sentiment analysis on twitter data streams",
-        "CitationCount_CrossRef": 38.0
-      },
-      {
-        "PaperType": "M",
-        "Title": "VAST 2008 Challenge: Introducing mini-challenges",
-        "CitationCount_CrossRef": 31.0
-      },
-      {
-        "PaperType": "M",
-        "Title": "Animating multidimensional scaling to visualize N-dimensional data sets",
-        "CitationCount_CrossRef": 25.0
-      },
-      {
-        "PaperType": "M",
-        "Title": "ScatterBlogs: Geo-spatial document analysis",
-        "CitationCount_CrossRef": 23.0
-      },
-      {
-        "PaperType": "M",
-        "Title": "Analysis of community-contributed space- and time-referenced data (example of flickr and panoramio photos)",
-        "CitationCount_CrossRef": 18.0
-      },
-      {
-        "PaperType": "M",
-        "Title": "Poster: Dynamic time transformation for interpreting clusters of trajectories with space-time cube",
-        "CitationCount_CrossRef": 18.0
-      },
-      {
-        "PaperType": "M",
-        "Title": "VAST 2006 Contest - A Tale of Alderwood",
-        "CitationCount_CrossRef": 17.0
-      },
-      {
-        "PaperType": "M",
-        "Title": "IN-SPIRE InfoVis 2004 Contest Entry",
-        "CitationCount_CrossRef": 15.0
-      },
-      {
-        "PaperType": "M",
-        "Title": "RankSpiral: Toward Enhancing Search Results Visualizations",
-        "CitationCount_CrossRef": 15.0
-      },
-      {
-        "PaperType": "M",
-        "Title": "Hierarchy Based 3D Visualization of Large Software Structures",
-        "CitationCount_CrossRef": 14.0
+        "count": 319
       }
     ]
   },
@@ -546,148 +408,388 @@
       }
     ]
   },
-  "Year": {
-    "query": "Publication trends over the years",
+  "Year & Conference": {
+    "query": "Trends in conference participation over the years",
     "computed_data": [
       {
         "Year": 1990,
-        "publication_count": 53
+        "Conference": "Vis",
+        "participation_count": 53
       },
       {
         "Year": 1991,
-        "publication_count": 57
+        "Conference": "Vis",
+        "participation_count": 57
       },
       {
         "Year": 1992,
-        "publication_count": 59
+        "Conference": "Vis",
+        "participation_count": 59
       },
       {
         "Year": 1993,
-        "publication_count": 55
+        "Conference": "Vis",
+        "participation_count": 55
       },
       {
         "Year": 1994,
-        "publication_count": 59
+        "Conference": "Vis",
+        "participation_count": 59
       },
       {
         "Year": 1995,
-        "publication_count": 74
+        "Conference": "InfoVis",
+        "participation_count": 18
+      },
+      {
+        "Year": 1995,
+        "Conference": "Vis",
+        "participation_count": 56
       },
       {
         "Year": 1996,
-        "publication_count": 89
+        "Conference": "InfoVis",
+        "participation_count": 19
+      },
+      {
+        "Year": 1996,
+        "Conference": "Vis",
+        "participation_count": 70
       },
       {
         "Year": 1997,
-        "publication_count": 91
+        "Conference": "InfoVis",
+        "participation_count": 16
+      },
+      {
+        "Year": 1997,
+        "Conference": "Vis",
+        "participation_count": 75
       },
       {
         "Year": 1998,
-        "publication_count": 94
+        "Conference": "InfoVis",
+        "participation_count": 18
+      },
+      {
+        "Year": 1998,
+        "Conference": "Vis",
+        "participation_count": 76
       },
       {
         "Year": 1999,
-        "publication_count": 91
+        "Conference": "InfoVis",
+        "participation_count": 19
+      },
+      {
+        "Year": 1999,
+        "Conference": "Vis",
+        "participation_count": 72
       },
       {
         "Year": 2000,
-        "publication_count": 93
+        "Conference": "InfoVis",
+        "participation_count": 20
+      },
+      {
+        "Year": 2000,
+        "Conference": "Vis",
+        "participation_count": 73
       },
       {
         "Year": 2001,
-        "publication_count": 97
+        "Conference": "InfoVis",
+        "participation_count": 23
+      },
+      {
+        "Year": 2001,
+        "Conference": "Vis",
+        "participation_count": 74
       },
       {
         "Year": 2002,
-        "publication_count": 103
+        "Conference": "InfoVis",
+        "participation_count": 25
+      },
+      {
+        "Year": 2002,
+        "Conference": "Vis",
+        "participation_count": 78
       },
       {
         "Year": 2003,
-        "publication_count": 114
+        "Conference": "InfoVis",
+        "participation_count": 33
+      },
+      {
+        "Year": 2003,
+        "Conference": "Vis",
+        "participation_count": 81
       },
       {
         "Year": 2004,
-        "publication_count": 174
+        "Conference": "InfoVis",
+        "participation_count": 63
+      },
+      {
+        "Year": 2004,
+        "Conference": "Vis",
+        "participation_count": 111
       },
       {
         "Year": 2005,
-        "publication_count": 120
+        "Conference": "InfoVis",
+        "participation_count": 32
+      },
+      {
+        "Year": 2005,
+        "Conference": "Vis",
+        "participation_count": 88
       },
       {
         "Year": 2006,
-        "publication_count": 114
+        "Conference": "InfoVis",
+        "participation_count": 24
+      },
+      {
+        "Year": 2006,
+        "Conference": "VAST",
+        "participation_count": 27
+      },
+      {
+        "Year": 2006,
+        "Conference": "Vis",
+        "participation_count": 63
       },
       {
         "Year": 2007,
-        "publication_count": 131
+        "Conference": "InfoVis",
+        "participation_count": 27
+      },
+      {
+        "Year": 2007,
+        "Conference": "VAST",
+        "participation_count": 48
+      },
+      {
+        "Year": 2007,
+        "Conference": "Vis",
+        "participation_count": 56
       },
       {
         "Year": 2008,
-        "publication_count": 123
+        "Conference": "InfoVis",
+        "participation_count": 28
+      },
+      {
+        "Year": 2008,
+        "Conference": "VAST",
+        "participation_count": 45
+      },
+      {
+        "Year": 2008,
+        "Conference": "Vis",
+        "participation_count": 50
       },
       {
         "Year": 2009,
-        "publication_count": 148
+        "Conference": "InfoVis",
+        "participation_count": 37
+      },
+      {
+        "Year": 2009,
+        "Conference": "VAST",
+        "participation_count": 57
+      },
+      {
+        "Year": 2009,
+        "Conference": "Vis",
+        "participation_count": 54
       },
       {
         "Year": 2010,
-        "publication_count": 130
+        "Conference": "InfoVis",
+        "participation_count": 35
+      },
+      {
+        "Year": 2010,
+        "Conference": "VAST",
+        "participation_count": 47
+      },
+      {
+        "Year": 2010,
+        "Conference": "Vis",
+        "participation_count": 48
       },
       {
         "Year": 2011,
-        "publication_count": 149
+        "Conference": "InfoVis",
+        "participation_count": 44
+      },
+      {
+        "Year": 2011,
+        "Conference": "VAST",
+        "participation_count": 56
+      },
+      {
+        "Year": 2011,
+        "Conference": "Vis",
+        "participation_count": 49
       },
       {
         "Year": 2012,
-        "publication_count": 138
+        "Conference": "InfoVis",
+        "participation_count": 44
+      },
+      {
+        "Year": 2012,
+        "Conference": "SciVis",
+        "participation_count": 42
+      },
+      {
+        "Year": 2012,
+        "Conference": "VAST",
+        "participation_count": 52
       },
       {
         "Year": 2013,
-        "publication_count": 101
+        "Conference": "InfoVis",
+        "participation_count": 38
+      },
+      {
+        "Year": 2013,
+        "Conference": "SciVis",
+        "participation_count": 31
+      },
+      {
+        "Year": 2013,
+        "Conference": "VAST",
+        "participation_count": 32
       },
       {
         "Year": 2014,
-        "publication_count": 133
+        "Conference": "InfoVis",
+        "participation_count": 45
+      },
+      {
+        "Year": 2014,
+        "Conference": "SciVis",
+        "participation_count": 34
+      },
+      {
+        "Year": 2014,
+        "Conference": "VAST",
+        "participation_count": 54
       },
       {
         "Year": 2015,
-        "publication_count": 160
+        "Conference": "InfoVis",
+        "participation_count": 38
+      },
+      {
+        "Year": 2015,
+        "Conference": "SciVis",
+        "participation_count": 56
+      },
+      {
+        "Year": 2015,
+        "Conference": "VAST",
+        "participation_count": 66
       },
       {
         "Year": 2016,
-        "publication_count": 115
+        "Conference": "InfoVis",
+        "participation_count": 37
+      },
+      {
+        "Year": 2016,
+        "Conference": "SciVis",
+        "participation_count": 30
+      },
+      {
+        "Year": 2016,
+        "Conference": "VAST",
+        "participation_count": 48
       },
       {
         "Year": 2017,
-        "publication_count": 114
+        "Conference": "InfoVis",
+        "participation_count": 39
+      },
+      {
+        "Year": 2017,
+        "Conference": "SciVis",
+        "participation_count": 23
+      },
+      {
+        "Year": 2017,
+        "Conference": "VAST",
+        "participation_count": 52
       },
       {
         "Year": 2018,
-        "publication_count": 127
+        "Conference": "InfoVis",
+        "participation_count": 47
+      },
+      {
+        "Year": 2018,
+        "Conference": "SciVis",
+        "participation_count": 32
+      },
+      {
+        "Year": 2018,
+        "Conference": "VAST",
+        "participation_count": 48
       },
       {
         "Year": 2019,
-        "publication_count": 129
+        "Conference": "InfoVis",
+        "participation_count": 53
+      },
+      {
+        "Year": 2019,
+        "Conference": "SciVis",
+        "participation_count": 25
+      },
+      {
+        "Year": 2019,
+        "Conference": "VAST",
+        "participation_count": 51
       },
       {
         "Year": 2020,
-        "publication_count": 157
+        "Conference": "InfoVis",
+        "participation_count": 64
+      },
+      {
+        "Year": 2020,
+        "Conference": "SciVis",
+        "participation_count": 32
+      },
+      {
+        "Year": 2020,
+        "Conference": "VAST",
+        "participation_count": 61
       },
       {
         "Year": 2021,
-        "publication_count": 109
+        "Conference": "Vis",
+        "participation_count": 109
       },
       {
         "Year": 2022,
-        "publication_count": 119
+        "Conference": "Vis",
+        "participation_count": 119
       },
       {
         "Year": 2023,
-        "publication_count": 133
+        "Conference": "Vis",
+        "participation_count": 133
       },
       {
         "Year": 2024,
-        "publication_count": 124
+        "Conference": "Vis",
+        "participation_count": 124
       }
     ]
   },
@@ -695,1096 +797,982 @@
     "query": "Correlation between paper types and awards",
     "computed_data": [
       {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT;BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
+        "PaperType": "C",
+        "Award": "BA",
+        "count": 3
       },
       {
         "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
+        "Award": "BCS",
+        "count": 5
       },
       {
         "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
+        "Award": "BP",
+        "count": 22
       },
       {
         "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
+        "Award": "HM",
+        "count": 5
       },
       {
         "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
+        "Award": "TT",
+        "count": 22
       },
       {
         "PaperType": "C",
-        "Award": "TT"
+        "Award": "TT;BP",
+        "count": 3
       },
       {
-        "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "C",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BA"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "C",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "TT;BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BA"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT;BP"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "C",
-        "Award": "TT;BP"
-      },
-      {
-        "PaperType": "C",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "C",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "C",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "C",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "C",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "C",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "C",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
-        "PaperType": "J",
-        "Award": "HM"
-      },
-      {
-        "PaperType": "J",
-        "Award": "BP"
-      },
-      {
         "PaperType": "J",
-        "Award": "BP"
+        "Award": "BA",
+        "count": 3
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
-      },
-      {
         "PaperType": "J",
-        "Award": "HM"
+        "Award": "BP",
+        "count": 56
       },
       {
         "PaperType": "J",
-        "Award": "HM"
+        "Award": "HM",
+        "count": 139
       },
       {
         "PaperType": "J",
-        "Award": "BP"
+        "Award": "TT",
+        "count": 13
       },
       {
         "PaperType": "J",
-        "Award": "TT"
-      },
+        "Award": "TT;BP",
+        "count": 2
+      }
+    ]
+  },
+  "Year & Conference & Award": {
+    "query": "Impact of conference on award distribution over time",
+    "computed_data": [
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1990,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1991,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1992,
+        "Conference": "Vis",
+        "Award": "TT;BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "TT"
+        "Year": 1993,
+        "Conference": "Vis",
+        "Award": "BCS",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1993,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1993,
+        "Conference": "Vis",
+        "Award": "TT;BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 1994,
+        "Conference": "Vis",
+        "Award": "BCS",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1994,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 2
       },
       {
-        "PaperType": "C",
-        "Award": "HM"
+        "Year": 1994,
+        "Conference": "Vis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1995,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1995,
+        "Conference": "Vis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1996,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1996,
+        "Conference": "Vis",
+        "Award": "BCS",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1996,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1996,
+        "Conference": "Vis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1997,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "TT"
+        "Year": 1997,
+        "Conference": "Vis",
+        "Award": "BCS",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 1997,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 1998,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 1998,
+        "Conference": "Vis",
+        "Award": "BCS",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1998,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1998,
+        "Conference": "Vis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "HM"
+        "Year": 1999,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1999,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 1999,
+        "Conference": "Vis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2000,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2000,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "TT;BP"
+        "Year": 2001,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "TT"
+        "Year": 2001,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BCS"
+        "Year": 2002,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2002,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BA"
+        "Year": 2002,
+        "Conference": "Vis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 2003,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2003,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2003,
+        "Conference": "Vis",
+        "Award": "BA",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 2003,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2003,
+        "Conference": "Vis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2004,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2004,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 2004,
+        "Conference": "Vis",
+        "Award": "BA",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BCS"
+        "Year": 2004,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "HM"
+        "Year": 2004,
+        "Conference": "Vis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2005,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2005,
+        "Conference": "Vis",
+        "Award": "BA",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2005,
+        "Conference": "Vis",
+        "Award": "TT;BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2006,
+        "Conference": "InfoVis",
+        "Award": "TT;BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2006,
+        "Conference": "VAST",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2006,
+        "Conference": "Vis",
+        "Award": "BA",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2006,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2006,
+        "Conference": "Vis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2007,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "TT"
+        "Year": 2007,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "HM"
+        "Year": 2007,
+        "Conference": "VAST",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 2007,
+        "Conference": "Vis",
+        "Award": "BA",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2007,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BCS"
+        "Year": 2008,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2008,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 3
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2008,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2008,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2008,
+        "Conference": "Vis",
+        "Award": "BA",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2008,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "TT"
+        "Year": 2009,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2009,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 4
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2009,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2009,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2009,
+        "Conference": "VAST",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2009,
+        "Conference": "Vis",
+        "Award": "HM",
+        "award_count": 3
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 2009,
+        "Conference": "Vis",
+        "Award": "TT;BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2010,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2010,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 5
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2010,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2010,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2010,
+        "Conference": "VAST",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2010,
+        "Conference": "VAST",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 2010,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2010,
+        "Conference": "Vis",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2010,
+        "Conference": "Vis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BA"
+        "Year": 2011,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 2011,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 2011,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2011,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2011,
+        "Conference": "VAST",
+        "Award": "HM",
+        "award_count": 3
       },
       {
-        "PaperType": "C",
-        "Award": "TT"
+        "Year": 2011,
+        "Conference": "VAST",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BCS"
+        "Year": 2011,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2011,
+        "Conference": "Vis",
+        "Award": "HM",
+        "award_count": 3
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2011,
+        "Conference": "Vis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2012,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2012,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 3
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2012,
+        "Conference": "SciVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BA"
+        "Year": 2012,
+        "Conference": "SciVis",
+        "Award": "HM",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2012,
+        "Conference": "SciVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2012,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2012,
+        "Conference": "VAST",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2013,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2013,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2013,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 2013,
+        "Conference": "SciVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BA"
+        "Year": 2013,
+        "Conference": "SciVis",
+        "Award": "HM",
+        "award_count": 3
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2013,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2013,
+        "Conference": "VAST",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2013,
+        "Conference": "VAST",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2014,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2014,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 3
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2014,
+        "Conference": "InfoVis",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BCS"
+        "Year": 2014,
+        "Conference": "SciVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 2014,
+        "Conference": "SciVis",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "C",
-        "Award": "BP"
+        "Year": 2014,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2014,
+        "Conference": "VAST",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2014,
+        "Conference": "VAST",
+        "Award": "TT",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2015,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2015,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2015,
+        "Conference": "SciVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2015,
+        "Conference": "SciVis",
+        "Award": "HM",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2015,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2015,
+        "Conference": "VAST",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2016,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2016,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 3
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2016,
+        "Conference": "SciVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2016,
+        "Conference": "SciVis",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2016,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2016,
+        "Conference": "VAST",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2017,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2017,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2017,
+        "Conference": "SciVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2017,
+        "Conference": "SciVis",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2017,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2017,
+        "Conference": "VAST",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2018,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2018,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 3
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2018,
+        "Conference": "SciVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2018,
+        "Conference": "SciVis",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2018,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2018,
+        "Conference": "VAST",
+        "Award": "HM",
+        "award_count": 3
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2019,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2019,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2019,
+        "Conference": "SciVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2019,
+        "Conference": "SciVis",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2019,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2019,
+        "Conference": "VAST",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2020,
+        "Conference": "InfoVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2020,
+        "Conference": "InfoVis",
+        "Award": "HM",
+        "award_count": 4
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2020,
+        "Conference": "SciVis",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2020,
+        "Conference": "SciVis",
+        "Award": "HM",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2020,
+        "Conference": "VAST",
+        "Award": "BP",
+        "award_count": 1
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2020,
+        "Conference": "VAST",
+        "Award": "HM",
+        "award_count": 2
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2021,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 4
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2021,
+        "Conference": "Vis",
+        "Award": "HM",
+        "award_count": 16
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2022,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 3
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2022,
+        "Conference": "Vis",
+        "Award": "HM",
+        "award_count": 17
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2023,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 6
       },
       {
-        "PaperType": "J",
-        "Award": "BP"
+        "Year": 2023,
+        "Conference": "Vis",
+        "Award": "HM",
+        "award_count": 13
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2024,
+        "Conference": "Vis",
+        "Award": "BP",
+        "award_count": 5
       },
       {
-        "PaperType": "J",
-        "Award": "HM"
+        "Year": 2024,
+        "Conference": "Vis",
+        "Award": "HM",
+        "award_count": 14
       }
     ]
   }

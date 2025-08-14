@@ -479,11 +479,134 @@ class Agent:
         return {"dataset_info": dataset_info, "raw_data": raw_data}
 
     def decode_output(self, output: dict):
-        # if the final output contains Vega-Lite codes, then use generate_html_report
-        # if the final output contains Python codes, then use generate_pdf_report
-
-        # generate_pdf_report(output, "output.pdf")
-        generate_html_report(output, "output.html")
+        # New decode logic for step 7 output structure
+        if "generated_research_paper_components" in output:
+            print("Using new research paper HTML generation...")
+            self.generate_research_paper_html_report(output["generated_research_paper_components"], "output.html")
+        else:
+            print("Using original HTML generation...")
+            generate_html_report(output, "output.html")
+    
+    def generate_research_paper_html_report(self, research_paper_components: dict, output_path: str):
+        """
+        Generate HTML report from research paper components.
+        Each component can have:
+        - Only 'narrative' field: render as markdown
+        - Both 'narrative' and 'vega_lite_chart': render both
+        """
+        html_lines = [
+            "<!DOCTYPE html>",
+            "<html lang='en'>",
+            "<head>",
+            "  <meta charset='utf-8'>",
+            "  <title>Research Paper Report</title>",
+            "  <script src='https://cdn.jsdelivr.net/npm/vega@5'></script>",
+            "  <script src='https://cdn.jsdelivr.net/npm/vega-lite@5'></script>",
+            "  <script src='https://cdn.jsdelivr.net/npm/vega-embed@6'></script>",
+            "  <style>",
+            "    body { font-family: 'Georgia', serif; margin: 2em auto; max-width: 1000px; line-height: 1.6; }",
+            "    h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }",
+            "    h2 { color: #34495e; margin-top: 2em; }",
+            "    h3 { color: #7f8c8d; margin-top: 1.5em; }",
+            "    .visualization-container { margin: 2em 0; padding: 1em; border: 1px solid #ecf0f1; border-radius: 5px; }",
+            "    .narrative { margin: 1em 0; }",
+            "    strong { color: #2c3e50; }",
+            "    code { background-color: #f8f9fa; padding: 2px 4px; border-radius: 3px; }",
+            "    hr { margin: 2em 0; border: none; border-top: 1px solid #bdc3c7; }",
+            "  </style>",
+            "</head>",
+            "<body>",
+        ]
+        
+        vis_counter = 0
+        
+        # Process each component in order
+        for key, component in research_paper_components.items():
+            if isinstance(component, dict):
+                # Check if component has narrative
+                if "narrative" in component:
+                    narrative_html = self.markdown_to_html_enhanced(component["narrative"])
+                    html_lines.append(f'<div class="narrative">{narrative_html}</div>')
+                
+                # Check if component has vega-lite chart
+                if "vega_lite_chart" in component:
+                    div_id = f"vis{vis_counter}"
+                    html_lines.append(f'<div class="visualization-container">')
+                    html_lines.append(f'  <div id="{div_id}"></div>')
+                    
+                    # Handle both string and dict vega_lite_chart
+                    vega_spec = component["vega_lite_chart"]
+                    if isinstance(vega_spec, str):
+                        try:
+                            import json
+                            vega_spec = json.loads(vega_spec)
+                        except json.JSONDecodeError:
+                            html_lines.append(f'<p>Error: Invalid Vega-Lite specification</p>')
+                            html_lines.append('</div>')
+                            continue
+                    
+                    spec_json = json.dumps(vega_spec)
+                    html_lines.extend([
+                        "  <script>",
+                        f"    vegaEmbed('#{div_id}', {spec_json})",
+                        "      .catch(console.error);",
+                        "  </script>",
+                    ])
+                    html_lines.append('</div>')
+                    vis_counter += 1
+            else:
+                # Handle simple string components
+                html_lines.append(f'<div class="narrative">{self.markdown_to_html_enhanced(str(component))}</div>')
+        
+        html_lines.extend([
+            "</body>",
+            "</html>"
+        ])
+        
+        # Write to file (ensure it's in the correct directory)
+        from pathlib import Path
+        import os
+        
+        # Make sure we're writing to the current working directory (studio/)
+        if not os.path.isabs(output_path):
+            output_path = os.path.join(os.getcwd(), output_path)
+            
+        Path(output_path).write_text("\n".join(html_lines), encoding="utf-8")
+        print(f"HTML report generated at: {output_path}")
+    
+    def markdown_to_html_enhanced(self, md: str) -> str:
+        """Enhanced markdown to HTML converter for research papers."""
+        import re
+        
+        # Convert markdown headers
+        html = re.sub(r'^# (.+)$', r'<h1>\1</h1>', md, flags=re.MULTILINE)
+        html = re.sub(r'^## (.+)$', r'<h2>\1</h2>', html, flags=re.MULTILINE)
+        html = re.sub(r'^### (.+)$', r'<h3>\1</h3>', html, flags=re.MULTILINE)
+        
+        # Convert bold and italic
+        html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html)
+        html = re.sub(r'\*(.+?)\*', r'<em>\1</em>', html)
+        
+        # Convert code blocks
+        html = re.sub(r'`(.+?)`', r'<code>\1</code>', html)
+        
+        # Convert lists
+        html = re.sub(r'^- (.+)$', r'<li>\1</li>', html, flags=re.MULTILINE)
+        html = re.sub(r'(<li>.*</li>)', r'<ul>\1</ul>', html, flags=re.DOTALL)
+        
+        # Convert horizontal rules
+        html = re.sub(r'^---\s*$', r'<hr/>', html, flags=re.MULTILINE)
+        
+        # Convert paragraphs (split by double newlines)
+        parts = [p.strip() for p in html.split('\n\n') if p.strip()]
+        paragraphs = []
+        for part in parts:
+            if not any(tag in part for tag in ['<h1>', '<h2>', '<h3>', '<ul>', '<hr/>']):
+                paragraphs.append(f'<p>{part}</p>')
+            else:
+                paragraphs.append(part)
+        
+        return '\n'.join(paragraphs)
 
     def process(self):
         if self.workflow is None:
