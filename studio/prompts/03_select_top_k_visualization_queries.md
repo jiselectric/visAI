@@ -29,6 +29,9 @@ You are given a **comprehensive set of visualization queries** generated from a 
 3. **Queries that explore the same relationship** from different angles
 4. **Overlapping insights** that would produce similar visualizations
 5. **Queries that don't contribute to the overall story flow**
+6. **Queries that would create unreadable charts** (e.g., > 15 data points, high cardinality)
+7. **Queries about individual data points** instead of aggregated summaries
+8. **Queries involving columns with > 15 unique values** (these create visual noise)
 
 ## 🎭 Logical Flow Structure (Follow This Order):
 
@@ -56,6 +59,24 @@ You are given a **comprehensive set of visualization queries** generated from a 
 - Synthesize findings into actionable insights
 - Identify outliers, anomalies, or special cases
 - Use: combination charts, advanced visualizations
+
+## 🚨 CHART READABILITY REQUIREMENTS:
+
+**CRITICAL: Only select queries that will produce READABLE charts:**
+
+✅ **GOOD queries** (≤ 15 data points):
+- "Distribution of papers by conference" (4 conferences = 4 bars)
+- "Paper types distribution" (3 types = 3 bars)
+- "Top 10 most cited papers by category" (10 bars = readable)
+
+❌ **REJECT queries** (> 15 data points):
+- "Publication trends by year" (if > 15 years, too many points)
+- "Individual citation counts" (hundreds of unique values)
+- "Distribution of individual scores" (too many discrete values)
+- "Raw data point analysis" (not aggregated)
+- "Author-level analysis" (too many authors)
+
+**Remember: A chart with > 15 bars/points becomes cluttered and provides no clear insights.**
 
 ## 🔍 Input Analysis
 
@@ -127,5 +148,15 @@ Before submitting, verify:
 - [ ] Each query explores different aspects
 - [ ] Output follows exact JSON format
 - [ ] No markdown formatting or explanations outside JSON
+
+## ⚠️ FINAL WARNING:
+
+**Before selecting any query, ask yourself:**
+- "Will this create a chart with ≤ 15 data points?"
+- "Is the data aggregated/summarized, not raw individual values?"
+- "Are the involved columns low-cardinality (≤ 15 unique values)?"
+- "Can someone actually read and understand this chart?"
+
+**If any answer is NO, REJECT the query. It's better to have fewer, readable charts than many unreadable ones.**
 
 **Return only the final JSON. Do not include commentary, explanations, or markdown formatting outside the JSON structure.**

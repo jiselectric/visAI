@@ -11,55 +11,37 @@
   "Year": {
     "queries": {
       "How has the number of publications changed over the years?": "Line chart",
+      "What is the trend of publications over time?": "Area chart",
       "Which year had the highest number of publications?": "Bar chart",
-      "What is the distribution of publications across different years?": "Histogram",
-      "Identify any trends in publication counts over the years.": "Line chart",
-      "Compare the number of publications in the top 5 years.": "Bar chart"
+      "How do publication counts vary by year?": "Line chart",
+      "What is the distribution of publications across different years?": "Histogram"
     }
   },
   "PaperType": {
     "queries": {
-      "What is the distribution of paper types?": "Bar chart or pie chart",
+      "What is the distribution of papers by type?": "Bar chart or pie chart",
       "Which paper type is most common?": "Bar chart",
-      "How do the proportions of paper types compare?": "Pie chart",
-      "Compare the number of papers for each paper type.": "Bar chart",
-      "What is the frequency of each paper type?": "Bar chart"
+      "How many papers of each type were published?": "Bar chart",
+      "What proportion of the total publications does each paper type contribute?": "Pie chart",
+      "Compare the number of papers across different paper types.": "Stacked bar chart"
     }
   },
-  "AuthorKeywords": {
+  "Award": {
     "queries": {
-      "What are the most common author keywords?": "Word cloud",
-      "How frequently do top keywords appear?": "Bar chart",
-      "What is the distribution of keyword frequencies?": "Histogram",
-      "Identify the top 10 most used keywords.": "Bar chart",
-      "How do keyword frequencies compare?": "Bar chart"
-    }
-  },
-  "CitationCount_CrossRef": {
-    "queries": {
-      "What is the distribution of citation counts?": "Histogram",
-      "Which papers have the highest citation counts?": "Bar chart",
-      "How do citation counts vary across papers?": "Box plot",
-      "Identify any outliers in citation counts.": "Box plot",
-      "What is the median citation count?": "Box plot"
-    }
-  },
-  "Downloads_Xplore": {
-    "queries": {
-      "What is the distribution of download counts?": "Histogram",
-      "Which papers have the highest download counts?": "Bar chart",
-      "How do download counts vary across papers?": "Box plot",
-      "Identify any outliers in download counts.": "Box plot",
-      "What is the median download count?": "Box plot"
+      "What is the distribution of awards among papers?": "Bar chart or pie chart",
+      "Which award is most frequently given?": "Bar chart",
+      "How many papers received each type of award?": "Bar chart",
+      "What proportion of papers received awards?": "Pie chart",
+      "Compare the number of awards across different types.": "Stacked bar chart"
     }
   },
   "Year & Conference": {
     "queries": {
-      "How has the number of publications per conference changed over the years?": "Stacked line chart",
-      "Which conference had the most publications each year?": "Stacked bar chart",
+      "How has the number of papers published in each conference changed over the years?": "Stacked line chart",
+      "Which conference had the most papers published each year?": "Stacked bar chart",
       "Compare the trends of publications across conferences over time.": "Multi-line chart",
-      "What is the yearly distribution of publications for each conference?": "Stacked area chart",
-      "Identify any shifts in conference popularity over the years.": "Line chart"
+      "What is the yearly distribution of papers for each conference?": "Grouped bar chart",
+      "How do publication trends differ between conferences over the years?": "Stacked area chart"
     }
   },
   "Year & PaperType": {
@@ -71,64 +53,52 @@
       "Compare yearly trends across all paper types.": "Multi-line chart"
     }
   },
-  "Year & CitationCount_CrossRef": {
-    "queries": {
-      "How have citation counts changed over the years?": "Line chart",
-      "Which year had the highest average citation count?": "Bar chart",
-      "Identify trends in citation counts over time.": "Line chart",
-      "Compare citation counts across different years.": "Box plot",
-      "What is the distribution of citation counts per year?": "Stacked area chart"
-    }
-  },
   "Conference & PaperType": {
     "queries": {
-      "What is the distribution of paper types across conferences?": "Stacked bar chart",
-      "Which conference has the most journal papers?": "Bar chart",
+      "What is the distribution of paper types within each conference?": "Stacked bar chart",
+      "Which paper type is most common in each conference?": "Grouped bar chart",
+      "How do paper types vary across different conferences?": "Stacked bar chart",
       "Compare the number of each paper type across conferences.": "Grouped bar chart",
-      "How do paper type proportions vary by conference?": "Stacked bar chart",
-      "Identify the most common paper type for each conference.": "Bar chart"
+      "What proportion of each conference's papers are of each type?": "Stacked bar chart"
     }
   },
-  "Conference & CitationCount_CrossRef": {
+  "Year & Award": {
     "queries": {
-      "Which conference has the highest average citation count?": "Bar chart",
-      "Compare citation counts across conferences.": "Box plot",
-      "What is the distribution of citation counts for each conference?": "Stacked area chart",
-      "Identify any conferences with unusually high citation counts.": "Box plot",
-      "How do citation counts vary by conference?": "Bar chart"
+      "How has the distribution of awards changed over the years?": "Stacked area chart",
+      "Which year had the highest number of awarded papers?": "Bar chart",
+      "Compare the number of awards given each year.": "Line chart",
+      "What is the trend of award distribution over time?": "Line chart",
+      "How do award trends vary by year?": "Stacked bar chart"
     }
   },
-  "PaperType & CitationCount_CrossRef": {
+  "Conference & Award": {
     "queries": {
-      "Which paper type has the highest average citation count?": "Bar chart",
-      "Compare citation counts across different paper types.": "Box plot",
-      "What is the distribution of citation counts for each paper type?": "Stacked area chart",
-      "Identify any paper types with unusually high citation counts.": "Box plot",
-      "How do citation counts vary by paper type?": "Bar chart"
+      "What is the distribution of awards across different conferences?": "Stacked bar chart",
+      "Which conference has the highest number of awarded papers?": "Bar chart",
+      "How do awards vary across different conferences?": "Stacked bar chart",
+      "Compare the number of awards given in each conference.": "Grouped bar chart",
+      "What proportion of each conference's papers received awards?": "Stacked bar chart"
     }
   },
-  "Year & Downloads_Xplore": {
+  "PaperType & Award": {
     "queries": {
-      "How have download counts changed over the years?": "Line chart",
-      "Which year had the highest average download count?": "Bar chart",
-      "Identify trends in download counts over time.": "Line chart",
-      "Compare download counts across different years.": "Box plot",
-      "What is the distribution of download counts per year?": "Stacked area chart"
+      "What is the distribution of awards across different paper types?": "Stacked bar chart",
+      "Which paper type receives the most awards?": "Bar chart",
+      "How do awards vary across different paper types?": "Stacked bar chart",
+      "Compare the number of awards given for each paper type.": "Grouped bar chart",
+      "What proportion of each paper type received awards?": "Stacked bar chart"
     }
   },
   "attributes": [
     "Conference",
     "Year",
     "PaperType",
-    "AuthorKeywords",
-    "CitationCount_CrossRef",
-    "Downloads_Xplore",
+    "Award",
     "Year & Conference",
     "Year & PaperType",
-    "Year & CitationCount_CrossRef",
     "Conference & PaperType",
-    "Conference & CitationCount_CrossRef",
-    "PaperType & CitationCount_CrossRef",
-    "Year & Downloads_Xplore"
+    "Year & Award",
+    "Conference & Award",
+    "PaperType & Award"
   ]
 }

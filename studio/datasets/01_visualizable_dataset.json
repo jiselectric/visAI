@@ -1,124 +1,98 @@
 {
   "Conference": {
     "column_name": "Conference",
+    "data_type": "Categorical",
+    "unique_value_count": 4,
     "examples": [
       "InfoVis",
       "SciVis",
       "Vis",
       "VAST"
     ],
-    "unique_value_count": 4,
     "top_frequencies": {
       "Vis": 1942,
       "InfoVis": 886,
       "VAST": 744,
       "SciVis": 305
     },
-    "Data Quality Notes": "Clean categorical data with a small number of unique values.",
-    "Potential Visualizations": [
-      "Bar chart of count per conference",
-      "Pie chart of conference distribution"
-    ]
+    "visualization_suitability": "Excellent - Low cardinality, clean categories",
+    "recommended_charts": [
+      "Bar chart of papers per conference",
+      "Pie chart of conference distribution",
+      "Stacked bar with other categorical variables"
+    ],
+    "data_quality_score": "High - No missing data, consistent values"
   },
   "Year": {
     "column_name": "Year",
+    "data_type": "Time/Date",
+    "unique_value_count": 35,
     "examples": [
       "2011",
       "2014",
       "2010",
       "2006"
     ],
-    "unique_value_count": 35,
     "top_frequencies": {
       "2004": 174,
       "2015": 160,
       "2020": 157,
-      "2011": 149
+      "2011": 149,
+      "2009": 148
     },
-    "Data Quality Notes": "Complete data with consistent year format.",
-    "Potential Visualizations": [
+    "visualization_suitability": "Excellent - Natural time ordering, reasonable range",
+    "recommended_charts": [
       "Line chart of publications over time",
-      "Histogram of year distribution"
-    ]
+      "Area chart of cumulative publications",
+      "Time series analysis"
+    ],
+    "data_quality_score": "High - All values are valid 4-digit years"
   },
   "PaperType": {
     "column_name": "PaperType",
+    "data_type": "Categorical",
+    "unique_value_count": 3,
     "examples": [
       "J",
       "C",
       "M"
     ],
-    "unique_value_count": 3,
     "top_frequencies": {
       "J": 1999,
       "C": 1559,
       "M": 319
     },
-    "Data Quality Notes": "Categorical data with clear and distinct categories.",
-    "Potential Visualizations": [
-      "Bar chart of paper type distribution",
-      "Pie chart of paper type proportions"
-    ]
-  },
-  "AuthorKeywords": {
-    "column_name": "AuthorKeywords",
-    "examples": [
-      "Information visualization, user interfaces, toolkits, 2D graphics",
-      "Sets, set visualization, sets intersections, set attributes, set relationships, multidimensional data",
-      "Narrative visualization, storytelling, design methods, case study, journalism, social data analysis"
+    "visualization_suitability": "Excellent - Low cardinality, clean categories",
+    "recommended_charts": [
+      "Bar chart of paper types",
+      "Pie chart of paper type distribution",
+      "Stacked bar with other categorical variables"
     ],
-    "unique_value_count": 2883,
-    "top_frequencies": {
-      "": 979,
-      "Information visualization, user interfaces, toolkits, 2D graphics": 2,
-      "Movement data, spatio-temporal data, aggregation, scalable visualization, geovisualization": 2
-    },
-    "Data Quality Notes": "Structured text data suitable for aggregation.",
-    "Potential Visualizations": [
-      "Word cloud of keywords",
-      "Bar chart of top keywords"
-    ]
+    "data_quality_score": "High - No missing data, consistent values"
   },
-  "CitationCount_CrossRef": {
-    "column_name": "CitationCount_CrossRef",
+  "Award": {
+    "column_name": "Award",
+    "data_type": "Categorical",
+    "unique_value_count": 7,
     "examples": [
-      "2178",
-      "1561",
-      "726",
-      "679"
+      "TT",
+      "TT;BP",
+      "",
+      "BP"
     ],
-    "unique_value_count": 229,
     "top_frequencies": {
-      "0": 364,
-      "2": 186,
-      "1": 183,
-      "3": 147
+      "": 3604,
+      "HM": 144,
+      "BP": 78,
+      "TT": 35,
+      "BA": 6
     },
-    "Data Quality Notes": "Numerical data with a range of citation counts.",
-    "Potential Visualizations": [
-      "Histogram of citation counts",
-      "Box plot of citation distribution"
-    ]
-  },
-  "Downloads_Xplore": {
-    "column_name": "Downloads_Xplore",
-    "examples": [
-      "11668",
-      "26170",
-      "31097",
-      "7861"
+    "visualization_suitability": "Good - Low cardinality, clean categories",
+    "recommended_charts": [
+      "Bar chart of awards",
+      "Pie chart of award distribution",
+      "Stacked bar with other categorical variables"
     ],
-    "unique_value_count": 1679,
-    "top_frequencies": {
-      "71": 17,
-      "59": 14,
-      "76": 14,
-      "57": 14
-    },
-    "Data Quality Notes": "Numerical data with a wide range of download counts.",
-    "Potential Visualizations": [
-      "Histogram of download counts",
-      "Box plot of download distribution"
-    ]
+    "data_quality_score": "Medium - Some missing data, but manageable"
   }
 }

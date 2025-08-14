@@ -2,125 +2,61 @@
   "selected_queries": [
     {
       "order": 1,
-      "query": "What is the distribution of paper types in the dataset?",
-      "chart_type": "Pie Chart",
-      "source_attribute": "PaperType",
-      "flow_stage": "Introduction & Overview",
-      "rationale": "Provides a high-level overview of the types of papers included in the dataset, setting the stage for deeper analysis."
-    },
-    {
-      "order": 2,
-      "query": "How many papers are published each year?",
-      "chart_type": "Bar Chart",
-      "source_attribute": "Year",
-      "flow_stage": "Introduction & Overview",
-      "rationale": "Gives an overview of the dataset's temporal scope and the volume of publications over time."
-    },
-    {
-      "order": 3,
-      "query": "Which conferences have the highest number of papers?",
+      "query": "Distribution of papers by conference",
       "chart_type": "Bar Chart",
       "source_attribute": "Conference",
       "flow_stage": "Introduction & Overview",
-      "rationale": "Identifies key conferences contributing to the dataset, providing context on where the research is being presented."
+      "rationale": "Provides a high-level overview of the dataset by showing the number of papers per conference, setting the stage for deeper analysis."
+    },
+    {
+      "order": 2,
+      "query": "Paper types distribution",
+      "chart_type": "Pie Chart",
+      "source_attribute": "PaperType",
+      "flow_stage": "Introduction & Overview",
+      "rationale": "Offers insight into the composition of paper types, helping to understand the dataset's structure."
+    },
+    {
+      "order": 3,
+      "query": "Distribution of awards by conference",
+      "chart_type": "Bar Chart",
+      "source_attribute": "Conference & Award",
+      "flow_stage": "Distribution Analysis",
+      "rationale": "Explores how awards are distributed across different conferences, highlighting any concentration of awards."
     },
     {
       "order": 4,
-      "query": "What is the distribution of citation counts across papers?",
-      "chart_type": "Histogram",
-      "source_attribute": "CitationCount_CrossRef",
+      "query": "Yearly distribution of paper types",
+      "chart_type": "Stacked Bar Chart",
+      "source_attribute": "Year & PaperType",
       "flow_stage": "Distribution Analysis",
-      "rationale": "Explores how citation counts are distributed, highlighting the impact and reach of the papers."
+      "rationale": "Analyzes the distribution of paper types over the years, identifying trends and shifts in focus."
     },
     {
       "order": 5,
-      "query": "What is the distribution of downloads across papers?",
-      "chart_type": "Histogram",
-      "source_attribute": "Downloads_Xplore",
-      "flow_stage": "Distribution Analysis",
-      "rationale": "Analyzes the distribution of downloads, indicating the popularity and accessibility of the papers."
+      "query": "Publication trends over the years",
+      "chart_type": "Line Chart",
+      "source_attribute": "Year",
+      "flow_stage": "Temporal Trends",
+      "rationale": "Examines the overall trend in publications over time, identifying growth or decline patterns."
     },
     {
       "order": 6,
-      "query": "How are author affiliations distributed in the dataset?",
-      "chart_type": "Bar Chart",
-      "source_attribute": "AuthorAffiliation",
-      "flow_stage": "Distribution Analysis",
-      "rationale": "Examines the distribution of author affiliations, providing insights into the diversity and reach of the research community."
+      "query": "Correlation between paper types and awards",
+      "chart_type": "Scatter Plot",
+      "source_attribute": "PaperType & Award",
+      "flow_stage": "Relationship Analysis",
+      "rationale": "Investigates the relationship between paper types and the likelihood of receiving awards, uncovering potential biases or trends."
     },
     {
       "order": 7,
-      "query": "What are the trends in paper publications over the years?",
-      "chart_type": "Line Chart",
-      "source_attribute": "Year",
-      "flow_stage": "Temporal Trends",
-      "rationale": "Analyzes trends in publication volume over time, identifying growth or decline in research output."
-    },
-    {
-      "order": 8,
-      "query": "How have citation counts changed over the years?",
-      "chart_type": "Line Chart",
-      "source_attribute": "Year",
-      "flow_stage": "Temporal Trends",
-      "rationale": "Explores changes in citation counts over time, indicating shifts in research impact."
-    },
-    {
-      "order": 9,
-      "query": "What are the trends in downloads over the years?",
-      "chart_type": "Line Chart",
-      "source_attribute": "Year",
-      "flow_stage": "Temporal Trends",
-      "rationale": "Examines trends in downloads, reflecting changes in research accessibility and interest."
-    },
-    {
-      "order": 10,
-      "query": "Is there a correlation between citation counts and downloads?",
-      "chart_type": "Scatter Plot",
-      "source_attribute": "CitationCount_CrossRef & Downloads_Xplore",
-      "flow_stage": "Relationship Analysis",
-      "rationale": "Investigates the relationship between citation counts and downloads, revealing potential connections between impact and popularity."
-    },
-    {
-      "order": 11,
-      "query": "How do citation counts correlate with the number of authors?",
-      "chart_type": "Scatter Plot",
-      "source_attribute": "CitationCount_CrossRef & AuthorNames-Deduped",
-      "flow_stage": "Relationship Analysis",
-      "rationale": "Explores the relationship between the number of authors and citation counts, providing insights into collaborative impact."
-    },
-    {
-      "order": 12,
-      "query": "What is the relationship between paper type and citation count?",
-      "chart_type": "Box Plot",
-      "source_attribute": "PaperType & CitationCount_CrossRef",
-      "flow_stage": "Relationship Analysis",
-      "rationale": "Analyzes how different paper types are associated with citation counts, highlighting the impact of various research formats."
-    },
-    {
-      "order": 13,
-      "query": "Which papers have received awards and what are their citation counts?",
+      "query": "Top 10 most cited papers by category",
       "chart_type": "Bar Chart",
-      "source_attribute": "Award & CitationCount_CrossRef",
+      "source_attribute": "PaperType",
       "flow_stage": "Advanced Insights & Conclusions",
-      "rationale": "Identifies award-winning papers and their citation counts, showcasing high-impact research."
-    },
-    {
-      "order": 14,
-      "query": "What are the most common keywords in highly cited papers?",
-      "chart_type": "Word Cloud",
-      "source_attribute": "AuthorKeywords",
-      "flow_stage": "Advanced Insights & Conclusions",
-      "rationale": "Highlights prevalent research themes in highly cited papers, providing insights into influential topics."
-    },
-    {
-      "order": 15,
-      "query": "How do graphics replicability stamps correlate with citation counts?",
-      "chart_type": "Bar Chart",
-      "source_attribute": "GraphicsReplicabilityStamp & CitationCount_CrossRef",
-      "flow_stage": "Advanced Insights & Conclusions",
-      "rationale": "Examines the relationship between replicability and impact, emphasizing the importance of reproducible research."
+      "rationale": "Highlights the most impactful papers, providing insights into which categories are leading in citations."
     }
   ],
-  "logical_flow": "The narrative begins with an overview of the dataset, establishing the context and scope of the research. It then delves into distribution analyses to understand the spread of key metrics like citations and downloads. Temporal trends are explored to identify changes over time, followed by relationship analyses to uncover correlations between variables. The paper concludes with advanced insights, synthesizing findings into actionable conclusions.",
-  "flow_justification": "This order creates a compelling story by starting with foundational insights and progressively building towards complex analyses. Each stage logically follows from the previous one, ensuring a coherent and comprehensive exploration of the dataset. The diversity of chart types and analytical approaches enriches the narrative, providing a well-rounded understanding of the research landscape."
+  "logical_flow": "The narrative begins with an overview of the dataset, focusing on the distribution of papers by conference and paper type. It then delves into the distribution of awards across conferences and the yearly distribution of paper types, providing a deeper understanding of the dataset's structure. The analysis progresses to temporal trends, examining publication trends over the years. This is followed by a relationship analysis between paper types and awards, uncovering potential correlations. The narrative concludes with advanced insights, highlighting the top 10 most cited papers by category, offering a perspective on the dataset's impact.",
+  "flow_justification": "This order creates a compelling story by starting with a broad overview, then narrowing down to specific distributions and trends, before exploring relationships and concluding with impactful insights. Each query builds on the previous one, ensuring a logical progression and comprehensive understanding of the dataset."
 }

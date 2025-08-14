@@ -51,20 +51,37 @@ def read_csv_data(csv_path: str) -> Dict[str, Any]:
         }
 
 
-def clean_pandas_query(llm_output: str) -> str:
+def clean_markdown_output(llm_output: str, output_type: str = "generic") -> str:
+    """
+    Clean markdown output from LLM and extract the relevant content.
+
+    Args:
+        llm_output: Raw output from LLM that may contain markdown, code blocks, etc.
+        output_type: Type of output to extract ("pandas", "vegalite", "json", "generic")
+
+    Returns:
+        Clean content string without markdown formatting
+
+    Examples:
+        Input: "```python\nresult = df.groupby('Year').size()\n```"
+        Output: "result = df.groupby('Year').size()"
+
+        Input: "```json\n{\"$schema\": \"...\"}\n```"
+        Output: "{\"$schema\": \"...\"}"
+    """
     import re
 
-    # Remove markdown code blocks (```python, ```, etc.)
-    code_block_pattern = r"```(?:python)?\s*\n?(.*?)\n?```"
+    # Remove markdown code blocks (```python, ```json, ```, etc.)
+    code_block_pattern = r"```(?:python|json|javascript|html|css)?\s*\n?(.*?)\n?```"
     code_match = re.search(code_block_pattern, llm_output, re.DOTALL)
 
     if code_match:
         # Extract code from code block
-        code = code_match.group(1).strip()
+        content = code_match.group(1).strip()
     else:
-        # If no code block found, try to extract lines that look like Python code
+        # If no code block found, try to extract relevant lines based on output type
         lines = llm_output.split("\n")
-        code_lines = []
+        content_lines = []
 
         for line in lines:
             line = line.strip()
@@ -77,20 +94,45 @@ def clean_pandas_query(llm_output: str) -> str:
                 and not line.startswith("-")
                 and not line.startswith("##")
                 and not line.startswith("```")
-                and "=" in line
-                or "df." in line
-                or "result" in line
+                and not line.startswith(">")
+                and not line.startswith("|")
             ):
-                code_lines.append(line)
+                # For pandas queries, look for specific patterns
+                if output_type == "pandas" and (
+                    "=" in line or "df." in line or "result" in line
+                ):
+                    content_lines.append(line)
+                # For Vega-Lite/JSON, look for JSON-like patterns
+                elif output_type in ["vegalite", "json"] and (
+                    "{" in line or "}" in line or '"' in line or ":" in line
+                ):
+                    content_lines.append(line)
+                # For generic output, include lines that look like code/content
+                elif output_type == "generic" and (
+                    "=" in line
+                    or "{" in line
+                    or "}" in line
+                    or "[" in line
+                    or "]" in line
+                ):
+                    content_lines.append(line)
+                # For generic output, also include lines that don't look like markdown
+                elif output_type == "generic" and not any(
+                    line.startswith(prefix)
+                    for prefix in ["#", "**", "*", "-", "##", "```", ">", "|"]
+                ):
+                    content_lines.append(line)
 
-        code = "\n".join(code_lines)
+        content = "\n".join(content_lines)
 
     # Clean up any remaining markdown artifacts
-    code = re.sub(r"\*\*.*?\*\*", "", code)  # Remove bold text
-    code = re.sub(r"\*.*?\*", "", code)  # Remove italic text
-    code = re.sub(r"`.*?`", "", code)  # Remove inline code
+    content = re.sub(r"\*\*.*?\*\*", "", content)  # Remove bold text
+    content = re.sub(r"\*.*?\*", "", content)  # Remove italic text
+    content = re.sub(r"`.*?`", "", content)  # Remove inline code
+    content = re.sub(r"\[.*?\]\(.*?\)", "", content)  # Remove links
+    content = re.sub(r"!\[.*?\]\(.*?\)", "", content)  # Remove images
 
     # Remove any leading/trailing whitespace and empty lines
-    code = "\n".join(line for line in code.split("\n") if line.strip())
+    content = "\n".join(line for line in content.split("\n") if line.strip())
 
-    return code
+    return content

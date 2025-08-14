@@ -10,7 +10,7 @@ from report_pdf import generate_pdf_report
 from typing_extensions import TypedDict
 from utils.data_utils import execute_pandas_query, generate_dataset_summary, sample_data
 from utils.file_operation import (
-    clean_pandas_query,
+    clean_markdown_output,
     load_cached_json,
     load_prompt_template,
     read_csv_data,
@@ -32,6 +32,13 @@ class State(TypedDict):
     top_k_visualization_queries: JSONType  # Step 3: Select top-K queries
     computed_visualization_data: (
         JSONType  # Step 4: Compute data for visualization queries
+    )
+    generated_vegalite_charts: JSONType  # Step 5: Generate Vega-Lite Charts
+    generated_vegalite_charts_with_narrative: (
+        JSONType  # Step 6: Generate Narrative for Vega-Lite Charts
+    )
+    generated_research_paper_components: (
+        JSONType  # Step 7: Generate Research Paper Components
     )
 
 
@@ -111,7 +118,7 @@ def generate_visualization_queries(state: State):
 def select_top_k_visualization_queries(state: State):
     print("Step 3 / 10: Select Top-K Visualization Queries")
     visualization_queries = state["visualization_queries"]
-    attributes = state["dataset_info"]["attributes"]  # type: ignore
+    attributes = state["visualization_queries"]["attributes"]  # type: ignore
 
     # Check if cached result exists
     cached_data = load_cached_json("03_top_k_visualization_queries.json")
@@ -126,7 +133,7 @@ def select_top_k_visualization_queries(state: State):
         visualization_queries, indent=2, ensure_ascii=False
     )
 
-    K = 15  # number of queries to select
+    K = 7  # number of queries to select
     response_content = invoke_llm_with_prompt(
         system_content="You are a highly skilled scholar who is writing a research paper. You are given a list of visualization queries that give deep insights into the dataset. Your task is to select the top-{K} queries that would produce the research paper with natural logical flow.",
         prompt_template=sys_prompt,
@@ -205,7 +212,7 @@ def compute_data_for_visualization_queries(state: State):
                 },  # type: ignore
             )
 
-            cleaned_pandas_query = clean_pandas_query(pandas_query)
+            cleaned_pandas_query = clean_markdown_output(pandas_query, "pandas")
             computed_data = execute_pandas_query(cleaned_pandas_query)
 
             computed_visualization_data[visualization_query["source_attribute"]] = {  # type: ignore
@@ -217,6 +224,166 @@ def compute_data_for_visualization_queries(state: State):
     save_json_data(computed_visualization_data, "04_computed_visualization_data.json")
 
     return {"computed_visualization_data": computed_visualization_data}
+
+
+# Step 5: Generate Vega-Lite Charts
+def generate_vega_lite_charts(state: State):
+    print("Step 5 / 10: Generate Vega-Lite Charts")
+    computed_visualization_data = state["computed_visualization_data"]
+
+    # Check if cached result exists
+    cached_data = load_cached_json("05_generated_vegalite_charts.json")
+    if cached_data:
+        print("Using cached - 05_generated_vegalite_charts.json")
+        return {"computed_visualization_data": cached_data}
+
+    generated_vega_lite_charts = {}
+    for source_attribute, data in computed_visualization_data.items():  # type: ignore
+        query = data["query"]  # type: ignore
+        computed_data = data["computed_data"]  # type: ignore
+
+        sys_prompt = load_prompt_template("05_generate_vegalite_chart.md")
+
+        # Generate response using LLM
+        computed_data_json = json.dumps(computed_data, indent=2, ensure_ascii=False)
+
+        response_content = invoke_llm_with_prompt(
+            system_content="You are a highly skilled data analyst with expertise in Vega-Lite charts. You are given a query and a computed data in JSON format. Your task is to generate an accurate Vega-Lite chart to visualize the data.",
+            prompt_template=sys_prompt,
+            replacements={
+                "{{query}}": query,  # type: ignore
+                "{{computed_data_json}}": computed_data_json,  # type: ignore
+            },  # type: ignore
+        )
+
+        cleaned_response_content = clean_markdown_output(response_content, "vegalite")
+
+        generated_vega_lite_charts[source_attribute] = {
+            "query": query,
+            "vega_lite_chart": cleaned_response_content,
+        }
+
+    # Save the result
+    save_json_data(generated_vega_lite_charts, "05_generated_vegalite_charts.json")
+
+    return {"generated_vegalite_charts": generated_vega_lite_charts}
+
+
+# Step 6: Generate Narrative for Vega-Lite Charts
+def generate_narrative_for_vegalite_charts(state: State):
+    print("Step 6 / 10: Generate Narrative for Vega-Lite Charts")
+    generated_vega_lite_charts = state["generated_vegalite_charts"]
+
+    # Check if cached result exists
+    cached_data = load_cached_json("06_generated_vegalite_charts_with_narrative.json")
+    if cached_data:
+        print("Using cached - 06_generated_vegalite_charts_with_narrative.json")
+        return {"06_generated_vegalite_charts_with_narrative": cached_data}
+
+    generated_vegalite_charts_with_narrative = {}
+    for source_attribute, data in generated_vega_lite_charts.items():  # type: ignore
+        query = data["query"]  # type: ignore
+        vega_lite_chart = data["vega_lite_chart"]  # type: ignore
+
+        sys_prompt = load_prompt_template("06_generate_narrative_for_vegalite_chart.md")
+
+        # Generate response using LLM
+        vega_lite_chart_json = json.dumps(vega_lite_chart, indent=2, ensure_ascii=False)
+
+        response_content = invoke_llm_with_prompt(
+            system_content="You are a **data storytelling expert** specializing in transforming complex visualizations into compelling, accessible narratives. Given a query and its corresponding Vega-Lite chart specification, your task is to generate **detailed, insightful explanations** that help readers understand both the data and its implications.",
+            prompt_template=sys_prompt,
+            replacements={
+                "{{query}}": query,  # type: ignore
+                "{{vega_lite_chart_json}}": vega_lite_chart_json,  # type: ignore
+            },  # type: ignore
+        )
+
+        generated_vegalite_charts_with_narrative[query] = {
+            "vega_lite_chart": vega_lite_chart,
+            "narrative": response_content,
+        }
+
+    # Save the result
+    save_json_data(
+        generated_vegalite_charts_with_narrative,
+        "06_generated_vegalite_charts_with_narrative.json",
+    )
+
+    return {
+        "generated_vegalite_charts_with_narrative": generated_vegalite_charts_with_narrative
+    }
+
+
+# Step 7: Generate Research Paper Components
+def generate_research_paper_components(state: State):
+    print("Step 7 / 10: Generate Research Paper Components")
+    generated_vegalite_charts_with_narrative = state[
+        "generated_vegalite_charts_with_narrative"
+    ]
+
+    # Check if cached result exists
+    cached_data = load_cached_json("07_generated_research_paper_components.json")
+    if cached_data:
+        print("Using cached - 07_generated_research_paper_components.json")
+        return {"generated_research_paper_components": cached_data}
+
+    sys_prompt = load_prompt_template("07_generate_research_paper_components.md")
+
+    generated_vegalite_charts_with_narrative_json = json.dumps(
+        generated_vegalite_charts_with_narrative, indent=2, ensure_ascii=False
+    )
+
+    response_content = invoke_llm_with_prompt(
+        system_content="You are a research paper writing assistant that transforms structured JSON data containing Vega-Lite chart specifications and narratives into a full, well-formatted markdown research paper with Title, Abstract, Keywords, Introduction, Methodology, Results, Discussion, and Conclusion, following detailed formatting and style rules for clarity, insight, and accessibility",
+        prompt_template=sys_prompt,
+        replacements={
+            "{{generated_vegalite_charts_with_narrative_json}}": generated_vegalite_charts_with_narrative_json,  # type: ignore
+        },  # type: ignore
+    )
+
+    # Extract JSON from response
+    response_content_json = extract_json_from_response(response_content)
+
+    # Create Final Report
+    generated_research_paper_components = {}
+    generated_research_paper_components["title"] = {
+        "narrative": response_content_json["title"]
+    }
+    generated_research_paper_components["abstract"] = {
+        "narrative": response_content_json["abstract"]
+    }
+    generated_research_paper_components["keywords"] = {
+        "narrative": response_content_json["keywords"]
+    }
+    generated_research_paper_components["introduction"] = {
+        "narrative": response_content_json["introduction"]
+    }
+    generated_research_paper_components["methodology"] = {
+        "narrative": response_content_json["methodology"]
+    }
+
+    # Add each visualization item separately between methodology and results
+    for key, value in generated_vegalite_charts_with_narrative.items():  # type: ignore
+        generated_research_paper_components[key] = value
+
+    generated_research_paper_components["results"] = {
+        "narrative": response_content_json["results"]
+    }
+    generated_research_paper_components["discussion"] = {
+        "narrative": response_content_json["discussion"]
+    }
+    generated_research_paper_components["conclusion"] = {
+        "narrative": response_content_json["conclusion"]
+    }
+
+    # Save the result
+    save_json_data(
+        generated_research_paper_components,
+        "07_generated_research_paper_components.json",
+    )
+
+    return {"generated_research_paper_components": generated_research_paper_components}
 
 
 def generate_msg(state: State):
@@ -252,6 +419,13 @@ def create_workflow():
     builder.add_node(
         "compute_data_for_visualization_queries", compute_data_for_visualization_queries
     )
+    builder.add_node("generate_vega_lite_charts", generate_vega_lite_charts)
+    builder.add_node(
+        "generate_narrative_for_vegalite_charts", generate_narrative_for_vegalite_charts
+    )
+    builder.add_node(
+        "generate_research_paper_components", generate_research_paper_components
+    )
 
     builder.add_edge(START, "select_visualizable_data")
     builder.add_edge("select_visualizable_data", "generate_visualization_queries")
@@ -261,7 +435,16 @@ def create_workflow():
     builder.add_edge(
         "select_top_k_visualization_queries", "compute_data_for_visualization_queries"
     )
-    builder.add_edge("compute_data_for_visualization_queries", END)
+    builder.add_edge(
+        "compute_data_for_visualization_queries", "generate_vega_lite_charts"
+    )
+    builder.add_edge(
+        "generate_vega_lite_charts", "generate_narrative_for_vegalite_charts"
+    )
+    builder.add_edge(
+        "generate_narrative_for_vegalite_charts", "generate_research_paper_components"
+    )
+    builder.add_edge("generate_research_paper_components", END)
     # builder.add_edge("generate_msg", END)
     return builder.compile()
 
