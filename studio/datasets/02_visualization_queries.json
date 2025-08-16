@@ -11,37 +11,55 @@
   "Year": {
     "queries": {
       "How has the number of publications changed over the years?": "Line chart",
+      "What is the trend of publications over the decades?": "Area chart",
       "Which year had the highest number of publications?": "Bar chart",
-      "What is the trend of publications over the last decade?": "Line chart",
-      "How do publication counts vary by year?": "Bar chart",
-      "What is the cumulative number of publications over time?": "Area chart"
+      "How does the publication count vary year by year?": "Line chart",
+      "What is the cumulative number of publications over time?": "Cumulative area chart"
     }
   },
   "PaperType": {
     "queries": {
-      "What is the distribution of papers by type?": "Bar chart or pie chart",
+      "What is the distribution of paper types?": "Bar chart or pie chart",
       "Which paper type is most common?": "Bar chart",
       "How many papers of each type have been published?": "Bar chart",
-      "What proportion of the total publications does each paper type contribute?": "Pie chart",
+      "What proportion of papers are of each type?": "Pie chart",
       "Compare the number of papers across different paper types.": "Stacked bar chart"
     }
   },
-  "Award": {
+  "CitationImpact": {
     "queries": {
-      "What is the distribution of awards among papers?": "Bar chart or pie chart",
-      "Which award is most frequently given?": "Bar chart",
-      "How many papers received each type of award?": "Bar chart",
-      "What proportion of papers received awards?": "Pie chart",
-      "Compare the number of papers receiving different awards.": "Stacked bar chart"
+      "What is the distribution of citation impact categories?": "Bar chart",
+      "Which citation impact category is most common?": "Pie chart",
+      "How many papers fall into each citation impact category?": "Bar chart",
+      "What proportion of papers are in each citation impact category?": "Pie chart",
+      "Compare the number of papers across different citation impact categories.": "Stacked bar chart"
+    }
+  },
+  "AuthorCountry": {
+    "queries": {
+      "What is the geographic distribution of authors?": "Geographic distribution map",
+      "Which country has the most authors?": "Bar chart",
+      "How many authors are from each country?": "Bar chart",
+      "What proportion of authors are from each country?": "Pie chart",
+      "Compare the number of authors across different countries.": "Stacked bar chart"
+    }
+  },
+  "PageCount": {
+    "queries": {
+      "What is the distribution of paper lengths?": "Histogram",
+      "Which paper length is most common?": "Bar chart",
+      "How many papers fall into each length category?": "Bar chart",
+      "What is the average paper length?": "Box plot",
+      "Compare the distribution of paper lengths across different conferences.": "Box plot"
     }
   },
   "Year & Conference": {
     "queries": {
-      "How has the number of papers per conference changed over the years?": "Stacked line chart",
+      "How has the number of papers published in each conference changed over the years?": "Stacked line chart",
       "Which conference had the most papers published each year?": "Stacked bar chart",
-      "What is the trend of publications for each conference over time?": "Multi-line chart",
-      "Compare the growth of publications across conferences over the years.": "Grouped bar chart",
-      "How do publication trends differ by conference over time?": "Stacked area chart"
+      "Compare the publication trends of different conferences over time.": "Multi-line chart",
+      "What is the yearly distribution of papers across conferences?": "Stacked area chart",
+      "How does the publication count for each conference vary year by year?": "Grouped bar chart"
     }
   },
   "Year & PaperType": {
@@ -53,52 +71,44 @@
       "Compare yearly trends across all paper types.": "Multi-line chart"
     }
   },
+  "Year & CitationImpact": {
+    "queries": {
+      "How has the distribution of citation impact categories changed over the years?": "Stacked area chart",
+      "Which citation impact category was most common each year?": "Line chart or stacked bar chart",
+      "Rank the citation impact categories by count per year.": "Grouped bar chart",
+      "How many papers with high impact were published each year?": "Line chart",
+      "Compare yearly trends across all citation impact categories.": "Multi-line chart"
+    }
+  },
   "Conference & PaperType": {
     "queries": {
       "What is the distribution of paper types within each conference?": "Stacked bar chart",
-      "Which conference has the highest number of journal papers?": "Grouped bar chart",
-      "Compare the paper type distribution across different conferences.": "Stacked bar chart",
-      "How do paper types vary by conference?": "Pie chart for each conference",
-      "What is the most common paper type for each conference?": "Bar chart"
+      "Which conference has the highest number of journal papers?": "Bar chart",
+      "Compare the distribution of paper types across different conferences.": "Grouped bar chart",
+      "What proportion of each conference's papers are of each type?": "Stacked bar chart",
+      "How does the paper type distribution vary by conference?": "Stacked bar chart"
     }
   },
-  "Year & Award": {
+  "Conference & CitationImpact": {
     "queries": {
-      "How has the distribution of awards changed over the years?": "Stacked bar chart",
-      "Which year had the highest number of awarded papers?": "Bar chart",
-      "What is the trend of award distribution over time?": "Line chart",
-      "Compare the number of awards given each year.": "Grouped bar chart",
-      "How do award trends vary by year?": "Stacked area chart"
-    }
-  },
-  "Conference & Award": {
-    "queries": {
-      "What is the distribution of awards across different conferences?": "Stacked bar chart",
-      "Which conference has the highest number of awarded papers?": "Grouped bar chart",
-      "Compare the award distribution across conferences.": "Stacked bar chart",
-      "How do awards vary by conference?": "Pie chart for each conference",
-      "What is the most common award for each conference?": "Bar chart"
-    }
-  },
-  "PaperType & Award": {
-    "queries": {
-      "What is the distribution of awards among different paper types?": "Stacked bar chart",
-      "Which paper type receives the most awards?": "Grouped bar chart",
-      "Compare the award distribution across paper types.": "Stacked bar chart",
-      "How do awards vary by paper type?": "Pie chart for each paper type",
-      "What is the most common award for each paper type?": "Bar chart"
+      "What is the distribution of citation impact categories within each conference?": "Stacked bar chart",
+      "Which conference has the highest number of high-impact papers?": "Bar chart",
+      "Compare the distribution of citation impacts across different conferences.": "Grouped bar chart",
+      "What proportion of each conference's papers fall into each citation impact category?": "Stacked bar chart",
+      "How does the citation impact distribution vary by conference?": "Stacked bar chart"
     }
   },
   "attributes": [
     "Conference",
     "Year",
     "PaperType",
-    "Award",
+    "CitationImpact",
+    "AuthorCountry",
+    "PageCount",
     "Year & Conference",
     "Year & PaperType",
+    "Year & CitationImpact",
     "Conference & PaperType",
-    "Year & Award",
-    "Conference & Award",
-    "PaperType & Award"
+    "Conference & CitationImpact"
   ]
 }
