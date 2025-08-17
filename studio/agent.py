@@ -61,10 +61,17 @@ def select_visualizable_data(state: State):
     dataset_summary = state["dataset_summary"]
 
     # Check if cached result exists
-    cached_data = load_cached_json("visualizable_dataset.json")
-    if cached_data:
-        print("Using cached - visualizable_dataset.json")
-        return {"visualizable_dataset": cached_data}
+    cached_visualizable_dataset = load_cached_json("visualizable_dataset.json")
+    cached_synthetic_dataset_info = load_cached_json("01_synthetic_dataset_info.json")
+
+    if cached_visualizable_dataset and cached_synthetic_dataset_info:
+        print(
+            "Using cached - visualizable_dataset.json & 01_synthetic_dataset_info.json"
+        )
+        return {
+            "visualizable_dataset": cached_visualizable_dataset,
+            "synthetic_dataset_info": cached_synthetic_dataset_info,
+        }
 
     dataset_summary_json = json.dumps(dataset_summary, indent=2, ensure_ascii=False)
 

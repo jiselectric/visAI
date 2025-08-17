@@ -5,8 +5,8 @@
     "extractable_categories": {
       "Country": [
         "USA",
-        "Canada",
         "Netherlands",
+        "Canada",
         "Switzerland",
         "Other"
       ],
@@ -48,7 +48,7 @@
     "extractable_categories": {
       "Research_Area": [
         "Visualization",
-        "Data_Analysis",
+        "Data_Mining",
         "User_Interface",
         "Network_Analysis",
         "Other"
@@ -56,8 +56,7 @@
       "Method_Type": [
         "Quantitative",
         "Qualitative",
-        "Mixed_Methods",
-        "Theoretical"
+        "Mixed_Methods"
       ],
       "Application_Domain": [
         "Healthcare",
@@ -95,11 +94,11 @@
         "Visualization",
         "Data_Analysis",
         "Interaction",
-        "Design",
+        "Design_Methodology",
         "Other"
       ]
     },
-    "extraction_method": "keyword_analysis_and_theme_detection",
+    "extraction_method": "keyword_analysis_and_thematic_clustering",
     "sample_extractions": {
       "Narrative Visualization: Telling Stories with Data": {
         "Content_Type": "Research",
@@ -108,7 +107,7 @@
     },
     "rationale": "Titles often contain keywords that indicate the type and topic of the content, allowing for classification into meaningful categories",
     "expected_coverage": "75-85% of entries can be categorized based on title keywords",
-    "visualization_potential": "High - Content type distribution, topic trends over time",
+    "visualization_potential": "Medium - Content type distribution, topic trends over time",
     "data_quality_impact": "Good - Titles are generally concise and focused, aiding reliable extraction",
     "confidence_score": 0.75
   }

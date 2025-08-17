@@ -72,56 +72,36 @@
     "data_quality_score": "High - No missing data, consistent values",
     "selection_rationale": "Provides insight into the distribution of paper types"
   },
-  "TotalCitations": {
-    "column_name": "TotalCitations",
-    "source": "synthetic",
-    "original_columns": [
-      "AminerCitationCount",
-      "CitationCount_CrossRef"
-    ],
-    "data_type": "Numerical",
-    "unique_value_count": "Medium-High",
-    "examples": [
-      "5000",
-      "3000",
-      "1000"
-    ],
-    "operation": "addition",
-    "operation_description": "AminerCitationCount + CitationCount_CrossRef",
-    "visualization_suitability": "High - Better representation of paper impact than individual sources",
-    "recommended_charts": [
-      "Histogram of total citations",
-      "Box plot of citations by conference"
-    ],
-    "data_quality_score": "Good - Can handle missing values by treating as 0",
-    "selection_rationale": "Combines citation counts for a comprehensive impact metric"
-  },
-  "Downloads_Xplore_Binned": {
-    "column_name": "Downloads_Xplore_Binned",
+  "CitationImpact": {
+    "column_name": "CitationImpact",
     "source": "binning_enhancement",
     "original_columns": [
-      "Downloads_Xplore"
+      "AminerCitationCount"
     ],
     "data_type": "Categorical",
-    "unique_value_count": 3,
+    "unique_value_count": 5,
     "examples": [
-      "Low_Popularity",
-      "Medium_Popularity",
-      "High_Popularity"
+      "No_Impact",
+      "Low_Impact",
+      "Medium_Impact",
+      "High_Impact",
+      "Very_High_Impact"
     ],
-    "binning_strategy": "popularity_tiers",
+    "binning_strategy": "impact_levels",
     "bins": {
-      "Low_Popularity": "0-1000",
-      "Medium_Popularity": "1001-10000",
-      "High_Popularity": "10001+"
+      "No_Impact": "0",
+      "Low_Impact": "1-10",
+      "Medium_Impact": "11-100",
+      "High_Impact": "101-1000",
+      "Very_High_Impact": "1000+"
     },
-    "visualization_suitability": "High - Popularity distribution charts, popularity by content type",
+    "visualization_suitability": "Excellent - Meaningful impact categories with clear interpretation",
     "recommended_charts": [
-      "Bar chart of download popularity",
-      "Popularity by paper type"
+      "Bar chart of impact distribution",
+      "Impact by conference/year"
     ],
-    "data_quality_score": "Good - Maintains relative popularity ordering",
-    "selection_rationale": "Enables comparison of content reach through intuitive popularity tiers"
+    "data_quality_score": "High - Maintains data integrity while improving visualizability",
+    "selection_rationale": "Transforms high-cardinality numerical data into interpretable impact categories"
   },
   "AuthorCountry": {
     "column_name": "AuthorCountry",
@@ -133,8 +113,8 @@
     "unique_value_count": 5,
     "examples": [
       "USA",
-      "Canada",
       "Netherlands",
+      "Canada",
       "Switzerland",
       "Other"
     ],
@@ -146,5 +126,30 @@
     ],
     "data_quality_score": "Good - 85% extraction success rate with 'Other' fallback",
     "selection_rationale": "Unlocks geographic insights from unstructured affiliation text"
+  },
+  "PageCount": {
+    "column_name": "PageCount",
+    "source": "synthetic_enhancement",
+    "original_columns": [
+      "FirstPage",
+      "LastPage"
+    ],
+    "data_type": "Numerical",
+    "unique_value_count": 50,
+    "examples": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "operation": "subtraction_plus_one",
+    "operation_description": "LastPage - FirstPage + 1",
+    "visualization_suitability": "High - Can show distribution of paper lengths, papers by length category",
+    "recommended_charts": [
+      "Histogram of paper lengths",
+      "Box plot of paper lengths by conference"
+    ],
+    "data_quality_score": "Good - Both source columns have similar missing data patterns",
+    "selection_rationale": "Provides a meaningful measure of paper length, useful for analyzing document size distribution"
   }
 }

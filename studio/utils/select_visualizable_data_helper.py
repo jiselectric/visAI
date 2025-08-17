@@ -10,6 +10,7 @@ from .file_operation import clean_markdown_output, load_prompt_template, read_cs
 from .llm_operations import extract_json_from_response, invoke_llm_with_prompt
 
 
+# Step 1.1: Direct column selection
 def select_direct_visualizable_columns(dataset_summary_json: str) -> dict:
     """
     Agent 0: Direct column selection (foundation step)
@@ -24,7 +25,7 @@ def select_direct_visualizable_columns(dataset_summary_json: str) -> dict:
         dict: Directly visualizable columns following original selection criteria
     """
 
-    sys_prompt = load_prompt_template("01_select_visualizable_dataset.md")
+    sys_prompt = load_prompt_template("01a_select_direct_visualizable_columns.md")
 
     response_content = invoke_llm_with_prompt(
         system_content="You are a data visualization expert. Given a JSON object that summarizes each column of a dataset (with fields like column_name, examples, unique_value_count, top_frequencies, etc.), select only the columns appropriate for visualization and output them in the specified JSON format.",
@@ -37,6 +38,7 @@ def select_direct_visualizable_columns(dataset_summary_json: str) -> dict:
     return extract_json_from_response(response_content)
 
 
+# Step 1.2: Detect synthetic column opportunities
 def detect_synthetic_opportunities(dataset_summary_json: str) -> dict:
     """
     Agent 1: Detect opportunities for synthetic column generation
@@ -51,7 +53,7 @@ def detect_synthetic_opportunities(dataset_summary_json: str) -> dict:
         dict: Array of synthetic opportunities with operations and rationale
     """
 
-    sys_prompt = load_prompt_template("01a_detect_synthetic_opportunities.md")
+    sys_prompt = load_prompt_template("01b_detect_synthetic_opportunities.md")
 
     response_content = invoke_llm_with_prompt(
         system_content="You are a data relationship expert. Analyze the dataset summary and identify columns that can be mathematically or logically combined to create new, more visualizable columns. Return only a JSON array of opportunities.",
@@ -64,6 +66,7 @@ def detect_synthetic_opportunities(dataset_summary_json: str) -> dict:
     return extract_json_from_response(response_content)
 
 
+# Step 1.3: Detect binning opportunities
 def detect_binning_opportunities(dataset_summary_json: str) -> dict:
     """
     Agent 2: Detect opportunities for numerical binning
@@ -78,7 +81,7 @@ def detect_binning_opportunities(dataset_summary_json: str) -> dict:
         dict: Array of binning opportunities with proposed bins and rationale
     """
 
-    sys_prompt = load_prompt_template("01b_detect_binning_opportunities.md")
+    sys_prompt = load_prompt_template("01c_detect_binning_opportunities.md")
 
     response_content = invoke_llm_with_prompt(
         system_content="You are a data categorization expert. Analyze the dataset summary and identify numerical columns with high cardinality that can be binned into meaningful categories for better visualization. Return only a JSON array of opportunities.",
@@ -91,6 +94,7 @@ def detect_binning_opportunities(dataset_summary_json: str) -> dict:
     return extract_json_from_response(response_content)
 
 
+# Step 1.4: Detect extraction opportunities
 def detect_extraction_opportunities(dataset_summary_json: str) -> dict:
     """
     Agent 3: Detect opportunities for text extraction
@@ -105,7 +109,7 @@ def detect_extraction_opportunities(dataset_summary_json: str) -> dict:
         dict: Array of extraction opportunities with categories and methods
     """
 
-    sys_prompt = load_prompt_template("01c_detect_extraction_opportunities.md")
+    sys_prompt = load_prompt_template("01d_detect_extraction_opportunities.md")
 
     response_content = invoke_llm_with_prompt(
         system_content="You are a text analysis expert. Analyze the dataset summary and identify text columns that contain hidden categorical information that can be extracted for visualization. Return only a JSON array of opportunities.",
@@ -118,6 +122,7 @@ def detect_extraction_opportunities(dataset_summary_json: str) -> dict:
     return extract_json_from_response(response_content)
 
 
+# Step 1.5: Orchestrate final selection
 def orchestrate_final_selection(
     dataset_summary_json: str,
     direct_columns: dict,
@@ -142,7 +147,7 @@ def orchestrate_final_selection(
         dict: Final selected columns for visualization with enhanced metadata
     """
 
-    sys_prompt = load_prompt_template("01d_orchestrate_final_selection.md")
+    sys_prompt = load_prompt_template("01e_orchestrate_final_selection.md")
 
     response_content = invoke_llm_with_prompt(
         system_content="You are the final decision-maker for selecting the optimal set of columns for visualization. Combine directly selected columns with synthetic, binning, and extraction opportunities into a cohesive visualization dataset. Prioritize keeping all direct columns and adding the best enhancements. Return only the final JSON object.",
@@ -165,6 +170,7 @@ def orchestrate_final_selection(
     return extract_json_from_response(response_content)
 
 
+# Step 1.6: Generate synthetic dataset
 def generate_synthetic_dataset(visualizable_dataset: dict, dataset_info: dict):
     import pandas as pd
 

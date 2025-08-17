@@ -84,7 +84,7 @@
       "BP": 78,
       "TT": 35
     },
-    "visualization_suitability": "Good - Low cardinality, meaningful categories",
+    "visualization_suitability": "Good - Low cardinality, clear categories",
     "recommended_charts": [
       "Bar chart of awards",
       "Pie chart of award distribution"

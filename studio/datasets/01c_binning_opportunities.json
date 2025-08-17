@@ -1,39 +1,21 @@
 [
   {
-    "column_name": "FirstPage",
-    "current_cardinality": 1589,
-    "binning_strategy": "page_range",
+    "column_name": "AminerCitationCount",
+    "current_cardinality": 397,
+    "binning_strategy": "impact_levels",
     "proposed_bins": {
-      "Very_Short": "1-100",
-      "Short": "101-500",
-      "Medium": "501-1000",
-      "Long": "1001-2000",
-      "Very_Long": "2001+"
+      "No_Impact": "0",
+      "Low_Impact": "1-10",
+      "Medium_Impact": "11-100",
+      "High_Impact": "101-1000",
+      "Very_High_Impact": "1000+"
     },
     "bin_count": 5,
-    "rationale": "Page numbers can be binned to reflect the length of papers, which is often correlated with the depth of content.",
-    "visualization_potential": "Medium - Length distribution, length by conference/year",
-    "domain_interpretability": "Good - Page ranges are intuitive for understanding paper length",
-    "information_loss": "Low - Preserves general length categories",
-    "confidence_score": 0.7
-  },
-  {
-    "column_name": "LastPage",
-    "current_cardinality": 1615,
-    "binning_strategy": "page_range",
-    "proposed_bins": {
-      "Very_Short": "1-100",
-      "Short": "101-500",
-      "Medium": "501-1000",
-      "Long": "1001-2000",
-      "Very_Long": "2001+"
-    },
-    "bin_count": 5,
-    "rationale": "Similar to FirstPage, binning LastPage helps in understanding the overall length of papers.",
-    "visualization_potential": "Medium - Length distribution, length by conference/year",
-    "domain_interpretability": "Good - Page ranges are intuitive for understanding paper length",
-    "information_loss": "Low - Preserves general length categories",
-    "confidence_score": 0.7
+    "rationale": "Citation counts are highly skewed with most papers having low citations. Binning reveals impact tiers more clearly than raw counts.",
+    "visualization_potential": "High - Bar charts of impact distribution, impact by conference/year",
+    "domain_interpretability": "Excellent - Citation impact levels are standard in academic analysis",
+    "information_loss": "Minimal - Preserves relative impact while reducing noise",
+    "confidence_score": 0.9
   },
   {
     "column_name": "Downloads_Xplore",
@@ -50,5 +32,41 @@
     "domain_interpretability": "Good - Popularity tiers are intuitive for content analysis",
     "information_loss": "Low - Maintains relative popularity ordering",
     "confidence_score": 0.8
+  },
+  {
+    "column_name": "FirstPage",
+    "current_cardinality": 1589,
+    "binning_strategy": "page_range",
+    "proposed_bins": {
+      "Very_Short": "1-100",
+      "Short": "101-500",
+      "Medium": "501-1000",
+      "Long": "1001-2000",
+      "Very_Long": "2001+"
+    },
+    "bin_count": 5,
+    "rationale": "Page numbers can be binned to reflect document length, aiding in understanding document size distribution.",
+    "visualization_potential": "Medium - Document length distribution, length by conference",
+    "domain_interpretability": "Moderate - Page ranges are common in document analysis",
+    "information_loss": "Moderate - Some granularity lost but overall trends preserved",
+    "confidence_score": 0.7
+  },
+  {
+    "column_name": "LastPage",
+    "current_cardinality": 1615,
+    "binning_strategy": "page_range",
+    "proposed_bins": {
+      "Very_Short": "1-100",
+      "Short": "101-500",
+      "Medium": "501-1000",
+      "Long": "1001-2000",
+      "Very_Long": "2001+"
+    },
+    "bin_count": 5,
+    "rationale": "Page numbers can be binned to reflect document length, aiding in understanding document size distribution.",
+    "visualization_potential": "Medium - Document length distribution, length by conference",
+    "domain_interpretability": "Moderate - Page ranges are common in document analysis",
+    "information_loss": "Moderate - Some granularity lost but overall trends preserved",
+    "confidence_score": 0.7
   }
 ]
