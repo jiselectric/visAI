@@ -1,0 +1,54 @@
+[
+  {
+    "column_name": "FirstPage",
+    "current_cardinality": 1589,
+    "binning_strategy": "page_range",
+    "proposed_bins": {
+      "Very_Short": "1-100",
+      "Short": "101-500",
+      "Medium": "501-1000",
+      "Long": "1001-2000",
+      "Very_Long": "2001+"
+    },
+    "bin_count": 5,
+    "rationale": "Page numbers can be binned to reflect the length of papers, which is often correlated with the depth of content.",
+    "visualization_potential": "Medium - Length distribution, length by conference/year",
+    "domain_interpretability": "Good - Page ranges are intuitive for understanding paper length",
+    "information_loss": "Low - Preserves general length categories",
+    "confidence_score": 0.7
+  },
+  {
+    "column_name": "LastPage",
+    "current_cardinality": 1615,
+    "binning_strategy": "page_range",
+    "proposed_bins": {
+      "Very_Short": "1-100",
+      "Short": "101-500",
+      "Medium": "501-1000",
+      "Long": "1001-2000",
+      "Very_Long": "2001+"
+    },
+    "bin_count": 5,
+    "rationale": "Similar to FirstPage, binning LastPage helps in understanding the overall length of papers.",
+    "visualization_potential": "Medium - Length distribution, length by conference/year",
+    "domain_interpretability": "Good - Page ranges are intuitive for understanding paper length",
+    "information_loss": "Low - Preserves general length categories",
+    "confidence_score": 0.7
+  },
+  {
+    "column_name": "Downloads_Xplore",
+    "current_cardinality": 1679,
+    "binning_strategy": "popularity_tiers",
+    "proposed_bins": {
+      "Low_Popularity": "0-1000",
+      "Medium_Popularity": "1001-10000",
+      "High_Popularity": "10001+"
+    },
+    "bin_count": 3,
+    "rationale": "Download counts show exponential distribution. Binning into popularity tiers enables comparison of content reach.",
+    "visualization_potential": "High - Popularity distribution charts, popularity by content type",
+    "domain_interpretability": "Good - Popularity tiers are intuitive for content analysis",
+    "information_loss": "Low - Maintains relative popularity ordering",
+    "confidence_score": 0.8
+  }
+]

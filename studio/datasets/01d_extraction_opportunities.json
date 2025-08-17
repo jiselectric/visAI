@@ -1,0 +1,115 @@
+[
+  {
+    "column_name": "AuthorAffiliation",
+    "extraction_type": "geographic_and_institutional",
+    "extractable_categories": {
+      "Country": [
+        "USA",
+        "Canada",
+        "Netherlands",
+        "Switzerland",
+        "Other"
+      ],
+      "Institution_Type": [
+        "University",
+        "Industry",
+        "Research_Lab",
+        "Government"
+      ],
+      "Geographic_Region": [
+        "North_America",
+        "Europe",
+        "Asia",
+        "Other"
+      ]
+    },
+    "extraction_method": "pattern_matching_and_keyword_analysis",
+    "sample_extractions": {
+      "Computer Science Department, Stanford University, Stanford, CA, USA": {
+        "Country": "USA",
+        "Institution_Type": "University",
+        "Geographic_Region": "North_America"
+      },
+      "IBM Research GmbH, Switzerland": {
+        "Country": "Switzerland",
+        "Institution_Type": "Industry",
+        "Geographic_Region": "Europe"
+      }
+    },
+    "rationale": "Affiliation text contains structured geographic and institutional information that can be reliably extracted into meaningful categories",
+    "expected_coverage": "85-90% of entries can be successfully categorized",
+    "visualization_potential": "High - Geographic distribution maps, institution type analysis, regional collaboration patterns",
+    "data_quality_impact": "Good - Pattern-based extraction with fallback to 'Other' category",
+    "confidence_score": 0.8
+  },
+  {
+    "column_name": "AuthorKeywords",
+    "extraction_type": "topic_classification",
+    "extractable_categories": {
+      "Research_Area": [
+        "Visualization",
+        "Data_Analysis",
+        "User_Interface",
+        "Network_Analysis",
+        "Other"
+      ],
+      "Method_Type": [
+        "Quantitative",
+        "Qualitative",
+        "Mixed_Methods",
+        "Theoretical"
+      ],
+      "Application_Domain": [
+        "Healthcare",
+        "Finance",
+        "Education",
+        "General"
+      ]
+    },
+    "extraction_method": "keyword_clustering_and_domain_classification",
+    "sample_extractions": {
+      "Information visualization, user interfaces, toolkits, 2D graphics": {
+        "Research_Area": "Visualization",
+        "Method_Type": "Quantitative",
+        "Application_Domain": "General"
+      }
+    },
+    "rationale": "Keywords contain structured research classification information that can group papers by research themes",
+    "expected_coverage": "70-80% of entries have sufficient keywords for classification",
+    "visualization_potential": "Medium-High - Research area trends, methodology distributions, domain focus analysis",
+    "data_quality_impact": "Fair - Some entries lack keywords, requiring handling of missing data",
+    "confidence_score": 0.7
+  },
+  {
+    "column_name": "Title",
+    "extraction_type": "content_classification",
+    "extractable_categories": {
+      "Content_Type": [
+        "Research",
+        "Tutorial",
+        "Case_Study",
+        "Review",
+        "Other"
+      ],
+      "Topic_Category": [
+        "Visualization",
+        "Data_Analysis",
+        "Interaction",
+        "Design",
+        "Other"
+      ]
+    },
+    "extraction_method": "keyword_analysis_and_theme_detection",
+    "sample_extractions": {
+      "Narrative Visualization: Telling Stories with Data": {
+        "Content_Type": "Research",
+        "Topic_Category": "Visualization"
+      }
+    },
+    "rationale": "Titles often contain keywords that indicate the type and topic of the content, allowing for classification into meaningful categories",
+    "expected_coverage": "75-85% of entries can be categorized based on title keywords",
+    "visualization_potential": "High - Content type distribution, topic trends over time",
+    "data_quality_impact": "Good - Titles are generally concise and focused, aiding reliable extraction",
+    "confidence_score": 0.75
+  }
+]

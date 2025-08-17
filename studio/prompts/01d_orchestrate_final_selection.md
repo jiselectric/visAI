@@ -95,6 +95,8 @@ For each column (original or enhanced), evaluate:
 
 Return the final visualization dataset with both original and enhanced columns:
 
+⚠️ **IMPORTANT**: The examples below are for **INSPIRATION ONLY**. Analyze the actual datasets provided and create your own unique final visualization dataset based the criteria provided above.
+
 ```json
 {
   "Conference": {

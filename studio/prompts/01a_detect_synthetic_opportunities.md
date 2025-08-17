@@ -61,7 +61,7 @@ Analyze the following dataset summary for synthetic opportunities:
 
 ## 📝 Output Format
 
-Return a JSON array of synthetic opportunities. For each opportunity:
+⚠️ **IMPORTANT**: The examples below are for **INSPIRATION ONLY**. Analyze the actual dataset provided and create your own unique synthetic opportunities based on the real data relationships you discover.
 
 ```json
 [
@@ -76,17 +76,39 @@ Return a JSON array of synthetic opportunities. For each opportunity:
     "data_quality_impact": "Good - Both source columns have similar missing data patterns",
     "confidence_score": 0.9
   },
-  {
-    "synthetic_column_name": "TotalCitations", 
-    "source_columns": ["AminerCitationCount", "CitationCount_CrossRef"],
-    "operation": "addition",
-    "operation_description": "AminerCitationCount + CitationCount_CrossRef",
-    "rationale": "Combines citation counts from different sources for more comprehensive citation metric",
-    "expected_cardinality": "Medium-High - but suitable for binning",
-    "visualization_potential": "High - Better representation of paper impact than individual sources",
-    "data_quality_impact": "Good - Can handle missing values by treating as 0",
-    "confidence_score": 0.8
-  }
+     {
+     "synthetic_column_name": "TotalCitations", 
+     "source_columns": ["AminerCitationCount", "CitationCount_CrossRef"],
+     "operation": "addition",
+     "operation_description": "AminerCitationCount + CitationCount_CrossRef",
+     "rationale": "Combines citation counts from different sources for more comprehensive citation metric",
+     "expected_cardinality": "Medium-High - but suitable for binning",
+     "visualization_potential": "High - Better representation of paper impact than individual sources",
+     "data_quality_impact": "Good - Can handle missing values by treating as 0",
+     "confidence_score": 0.8
+   },
+   {
+     "synthetic_column_name": "TotalCitationScore", 
+     "source_columns": ["AminerCitationCount", "CitationCount_CrossRef", "PubsCited_CrossRef"],
+     "operation": "addition",
+     "operation_description": "AminerCitationCount + CitationCount_CrossRef + PubsCited_CrossRef",
+     "rationale": "Combines citation counts from multiple sources for comprehensive citation impact measure",
+     "expected_cardinality": "Medium-High - but suitable for binning into impact categories",
+     "visualization_potential": "High - Can show comprehensive citation impact distributions and identify highly cited papers",
+     "data_quality_impact": "Good - Can handle missing values by treating as 0",
+     "confidence_score": 0.8
+   },
+   {
+     "synthetic_column_name": "CitationPerDownload", 
+     "source_columns": ["AminerCitationCount", "CitationCount_CrossRef", "PubsCited_CrossRef", "Downloads_Xplore"],
+     "operation": "ratio_calculation",
+     "operation_description": "(AminerCitationCount + CitationCount_CrossRef + PubsCited_CrossRef) / Downloads_Xplore",
+     "rationale": "Measures citation efficiency - how many citations a paper receives per download, indicating research impact relative to accessibility",
+     "expected_cardinality": "High - continuous ratio values suitable for binning into efficiency categories",
+     "visualization_potential": "High - Can show impact efficiency distributions, identify high-performing papers after binning into Low/Medium/High efficiency categories",
+     "data_quality_impact": "Good - Handles division by zero cases (Downloads_Xplore = 0) by setting to null or infinity",
+     "confidence_score": 0.8
+   },
 ]
 ```
 

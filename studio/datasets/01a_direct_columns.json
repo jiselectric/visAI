@@ -1,0 +1,94 @@
+{
+  "Conference": {
+    "column_name": "Conference",
+    "data_type": "Categorical",
+    "unique_value_count": 4,
+    "examples": [
+      "InfoVis",
+      "SciVis",
+      "Vis",
+      "VAST"
+    ],
+    "top_frequencies": {
+      "Vis": 1942,
+      "InfoVis": 886,
+      "VAST": 744,
+      "SciVis": 305
+    },
+    "visualization_suitability": "Excellent - Low cardinality, clean categories",
+    "recommended_charts": [
+      "Bar chart of papers per conference",
+      "Pie chart of conference distribution",
+      "Stacked bar with other categorical variables"
+    ],
+    "data_quality_score": "High - No missing data, consistent values"
+  },
+  "Year": {
+    "column_name": "Year",
+    "data_type": "Time/Date",
+    "unique_value_count": 35,
+    "examples": [
+      "2011",
+      "2014",
+      "2010",
+      "2006"
+    ],
+    "top_frequencies": {
+      "2004": 174,
+      "2015": 160,
+      "2020": 157,
+      "2011": 149
+    },
+    "visualization_suitability": "Excellent - Natural time ordering, reasonable range",
+    "recommended_charts": [
+      "Line chart of publications over time",
+      "Area chart of cumulative publications",
+      "Time series analysis"
+    ],
+    "data_quality_score": "High - All values are valid 4-digit years"
+  },
+  "PaperType": {
+    "column_name": "PaperType",
+    "data_type": "Categorical",
+    "unique_value_count": 3,
+    "examples": [
+      "J",
+      "C",
+      "M"
+    ],
+    "top_frequencies": {
+      "J": 1999,
+      "C": 1559,
+      "M": 319
+    },
+    "visualization_suitability": "Excellent - Low cardinality, clear categories",
+    "recommended_charts": [
+      "Bar chart of paper types",
+      "Pie chart of paper type distribution"
+    ],
+    "data_quality_score": "High - No missing data, consistent values"
+  },
+  "Award": {
+    "column_name": "Award",
+    "data_type": "Categorical",
+    "unique_value_count": 7,
+    "examples": [
+      "TT",
+      "TT;BP",
+      "",
+      "BP"
+    ],
+    "top_frequencies": {
+      "": 3604,
+      "HM": 144,
+      "BP": 78,
+      "TT": 35
+    },
+    "visualization_suitability": "Good - Low cardinality, meaningful categories",
+    "recommended_charts": [
+      "Bar chart of awards",
+      "Pie chart of award distribution"
+    ],
+    "data_quality_score": "Medium - Some missing data"
+  }
+}

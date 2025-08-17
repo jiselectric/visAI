@@ -19,11 +19,31 @@ def load_cached_json(
 def save_json_data(
     data: Dict[str, Any], file_path: str, dataset_dir: str = "./datasets"
 ) -> None:
-    """Save data to JSON file with proper encoding."""
+    """Save data to JSON file with proper encoding and numpy type conversion."""
+    import numpy as np
+    
+    def convert_numpy_types(obj):
+        """Convert numpy types to Python native types for JSON serialization"""
+        if isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, dict):
+            return {key: convert_numpy_types(value) for key, value in obj.items()}
+        elif isinstance(obj, list):
+            return [convert_numpy_types(item) for item in obj]
+        else:
+            return obj
+    
+    # Convert numpy types before saving
+    clean_data = convert_numpy_types(data)
+    
     os.makedirs(dataset_dir, exist_ok=True)
     full_path = os.path.join(dataset_dir, file_path)
     with open(full_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        json.dump(clean_data, f, indent=2, ensure_ascii=False)
 
 
 def load_prompt_template(prompt_path: str, prompt_dir: str = "./prompts") -> str:

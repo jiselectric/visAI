@@ -1,0 +1,150 @@
+{
+  "Conference": {
+    "column_name": "Conference",
+    "source": "original",
+    "data_type": "Categorical",
+    "unique_value_count": 4,
+    "examples": [
+      "InfoVis",
+      "SciVis",
+      "Vis",
+      "VAST"
+    ],
+    "top_frequencies": {
+      "Vis": 1942,
+      "InfoVis": 886,
+      "VAST": 744,
+      "SciVis": 305
+    },
+    "visualization_suitability": "Excellent - Low cardinality, clean categories",
+    "recommended_charts": [
+      "Bar chart of papers per conference",
+      "Pie chart of conference distribution"
+    ],
+    "data_quality_score": "High - No missing data, consistent values",
+    "selection_rationale": "Perfect categorical variable for grouping and comparison analysis"
+  },
+  "Year": {
+    "column_name": "Year",
+    "source": "original",
+    "data_type": "Time/Date",
+    "unique_value_count": 35,
+    "examples": [
+      "2011",
+      "2014",
+      "2010",
+      "2006"
+    ],
+    "top_frequencies": {
+      "2004": 174,
+      "2015": 160,
+      "2020": 157,
+      "2011": 149
+    },
+    "visualization_suitability": "Excellent - Natural time ordering, reasonable range",
+    "recommended_charts": [
+      "Line chart of publications over time",
+      "Area chart of cumulative publications"
+    ],
+    "data_quality_score": "High - All values are valid 4-digit years",
+    "selection_rationale": "Essential for temporal analysis and trend visualization"
+  },
+  "PaperType": {
+    "column_name": "PaperType",
+    "source": "original",
+    "data_type": "Categorical",
+    "unique_value_count": 3,
+    "examples": [
+      "J",
+      "C",
+      "M"
+    ],
+    "top_frequencies": {
+      "J": 1999,
+      "C": 1559,
+      "M": 319
+    },
+    "visualization_suitability": "Excellent - Low cardinality, clear categories",
+    "recommended_charts": [
+      "Bar chart of paper types",
+      "Pie chart of paper type distribution"
+    ],
+    "data_quality_score": "High - No missing data, consistent values",
+    "selection_rationale": "Provides insight into the distribution of paper types"
+  },
+  "TotalCitations": {
+    "column_name": "TotalCitations",
+    "source": "synthetic",
+    "original_columns": [
+      "AminerCitationCount",
+      "CitationCount_CrossRef"
+    ],
+    "data_type": "Numerical",
+    "unique_value_count": "Medium-High",
+    "examples": [
+      "5000",
+      "3000",
+      "1000"
+    ],
+    "operation": "addition",
+    "operation_description": "AminerCitationCount + CitationCount_CrossRef",
+    "visualization_suitability": "High - Better representation of paper impact than individual sources",
+    "recommended_charts": [
+      "Histogram of total citations",
+      "Box plot of citations by conference"
+    ],
+    "data_quality_score": "Good - Can handle missing values by treating as 0",
+    "selection_rationale": "Combines citation counts for a comprehensive impact metric"
+  },
+  "Downloads_Xplore_Binned": {
+    "column_name": "Downloads_Xplore_Binned",
+    "source": "binning_enhancement",
+    "original_columns": [
+      "Downloads_Xplore"
+    ],
+    "data_type": "Categorical",
+    "unique_value_count": 3,
+    "examples": [
+      "Low_Popularity",
+      "Medium_Popularity",
+      "High_Popularity"
+    ],
+    "binning_strategy": "popularity_tiers",
+    "bins": {
+      "Low_Popularity": "0-1000",
+      "Medium_Popularity": "1001-10000",
+      "High_Popularity": "10001+"
+    },
+    "visualization_suitability": "High - Popularity distribution charts, popularity by content type",
+    "recommended_charts": [
+      "Bar chart of download popularity",
+      "Popularity by paper type"
+    ],
+    "data_quality_score": "Good - Maintains relative popularity ordering",
+    "selection_rationale": "Enables comparison of content reach through intuitive popularity tiers"
+  },
+  "AuthorCountry": {
+    "column_name": "AuthorCountry",
+    "source": "extraction_enhancement",
+    "original_columns": [
+      "AuthorAffiliation"
+    ],
+    "data_type": "Categorical",
+    "unique_value_count": 5,
+    "examples": [
+      "USA",
+      "Canada",
+      "Netherlands",
+      "Switzerland",
+      "Other"
+    ],
+    "extraction_method": "geographic_pattern_matching",
+    "visualization_suitability": "Excellent - Enables geographic analysis of research distribution",
+    "recommended_charts": [
+      "Geographic distribution map",
+      "Country collaboration analysis"
+    ],
+    "data_quality_score": "Good - 85% extraction success rate with 'Other' fallback",
+    "selection_rationale": "Unlocks geographic insights from unstructured affiliation text"
+  }
+}

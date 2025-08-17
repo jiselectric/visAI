@@ -121,7 +121,9 @@ Please analyze the following dataset summary and select ONLY the columns that me
 
 ## 📝 Output Format
 
-Return a filtered JSON object where each key is a retained column name and each value follows this format:
+Return a filtered JSON object where each key is a retained column name and each value follows this format
+
+⚠️ **IMPORTANT**: The examples below are for **INSPIRATION ONLY**. Analyze the actual dataset provided and create your own unique visualizable dataset based the criteria provided above.
 
 ```json
 {

@@ -14,8 +14,13 @@ from utils.select_visualizable_data_helper import (
     detect_extraction_opportunities,
     detect_synthetic_opportunities,
     orchestrate_final_selection,
+    generate_synthetic_dataset,
 )
-from utils.data_utils import execute_pandas_query, generate_dataset_summary, sample_data
+from utils.data_utils import (
+    execute_pandas_query_for_computation,
+    generate_dataset_summary,
+    sample_data,
+)
 from utils.file_operation import (
     clean_markdown_output,
     load_cached_json,
@@ -35,6 +40,7 @@ class State(TypedDict):
     dataset_info: JSONType  # Step 0.1: Read the dataset
     dataset_summary: JSONType  # Step 0.2: Generate dataset summary
     visualizable_dataset: JSONType  # Step 1: Select visualizable columns
+    synthetic_dataset_info: JSONType  # Step 1: Generate synthetic dataset
     visualization_queries: JSONType  # Step 2: Generate visualization queries
     top_k_visualization_queries: JSONType  # Step 3: Select top-K queries
     computed_visualization_data: (
@@ -64,15 +70,19 @@ def select_visualizable_data(state: State):
 
     print("  1.1: Selecting direct visualizable columns (foundation)...")
     direct_columns = select_direct_visualizable_columns(dataset_summary_json)
+    save_json_data(direct_columns, "01a_direct_columns.json")
 
     print("  1.2: Detecting synthetic column opportunities...")
     synthetic_opportunities = detect_synthetic_opportunities(dataset_summary_json)
+    save_json_data(synthetic_opportunities, "01b_synthetic_opportunities.json")
 
     print("  1.3: Detecting numerical binning opportunities...")
     binning_opportunities = detect_binning_opportunities(dataset_summary_json)
+    save_json_data(binning_opportunities, "01c_binning_opportunities.json")
 
     print("  1.4: Detecting text extraction opportunities...")
     extraction_opportunities = detect_extraction_opportunities(dataset_summary_json)
+    save_json_data(extraction_opportunities, "01d_extraction_opportunities.json")
 
     print("  1.5: Orchestrating final column selection...")
     visualizable_dataset = orchestrate_final_selection(
@@ -83,16 +93,23 @@ def select_visualizable_data(state: State):
         extraction_opportunities,
     )
 
-    # Save the result
-    save_json_data(visualizable_dataset, "visualizable_dataset.json")
+    # Save the final result
+    save_json_data(visualizable_dataset, "01_visualizable_dataset.json")
 
-    return {"visualizable_dataset": visualizable_dataset}
+    # Step 1.6: Generate synthetic dataset with actual enhanced columns
+    print("  1.6: Generating synthetic dataset with enhanced columns...")
+    synthetic_dataset_info = generate_synthetic_dataset(visualizable_dataset, state["dataset_info"])  # type: ignore
+
+    return {
+        "visualizable_dataset": visualizable_dataset,
+        "synthetic_dataset_info": synthetic_dataset_info,
+    }
 
 
 # Step 2: Generate queries to inspire visualization generation
 def generate_visualization_queries(state: State):
     print("Step 2 / 10: Generate Visualization Queries")
-    attributes = state["dataset_info"]["attributes"]  # type: ignore
+    attributes = state["synthetic_dataset_info"]["attributes"]  # type: ignore
     visualizable_dataset = state["visualizable_dataset"]
 
     # Check if cached result exists
@@ -170,7 +187,7 @@ def select_top_k_visualization_queries(state: State):
 # Step 4: Compute the data for each visualization query
 def compute_data_for_visualization_queries(state: State):
     print("Step 4 / 10: Compute Data for Visualization Queries")
-    dataset_info = state["dataset_info"]
+    dataset_info = state["synthetic_dataset_info"]
     top_k_visualization_queries = state["top_k_visualization_queries"]
 
     # Check if cached result exists
@@ -227,7 +244,7 @@ def compute_data_for_visualization_queries(state: State):
             )
 
             cleaned_pandas_query = clean_markdown_output(pandas_query, "pandas")
-            computed_data = execute_pandas_query(cleaned_pandas_query)
+            computed_data = execute_pandas_query_for_computation(cleaned_pandas_query)
 
             computed_visualization_data[visualization_query["source_attribute"]] = {  # type: ignore
                 "query": query,

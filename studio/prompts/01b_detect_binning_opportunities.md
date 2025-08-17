@@ -74,7 +74,7 @@ Analyze the following dataset summary for binning opportunities:
 
 ## 📝 Output Format
 
-Return a JSON array of binning opportunities. For each opportunity:
+⚠️ **IMPORTANT**: The examples below are for **INSPIRATION ONLY**. Analyze the actual dataset provided and create your own unique binning opportunities based the criteria provided above.
 
 ```json
 [

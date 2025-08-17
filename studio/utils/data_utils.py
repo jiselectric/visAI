@@ -1,7 +1,24 @@
 from typing import Any, Counter, Dict, List
 
 import pandas as pd
+import numpy as np
 from utils.file_operation import save_json_data
+
+
+def convert_numpy_types(obj):
+    """Convert numpy types to Python native types for JSON serialization"""
+    if isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, dict):
+        return {key: convert_numpy_types(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_numpy_types(item) for item in obj]
+    else:
+        return obj
 
 
 def chunk_list(lst: List[Any], batch_size: int):
@@ -63,8 +80,13 @@ def generate_dataset_summary(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def sample_data(columns, sample_size):
-    # Create DataFrame directly from the data list
-    df = pd.read_csv("dataset.csv")
+    # Use synthetic dataset if it exists, otherwise fall back to original
+    import os
+
+    if os.path.exists("synthetic_dataset.csv"):
+        df = pd.read_csv("synthetic_dataset.csv")
+    else:
+        df = pd.read_csv("dataset.csv")
 
     samples = {}
     for col in columns:
@@ -75,12 +97,12 @@ def sample_data(columns, sample_size):
     return samples
 
 
-def execute_pandas_query(query: str) -> Dict[str, Any]:
+def execute_pandas_query_for_computation(query: str) -> Dict[str, Any]:
     """Execute pandas code and return the computed data in the correct format"""
     import pandas as pd
 
     # Load the dataset
-    df = pd.read_csv("dataset.csv")
+    df = pd.read_csv("synthetic_dataset.csv")
 
     # Create a local namespace with df available
     local_namespace = {"df": df, "pd": pd}
@@ -112,3 +134,46 @@ def execute_pandas_query(query: str) -> Dict[str, Any]:
 
     except Exception as e:
         return {"error": f"Error executing pandas code: {str(e)}"}
+
+
+def execute_pandas_query_for_synthetic_dataset(
+    dataset: pd.DataFrame, query: str
+) -> pd.DataFrame:
+    """
+    Execute pandas code on the given dataset to add synthetic columns
+
+    Args:
+        dataset: DataFrame to modify (passed by reference, will be modified in-place)
+        query: Pandas code to execute (should create new column(s) in df)
+
+    Returns:
+        pd.DataFrame: The modified dataset with new synthetic column(s)
+    """
+    import pandas as pd
+    import numpy as np
+    import json
+
+    # Create execution environment with the passed dataset
+    local_namespace = {"df": dataset, "pd": pd, "np": np, "json": json}
+
+    try:
+        # Execute the pandas code (modifies df in-place)
+        exec(query, globals(), local_namespace)
+
+        # Get the modified DataFrame
+        result_df = local_namespace["df"]
+
+        # Convert numpy types to avoid JSON serialization issues later
+        for col in result_df.columns:
+            if result_df[col].dtype == "int64":
+                result_df[col] = result_df[col].astype("object")
+            elif result_df[col].dtype == "float64":
+                result_df[col] = result_df[col].astype("object")
+
+        return result_df
+
+    except Exception as e:
+        print(f"Error executing pandas query: {str(e)}")
+        print(f"Query was: {query}")
+        # Return the dataset unchanged if execution fails
+        return dataset

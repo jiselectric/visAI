@@ -81,7 +81,7 @@ Analyze the following dataset summary for text extraction opportunities:
 
 ## 📝 Output Format
 
-Return a JSON array of extraction opportunities. For each opportunity:
+⚠️ **IMPORTANT**: The examples below are for **INSPIRATION ONLY**. Analyze the actual dataset provided and create your own unique extraction opportunities based the criteria provided above.
 
 ```json
 [
