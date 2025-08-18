@@ -5,8 +5,8 @@
     "extractable_categories": {
       "Country": [
         "USA",
-        "Netherlands",
         "Canada",
+        "Netherlands",
         "Switzerland",
         "Other"
       ],
@@ -19,7 +19,6 @@
       "Geographic_Region": [
         "North_America",
         "Europe",
-        "Asia",
         "Other"
       ]
     },
@@ -48,7 +47,7 @@
     "extractable_categories": {
       "Research_Area": [
         "Visualization",
-        "Data_Mining",
+        "Data_Analysis",
         "User_Interface",
         "Network_Analysis",
         "Other"
@@ -59,10 +58,10 @@
         "Mixed_Methods"
       ],
       "Application_Domain": [
+        "General",
         "Healthcare",
-        "Finance",
         "Education",
-        "General"
+        "Social_Science"
       ]
     },
     "extraction_method": "keyword_clustering_and_domain_classification",
@@ -85,16 +84,16 @@
     "extractable_categories": {
       "Content_Type": [
         "Research",
-        "Tutorial",
         "Case_Study",
         "Review",
+        "Methodology",
         "Other"
       ],
       "Topic_Category": [
         "Visualization",
         "Data_Analysis",
         "Interaction",
-        "Design_Methodology",
+        "Design",
         "Other"
       ]
     },
@@ -105,9 +104,9 @@
         "Topic_Category": "Visualization"
       }
     },
-    "rationale": "Titles often contain keywords that indicate the type and topic of the content, allowing for classification into meaningful categories",
+    "rationale": "Titles often contain keywords that indicate the type and topic of the content, allowing for categorization",
     "expected_coverage": "75-85% of entries can be categorized based on title keywords",
-    "visualization_potential": "Medium - Content type distribution, topic trends over time",
+    "visualization_potential": "High - Content type distribution, topic trends over time",
     "data_quality_impact": "Good - Titles are generally concise and focused, aiding reliable extraction",
     "confidence_score": 0.75
   }

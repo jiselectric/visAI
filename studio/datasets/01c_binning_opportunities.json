@@ -32,41 +32,5 @@
     "domain_interpretability": "Good - Popularity tiers are intuitive for content analysis",
     "information_loss": "Low - Maintains relative popularity ordering",
     "confidence_score": 0.8
-  },
-  {
-    "column_name": "FirstPage",
-    "current_cardinality": 1589,
-    "binning_strategy": "page_range",
-    "proposed_bins": {
-      "Very_Short": "1-100",
-      "Short": "101-500",
-      "Medium": "501-1000",
-      "Long": "1001-2000",
-      "Very_Long": "2001+"
-    },
-    "bin_count": 5,
-    "rationale": "Page numbers can be binned to reflect document length, aiding in understanding document size distribution.",
-    "visualization_potential": "Medium - Document length distribution, length by conference",
-    "domain_interpretability": "Moderate - Page ranges are common in document analysis",
-    "information_loss": "Moderate - Some granularity lost but overall trends preserved",
-    "confidence_score": 0.7
-  },
-  {
-    "column_name": "LastPage",
-    "current_cardinality": 1615,
-    "binning_strategy": "page_range",
-    "proposed_bins": {
-      "Very_Short": "1-100",
-      "Short": "101-500",
-      "Medium": "501-1000",
-      "Long": "1001-2000",
-      "Very_Long": "2001+"
-    },
-    "bin_count": 5,
-    "rationale": "Page numbers can be binned to reflect document length, aiding in understanding document size distribution.",
-    "visualization_potential": "Medium - Document length distribution, length by conference",
-    "domain_interpretability": "Moderate - Page ranges are common in document analysis",
-    "information_loss": "Moderate - Some granularity lost but overall trends preserved",
-    "confidence_score": 0.7
   }
 ]

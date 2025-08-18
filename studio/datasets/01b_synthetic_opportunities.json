@@ -7,7 +7,7 @@
     ],
     "operation": "subtraction_plus_one",
     "operation_description": "LastPage - FirstPage + 1",
-    "rationale": "Combines two high-cardinality numerical columns into a meaningful measure of paper length",
+    "rationale": "Combines two numerical columns to measure the length of a paper, which is a meaningful metric for analysis.",
     "expected_cardinality": "Low-Medium (5-50 unique values)",
     "visualization_potential": "High - Can show distribution of paper lengths, papers by length category",
     "data_quality_impact": "Good - Both source columns have similar missing data patterns",
@@ -21,7 +21,7 @@
     ],
     "operation": "addition",
     "operation_description": "AminerCitationCount + CitationCount_CrossRef",
-    "rationale": "Combines citation counts from different sources for more comprehensive citation metric",
+    "rationale": "Combines citation counts from different sources for a more comprehensive citation metric.",
     "expected_cardinality": "Medium-High - but suitable for binning",
     "visualization_potential": "High - Better representation of paper impact than individual sources",
     "data_quality_impact": "Good - Can handle missing values by treating as 0",
@@ -36,7 +36,7 @@
     ],
     "operation": "ratio_calculation",
     "operation_description": "(AminerCitationCount + CitationCount_CrossRef) / Downloads_Xplore",
-    "rationale": "Measures citation efficiency - how many citations a paper receives per download, indicating research impact relative to accessibility",
+    "rationale": "Measures citation efficiency, indicating research impact relative to accessibility.",
     "expected_cardinality": "High - continuous ratio values suitable for binning into efficiency categories",
     "visualization_potential": "High - Can show impact efficiency distributions, identify high-performing papers after binning into Low/Medium/High efficiency categories",
     "data_quality_impact": "Good - Handles division by zero cases (Downloads_Xplore = 0) by setting to null or infinity",
@@ -48,25 +48,24 @@
       "AuthorNames"
     ],
     "operation": "count",
-    "operation_description": "Count of authors in AuthorNames",
-    "rationale": "Provides a numerical representation of the number of authors per paper, useful for analyzing collaboration patterns",
-    "expected_cardinality": "Low-Medium - suitable for categorization",
-    "visualization_potential": "High - Can show distribution of papers by number of authors, collaboration trends",
-    "data_quality_impact": "Good - Minimal impact as it derives directly from existing data",
-    "confidence_score": 0.9
+    "operation_description": "Count the number of authors in the AuthorNames column",
+    "rationale": "Provides a metric for collaboration level on papers, which can be insightful for analysis.",
+    "expected_cardinality": "Low-Medium",
+    "visualization_potential": "Medium - Can show distribution of papers by number of authors",
+    "data_quality_impact": "Good - Minimal impact as it derives from existing data",
+    "confidence_score": 0.85
   },
   {
-    "synthetic_column_name": "YearlyDownloads",
+    "synthetic_column_name": "AwardCount",
     "source_columns": [
-      "Downloads_Xplore",
-      "Year"
+      "Award"
     ],
-    "operation": "division",
-    "operation_description": "Downloads_Xplore / (CurrentYear - Year + 1)",
-    "rationale": "Normalizes download counts by the number of years since publication, providing a measure of average annual downloads",
-    "expected_cardinality": "Medium - suitable for trend analysis",
-    "visualization_potential": "High - Can show trends in download popularity over time",
-    "data_quality_impact": "Good - Accounts for varying publication years",
+    "operation": "count",
+    "operation_description": "Count the number of awards listed in the Award column",
+    "rationale": "Quantifies the recognition a paper has received, useful for impact analysis.",
+    "expected_cardinality": "Low",
+    "visualization_potential": "Medium - Can show distribution of papers by number of awards",
+    "data_quality_impact": "Good - Minimal impact as it derives from existing data",
     "confidence_score": 0.85
   }
 ]

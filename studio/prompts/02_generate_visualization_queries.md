@@ -1,22 +1,76 @@
-# 🤖 Prompt: Generate Visualization Queries from Dataset Summary
+# 🎨 Generate Creative Visualization Queries Inspired by Vega-Lite Gallery
 
 ## 🎯 Objective
 
-You are given a **summary of a structured dataset**. Your task is to generate **natural language queries** that can help guide a second LLM to produce meaningful **visualizations** and insights from the dataset.
+You are a **creative data visualization strategist** inspired by the rich examples from vega.github.io/vega-lite/examples/. Your task is to generate **visually compelling queries** that guide the creation of **interactive, beautiful, and insightful** Vega-Lite visualizations.
 
-## 📋 Instructions
+## 🌟 Creative Visualization Mission
 
-1. For **each column** in the dataset summary, generate **5 distinct queries** related to that attribute.
-2. Additionally, generate at least **10 synthetic queries** that combine **two or more columns** (e.g., `"Year & PaperType"` or `"Award & Conference"`). These should uncover **relationships or comparisons across columns**.
-3. For each query, include a **suggested chart type** (e.g., bar chart, pie chart, line chart, box plot, word cloud).
-4. Make queries **concrete**, measurable, and based only on the data summary provided. Avoid vague, subjective, or open-ended questions.
-5. Use **natural language** for the queries.
+1. For **each column**, generate **5 visually inspiring queries** that suggest advanced Vega-Lite techniques
+2. Generate **10+ multi-column queries** that reveal relationships through innovative visual approaches
+3. **AVOID basic chart types** - instead suggest creative techniques from the Vega-Lite gallery
+4. Focus on **interactivity, aesthetics, and multi-dimensional encoding**
+5. **Use examples below as INSPIRATION, not templates to copy**
 
-## IMPORTANT RULES:
-1. **AVOID columns with excessive missing data** (>20% missing values)
-2. **Focus on columns with clean, complete data**
-3. **Generate queries that lead to meaningful insights**
-4. **Consider data quality** when selecting columns to analyze
+## 🎨 Creative Vega-Lite Techniques (Inspired by vega.github.io/vega-lite/examples/)
+
+### 🌈 Instead of Basic Charts, Suggest These Creative Approaches:
+
+#### **For Categorical Distributions:**
+- **"Interactive radial bar chart with hover animations"** (arc marks in polar coordinates)
+- **"Layered bar chart with value annotations and gradient fills"** 
+- **"Faceted small multiples with brushing and linking"**
+- **"Bubble chart with categorical color encoding and size variations"**
+
+#### **For Time Series & Trends:**
+- **"Connected scatterplot showing correlation evolution over time"**
+- **"Streamgraph with flowing, organic area fills"** 
+- **"Multi-layer chart combining line trends with confidence intervals"**
+- **"Interactive time series with brush selection and zooming"**
+
+#### **For Correlations & Relationships:**
+- **"Bubble chart with 3-4 dimensional encoding (x, y, size, color)"**
+- **"Hexbin plot for dense data with aggregated hover details"**
+- **"Scatterplot matrix with cross-filtering and highlighting"**
+- **"Connected scatterplot showing temporal correlation patterns"**
+
+#### **For Multi-dimensional Analysis:**
+- **"Interactive heatmap with sequential color schemes and tooltips"**
+- **"Layered composition combining multiple chart types"**
+- **"Parallel coordinates plot for high-dimensional exploration"**
+- **"Trellis plot (small multiples) with shared scales and brushing"**
+
+#### **For Comparisons & Rankings:**
+- **"Slope graph showing changes between two time points"**
+- **"Grouped bar chart with interactive legend filtering"**
+- **"Box plot with overlaid strip plot for distribution details"**
+- **"Waterfall chart showing cumulative effects"**
+
+## 🎯 Advanced Interactive Features to Incorporate:
+
+### **Selection & Filtering:**
+- **Brush selection** for zooming and filtering
+- **Click selection** for highlighting and cross-filtering  
+- **Legend interaction** for showing/hiding categories
+- **Interval selection** for range-based filtering
+
+### **Rich Tooltips & Hover Effects:**
+- **Multi-field tooltips** with formatted values
+- **Opacity changes** on hover for depth
+- **Highlight effects** for related data points
+- **Dynamic text annotations** showing insights
+
+### **Sophisticated Color & Styling:**
+- **Sequential color schemes** (viridis, plasma, blues)
+- **Categorical palettes** (category10, set2, tableau10)
+- **Gradient fills** and **opacity encoding**
+- **Custom styling** with rounded corners and strokes
+
+## CRITICAL RULES:
+1. **NEVER suggest basic "bar chart", "pie chart", "line chart"**
+2. **ALWAYS include interactive elements** (hover, selection, tooltips)
+3. **ENCOURAGE multi-dimensional encoding** (size, color, opacity, shape)
+4. **FOCUS on visual appeal AND insight**
 
 ## CRITICAL REQUIREMENTS FOR INSIGHTFUL QUERIES:
 
@@ -65,35 +119,37 @@ Your final output **must be a JSON object** with the following structure:
   - The **key** is a query string.
   - The **value** is the suggested visualization type(s).
 
+**🚨 CRITICAL INSTRUCTION: Use the examples below as INSPIRATION ONLY. NEVER copy the provided example queries or visualization types directly. Create your own unique queries and creative visualization suggestions based on the actual dataset provided.**
+
 ### Example Output
 
 ```json
 {
   "Conference": {
     "queries": {
-      "What is the distribution of papers by conference type?": "Bar chart or pie chart",
-      "Which conference has the highest number of published papers?": "Bar chart",
-      "How many papers were submitted for each conference?": "Bar chart",
-      "What proportion of the total publications does each conference contribute?": "Pie chart",
-      "Compare the number of papers across different conference types.": "Stacked bar chart"
+      "What is the distribution of papers by conference with interactive hover details?": "Interactive radial bar chart with hover animations and value annotations",
+      "Which conference dominates the research landscape with visual impact comparison?": "Bubble chart with size encoding and gradient color fills",
+      "How do conference submission patterns reveal research focus areas?": "Layered bar chart with categorical color encoding and custom styling",
+      "What proportion of publications shows conference research diversity?": "Arc chart with polar coordinates and sequential color scheme",
+      "Compare conference impact through multi-dimensional visualization": "Faceted small multiples with brushing and cross-filtering"
     }
   },
   "Year & PaperType": {
     "queries": {
-      "How has the distribution of paper types changed over the years?": "Stacked area chart",
-      "Which type of paper was most commonly submitted each year?": "Line chart or stacked bar chart",
-      "Rank the paper types by submission count per year.": "Grouped bar chart",
-      "How many journal papers were submitted each year?": "Line chart",
-      "Compare yearly trends across all paper types.": "Multi-line chart"
+      "How has the evolution of paper types created dynamic research trends?": "Streamgraph with flowing area fills and temporal animation",
+      "Which paper type innovations emerge as research frontiers each year?": "Connected scatterplot showing temporal correlation patterns",
+      "What temporal patterns reveal shifting research methodologies over decades?": "Multi-layer chart combining line trends with confidence intervals",
+      "How do yearly submission waves illustrate research paradigm shifts?": "Interactive time series with brush selection and dynamic zooming",
+      "Compare research diversity through temporal multi-dimensional analysis": "Heatmap with sequential color schemes and rich hover tooltips"
     }
   },
   "Year & PaperType & Citations": {
     "queries": {
-      "How has the distribution of citation counts changed over the years?": "Stacked area chart",
-      "Which type of paper had the highest median citation count each year?": "Line chart or stacked bar chart",
-      "Rank the paper types by median citation count per year.": "Grouped bar chart",
-      "How many journal papers had the highest median citation count each year?": "Line chart",
-      "Compare yearly trends across all paper types with median citation counts.": "Multi-line chart"
+      "How do citation patterns reveal research impact evolution across time and types?": "3D bubble chart with temporal, categorical, and impact encoding",
+      "Which paper types achieve breakthrough impact in different eras?": "Slope graph showing changes between time periods with impact indicators",
+      "What citation trajectories show the most influential research directions?": "Connected scatterplot matrix with cross-filtering and highlighting",
+      "How do high-impact papers cluster across time, type, and citation dimensions?": "Hexbin plot with aggregated hover details and density encoding",
+      "Compare research excellence through interactive multi-dimensional exploration": "Parallel coordinates plot with brushable axes and dynamic filtering"
     }
   }
 }

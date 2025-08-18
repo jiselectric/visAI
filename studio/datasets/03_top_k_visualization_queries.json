@@ -2,125 +2,125 @@
   "selected_queries": [
     {
       "order": 1,
-      "query": "Distribution of papers by conference",
-      "chart_type": "Bar Chart",
+      "query": "How does the distribution of papers across conferences change with interactive exploration?",
+      "chart_type": "Interactive radial bar chart with hover animations and dynamic filtering",
       "source_attribute": "Conference",
       "flow_stage": "Introduction & Overview",
-      "rationale": "Provides a high-level overview of the dataset by showing the number of papers per conference, setting the stage for further analysis."
+      "rationale": "This query provides a broad overview of the dataset by showing how papers are distributed across different conferences, setting the stage for deeper analysis."
     },
     {
       "order": 2,
-      "query": "Paper types distribution",
-      "chart_type": "Pie Chart",
-      "source_attribute": "PaperType",
+      "query": "Which conferences lead in research output with a focus on visual impact?",
+      "chart_type": "Bubble chart with size and color encoding to represent conference dominance",
+      "source_attribute": "Conference",
       "flow_stage": "Introduction & Overview",
-      "rationale": "Gives insight into the types of papers present in the dataset, helping to understand the dataset's composition."
+      "rationale": "This query highlights the leading conferences in terms of research output, providing context on where the most research activity is concentrated."
     },
     {
       "order": 3,
-      "query": "Average citation impact by conference",
-      "chart_type": "Bar Chart",
-      "source_attribute": "Conference & CitationImpact",
+      "query": "How is the distribution of paper types visually represented with interactive elements?",
+      "chart_type": "Interactive radial bar chart with hover animations and value annotations",
+      "source_attribute": "PaperType",
       "flow_stage": "Introduction & Overview",
-      "rationale": "Introduces the concept of citation impact and how it varies across different conferences, providing context for further analysis."
+      "rationale": "This query introduces the different types of papers in the dataset, offering a foundational understanding of the research landscape."
     },
     {
       "order": 4,
-      "query": "Distribution of citation impact",
-      "chart_type": "Histogram",
-      "source_attribute": "CitationImpact",
+      "query": "What insights can be drawn from the layered distribution of papers by conference?",
+      "chart_type": "Layered bar chart with gradient fills and interactive legend filtering",
+      "source_attribute": "Conference",
       "flow_stage": "Distribution Analysis",
-      "rationale": "Explores how citation impact is distributed across the dataset, identifying patterns or concentrations."
+      "rationale": "This query delves into the distribution of papers across conferences, allowing for a detailed examination of patterns and concentrations."
     },
     {
       "order": 5,
-      "query": "Page count distribution",
-      "chart_type": "Box Plot",
-      "source_attribute": "PageCount",
+      "query": "What insights can be drawn from the layered distribution of paper types?",
+      "chart_type": "Layered bar chart with gradient fills and interactive legend filtering",
+      "source_attribute": "PaperType",
       "flow_stage": "Distribution Analysis",
-      "rationale": "Analyzes the distribution of page counts, providing insights into the typical length of papers."
+      "rationale": "This query provides a detailed look at how different paper types are distributed, helping to identify patterns and concentrations."
     },
     {
       "order": 6,
-      "query": "Distribution of papers by author country",
-      "chart_type": "Bar Chart",
-      "source_attribute": "AuthorCountry",
+      "query": "How is the distribution of citation impact categories visually represented?",
+      "chart_type": "Interactive radial bar chart with hover animations and value annotations",
+      "source_attribute": "CitationImpact",
       "flow_stage": "Distribution Analysis",
-      "rationale": "Examines the geographic distribution of authors, highlighting diversity or concentration in certain regions."
+      "rationale": "This query explores the distribution of citation impacts, offering insights into the influence of different research outputs."
     },
     {
       "order": 7,
-      "query": "Publication trends over the years",
-      "chart_type": "Line Chart",
+      "query": "What are the temporal trends in publication counts with interactive exploration?",
+      "chart_type": "Interactive time series with brush selection and zooming capabilities",
       "source_attribute": "Year",
       "flow_stage": "Temporal Trends",
-      "rationale": "Analyzes how the number of publications has changed over time, identifying trends or shifts in research activity."
+      "rationale": "This query examines how publication counts have changed over time, providing a temporal context for the dataset."
     },
     {
       "order": 8,
-      "query": "Citation impact trends over the years",
-      "chart_type": "Line Chart",
-      "source_attribute": "Year & CitationImpact",
+      "query": "How do publication patterns evolve over the years with visual annotations?",
+      "chart_type": "Multi-layer chart combining line trends with dynamic annotations",
+      "source_attribute": "Year",
       "flow_stage": "Temporal Trends",
-      "rationale": "Explores how citation impact has evolved over time, providing insights into the changing influence of research."
+      "rationale": "This query offers a detailed view of publication trends over time, highlighting key changes and annotations for deeper insights."
     },
     {
       "order": 9,
-      "query": "Trends in paper types over the years",
-      "chart_type": "Area Chart",
-      "source_attribute": "Year & PaperType",
+      "query": "How do publication trends vary across conferences over time?",
+      "chart_type": "Streamgraph with flowing area fills and temporal animation",
+      "source_attribute": "Year & Conference",
       "flow_stage": "Temporal Trends",
-      "rationale": "Shows how the prevalence of different paper types has changed over time, indicating shifts in research focus."
+      "rationale": "This query explores how publication trends differ across conferences over time, revealing shifts in focus and activity."
     },
     {
       "order": 10,
-      "query": "Correlation between page count and citation impact",
-      "chart_type": "Scatter Plot",
-      "source_attribute": "PageCount & CitationImpact",
+      "query": "How do paper types vary across different conferences?",
+      "chart_type": "Bubble chart with size and color encoding for conference and type comparison",
+      "source_attribute": "Conference & PaperType",
       "flow_stage": "Relationship Analysis",
-      "rationale": "Investigates the relationship between the length of papers and their citation impact, identifying any potential correlation."
+      "rationale": "This query investigates the relationship between paper types and conferences, uncovering patterns of diversity and focus."
     },
     {
       "order": 11,
-      "query": "Correlation between conference and citation impact",
-      "chart_type": "Grouped Bar Chart",
+      "query": "How do citation impact categories vary across different conferences?",
+      "chart_type": "Bubble chart with size and color encoding for conference and impact comparison",
       "source_attribute": "Conference & CitationImpact",
       "flow_stage": "Relationship Analysis",
-      "rationale": "Explores how different conferences correlate with citation impact, providing insights into conference prestige or influence."
+      "rationale": "This query examines the relationship between citation impacts and conferences, identifying areas of high influence."
     },
     {
       "order": 12,
-      "query": "Relationship between paper type and citation impact",
-      "chart_type": "Box Plot",
-      "source_attribute": "PaperType & CitationImpact",
+      "query": "How do yearly conference submissions illustrate research paradigm shifts?",
+      "chart_type": "Interactive time series with brush selection and dynamic zooming",
+      "source_attribute": "Year & Conference",
       "flow_stage": "Relationship Analysis",
-      "rationale": "Analyzes how different types of papers are associated with varying levels of citation impact."
+      "rationale": "This query analyzes how conference submissions have changed over time, indicating shifts in research paradigms."
     },
     {
       "order": 13,
-      "query": "Top 10 most cited papers",
-      "chart_type": "Bar Chart",
-      "source_attribute": "CitationImpact",
+      "query": "How has the evolution of paper types created dynamic research trends?",
+      "chart_type": "Streamgraph with flowing area fills and temporal animation",
+      "source_attribute": "Year & PaperType",
       "flow_stage": "Advanced Insights & Conclusions",
-      "rationale": "Highlights the most influential papers in the dataset, providing insights into key research contributions."
+      "rationale": "This query synthesizes the evolution of paper types over time, highlighting dynamic trends and emerging research areas."
     },
     {
       "order": 14,
-      "query": "Outliers in citation impact",
-      "chart_type": "Box Plot",
-      "source_attribute": "CitationImpact",
+      "query": "Which years show significant changes in citation impact categories?",
+      "chart_type": "Connected scatterplot showing temporal correlation patterns",
+      "source_attribute": "Year & CitationImpact",
       "flow_stage": "Advanced Insights & Conclusions",
-      "rationale": "Identifies papers with exceptionally high or low citation impact, offering insights into anomalies or exceptional cases."
+      "rationale": "This query identifies years with significant changes in citation impacts, offering insights into influential research periods."
     },
     {
       "order": 15,
-      "query": "Comparison of citation impact across paper types and conferences",
-      "chart_type": "Combination Chart",
-      "source_attribute": "Conference & PaperType & CitationImpact",
+      "query": "Explore the conference and citation impact landscape through a multi-faceted visual approach",
+      "chart_type": "Interactive heatmap with sequential color schemes and tooltips",
+      "source_attribute": "Conference & CitationImpact",
       "flow_stage": "Advanced Insights & Conclusions",
-      "rationale": "Synthesizes findings by comparing citation impact across both paper types and conferences, providing a comprehensive overview."
+      "rationale": "This query provides a comprehensive view of the conference and citation impact landscape, synthesizing insights into a cohesive conclusion."
     }
   ],
-  "logical_flow": "The narrative begins with an overview of the dataset, introducing key elements such as conferences, paper types, and citation impact. It then delves into distribution analysis to understand the spread of key metrics. Temporal trends are explored to identify changes over time, followed by relationship analysis to uncover correlations between variables. The paper concludes with advanced insights, highlighting top papers and synthesizing findings across multiple dimensions.",
-  "flow_justification": "This order creates a compelling story by starting with foundational insights and progressively building towards more complex analyses. Each stage logically follows from the previous one, ensuring a coherent narrative that guides the reader through the dataset's key insights and conclusions."
+  "logical_flow": "The narrative begins with an introduction to the dataset, providing an overview of the distribution of papers across conferences and paper types. It then delves into distribution analysis, examining how papers and citation impacts are distributed. Temporal trends are explored next, highlighting changes over time in publication counts and conference activities. Relationship analysis follows, uncovering connections between paper types, conferences, and citation impacts. The narrative concludes with advanced insights, synthesizing findings into a comprehensive understanding of research trends and impacts.",
+  "flow_justification": "This order creates a compelling story by starting with a broad overview, then progressively drilling down into specific analyses. Each stage builds on the previous one, leading to a comprehensive understanding of the dataset. The use of diverse visualization types ensures that insights are presented in an engaging and informative manner, maintaining reader interest throughout the narrative."
 }

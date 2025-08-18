@@ -255,6 +255,7 @@ def compute_data_for_visualization_queries(state: State):
 
             computed_visualization_data[visualization_query["source_attribute"]] = {  # type: ignore
                 "query": query,
+                "chart_type": chart_type,
                 "computed_data": computed_data,
             }
 
@@ -273,11 +274,12 @@ def generate_vega_lite_charts(state: State):
     cached_data = load_cached_json("05_generated_vegalite_charts.json")
     if cached_data:
         print("Using cached - 05_generated_vegalite_charts.json")
-        return {"computed_visualization_data": cached_data}
+        return {"generated_vegalite_charts": cached_data}
 
     generated_vega_lite_charts = {}
     for source_attribute, data in computed_visualization_data.items():  # type: ignore
         query = data["query"]  # type: ignore
+        chart_type = data["chart_type"]  # type: ignore
         computed_data = data["computed_data"]  # type: ignore
 
         sys_prompt = load_prompt_template("05_generate_vegalite_chart.md")
@@ -290,6 +292,7 @@ def generate_vega_lite_charts(state: State):
             prompt_template=sys_prompt,
             replacements={
                 "{{query}}": query,  # type: ignore
+                "{{chart_type}}": chart_type,
                 "{{computed_data_json}}": computed_data_json,  # type: ignore
             },  # type: ignore
         )

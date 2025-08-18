@@ -4,7 +4,10 @@
 
 You are given a **comprehensive set of visualization queries** generated from a dataset summary. Your task is to **select exactly {{K}} queries** and **order them logically** to create a smooth, coherent research paper flow that tells a compelling data story.
 
-**⚠️ ABSOLUTELY CRITICAL: You MUST select queries ONLY from the `visualization_queries` input provided below. Do NOT create new queries or copy from examples. Use ONLY the actual queries that exist in the input data.**
+**⚠️ ABSOLUTELY CRITICAL: 
+1. You MUST select queries ONLY from the `visualization_queries_json` input provided below. Do NOT create new queries or copy from examples. 
+2. You MUST preserve the EXACT creative visualization types (e.g., "Interactive radial bar chart with hover animations") from Step 2. Do NOT substitute with basic chart types.
+3. Use ONLY the actual queries and their associated creative visualization suggestions that exist in the input data.**
 
 ## 📋 Instructions
 
@@ -38,27 +41,27 @@ You are given a **comprehensive set of visualization queries** generated from a 
 ### 1. **Introduction & Overview** (2-3 queries)
 - Start with broad, high-level insights about the dataset
 - Establish context and basic understanding
-- Use simple charts: bar charts, pie charts, basic counts
+- **PRESERVE creative visualization types** from Step 2 (interactive radial charts, bubble charts, etc.)
 
 ### 2. **Distribution Analysis** (2-3 queries)
 - Explore how data is distributed across key categories
 - Identify patterns and concentrations
-- Use: histograms, box plots, distribution charts
+- **PRESERVE creative visualization types** from Step 2 (streamgraphs, layered compositions, etc.)
 
 ### 3. **Temporal Trends** (2-3 queries)
 - Analyze changes over time
 - Identify patterns, cycles, or anomalies
-- Use: line charts, area charts, time series
+- **PRESERVE creative visualization types** from Step 2 (connected scatterplots, multi-layer charts, etc.)
 
 ### 4. **Relationship Analysis** (2-3 queries)
 - Explore correlations and connections between variables
 - Identify meaningful associations
-- Use: scatter plots, correlation matrices, grouped charts
+- **PRESERVE creative visualization types** from Step 2 (hexbin plots, parallel coordinates, etc.)
 
 ### 5. **Advanced Insights & Conclusions** (1-2 queries)
 - Synthesize findings into actionable insights
 - Identify outliers, anomalies, or special cases
-- Use: combination charts, advanced visualizations
+- **PRESERVE creative visualization types** from Step 2 (advanced interactive visualizations)
 
 ## 🚨 CHART READABILITY REQUIREMENTS:
 
@@ -80,10 +83,10 @@ You are given a **comprehensive set of visualization queries** generated from a 
 
 ## 🔍 Input Analysis
 
-Please analyze the following visualization queries and select the top 10 for logical research flow:
+Please analyze the following visualization queries and select the top {{K}} for logical research flow:
 
 ```json
-{{visualization_queries}}
+{{visualization_queries_json}}
 ```
 
 ## 📝 Output Format
@@ -93,7 +96,7 @@ Your final output **must be a JSON object** with the following structure:
 - **`selected_queries`**: An array of exactly {{K}} query objects, where each object contains:
   - **`order`**: Sequential number (1, 2, 3, ...)
   - **`query`**: The actual query text from the input `visualization_queries`
-  - **`chart_type`**: The suggested chart type from the input `visualization_queries`
+  - **`chart_type`**: The creative visualization type from the input `visualization_queries` (preserve the EXACT creative Vega-Lite suggestions)
   - **`source_attribute`**: The attribute key from the input (e.g., "PaperType", "Year & Conference") **STRICTLY** from {{attributes}}
   - **`flow_stage`**: The logical flow stage this query belongs to
   - **`rationale`**: Why this query fits in this flow stage
@@ -129,15 +132,15 @@ Your final output **must be a JSON object** with the following structure:
 }
 ```
 
-**⚠️ REMEMBER: Replace all "EXAMPLE_*" placeholders with actual content from your input data. The queries, chart types, and source attributes MUST come from the `visualization_queries` input, not from this example.**
+**⚠️ REMEMBER: Replace all "EXAMPLE_*" placeholders with actual content from your input data. The queries, chart types, and source attributes MUST come from the `visualization_queries_json` input, not from this example. PRESERVE the creative visualization types exactly as they appear in the input.**
 
 ## 🎯 Selection Criteria for Each Query:
 
 1. **Uniqueness**: Must explore a different aspect, relationship, or insight
 2. **Progression**: Should naturally follow from previous queries
 3. **Insight Value**: Must contribute meaningful information to the story
-4. **Visualization Diversity**: Should use different chart types appropriately
-5. **Narrative Coherence**: Must fit the logical flow stage
+4. **Creative Visualization Diversity**: Should preserve and showcase different creative Vega-Lite techniques from Step 2 (e.g., radial charts, streamgraphs, hexbin plots, parallel coordinates)
+5. **Narrative Coherence**: Must fit the logical flow stage while maintaining visual creativity
 
 ## ⚠️ FINAL CHECKLIST:
 

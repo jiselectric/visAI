@@ -21,7 +21,7 @@ def save_json_data(
 ) -> None:
     """Save data to JSON file with proper encoding and numpy type conversion."""
     import numpy as np
-    
+
     def convert_numpy_types(obj):
         """Convert numpy types to Python native types for JSON serialization"""
         if isinstance(obj, np.integer):
@@ -36,10 +36,10 @@ def save_json_data(
             return [convert_numpy_types(item) for item in obj]
         else:
             return obj
-    
+
     # Convert numpy types before saving
     clean_data = convert_numpy_types(data)
-    
+
     os.makedirs(dataset_dir, exist_ok=True)
     full_path = os.path.join(dataset_dir, file_path)
     with open(full_path, "w", encoding="utf-8") as f:
