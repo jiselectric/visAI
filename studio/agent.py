@@ -9,6 +9,7 @@ from report_html import generate_html_report
 from report_pdf import generate_pdf_report
 from typing_extensions import TypedDict
 from utils.select_visualizable_data_helper import (
+    generate_synthetic_dataset_summary_for_binning,
     select_direct_visualizable_columns,
     detect_binning_opportunities,
     detect_extraction_opportunities,
@@ -18,12 +19,14 @@ from utils.select_visualizable_data_helper import (
 )
 from utils.data_utils import (
     execute_pandas_query_for_computation,
+    execute_pandas_query_for_synthetic_dataset,
     generate_dataset_summary,
     sample_data,
 )
 from utils.file_operation import (
     clean_markdown_output,
     load_cached_json,
+    load_or_execute_cached_step,
     load_prompt_template,
     read_csv_data,
     save_json_data,
@@ -62,11 +65,11 @@ def select_visualizable_data(state: State):
 
     # Check if cached result exists
     cached_visualizable_dataset = load_cached_json("01_visualizable_dataset.json")
-    cached_synthetic_dataset_info = load_cached_json("01e_synthetic_dataset_info.json")
+    cached_synthetic_dataset_info = load_cached_json("01_synthetic_dataset_info.json")
 
     if cached_visualizable_dataset and cached_synthetic_dataset_info:
         print(
-            "Using cached - 01_visualizable_dataset.json & 01e_synthetic_dataset_info.json"
+            "Using cached - 01_visualizable_dataset.json & 01_synthetic_dataset_info.json"
         )
         return {
             "visualizable_dataset": cached_visualizable_dataset,
@@ -76,41 +79,38 @@ def select_visualizable_data(state: State):
     dataset_summary_json = json.dumps(dataset_summary, indent=2, ensure_ascii=False)
 
     # Load or generate sub-step results with caching
-    print("  1.1: Selecting direct visualizable columns (foundation)...")
-    cached_direct_columns = load_cached_json("01a_direct_columns.json")
-    if cached_direct_columns:
-        print("    Using cached - 01a_direct_columns.json")
-        direct_columns = cached_direct_columns
-    else:
-        direct_columns = select_direct_visualizable_columns(dataset_summary_json)
-        save_json_data(direct_columns, "01a_direct_columns.json")
+    direct_columns = load_or_execute_cached_step(
+        "1.1: Selecting direct visualizable columns (foundation)",
+        "01a_direct_columns.json",
+        lambda: select_direct_visualizable_columns(dataset_summary_json),
+    )
 
-    print("  1.2: Detecting synthetic column opportunities...")
-    cached_synthetic_opportunities = load_cached_json("01b_synthetic_opportunities.json")
-    if cached_synthetic_opportunities:
-        print("    Using cached - 01b_synthetic_opportunities.json")
-        synthetic_opportunities = cached_synthetic_opportunities
-    else:
-        synthetic_opportunities = detect_synthetic_opportunities(dataset_summary_json)
-        save_json_data(synthetic_opportunities, "01b_synthetic_opportunities.json")
+    synthetic_opportunities = load_or_execute_cached_step(
+        "1.2: Detecting synthetic column opportunities",
+        "01b_synthetic_opportunities.json",
+        lambda: detect_synthetic_opportunities(dataset_summary_json),
+    )
 
-    print("  1.3: Detecting numerical binning opportunities...")
-    cached_binning_opportunities = load_cached_json("01c_binning_opportunities.json")
-    if cached_binning_opportunities:
-        print("    Using cached - 01c_binning_opportunities.json")
-        binning_opportunities = cached_binning_opportunities
-    else:
-        binning_opportunities = detect_binning_opportunities(dataset_summary_json)
-        save_json_data(binning_opportunities, "01c_binning_opportunities.json")
+    synthetic_dataset_summary = generate_synthetic_dataset_summary_for_binning(
+        dataset_summary, synthetic_opportunities
+    )
 
-    print("  1.4: Detecting text extraction opportunities...")
-    cached_extraction_opportunities = load_cached_json("01d_extraction_opportunities.json")
-    if cached_extraction_opportunities:
-        print("    Using cached - 01d_extraction_opportunities.json")
-        extraction_opportunities = cached_extraction_opportunities
-    else:
-        extraction_opportunities = detect_extraction_opportunities(dataset_summary_json)
-        save_json_data(extraction_opportunities, "01d_extraction_opportunities.json")
+    synthetic_dataset_summary_json = json.dumps(
+        synthetic_dataset_summary, indent=2, ensure_ascii=False
+    )
+
+    binning_opportunities = load_or_execute_cached_step(
+        "1.3: Detecting numerical binning opportunities",
+        "01c_binning_opportunities.json",
+        lambda: detect_binning_opportunities(synthetic_dataset_summary_json),
+    )
+
+    # TODO: Uncomment this when we have a way to handle text extraction opportunities
+    # extraction_opportunities = load_or_execute_cached_step(
+    #     "1.4: Detecting text extraction opportunities",
+    #     "01d_extraction_opportunities.json",
+    #     lambda: detect_extraction_opportunities(dataset_summary_json),
+    # )
 
     print("  1.5: Orchestrating final column selection...")
     visualizable_dataset = orchestrate_final_selection(
@@ -118,7 +118,7 @@ def select_visualizable_data(state: State):
         direct_columns,
         synthetic_opportunities,
         binning_opportunities,
-        extraction_opportunities,
+        # extraction_opportunities,
     )
 
     # Save the final result
@@ -127,7 +127,7 @@ def select_visualizable_data(state: State):
     # Step 1.6: Generate synthetic dataset with actual enhanced columns
     print("  1.6: Generating synthetic dataset with enhanced columns...")
     synthetic_dataset_info = generate_synthetic_dataset(visualizable_dataset, state["dataset_info"])  # type: ignore
-    save_json_data(synthetic_dataset_info, "01e_synthetic_dataset_info.json")
+    save_json_data(synthetic_dataset_info, "01_synthetic_dataset_info.json")
 
     return {
         "visualizable_dataset": visualizable_dataset,
@@ -240,7 +240,7 @@ def compute_data_for_visualization_queries(state: State):
 
     computed_visualization_data = {}
     if isinstance(queries_list, list):
-        for visualization_query in queries_list:
+        for idx, visualization_query in enumerate(queries_list):
             query = visualization_query["query"]  # type: ignore
             chart_type = visualization_query["chart_type"]  # type: ignore
             columns = [
@@ -275,7 +275,18 @@ def compute_data_for_visualization_queries(state: State):
             cleaned_pandas_query = clean_markdown_output(pandas_query, "pandas")
             computed_data = execute_pandas_query_for_computation(cleaned_pandas_query)
 
-            computed_visualization_data[visualization_query["source_attribute"]] = {  # type: ignore
+            if len(computed_data) > 1000:
+                print(
+                    f"  ⚠️  Skipping query {idx+1} - computed data too large ({len(computed_data)} rows)"
+                )
+                continue
+
+            # Create unique key using index to avoid overwrites
+            source_attr = visualization_query["source_attribute"]  # type: ignore
+            unique_key = f"{source_attr}_query{idx+1}"
+
+            computed_visualization_data[unique_key] = {
+                "source_attribute": source_attr,  # Preserve original attribute name
                 "query": query,
                 "chart_type": chart_type,
                 "computed_data": computed_data,
@@ -575,7 +586,8 @@ class Agent:
             "    h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }",
             "    h2 { color: #34495e; margin-top: 2em; }",
             "    h3 { color: #7f8c8d; margin-top: 1.5em; }",
-            "    .visualization-container { margin: 2em 0; padding: 1em; border: 1px solid #ecf0f1; border-radius: 5px; }",
+            "    .visualization-container { margin: 2em 0; padding: 1em; border: 1px solid #ecf0f1; border-radius: 5px; text-align: center; }",
+            "    .chart-container { margin: 2em auto; width: 100%; max-width: 900px; height: 500px; }",
             "    .narrative { margin: 1em 0; }",
             "    strong { color: #2c3e50; }",
             "    code { background-color: #f8f9fa; padding: 2px 4px; border-radius: 3px; }",
@@ -590,18 +602,31 @@ class Agent:
         # Process each component in order
         for key, component in research_paper_components.items():
             if isinstance(component, dict):
-                # Check if component has narrative
-                if "narrative" in component:
-                    narrative_html = self.markdown_to_html_enhanced(
-                        component["narrative"]
-                    )
-                    html_lines.append(f'<div class="narrative">{narrative_html}</div>')
+                # For components with both chart and narrative: Title -> Chart -> Narrative
+                if "vega_lite_chart" in component and "narrative" in component:
+                    # Extract title from narrative (first line if it's a header)
+                    narrative = component["narrative"]
+                    lines = narrative.split("\n")
+                    title = ""
+                    content = narrative
 
-                # Check if component has vega-lite chart
-                if "vega_lite_chart" in component:
+                    # Check if first line is a header
+                    if lines and (
+                        lines[0].startswith("#") or lines[0].startswith("##")
+                    ):
+                        title = lines[0].replace("#", "").strip()
+                        content = "\n".join(lines[1:]).strip()
+
+                    # Render title
+                    if title:
+                        html_lines.append(f"<h3>{title}</h3>")
+
+                    # Render chart
                     div_id = f"vis{vis_counter}"
                     html_lines.append(f'<div class="visualization-container">')
-                    html_lines.append(f'  <div id="{div_id}"></div>')
+                    html_lines.append(
+                        f'  <div id="{div_id}" class="chart-container"></div>'
+                    )
 
                     # Handle both string and dict vega_lite_chart
                     vega_spec = component["vega_lite_chart"]
@@ -617,22 +642,89 @@ class Agent:
                             html_lines.append("</div>")
                             continue
 
+                    # Modify the spec to set larger size
+                    if isinstance(vega_spec, dict):
+                        vega_spec["width"] = 800
+                        vega_spec["height"] = 400
+
                     spec_json = json.dumps(vega_spec)
                     html_lines.extend(
                         [
                             "  <script>",
-                            f"    vegaEmbed('#{div_id}', {spec_json})",
+                            f"    vegaEmbed('#{div_id}', {spec_json}, {{renderer: 'svg', actions: false}})",
                             "      .catch(console.error);",
                             "  </script>",
                         ]
                     )
                     html_lines.append("</div>")
+
+                    # Render narrative content (without title)
+                    if content:
+                        narrative_html = self.markdown_to_html_enhanced(content)
+                        html_lines.append(
+                            f'<div class="narrative">{narrative_html}</div>'
+                        )
+
+                    # Add horizontal separator after each visualization component
+                    html_lines.append("<hr/>")
+
+                    vis_counter += 1
+
+                # For components with only narrative
+                elif "narrative" in component:
+                    narrative_html = self.markdown_to_html_enhanced(
+                        component["narrative"]
+                    )
+                    html_lines.append(f'<div class="narrative">{narrative_html}</div>')
+                    # Add horizontal separator after narrative components
+                    html_lines.append("<hr/>")
+
+                # For components with only chart (shouldn't happen but handle gracefully)
+                elif "vega_lite_chart" in component:
+                    div_id = f"vis{vis_counter}"
+                    html_lines.append(f'<div class="visualization-container">')
+                    html_lines.append(
+                        f'  <div id="{div_id}" class="chart-container"></div>'
+                    )
+
+                    vega_spec = component["vega_lite_chart"]
+                    if isinstance(vega_spec, str):
+                        try:
+                            import json
+
+                            vega_spec = json.loads(vega_spec)
+                        except json.JSONDecodeError:
+                            html_lines.append(
+                                f"<p>Error: Invalid Vega-Lite specification</p>"
+                            )
+                            html_lines.append("</div>")
+                            continue
+
+                    # Modify the spec to set larger size
+                    if isinstance(vega_spec, dict):
+                        vega_spec["width"] = 800
+                        vega_spec["height"] = 400
+
+                    spec_json = json.dumps(vega_spec)
+                    html_lines.extend(
+                        [
+                            "  <script>",
+                            f"    vegaEmbed('#{div_id}', {spec_json}, {{renderer: 'svg', actions: false}})",
+                            "      .catch(console.error);",
+                            "  </script>",
+                        ]
+                    )
+                    html_lines.append("</div>")
+                    # Add horizontal separator after chart components
+                    html_lines.append("<hr/>")
                     vis_counter += 1
             else:
                 # Handle simple string components
                 html_lines.append(
                     f'<div class="narrative">{self.markdown_to_html_enhanced(str(component))}</div>'
                 )
+                # Add horizontal separator after simple components
+                html_lines.append("<hr/>")
 
         html_lines.extend(["</body>", "</html>"])
 

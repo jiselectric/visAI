@@ -156,3 +156,29 @@ def clean_markdown_output(llm_output: str, output_type: str = "generic") -> str:
     content = "\n".join(line for line in content.split("\n") if line.strip())
 
     return content
+
+
+def load_or_execute_cached_step(step_description: str, cache_filename: str, execute_func):
+    """
+    Helper function to deduplicate caching logic in workflow steps.
+    
+    Args:
+        step_description: Human-readable description for logging
+        cache_filename: Name of the cache file to check/save
+        execute_func: Function to execute if cache miss
+        
+    Returns:
+        Result from cache or execution
+    """
+    print(f"  {step_description}...")
+    
+    # Try to load from cache
+    cached_result = load_cached_json(cache_filename)
+    if cached_result:
+        print(f"    Using cached - {cache_filename}")
+        return cached_result
+    
+    # Cache miss - execute the function
+    result = execute_func()
+    save_json_data(result, cache_filename)
+    return result

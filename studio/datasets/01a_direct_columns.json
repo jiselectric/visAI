@@ -84,11 +84,11 @@
       "BP": 78,
       "TT": 35
     },
-    "visualization_suitability": "Good - Low cardinality, clear categories",
+    "visualization_suitability": "Good - Low cardinality, meaningful categories",
     "recommended_charts": [
       "Bar chart of awards",
       "Pie chart of award distribution"
     ],
-    "data_quality_score": "Medium - Some missing data, but manageable"
+    "data_quality_score": "Medium - High frequency of missing data"
   }
 }

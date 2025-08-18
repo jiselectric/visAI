@@ -1,104 +1,94 @@
 {
   "Conference": {
     "queries": {
-      "How does the distribution of papers across conferences change with interactive exploration?": "Interactive radial bar chart with hover animations and dynamic filtering",
-      "Which conferences lead in research output with a focus on visual impact?": "Bubble chart with size and color encoding to represent conference dominance",
-      "What insights can be drawn from the layered distribution of papers by conference?": "Layered bar chart with gradient fills and interactive legend filtering",
-      "How do conferences compare in terms of research diversity and focus?": "Arc chart with polar coordinates and categorical color encoding",
-      "Explore the conference landscape through a multi-faceted visual approach": "Faceted small multiples with brushing and linking for detailed exploration"
+      "How does the distribution of papers across conferences reveal research focus?": "Interactive radial bar chart with hover animations and categorical color encoding",
+      "Which conferences have the most diverse range of paper types?": "Layered bar chart with gradient fills and interactive legend filtering",
+      "What is the comparative impact of conferences on research trends?": "Bubble chart with size and color encoding to represent paper count and impact",
+      "How do conference participation trends change over time?": "Faceted small multiples with brushing and linking to show temporal changes",
+      "What insights can be drawn from the conference participation landscape?": "Arc chart with polar coordinates and sequential color schemes"
     }
   },
   "Year": {
     "queries": {
-      "What are the temporal trends in publication counts with interactive exploration?": "Interactive time series with brush selection and zooming capabilities",
-      "How do publication patterns evolve over the years with visual annotations?": "Multi-layer chart combining line trends with dynamic annotations",
-      "What are the key years of change in publication trends?": "Streamgraph with flowing area fills and temporal animation",
-      "How do publication counts fluctuate over time with detailed insights?": "Connected scatterplot showing correlation evolution over time",
-      "Explore the evolution of research output through a temporal lens": "Heatmap with sequential color schemes and interactive tooltips"
+      "How have publication trends evolved over the years?": "Streamgraph with flowing, organic area fills to show publication volume",
+      "What are the key temporal patterns in research output?": "Interactive time series with brush selection and zooming for detailed exploration",
+      "How do publication peaks and troughs correlate with major events?": "Multi-layer chart combining line trends with annotations for context",
+      "What are the long-term trends in research focus over decades?": "Connected scatterplot showing correlation evolution over time",
+      "How does the yearly publication count reflect research dynamics?": "Heatmap with sequential color schemes and interactive tooltips"
     }
   },
   "PaperType": {
     "queries": {
-      "How is the distribution of paper types visually represented with interactive elements?": "Interactive radial bar chart with hover animations and value annotations",
-      "Which paper types dominate the research landscape with visual impact?": "Bubble chart with size and color encoding for paper type comparison",
-      "What insights can be drawn from the layered distribution of paper types?": "Layered bar chart with gradient fills and interactive legend filtering",
-      "How do paper types compare in terms of research diversity and focus?": "Arc chart with polar coordinates and categorical color encoding",
-      "Explore the paper type landscape through a multi-faceted visual approach": "Faceted small multiples with brushing and linking for detailed exploration"
-    }
-  },
-  "CitationImpact": {
-    "queries": {
-      "How is the distribution of citation impact categories visually represented?": "Interactive radial bar chart with hover animations and value annotations",
-      "Which citation impact categories dominate the research landscape?": "Bubble chart with size and color encoding for impact comparison",
-      "What insights can be drawn from the layered distribution of citation impacts?": "Layered bar chart with gradient fills and interactive legend filtering",
-      "How do citation impact categories compare in terms of research diversity?": "Arc chart with polar coordinates and categorical color encoding",
-      "Explore the citation impact landscape through a multi-faceted visual approach": "Faceted small multiples with brushing and linking for detailed exploration"
+      "What is the distribution of paper types across different conferences?": "Interactive radial bar chart with hover animations and value annotations",
+      "How do different paper types contribute to research diversity?": "Bubble chart with categorical color encoding and size variations",
+      "What are the trends in paper type submissions over time?": "Streamgraph with flowing area fills to show temporal changes",
+      "How do paper types correlate with citation impact?": "Scatterplot matrix with cross-filtering and highlighting",
+      "What insights can be drawn from the distribution of paper types?": "Layered bar chart with gradient fills and interactive legend filtering"
     }
   },
   "PageCount": {
     "queries": {
-      "How is the distribution of paper lengths visually represented with interactive elements?": "Interactive histogram with hover details and dynamic binning",
-      "Which paper lengths dominate the research landscape with visual impact?": "Bubble chart with size and color encoding for length comparison",
-      "What insights can be drawn from the layered distribution of paper lengths?": "Layered bar chart with gradient fills and interactive legend filtering",
-      "How do paper lengths compare in terms of research diversity and focus?": "Arc chart with polar coordinates and categorical color encoding",
-      "Explore the paper length landscape through a multi-faceted visual approach": "Faceted small multiples with brushing and linking for detailed exploration"
+      "How does the distribution of paper lengths vary across conferences?": "Box plot with overlaid strip plot for detailed distribution analysis",
+      "What are the trends in paper length over time?": "Interactive time series with brush selection and zooming for detailed exploration",
+      "How do paper lengths correlate with citation impact?": "Bubble chart with size and color encoding to represent length and impact",
+      "What insights can be drawn from the distribution of paper lengths?": "Histogram with interactive tooltips and dynamic binning",
+      "How do paper lengths vary by paper type?": "Faceted small multiples with brushing and linking to show categorical differences"
+    }
+  },
+  "TotalCitations": {
+    "queries": {
+      "What is the distribution of total citations across different conferences?": "Interactive radial bar chart with hover animations and value annotations",
+      "How do citation patterns reveal research impact over time?": "Streamgraph with flowing area fills to show temporal changes",
+      "What are the trends in citation impact across paper types?": "Bubble chart with size and color encoding to represent impact and type",
+      "How do total citations correlate with paper length?": "Scatterplot matrix with cross-filtering and highlighting",
+      "What insights can be drawn from the distribution of total citations?": "Histogram with interactive tooltips and dynamic binning"
     }
   },
   "Year & Conference": {
     "queries": {
       "How do publication trends vary across conferences over time?": "Streamgraph with flowing area fills and temporal animation",
-      "Which conferences show significant changes in publication trends over the years?": "Connected scatterplot showing temporal correlation patterns",
-      "What temporal patterns reveal shifts in conference focus over decades?": "Multi-layer chart combining line trends with confidence intervals",
-      "How do yearly conference submissions illustrate research paradigm shifts?": "Interactive time series with brush selection and dynamic zooming",
-      "Compare conference trends through temporal multi-dimensional analysis": "Heatmap with sequential color schemes and rich hover tooltips"
+      "What are the temporal patterns in conference participation?": "Connected scatterplot showing temporal correlation patterns",
+      "How do conferences contribute to research trends over decades?": "Multi-layer chart combining line trends with confidence intervals",
+      "What insights can be drawn from the temporal distribution of conferences?": "Interactive time series with brush selection and dynamic zooming",
+      "How do conference trends reflect shifts in research focus?": "Heatmap with sequential color schemes and rich hover tooltips"
     }
   },
   "Year & PaperType": {
     "queries": {
-      "How has the evolution of paper types created dynamic research trends?": "Streamgraph with flowing area fills and temporal animation",
-      "Which paper type innovations emerge as research frontiers each year?": "Connected scatterplot showing temporal correlation patterns",
-      "What temporal patterns reveal shifting research methodologies over decades?": "Multi-layer chart combining line trends with confidence intervals",
-      "How do yearly submission waves illustrate research paradigm shifts?": "Interactive time series with brush selection and dynamic zooming",
-      "Compare research diversity through temporal multi-dimensional analysis": "Heatmap with sequential color schemes and rich hover tooltips"
+      "How have paper type trends evolved over the years?": "Streamgraph with flowing area fills and temporal animation",
+      "What are the key temporal patterns in paper type submissions?": "Connected scatterplot showing temporal correlation patterns",
+      "How do paper types contribute to research trends over decades?": "Multi-layer chart combining line trends with confidence intervals",
+      "What insights can be drawn from the temporal distribution of paper types?": "Interactive time series with brush selection and dynamic zooming",
+      "How do paper type trends reflect shifts in research focus?": "Heatmap with sequential color schemes and rich hover tooltips"
     }
   },
-  "Year & CitationImpact": {
+  "Year & TotalCitations": {
     "queries": {
-      "How do citation impact patterns evolve over time?": "Streamgraph with flowing area fills and temporal animation",
-      "Which years show significant changes in citation impact categories?": "Connected scatterplot showing temporal correlation patterns",
-      "What temporal patterns reveal shifts in citation impact over decades?": "Multi-layer chart combining line trends with confidence intervals",
-      "How do yearly citation impacts illustrate research paradigm shifts?": "Interactive time series with brush selection and dynamic zooming",
-      "Compare citation impact trends through temporal multi-dimensional analysis": "Heatmap with sequential color schemes and rich hover tooltips"
+      "How do citation patterns reveal research impact evolution over time?": "3D bubble chart with temporal and impact encoding",
+      "What are the trends in citation impact across different years?": "Slope graph showing changes between time periods with impact indicators",
+      "How do high-impact papers cluster across time and citation dimensions?": "Hexbin plot with aggregated hover details and density encoding",
+      "What insights can be drawn from the temporal distribution of citations?": "Interactive time series with brush selection and dynamic zooming",
+      "How do citation trends reflect shifts in research focus?": "Heatmap with sequential color schemes and rich hover tooltips"
     }
   },
   "Conference & PaperType": {
     "queries": {
-      "How do paper types vary across different conferences?": "Bubble chart with size and color encoding for conference and type comparison",
-      "Which conferences show a diverse range of paper types?": "Faceted small multiples with brushing and linking for detailed exploration",
-      "What insights can be drawn from the layered distribution of paper types by conference?": "Layered bar chart with gradient fills and interactive legend filtering",
-      "How do conferences compare in terms of paper type diversity and focus?": "Arc chart with polar coordinates and categorical color encoding",
-      "Explore the conference and paper type landscape through a multi-faceted visual approach": "Interactive heatmap with sequential color schemes and tooltips"
-    }
-  },
-  "Conference & CitationImpact": {
-    "queries": {
-      "How do citation impact categories vary across different conferences?": "Bubble chart with size and color encoding for conference and impact comparison",
-      "Which conferences show a diverse range of citation impacts?": "Faceted small multiples with brushing and linking for detailed exploration",
-      "What insights can be drawn from the layered distribution of citation impacts by conference?": "Layered bar chart with gradient fills and interactive legend filtering",
-      "How do conferences compare in terms of citation impact diversity and focus?": "Arc chart with polar coordinates and categorical color encoding",
-      "Explore the conference and citation impact landscape through a multi-faceted visual approach": "Interactive heatmap with sequential color schemes and tooltips"
+      "How do paper types vary across different conferences?": "Faceted small multiples with brushing and linking to show categorical differences",
+      "What are the trends in paper type submissions across conferences?": "Bubble chart with size and color encoding to represent type and conference",
+      "How do conferences contribute to the diversity of paper types?": "Layered bar chart with gradient fills and interactive legend filtering",
+      "What insights can be drawn from the distribution of paper types by conference?": "Arc chart with polar coordinates and sequential color schemes",
+      "How do paper type trends reflect shifts in conference focus?": "Heatmap with sequential color schemes and rich hover tooltips"
     }
   },
   "attributes": [
     "Conference",
     "Year",
     "PaperType",
-    "CitationImpact",
     "PageCount",
+    "TotalCitations",
     "Year & Conference",
     "Year & PaperType",
-    "Year & CitationImpact",
-    "Conference & PaperType",
-    "Conference & CitationImpact"
+    "Year & TotalCitations",
+    "Conference & PaperType"
   ]
 }

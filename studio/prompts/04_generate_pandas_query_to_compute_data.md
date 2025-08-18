@@ -108,14 +108,29 @@ result = df[['CitationCount_CrossRef', 'Downloads_Xplore']].dropna()
 result = df.groupby(['Year', 'PaperType']).size().reset_index(name='count').sort_values(['Year', 'PaperType'])
 ```
 
+## 🚨 CRITICAL: ANALYZE THE ACTUAL DATA PROVIDED
+
+**YOU MUST:**
+1. **Examine the sample data in `{{attributes_samples_json}}` carefully**
+2. **Understand the actual column names and data types in your dataset** 
+3. **Design your pandas query based on the REAL data structure, NOT the examples**
+4. **Match the query intent with the actual available columns**
+
 ## Your Task:
 Generate pandas code that:
 1. Reads the `df` DataFrame
-2. **Processes the data according to the query using appropriate pandas operations**
-3. **Assigns the final result to a variable called `result`**
-4. **Produces a DataFrame with the EXACT structure shown in the examples above**
+2. **Analyzes the ACTUAL columns provided in `{{attributes_samples_json}}`**
+3. **Processes the data according to the query using appropriate pandas operations**
+4. **Assigns the final result to a variable called `result`**
 5. **Uses descriptive column names for computed values** (e.g., 'publication_count', 'paper_count', 'count')
 6. **Sorts data appropriately** (chronological for time series, descending for rankings)
+
+## 🎯 Query Analysis Process:
+1. **Read the query**: {{query}}
+2. **Identify what analysis is needed**: aggregation, filtering, correlation, etc.
+3. **Examine the sample data**: {{attributes_samples_json}}
+4. **Match the query intent to appropriate pandas operations**
+5. **Generate code that works with the ACTUAL column names and data types**
 
 ## Output Format:
 Return **ONLY** the pandas code, **no markdown formatting**, **no explanations**. The code must be executable and produce a `result` variable.
@@ -123,8 +138,8 @@ Return **ONLY** the pandas code, **no markdown formatting**, **no explanations**
 ## Remember:
 - Use `df` as your DataFrame variable
 - **Assign final output to `result`**
-- **Focus on data computation, not visualization**
+- **IGNORE the examples if they don't match your actual data structure**
+- **Focus on the query intent and actual data provided**
 - **Make sure your code handles edge cases** (missing values, data types, etc.)
-- **Follow the EXACT pattern of the examples above**
-- **Your output must be a DataFrame with proper column names and structure**
+- **Use appropriate column names from the actual dataset**
 - **Use `.reset_index()` and `.sort_values()` appropriately**

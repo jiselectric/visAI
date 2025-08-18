@@ -46,10 +46,29 @@ For each potential synthetic column, assess:
 
 ## ⚠️ What NOT to Combine
 
-❌ **Incompatible Data Types**: Text + Numbers (unless extracting numbers from text)
-❌ **Unrelated Concepts**: Temperature + User_ID (no logical relationship)
+❌ **Single Column Transformations**: Operations on only 1 column (use data enhancement instead)
+❌ **Incompatible Data Types**: Mixing numerical + text (e.g., Year + Conference name)
+❌ **Unrelated Concepts**: Combining columns with no logical relationship
 ❌ **High Missing Values**: Combinations that would lose >20% of data
 ❌ **ID Fields**: Unique identifiers rarely combine meaningfully
+❌ **Simple Concatenations**: Joining strings without meaningful insight
+
+## 🚨 CRITICAL REQUIREMENTS
+
+### **Mandatory Multi-Column Rule**
+- **MUST use 2+ columns** for any synthetic opportunity
+- **Single column operations** (counting, extracting, etc.) are NOT synthetic columns
+
+### **Data Type Compatibility**
+- **Numerical + Numerical** → Mathematical operations (✅ GOOD)
+- **Categorical + Categorical** → Logical combinations (✅ GOOD)  
+- **Text + Numerical** → Avoid unless extracting numerical insights (❌ BAD)
+- **Mixed types concatenation** → Usually creates meaningless results (❌ BAD)
+
+### **Meaningful Operations Only**
+- Must create **new insights** not available from individual columns
+- Must have **domain/business logic** behind the combination
+- Must **improve visualization potential** over original columns
 
 ## 📋 Dataset Analysis
 

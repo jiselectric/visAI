@@ -6,7 +6,12 @@ Helper functions for multi-agent column selection with direct selection and adva
 import json
 
 from utils.data_utils import execute_pandas_query_for_synthetic_dataset
-from .file_operation import clean_markdown_output, load_prompt_template, read_csv_data
+from .file_operation import (
+    clean_markdown_output,
+    load_prompt_template,
+    read_csv_data,
+    save_json_data,
+)
 from .llm_operations import extract_json_from_response, invoke_llm_with_prompt
 
 
@@ -64,6 +69,86 @@ def detect_synthetic_opportunities(dataset_summary_json: str) -> dict:
     )
 
     return extract_json_from_response(response_content)
+
+
+# Step 1.2a: Generate synthetic dataset summary for enhanced binning detection
+def generate_synthetic_dataset_summary_for_binning(
+    dataset_summary, synthetic_opportunities
+) -> dict:
+    # Read original dataset
+    import pandas as pd
+
+    copied_original_dataset = pd.read_csv("dataset.csv").copy()
+
+    for synthetic_opportunity in synthetic_opportunities:
+        sys_prompt = load_prompt_template("01b_generate_synthethic_opp_columns.md")
+
+        synthetic_column_name = synthetic_opportunity["synthetic_column_name"]
+        source_columns = synthetic_opportunity["source_columns"]
+        operation_type = synthetic_opportunity["operation"]
+        operation_description = synthetic_opportunity["operation_description"]
+
+        pandas_query = invoke_llm_with_prompt(
+            system_content="You are a highly skilled data analyst with expertise in pandas. You are given synthetic column name, source columns, operation type, and operation description. Your task is to generate a pandas query to accurately compute the data for the synthetic column.",
+            prompt_template=sys_prompt,
+            replacements={
+                "{{synthetic_column_name}}": synthetic_column_name,
+                "{{source_columns}}": str(source_columns),
+                "{{operation_type}}": operation_type,
+                "{{operation_description}}": operation_description,
+            },
+        )
+
+        cleaned_pandas_query = clean_markdown_output(pandas_query, "pandas")
+
+        copied_original_dataset = execute_pandas_query_for_synthetic_dataset(
+            copied_original_dataset, cleaned_pandas_query
+        )
+
+    # Save the final synthetic dataset with all enhanced columns
+    synthetic_columns_dataset_path = "synthetic_columns_dataset.csv"
+    copied_original_dataset.to_csv(synthetic_columns_dataset_path, index=False)
+    print(f"  ✓ Synthetic columns dataset saved: {synthetic_columns_dataset_path}")
+
+    # Now generate the synthetic dataset summary
+    synthetic_dataset_summary = generate_synthetic_dataset_summary_from_df(
+        copied_original_dataset
+    )
+    save_json_data(synthetic_dataset_summary, "01b_synthetic_dataset_summary.json")
+
+    return synthetic_dataset_summary
+
+
+# TODO: Refactor
+def generate_synthetic_dataset_summary_from_df(df) -> dict:
+    """Generate dataset summary from a DataFrame (for synthetic datasets)"""
+    import pandas as pd
+    from collections import Counter
+
+    summaries = {}
+    for column in df.columns:
+        values = df[column].dropna().tolist()
+
+        if values:
+            all_examples = []
+            counter = Counter()
+
+            # Sample up to 10 examples
+            sample_values = values[:10]
+            counter.update(sample_values)
+            all_examples.extend(sample_values)
+
+            # Get unique examples
+            unique_examples = list(set(all_examples))[:10]
+
+            summaries[column] = {
+                "column_name": column,
+                "examples": unique_examples,
+                "unique_value_count": len(set(values)),
+                "top_frequencies": dict(counter.most_common(5)),
+            }
+
+    return summaries
 
 
 # Step 1.3: Detect binning opportunities
@@ -128,7 +213,7 @@ def orchestrate_final_selection(
     direct_columns: dict,
     synthetic_opportunities: dict,
     binning_opportunities: dict,
-    extraction_opportunities: dict,
+    # extraction_opportunities: dict,
 ) -> dict:
     """
     Agent 4: Final orchestrator - combine direct selection with advanced opportunities
@@ -161,9 +246,9 @@ def orchestrate_final_selection(
             "{{binning_opportunities_json}}": json.dumps(
                 binning_opportunities, indent=2
             ),
-            "{{extraction_opportunities_json}}": json.dumps(
-                extraction_opportunities, indent=2
-            ),
+            # "{{extraction_opportunities_json}}": json.dumps(
+            #     extraction_opportunities, indent=2
+            # ),
         },
     )
 

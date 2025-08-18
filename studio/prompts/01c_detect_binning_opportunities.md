@@ -64,6 +64,36 @@ For each binning opportunity, assess:
 ❌ **Precise Measurements**: Where exact values are critical
 ❌ **Binary Data**: Already two-value data
 
+## 🚫 CRITICAL: Avoid Redundant Binning (Few-Shot Learning Examples)
+
+### Example 1: Page Data
+❌ **BAD**: Don't bin `FirstPage` or `LastPage` individually
+✅ **GOOD**: Look for synthetic `PageCount` columns (LastPage - FirstPage + 1) instead
+**Why**: Page count provides meaningful length insights, while individual page numbers are just positional data
+
+### Example 2: Citation Data  
+❌ **BAD**: Don't bin individual citation sources like `CitationCount_Source1`, `CitationCount_Source2`
+✅ **GOOD**: Look for synthetic `TotalCitations` columns that combine all sources
+**Why**: Combined citation impact is more meaningful than individual source counts
+
+### Example 3: Date Components
+❌ **BAD**: Don't bin `Year`, `Month`, `Day` individually when temporal analysis exists
+✅ **GOOD**: Look for derived date features like `TimeToPublication`, `PublicationAge`
+**Why**: Derived temporal insights are more valuable than raw date components
+
+### Example 4: Geographic Components
+❌ **BAD**: Don't bin raw latitude/longitude coordinates
+✅ **GOOD**: Look for extracted location features like `Country`, `Region`, `City`
+**Why**: Geographic categories are more interpretable than coordinate ranges
+
+## 📋 Smart Decision Framework
+
+Before suggesting binning for any column, ask:
+1. **Is there a synthetic column** that already captures this insight better?
+2. **Are there component columns** that could be combined into something more meaningful?
+3. **Does binning this column** actually reveal useful patterns or just create arbitrary categories?
+4. **Would domain experts** find the binned categories meaningful and actionable?
+
 ## 📋 Dataset Analysis
 
 Analyze the following dataset summary for binning opportunities:
@@ -74,46 +104,35 @@ Analyze the following dataset summary for binning opportunities:
 
 ## 📝 Output Format
 
-⚠️ **IMPORTANT**: The examples below are for **INSPIRATION ONLY**. Analyze the actual dataset provided and create your own unique binning opportunities based the criteria provided above.
+**Output JSON Format**:
 
 ```json
 [
   {
-    "column_name": "AminerCitationCount",
-    "current_cardinality": 397,
-    "binning_strategy": "impact_levels",
+    "column_name": "ACTUAL_COLUMN_NAME_FROM_DATASET",
+    "current_cardinality": NUMBER_OF_UNIQUE_VALUES,
+    "binning_strategy": "MEANINGFUL_STRATEGY_NAME",
     "proposed_bins": {
-      "No_Impact": "0",
-      "Low_Impact": "1-10", 
-      "Medium_Impact": "11-100",
-      "High_Impact": "101-1000",
-      "Very_High_Impact": "1000+"
+      "Category1": "range_description",
+      "Category2": "range_description",
+      "Category3": "range_description"
     },
-    "bin_count": 5,
-    "rationale": "Citation counts are highly skewed with most papers having low citations. Binning reveals impact tiers more clearly than raw counts.",
-    "visualization_potential": "High - Bar charts of impact distribution, impact by conference/year",
-    "domain_interpretability": "Excellent - Citation impact levels are standard in academic analysis",
-    "information_loss": "Minimal - Preserves relative impact while reducing noise",
-    "confidence_score": 0.9
-  },
-  {
-    "column_name": "Downloads_Xplore",
-    "current_cardinality": 1679,
-    "binning_strategy": "popularity_tiers",
-    "proposed_bins": {
-      "Low_Popularity": "0-1000",
-      "Medium_Popularity": "1001-10000", 
-      "High_Popularity": "10001+"
-    },
-    "bin_count": 3,
-    "rationale": "Download counts show exponential distribution. Binning into popularity tiers enables comparison of content reach.",
-    "visualization_potential": "High - Popularity distribution charts, popularity by content type",
-    "domain_interpretability": "Good - Popularity tiers are intuitive for content analysis",
-    "information_loss": "Low - Maintains relative popularity ordering",
-    "confidence_score": 0.8
+    "bin_count": NUMBER_OF_CATEGORIES,
+    "rationale": "Why this column benefits from binning and how it improves analysis",
+    "visualization_potential": "What visualizations become possible/better with these bins",
+    "domain_interpretability": "How meaningful these categories are to domain experts",
+    "information_loss": "Assessment of what information is lost vs gained",
+    "confidence_score": 0.0_TO_1.0
   }
 ]
 ```
+
+**⚠️ CRITICAL INSTRUCTIONS**:
+1. **Only suggest columns from the actual dataset provided**
+2. **Apply the Smart Decision Framework** - avoid redundant binning
+3. **Focus on high-impact opportunities** (cardinality >50, meaningful patterns)
+4. **Create domain-appropriate bin names** based on the data context
+5. **Ensure bins are interpretable** and actionable for visualization
 
 ## 🎯 Focus Areas
 
