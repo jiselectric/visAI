@@ -61,12 +61,12 @@ def select_visualizable_data(state: State):
     dataset_summary = state["dataset_summary"]
 
     # Check if cached result exists
-    cached_visualizable_dataset = load_cached_json("visualizable_dataset.json")
-    cached_synthetic_dataset_info = load_cached_json("01_synthetic_dataset_info.json")
+    cached_visualizable_dataset = load_cached_json("01_visualizable_dataset.json")
+    cached_synthetic_dataset_info = load_cached_json("01e_synthetic_dataset_info.json")
 
     if cached_visualizable_dataset and cached_synthetic_dataset_info:
         print(
-            "Using cached - visualizable_dataset.json & 01_synthetic_dataset_info.json"
+            "Using cached - 01_visualizable_dataset.json & 01e_synthetic_dataset_info.json"
         )
         return {
             "visualizable_dataset": cached_visualizable_dataset,
@@ -75,21 +75,42 @@ def select_visualizable_data(state: State):
 
     dataset_summary_json = json.dumps(dataset_summary, indent=2, ensure_ascii=False)
 
+    # Load or generate sub-step results with caching
     print("  1.1: Selecting direct visualizable columns (foundation)...")
-    direct_columns = select_direct_visualizable_columns(dataset_summary_json)
-    save_json_data(direct_columns, "01a_direct_columns.json")
+    cached_direct_columns = load_cached_json("01a_direct_columns.json")
+    if cached_direct_columns:
+        print("    Using cached - 01a_direct_columns.json")
+        direct_columns = cached_direct_columns
+    else:
+        direct_columns = select_direct_visualizable_columns(dataset_summary_json)
+        save_json_data(direct_columns, "01a_direct_columns.json")
 
     print("  1.2: Detecting synthetic column opportunities...")
-    synthetic_opportunities = detect_synthetic_opportunities(dataset_summary_json)
-    save_json_data(synthetic_opportunities, "01b_synthetic_opportunities.json")
+    cached_synthetic_opportunities = load_cached_json("01b_synthetic_opportunities.json")
+    if cached_synthetic_opportunities:
+        print("    Using cached - 01b_synthetic_opportunities.json")
+        synthetic_opportunities = cached_synthetic_opportunities
+    else:
+        synthetic_opportunities = detect_synthetic_opportunities(dataset_summary_json)
+        save_json_data(synthetic_opportunities, "01b_synthetic_opportunities.json")
 
     print("  1.3: Detecting numerical binning opportunities...")
-    binning_opportunities = detect_binning_opportunities(dataset_summary_json)
-    save_json_data(binning_opportunities, "01c_binning_opportunities.json")
+    cached_binning_opportunities = load_cached_json("01c_binning_opportunities.json")
+    if cached_binning_opportunities:
+        print("    Using cached - 01c_binning_opportunities.json")
+        binning_opportunities = cached_binning_opportunities
+    else:
+        binning_opportunities = detect_binning_opportunities(dataset_summary_json)
+        save_json_data(binning_opportunities, "01c_binning_opportunities.json")
 
     print("  1.4: Detecting text extraction opportunities...")
-    extraction_opportunities = detect_extraction_opportunities(dataset_summary_json)
-    save_json_data(extraction_opportunities, "01d_extraction_opportunities.json")
+    cached_extraction_opportunities = load_cached_json("01d_extraction_opportunities.json")
+    if cached_extraction_opportunities:
+        print("    Using cached - 01d_extraction_opportunities.json")
+        extraction_opportunities = cached_extraction_opportunities
+    else:
+        extraction_opportunities = detect_extraction_opportunities(dataset_summary_json)
+        save_json_data(extraction_opportunities, "01d_extraction_opportunities.json")
 
     print("  1.5: Orchestrating final column selection...")
     visualizable_dataset = orchestrate_final_selection(
@@ -106,6 +127,7 @@ def select_visualizable_data(state: State):
     # Step 1.6: Generate synthetic dataset with actual enhanced columns
     print("  1.6: Generating synthetic dataset with enhanced columns...")
     synthetic_dataset_info = generate_synthetic_dataset(visualizable_dataset, state["dataset_info"])  # type: ignore
+    save_json_data(synthetic_dataset_info, "01e_synthetic_dataset_info.json")
 
     return {
         "visualizable_dataset": visualizable_dataset,
