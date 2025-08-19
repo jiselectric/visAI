@@ -46,8 +46,10 @@ def save_json_data(
         json.dump(clean_data, f, indent=2, ensure_ascii=False)
 
 
-def load_prompt_template(prompt_path: str, prompt_dir: str = "./prompts") -> str:
+def load_prompt_template(prompt_path: str) -> str:
     """Load prompt template with proper encoding."""
+    curr_dir = os.path.dirname(os.path.abspath(__file__))
+    prompt_dir = os.path.join(os.path.dirname((curr_dir)), "prompts")
     full_path = os.path.join(prompt_dir, prompt_path)
     try:
         with open(full_path, "r", encoding="utf-8") as f:
@@ -158,26 +160,28 @@ def clean_markdown_output(llm_output: str, output_type: str = "generic") -> str:
     return content
 
 
-def load_or_execute_cached_step(step_description: str, cache_filename: str, execute_func):
+def load_or_execute_cached_step(
+    step_description: str, cache_filename: str, execute_func
+):
     """
     Helper function to deduplicate caching logic in workflow steps.
-    
+
     Args:
         step_description: Human-readable description for logging
         cache_filename: Name of the cache file to check/save
         execute_func: Function to execute if cache miss
-        
+
     Returns:
         Result from cache or execution
     """
     print(f"  {step_description}...")
-    
+
     # Try to load from cache
     cached_result = load_cached_json(cache_filename)
     if cached_result:
         print(f"    Using cached - {cache_filename}")
         return cached_result
-    
+
     # Cache miss - execute the function
     result = execute_func()
     save_json_data(result, cache_filename)
