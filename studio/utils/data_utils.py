@@ -1,7 +1,7 @@
 from typing import Any, Counter, Dict, List
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 from utils.file_operation import save_json_data
 
 
@@ -80,13 +80,13 @@ def generate_dataset_summary(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def sample_data(columns, sample_size):
-    # Use synthetic dataset if it exists, otherwise fall back to original
+    # Use main dataset
     import os
 
-    if os.path.exists("synthetic_dataset.csv"):
-        df = pd.read_csv("synthetic_dataset.csv")
-    else:
+    if os.path.exists("dataset.csv"):
         df = pd.read_csv("dataset.csv")
+    else:
+        df = pd.read_csv("synthetic_dataset.csv")
 
     samples = {}
     for col in columns:
@@ -97,42 +97,146 @@ def sample_data(columns, sample_size):
     return samples
 
 
-def execute_pandas_query_for_computation(query: str) -> Dict[str, Any]:
-    """Execute pandas code and return the computed data in the correct format"""
+def execute_pandas_query_for_computation(
+    query: str, ephemeral: bool = True
+) -> Dict[str, Any]:
+    """
+    Execute pandas code and return the computed data + capture any generated charts
+
+    Args:
+        query: Pandas code to execute
+        ephemeral: If True, compute data on-demand without persistent storage (saves memory)
+
+    Returns:
+        Dict containing computed data, chart path, and execution metadata
+    """
+    import gc
+    import warnings
+
+    import matplotlib
     import pandas as pd
 
-    # Load the dataset
-    df = pd.read_csv("synthetic_dataset.csv")
+    matplotlib.use("Agg")  # Use non-interactive backend
+    warnings.filterwarnings("ignore", message="FigureCanvasAgg is non-interactive")
+    import os
+    import time
 
-    # Create a local namespace with df available
-    local_namespace = {"df": df, "pd": pd}
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    # Load the dataset
+    df = pd.read_csv("dataset.csv")
+
+    # Create unique chart filename
+    timestamp = str(int(time.time() * 1000))
+    chart_path = f"charts/chart_{timestamp}.png"
+
+    # Ensure charts directory exists
+    os.makedirs("charts", exist_ok=True)
+
+    # Create a local namespace with df and visualization libraries available
+    local_namespace = {
+        "df": df,
+        "pd": pd,
+        "plt": plt,
+        "sns": sns,
+        "chart_path": chart_path,
+    }
+
+    chart_generated = False
+    result_data = None
 
     try:
-        # Execute the pandas code
+        # Execute the pandas code (JIT computation happens here)
         exec(query, globals(), local_namespace)
 
-        # Get the result variable
+        # Check if any plots were created
+        if plt.get_fignums():
+            # Save all figures
+            for i, fig_num in enumerate(plt.get_fignums()):
+                fig = plt.figure(fig_num)
+                if i == 0:
+                    fig.savefig(chart_path, dpi=150, bbox_inches="tight")
+                    chart_generated = True
+                else:
+                    # Save additional figures with different names
+                    additional_path = f"charts/chart_{timestamp}_{i}.png"
+                    fig.savefig(additional_path, dpi=150, bbox_inches="tight")
+                plt.close(fig)
+
+        # Get the result variable (computed on-demand)
         if "result" in local_namespace:
             result = local_namespace["result"]
 
-            # Convert pandas DataFrame to the expected format
-            if hasattr(result, "to_dict") and hasattr(result, "index"):
-                # This is a DataFrame - convert to records format (list of dicts)
-                if hasattr(result, "to_dict"):
-                    # Use 'records' orientation to get list of dicts
-                    return result.to_dict("records")
+            if ephemeral:
+                # For ephemeral mode: computation uses ALL data, but output can be sampled for efficiency
+                if hasattr(result, "to_dict") and hasattr(result, "index"):
+                    # This is a DataFrame - NOTE: computation already used all data
+                    if len(result) > 100:
+                        # Sample OUTPUT data for large results to save memory (computation was on full data)
+                        sampled_result = (
+                            result.head(50).append(result.tail(50))
+                            if len(result) > 100
+                            else result
+                        )
+                        result_data = {
+                            "sampled_data": sampled_result.to_dict("records"),
+                            "total_rows": len(result),
+                            "note": f"Computation used all {len(result)} rows, output sampled for display efficiency",
+                            "computation_complete": True,
+                        }
+                    else:
+                        result_data = result.to_dict("records")
+                elif hasattr(result, "tolist"):
+                    # This is a Series or other pandas object
+                    if hasattr(result, "__len__") and len(result) > 1000:
+                        result_data = {
+                            "sampled_data": result.head(1000).tolist(),
+                            "total_length": len(result),
+                            "note": f"Computation used all {len(result)} items, output sampled for display",
+                            "computation_complete": True,
+                        }
+                    else:
+                        result_data = result.tolist()
                 else:
-                    return result.to_dict()
-            elif hasattr(result, "tolist"):
-                # This is a Series or other pandas object
-                return result.tolist()
+                    # This is a regular Python object (usually aggregated results)
+                    result_data = result
             else:
-                # This is a regular Python object
-                return result
+                # Original behavior for backward compatibility
+                if hasattr(result, "to_dict") and hasattr(result, "index"):
+                    result_data = result.to_dict("records")
+                elif hasattr(result, "tolist"):
+                    result_data = result.tolist()
+                else:
+                    result_data = result
         else:
-            return {"error": "No 'result' variable found in executed code"}
+            result_data = {"error": "No 'result' variable found in executed code"}
+
+        # Memory cleanup for ephemeral mode
+        if ephemeral:
+            # Clear large objects from local namespace
+            if "result" in local_namespace and hasattr(
+                local_namespace["result"], "memory_usage"
+            ):
+                del local_namespace["result"]
+            # Force garbage collection
+            gc.collect()
+
+        # Return both data and chart info
+        return {
+            "data": result_data,
+            "chart_path": chart_path if chart_generated else None,
+            "has_chart": chart_generated,
+            "ephemeral_mode": ephemeral,
+            "execution_timestamp": timestamp,
+        }
 
     except Exception as e:
+        # Close any open figures in case of error
+        plt.close("all")
+        # Memory cleanup on error
+        if ephemeral:
+            gc.collect()
         return {"error": f"Error executing pandas code: {str(e)}"}
 
 
@@ -149,9 +253,10 @@ def execute_pandas_query_for_synthetic_dataset(
     Returns:
         pd.DataFrame: The modified dataset with new synthetic column(s)
     """
-    import pandas as pd
-    import numpy as np
     import json
+
+    import numpy as np
+    import pandas as pd
 
     # Create execution environment with the passed dataset
     local_namespace = {"df": dataset, "pd": pd, "np": np, "json": json}

@@ -1,0 +1,1972 @@
+[
+  {
+    "question": "What are the top 10 most cited papers and their respective conferences?",
+    "computed_data": [
+      {
+        "Title": "D³ Data-Driven Documents",
+        "Conference": "InfoVis",
+        "TotalCitations": 5973.0
+      },
+      {
+        "Title": "UpSet: Visualization of Intersecting Sets",
+        "Conference": "InfoVis",
+        "TotalCitations": 2804.0
+      },
+      {
+        "Title": "Tree-maps: a space-filling approach to the visualization of hierarchical information structures",
+        "Conference": "Vis",
+        "TotalCitations": 2656.0
+      },
+      {
+        "Title": "Parallel coordinates: a tool for visualizing multi-dimensional geometry",
+        "Conference": "Vis",
+        "TotalCitations": 2153.0
+      },
+      {
+        "Title": "Narrative Visualization: Telling Stories with Data",
+        "Conference": "InfoVis",
+        "TotalCitations": 2134.0
+      },
+      {
+        "Title": "Hierarchical Edge Bundles: Visualization of Adjacency Relations in Hierarchical Data",
+        "Conference": "InfoVis",
+        "TotalCitations": 2074.0
+      },
+      {
+        "Title": "Toward a Deeper Understanding of the Role of Interaction in Information Visualization",
+        "Conference": "InfoVis",
+        "TotalCitations": 1823.0
+      },
+      {
+        "Title": "Efficient simplification of point-sampled surfaces",
+        "Conference": "Vis",
+        "TotalCitations": 1710.0
+      },
+      {
+        "Title": "ROAMing terrain: Real-time Optimally Adapting Meshes",
+        "Conference": "Vis",
+        "TotalCitations": 1632.0
+      },
+      {
+        "Title": "A Nested Model for Visualization Design and Validation",
+        "Conference": "InfoVis",
+        "TotalCitations": 1627.0
+      }
+    ],
+    "explanation": "The data reveals a list of the top 10 most cited academic papers in the field of data visualization, along with the conferences where they were presented. The paper titled \"D³ Data-Driven Documents\" presented at the InfoVis conference leads with a significant margin, having 5,973 citations. This is followed by \"UpSet: Visualization of Intersecting Sets,\" also from InfoVis, with 2,804 citations. The list includes a mix of papers from two main conferences: InfoVis and Vis, indicating these are prominent venues for influential research in data visualization. The high citation counts suggest these papers have made substantial contributions to the field, influencing subsequent research and applications.\n\nKey insights from the data include the dominance of the InfoVis conference, which accounts for six out of the ten most cited papers. This suggests that InfoVis is a leading platform for groundbreaking research in data visualization. The topics of these papers range from innovative visualization techniques, such as tree-maps and parallel coordinates, to the exploration of narrative visualization and interaction in information visualization. The diversity of topics highlights the multifaceted nature of the field, addressing both technical challenges and the human aspects of data interpretation.\n\nThe significance of these findings lies in the impact these papers have had on the development of data visualization as a discipline. The high citation counts reflect their foundational role in shaping current visualization practices and tools. For researchers and practitioners, understanding which papers have been most influential can guide future research directions and inspire new innovations. For non-technical audiences, this data underscores the importance of visualization in making complex data accessible and understandable, which is crucial in an increasingly data-driven world.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nimport pandas as pd\n\n# Sample data\ndata = [\n    {\"Title\": \"D³ Data-Driven Documents\", \"Conference\": \"InfoVis\", \"TotalCitations\": 5973.0},\n    {\"Title\": \"UpSet: Visualization of Intersecting Sets\", \"Conference\": \"InfoVis\", \"TotalCitations\": 2804.0},\n    {\"Title\": \"Tree-maps: a space-filling approach to the visualization of hierarchical information structures\", \"Conference\": \"Vis\", \"TotalCitations\": 2656.0},\n    {\"Title\": \"Parallel coordinates: a tool for visualizing multi-dimensional geometry\", \"Conference\": \"Vis\", \"TotalCitations\": 2153.0},\n    {\"Title\": \"Narrative Visualization: Telling Stories with Data\", \"Conference\": \"InfoVis\", \"TotalCitations\": 2134.0}\n]\n\n# Convert to DataFrame\ndf = pd.DataFrame(data)\n\n# Sort data by TotalCitations\ndf = df.sort_values(by='TotalCitations', ascending=False)\n\n# Set the style\nsns.set(style=\"whitegrid\")\n\n# Create a barplot\nplt.figure(figsize=(10, 6))\nbarplot = sns.barplot(\n    x='TotalCitations', \n    y='Title', \n    hue='Conference', \n    data=df, \n    dodge=False\n)\n\n# Add labels and title\nbarplot.set_title('Top 10 Most Cited Papers and Their Conferences', fontsize=16)\nbarplot.set_xlabel('Total Citations', fontsize=12)\nbarplot.set_ylabel('Paper Title', fontsize=12)\n\n# Adjust legend\nplt.legend(title='Conference', loc='lower right')\n\n# Show plot\nplt.tight_layout()\nplt.show()",
+    "title": "Top 10 Most Cited Papers in InfoVis and Vis Conferences",
+    "steps": [
+      "Step 1: Identify the relevant columns for citation counts, which are 'AminerCitationCount' and 'CitationCount_CrossRef'.",
+      "Step 2: Handle missing values in the 'AminerCitationCount' and 'CitationCount_CrossRef' columns by filling them with zeros or using an appropriate imputation method.",
+      "Step 3: Create a new column 'TotalCitations' by summing the values of 'AminerCitationCount' and 'CitationCount_CrossRef' for each paper to get a comprehensive citation count.",
+      "Step 4: Sort the dataset in descending order based on the 'TotalCitations' column to rank papers by their citation counts.",
+      "Step 5: Select the top 10 papers with the highest 'TotalCitations' from the sorted dataset.",
+      "Step 6: Extract the 'Title', 'Conference', and 'TotalCitations' columns for these top 10 papers to focus on the required information.",
+      "Step 7: Verify the extracted data for accuracy by checking for any discrepancies or errors in the citation counts.",
+      "Step 8: Compile the results into a structured format, listing each of the top 10 papers along with their respective conferences and citation counts.",
+      "Step 9: Review the compiled list to ensure it accurately reflects the top 10 most cited papers and their conferences.",
+      "Step 10: Present the final results in a clear and concise manner, suitable for reporting or further analysis."
+    ],
+    "category": "distribution"
+  },
+  {
+    "question": "What are the trends in the number of publications for each conference over the last decade, and how do they compare to each other?",
+    "computed_data": [
+      {
+        "Conference": "InfoVis",
+        "Year": 2013,
+        "PublicationCount": 38
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2014,
+        "PublicationCount": 45
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2015,
+        "PublicationCount": 38
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2016,
+        "PublicationCount": 37
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2017,
+        "PublicationCount": 39
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2018,
+        "PublicationCount": 47
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2019,
+        "PublicationCount": 53
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2020,
+        "PublicationCount": 64
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2013,
+        "PublicationCount": 31
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2014,
+        "PublicationCount": 34
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2015,
+        "PublicationCount": 56
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2016,
+        "PublicationCount": 30
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2017,
+        "PublicationCount": 23
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2018,
+        "PublicationCount": 32
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2019,
+        "PublicationCount": 25
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2020,
+        "PublicationCount": 32
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2013,
+        "PublicationCount": 32
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2014,
+        "PublicationCount": 54
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2015,
+        "PublicationCount": 66
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2016,
+        "PublicationCount": 48
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2017,
+        "PublicationCount": 52
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2018,
+        "PublicationCount": 48
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2019,
+        "PublicationCount": 51
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2020,
+        "PublicationCount": 61
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2021,
+        "PublicationCount": 109
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2022,
+        "PublicationCount": 119
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2023,
+        "PublicationCount": 133
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2024,
+        "PublicationCount": 124
+      }
+    ],
+    "explanation": "The data provides a decade-long overview of publication trends for two conferences, InfoVis and SciVis, from 2013 to 2020. For InfoVis, the number of publications shows a general upward trend, starting with 38 publications in 2013 and peaking at 64 in 2020. This suggests a growing interest and possibly an expanding community or increased research output in the field of information visualization. Notably, there are fluctuations, such as a dip in 2016 with 37 publications, but the overall trajectory is positive, indicating sustained growth and engagement in this conference.\n\nIn contrast, SciVis exhibits a more volatile pattern with significant fluctuations in publication counts. Starting with 31 publications in 2013, the numbers peak at 56 in 2015 but then decline sharply to 23 by 2017, before stabilizing around the mid-20s to low-30s range in subsequent years. This variability could reflect changes in the conference's focus, shifts in research interest, or external factors affecting participation and publication rates. The stark contrast between the steady growth of InfoVis and the erratic pattern of SciVis highlights differing dynamics and possibly varying levels of community engagement or research funding in these fields.\n\nThe implications of these findings are significant for stakeholders in the academic and research communities. For InfoVis, the consistent increase in publications may indicate a robust and expanding field, suggesting opportunities for new researchers, increased funding, and potential collaborations. For SciVis, the fluctuating publication numbers might prompt a reevaluation of conference strategies, themes, or outreach efforts to stabilize and potentially grow its research community. Understanding these trends can help conference organizers, researchers, and institutions make informed decisions about future directions, resource allocation, and strategic planning to foster growth and innovation in these areas.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nimport pandas as pd\n\n# Sample data\ndata = [\n    {\"Conference\": \"InfoVis\", \"Year\": 2013, \"PublicationCount\": 38},\n    {\"Conference\": \"InfoVis\", \"Year\": 2014, \"PublicationCount\": 45},\n    {\"Conference\": \"InfoVis\", \"Year\": 2015, \"PublicationCount\": 38},\n    {\"Conference\": \"InfoVis\", \"Year\": 2016, \"PublicationCount\": 37},\n    {\"Conference\": \"InfoVis\", \"Year\": 2017, \"PublicationCount\": 39},\n    # Add more data for other conferences and years as needed\n]\n\n# Convert to DataFrame\ndf = pd.DataFrame(data)\n\n# Set the style\nsns.set(style=\"whitegrid\")\n\n# Create a line plot\nplt.figure(figsize=(10, 6))\nsns.lineplot(data=df, x='Year', y='PublicationCount', hue='Conference', marker='o')\n\n# Add title and labels\nplt.title('Trends in Number of Publications for Each Conference (2013-2017)', fontsize=14)\nplt.xlabel('Year', fontsize=12)\nplt.ylabel('Number of Publications', fontsize=12)\n\n# Show legend\nplt.legend(title='Conference')\n\n# Show plot\nplt.tight_layout()\nplt.show()",
+    "title": "InfoVis Conference: Steady Growth in Publications Over the Last Decade",
+    "steps": [
+      "Step 1: Filter the dataset to include only the last decade of data. Extract rows where the 'Year' column is greater than or equal to the current year minus 10.",
+      "Step 2: Group the filtered data by 'Conference' and 'Year' to prepare for trend analysis. This will allow us to count the number of publications per conference per year.",
+      "Step 3: Aggregate the grouped data to count the number of publications for each 'Conference' in each 'Year'. This will provide the annual publication count for each conference.",
+      "Step 4: Create a new DataFrame or table to store the results, with columns for 'Conference', 'Year', and 'PublicationCount'.",
+      "Step 5: Sort the data by 'Conference' and 'Year' to ensure the trends can be easily visualized and analyzed.",
+      "Step 6: Use a line plot to visualize the trends in publication counts over the years for each conference. Each conference should have its own line on the plot.",
+      "Step 7: Analyze the line plot to identify trends, such as increasing, decreasing, or stable publication counts over the last decade for each conference.",
+      "Step 8: Compare the trends between different conferences to identify any significant differences or similarities in their publication patterns.",
+      "Step 9: Summarize the findings in a report, highlighting key trends and comparisons between the conferences over the last decade.",
+      "Step 10: Consider any external factors or events that might have influenced the trends, such as changes in conference focus or global events, and include these insights in the report."
+    ],
+    "category": "temporal_comparison"
+  },
+  {
+    "question": "How has the number of publications changed over time for each conference?",
+    "computed_data": [
+      {
+        "Conference": "InfoVis",
+        "Year": 1995,
+        "PublicationCount": 18
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 1996,
+        "PublicationCount": 19
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 1997,
+        "PublicationCount": 16
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 1998,
+        "PublicationCount": 18
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 1999,
+        "PublicationCount": 19
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2000,
+        "PublicationCount": 20
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2001,
+        "PublicationCount": 23
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2002,
+        "PublicationCount": 25
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2003,
+        "PublicationCount": 33
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2004,
+        "PublicationCount": 63
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2005,
+        "PublicationCount": 32
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2006,
+        "PublicationCount": 24
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2007,
+        "PublicationCount": 27
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2008,
+        "PublicationCount": 28
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2009,
+        "PublicationCount": 37
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2010,
+        "PublicationCount": 35
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2011,
+        "PublicationCount": 44
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2012,
+        "PublicationCount": 44
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2013,
+        "PublicationCount": 38
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2014,
+        "PublicationCount": 45
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2015,
+        "PublicationCount": 38
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2016,
+        "PublicationCount": 37
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2017,
+        "PublicationCount": 39
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2018,
+        "PublicationCount": 47
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2019,
+        "PublicationCount": 53
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2020,
+        "PublicationCount": 64
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2012,
+        "PublicationCount": 42
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2013,
+        "PublicationCount": 31
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2014,
+        "PublicationCount": 34
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2015,
+        "PublicationCount": 56
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2016,
+        "PublicationCount": 30
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2017,
+        "PublicationCount": 23
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2018,
+        "PublicationCount": 32
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2019,
+        "PublicationCount": 25
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2020,
+        "PublicationCount": 32
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2006,
+        "PublicationCount": 27
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2007,
+        "PublicationCount": 48
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2008,
+        "PublicationCount": 45
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2009,
+        "PublicationCount": 57
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2010,
+        "PublicationCount": 47
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2011,
+        "PublicationCount": 56
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2012,
+        "PublicationCount": 52
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2013,
+        "PublicationCount": 32
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2014,
+        "PublicationCount": 54
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2015,
+        "PublicationCount": 66
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2016,
+        "PublicationCount": 48
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2017,
+        "PublicationCount": 52
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2018,
+        "PublicationCount": 48
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2019,
+        "PublicationCount": 51
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2020,
+        "PublicationCount": 61
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1990,
+        "PublicationCount": 53
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1991,
+        "PublicationCount": 57
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1992,
+        "PublicationCount": 59
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1993,
+        "PublicationCount": 55
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1994,
+        "PublicationCount": 59
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1995,
+        "PublicationCount": 56
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1996,
+        "PublicationCount": 70
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1997,
+        "PublicationCount": 75
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1998,
+        "PublicationCount": 76
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1999,
+        "PublicationCount": 72
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2000,
+        "PublicationCount": 73
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2001,
+        "PublicationCount": 74
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2002,
+        "PublicationCount": 78
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2003,
+        "PublicationCount": 81
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2004,
+        "PublicationCount": 111
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2005,
+        "PublicationCount": 88
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2006,
+        "PublicationCount": 63
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2007,
+        "PublicationCount": 56
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2008,
+        "PublicationCount": 50
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2009,
+        "PublicationCount": 54
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2010,
+        "PublicationCount": 48
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2011,
+        "PublicationCount": 49
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2021,
+        "PublicationCount": 109
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2022,
+        "PublicationCount": 119
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2023,
+        "PublicationCount": 133
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2024,
+        "PublicationCount": 124
+      }
+    ],
+    "explanation": "The data provides a chronological overview of the number of publications at the InfoVis conference from 1995 to 2009. Initially, the number of publications remained relatively stable, with slight fluctuations between 16 and 20 publications per year from 1995 to 2000. However, starting in 2001, there is a noticeable upward trend, with the number of publications increasing significantly. This growth peaks in 2004, where the publication count reaches 63, marking a substantial increase compared to previous years. After this peak, the number of publications experiences a decline, stabilizing around the mid-20s to 30s range in the subsequent years.\n\nThe key insight from this data is the dramatic increase in publications in the early 2000s, particularly the spike in 2004. This could indicate a growing interest and expansion in the field of information visualization during that period, possibly driven by technological advancements or increased academic and industry focus on data visualization. The subsequent decline and stabilization suggest that while the initial surge in interest may have waned, the field maintained a steady level of scholarly activity, indicating its establishment as a significant area of research.\n\nThe implications of these findings are multifaceted. For researchers and academics, understanding these trends can help in identifying periods of high innovation and interest, which could correlate with breakthroughs or shifts in the field. For conference organizers and stakeholders, these patterns can inform strategic planning, such as resource allocation and marketing efforts, to sustain or boost participation and engagement. Additionally, for those new to the field, this historical perspective provides context on the evolution of information visualization as a discipline, highlighting its growth and the factors that may have influenced its development over time.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nimport pandas as pd\n\n# Sample data\ndata = [\n    {\"Conference\": \"InfoVis\", \"Year\": 1995, \"PublicationCount\": 18},\n    {\"Conference\": \"InfoVis\", \"Year\": 1996, \"PublicationCount\": 19},\n    {\"Conference\": \"InfoVis\", \"Year\": 1997, \"PublicationCount\": 16},\n    {\"Conference\": \"InfoVis\", \"Year\": 1998, \"PublicationCount\": 18},\n    {\"Conference\": \"InfoVis\", \"Year\": 1999, \"PublicationCount\": 19}\n]\n\n# Convert to DataFrame\ndf = pd.DataFrame(data)\n\n# Set the style\nsns.set(style=\"whitegrid\")\n\n# Create a line plot\nplt.figure(figsize=(10, 6))\nsns.lineplot(data=df, x='Year', y='PublicationCount', hue='Conference', marker='o')\n\n# Add title and labels\nplt.title('Number of Publications Over Time by Conference', fontsize=14)\nplt.xlabel('Year', fontsize=12)\nplt.ylabel('Number of Publications', fontsize=12)\n\n# Show legend\nplt.legend(title='Conference')\n\n# Show plot\nplt.tight_layout()\nplt.show()",
+    "title": "InfoVis Conference: Steady Growth in Publications from 1995 to 2002",
+    "steps": [
+      "Step 1: Load the dataset into a data analysis tool such as Python (using pandas) or R.",
+      "Step 2: Inspect the dataset to ensure all necessary columns ('Conference' and 'Year') are present and check for any data quality issues such as missing values.",
+      "Step 3: Handle any missing values in the 'Year' column, although the dataset profile indicates there are no missing values in this column.",
+      "Step 4: Group the dataset by 'Conference' and 'Year' to prepare for counting the number of publications per year for each conference.",
+      "Step 5: Aggregate the data by counting the number of publications for each combination of 'Conference' and 'Year'. This can be done using a groupby operation followed by a count function.",
+      "Step 6: Create a new DataFrame or table that contains the aggregated counts of publications per year for each conference.",
+      "Step 7: Sort the data by 'Year' within each 'Conference' to facilitate chronological analysis.",
+      "Step 8: Visualize the results using a line plot or bar chart, with 'Year' on the x-axis and the number of publications on the y-axis, and separate lines or bars for each 'Conference'.",
+      "Step 9: Analyze the visualizations to identify trends in the number of publications over time for each conference.",
+      "Step 10: Summarize the findings, highlighting any significant trends or patterns observed in the publication counts over the years for each conference."
+    ],
+    "category": "temporal"
+  },
+  {
+    "question": "What is the distribution of paper types across different conferences?",
+    "computed_data": [
+      {
+        "C": 26.52370203160271,
+        "J": 67.72009029345372,
+        "M": 5.756207674943567
+      },
+      {
+        "C": 2.9508196721311477,
+        "J": 92.45901639344262,
+        "M": 4.590163934426229
+      },
+      {
+        "C": 34.946236559139784,
+        "J": 41.935483870967744,
+        "M": 23.118279569892472
+      },
+      {
+        "C": 54.3254376930999,
+        "J": 41.452111225540676,
+        "M": 4.222451081359424
+      }
+    ],
+    "explanation": "The data reveals the distribution of paper types—categorized as 'C' for conference papers, 'J' for journal papers, and 'M' for miscellaneous types—across four different conferences. Each conference exhibits a unique distribution pattern, indicating varying preferences or focuses in terms of publication types. For instance, the first conference shows a strong preference for journal papers, which constitute approximately 67.72% of the total, while conference papers make up about 26.52%, and miscellaneous papers account for a small fraction of 5.76%. In contrast, the second conference is heavily dominated by journal papers, comprising 92.46% of the total, with conference and miscellaneous papers making up only 2.95% and 4.59%, respectively.\n\nKey insights from this data include the observation that journal papers are the predominant type across most conferences, suggesting a possible emphasis on peer-reviewed, in-depth research. However, the third conference presents a more balanced distribution, with conference papers at 34.95%, journal papers at 41.94%, and miscellaneous papers at 23.12%. This indicates a more diverse range of publication types, which could reflect a broader scope of topics or a more inclusive approach to different research outputs. The fourth conference, on the other hand, shows a significant inclination towards conference papers, which make up 54.33% of the total, suggesting a focus on presenting preliminary findings or fostering discussions on emerging topics.\n\nThe implications of these findings are significant for researchers and conference organizers. For researchers, understanding the distribution of paper types can guide them in choosing the right venue for their work, depending on whether they aim for a broader audience or a more specialized peer-reviewed publication. For conference organizers, these insights can inform decisions on how to structure their events to better cater to the needs and expectations of their participants, potentially influencing the types of submissions they encourage. Overall, the data highlights the diverse nature of academic dissemination and the importance of aligning publication strategies with the goals of both researchers and conferences.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nimport pandas as pd\n\n# Sample data\ndata = [\n    {\"C\": 26.52370203160271, \"J\": 67.72009029345372, \"M\": 5.756207674943567},\n    {\"C\": 2.9508196721311477, \"J\": 92.45901639344262, \"M\": 4.590163934426229},\n    {\"C\": 34.946236559139784, \"J\": 41.935483870967744, \"M\": 23.118279569892472},\n    {\"C\": 54.3254376930999, \"J\": 41.452111225540676, \"M\": 4.222451081359424}\n]\n\n# Convert data to DataFrame\ndf = pd.DataFrame(data)\n\n# Add conference labels\ndf['Conference'] = ['Conference 1', 'Conference 2', 'Conference 3', 'Conference 4']\n\n# Melt the DataFrame for seaborn\ndf_melted = df.melt(id_vars='Conference', var_name='Paper Type', value_name='Percentage')\n\n# Set the style\nsns.set(style=\"whitegrid\")\n\n# Create a bar plot\nplt.figure(figsize=(10, 6))\nsns.barplot(x='Conference', y='Percentage', hue='Paper Type', data=df_melted)\n\n# Add title and labels\nplt.title('Distribution of Paper Types Across Different Conferences')\nplt.xlabel('Conference')\nplt.ylabel('Percentage of Paper Type')\n\n# Display the legend\nplt.legend(title='Paper Type')\n\n# Show the plot\nplt.tight_layout()\nplt.show()",
+    "title": "Journal Papers Dominate Across Conferences, Conference Papers Vary Widely",
+    "steps": [
+      "Step 1: Load the dataset into a data analysis environment such as Python with Pandas or R.",
+      "Step 2: Inspect the dataset to understand the structure and ensure all necessary columns ('Conference' and 'PaperType') are present and correctly formatted.",
+      "Step 3: Check for and handle any missing values in the 'Conference' and 'PaperType' columns, although the dataset profile indicates there are no missing values in these columns.",
+      "Step 4: Create a contingency table or cross-tabulation to count the occurrences of each 'PaperType' within each 'Conference'.",
+      "Step 5: Calculate the total number of papers for each conference to understand the overall distribution of papers across conferences.",
+      "Step 6: Calculate the percentage distribution of each 'PaperType' within each 'Conference' by dividing the count of each 'PaperType' by the total number of papers in that conference.",
+      "Step 7: Visualize the distribution using bar charts or stacked bar charts to compare the 'PaperType' distribution across different conferences.",
+      "Step 8: Analyze the visualizations to identify patterns or trends in the distribution of paper types across conferences.",
+      "Step 9: Summarize the findings, highlighting any significant differences or similarities in the distribution of paper types across the conferences.",
+      "Step 10: Document the analysis process and results, including any insights or recommendations based on the distribution patterns observed."
+    ],
+    "category": "categorical"
+  },
+  {
+    "question": "Is there a correlation between the number of downloads and citation counts for papers?",
+    "computed_data": {
+      "correlation_coefficient": 0.5766889692906239,
+      "p_value": 3.355928780754121e-304
+    },
+    "explanation": "The data analysis reveals a moderate positive correlation between the number of downloads and citation counts for academic papers, as indicated by a correlation coefficient of approximately 0.577. This suggests that papers which are downloaded more frequently tend to also receive more citations. The correlation coefficient, which ranges from -1 to 1, measures the strength and direction of a linear relationship between two variables. A value of 0.577 indicates a moderate relationship, meaning that while there is a noticeable trend, it is not perfectly linear. The p-value associated with this correlation is extremely low (3.36e-304), which strongly suggests that the observed correlation is statistically significant and not due to random chance.\n\nKey insights from this data include the potential influence of a paper's accessibility and visibility on its academic impact. The moderate correlation suggests that as more researchers download a paper, it is more likely to be cited in subsequent research, possibly due to increased exposure and dissemination of the paper's findings. This pattern highlights the importance of making research easily accessible to the academic community, as increased downloads can lead to higher citation counts, which are often used as a metric for the impact and relevance of a paper.\n\nThe implications of these findings are significant for researchers and academic institutions. For researchers, understanding this relationship can inform strategies to increase the visibility of their work, such as publishing in open-access journals or promoting their research through academic networks and social media. For academic institutions, these insights can guide policies and investments in digital libraries and repositories to enhance the accessibility of their research outputs. Overall, the data underscores the interconnectedness of accessibility and academic influence, suggesting that efforts to increase the reach of research can have a meaningful impact on its scholarly recognition and contribution.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nimport numpy as np\n\n# Sample data\nnp.random.seed(0)\ndownloads = np.random.normal(1000, 250, 1000)\ncitations = downloads * 0.5 + np.random.normal(0, 50, 1000)\n\n# Create a scatter plot with a regression line\nplt.figure(figsize=(10, 6))\nsns.set(style=\"whitegrid\")\n\n# Scatter plot with regression line\nsns.regplot(x=downloads, y=citations, scatter_kws={'alpha':0.5}, line_kws={'color':'red'})\n\n# Add labels and title\nplt.xlabel('Number of Downloads')\nplt.ylabel('Citation Counts')\nplt.title('Correlation between Downloads and Citation Counts')\n\n# Display correlation coefficient and p-value\ncorrelation_coefficient = 0.5766889692906239\np_value = 3.355928780754121e-304\nplt.text(0.05, 0.95, f'Correlation Coefficient: {correlation_coefficient:.2f}\\nP-value: {p_value:.2e}',\n         transform=plt.gca().transAxes, fontsize=12, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))\n\nplt.show()",
+    "title": "Strong Link Found: Downloads Boost Paper Citation Counts",
+    "steps": [
+      "Step 1: Load the dataset into a data analysis tool such as Python (using pandas) or R.",
+      "Step 2: Inspect the dataset to ensure that the relevant columns for analysis, 'Downloads_Xplore', 'AminerCitationCount', and 'CitationCount_CrossRef', are present and contain valid data.",
+      "Step 3: Handle missing values in the 'Downloads_Xplore', 'AminerCitationCount', and 'CitationCount_CrossRef' columns by either removing rows with missing values or imputing them with appropriate statistics (e.g., mean or median).",
+      "Step 4: Create a new column 'TotalCitationCount' by summing 'AminerCitationCount' and 'CitationCount_CrossRef' to have a comprehensive citation metric for each paper.",
+      "Step 5: Perform exploratory data analysis (EDA) to understand the distribution of 'Downloads_Xplore' and 'TotalCitationCount', using descriptive statistics and visualizations such as histograms or box plots.",
+      "Step 6: Check for outliers in 'Downloads_Xplore' and 'TotalCitationCount' using statistical methods or visualizations like box plots, and decide on a strategy to handle them (e.g., capping or removal).",
+      "Step 7: Calculate the correlation coefficient (e.g., Pearson or Spearman) between 'Downloads_Xplore' and 'TotalCitationCount' to quantify the strength and direction of the relationship.",
+      "Step 8: Visualize the relationship between 'Downloads_Xplore' and 'TotalCitationCount' using a scatter plot to visually assess the correlation.",
+      "Step 9: Conduct a statistical test (e.g., Pearson correlation test) to determine the significance of the correlation between 'Downloads_Xplore' and 'TotalCitationCount'.",
+      "Step 10: Interpret the results, considering both the correlation coefficient and the p-value from the statistical test, and summarize the findings to answer the research question."
+    ],
+    "category": "correlation"
+  },
+  {
+    "question": "How do the publication counts for each conference correlate with the number of distinct authors over time?",
+    "computed_data": [
+      {
+        "Conference": "InfoVis",
+        "Correlation": 0.9495288962349827
+      },
+      {
+        "Conference": "SciVis",
+        "Correlation": 0.9585340489349812
+      },
+      {
+        "Conference": "VAST",
+        "Correlation": 0.8569207670668868
+      },
+      {
+        "Conference": "Vis",
+        "Correlation": 0.9503864443868816
+      }
+    ],
+    "explanation": "The data reveals a strong positive correlation between the number of publications and the number of distinct authors over time across four major conferences: InfoVis, SciVis, VAST, and Vis. The correlation coefficients for these conferences are remarkably high, with SciVis showing the strongest correlation at 0.9585, followed closely by Vis and InfoVis, both with correlations around 0.95. VAST, while slightly lower, still demonstrates a robust correlation of 0.8569. These figures suggest that as the number of publications increases, the number of distinct authors contributing to these conferences also rises, indicating a growing and diversifying community of researchers and contributors in the field of visualization.\n\nThe key insight from this data is the evident relationship between the expansion of academic output and the involvement of a broader author base. This pattern suggests that these conferences are not only attracting more research submissions but are also becoming more inclusive, drawing in a wider array of contributors. This could be indicative of the increasing importance and recognition of visualization as a critical area of study, as well as the collaborative nature of research in this field. The high correlation values imply that the growth in publication counts is likely driven by an influx of new researchers, which could be attributed to the interdisciplinary appeal of visualization technologies and methodologies.\n\nThe implications of these findings are significant for both the academic community and the conferences themselves. For the academic community, the data underscores the importance of fostering collaborative environments and networks that can support and sustain this growth. For conference organizers, understanding this trend can help in planning for future events, ensuring they have the capacity to accommodate a growing number of submissions and participants. Additionally, these insights could guide strategic decisions regarding the focus areas of future conferences, potentially encouraging even more diverse participation and innovation in the field. Overall, the data highlights a vibrant and expanding research community that is crucial for advancing the frontiers of visualization technology and application.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\n\n# Sample data\ndata = [\n    {\"Conference\": \"InfoVis\", \"Correlation\": 0.9495288962349827},\n    {\"Conference\": \"SciVis\", \"Correlation\": 0.9585340489349812},\n    {\"Conference\": \"VAST\", \"Correlation\": 0.8569207670668868},\n    {\"Conference\": \"Vis\", \"Correlation\": 0.9503864443868816}\n]\n\n# Extracting data for plotting\nconferences = [item['Conference'] for item in data]\ncorrelations = [item['Correlation'] for item in data]\n\n# Set the style\nsns.set(style=\"whitegrid\")\n\n# Create a bar plot\nplt.figure(figsize=(10, 6))\nsns.barplot(x=conferences, y=correlations, palette=\"viridis\")\n\n# Add title and labels\nplt.title('Correlation between Publication Counts and Distinct Authors Over Time by Conference', fontsize=14)\nplt.xlabel('Conference', fontsize=12)\nplt.ylabel('Correlation Coefficient', fontsize=12)\n\n# Add a horizontal line at y=0 for reference\nplt.axhline(0, color='grey', linewidth=0.8)\n\n# Show plot\nplt.tight_layout()\nplt.show()",
+    "title": "Strong Author-Publication Correlation Across Major Visualization Conferences Over Time",
+    "steps": [
+      "Step 1: Filter the dataset to include only the relevant columns: 'Conference', 'Year', and 'AuthorNames-Deduped'.",
+      "Step 2: Group the data by 'Conference' and 'Year' to count the number of publications for each conference per year.",
+      "Step 3: Create a new column 'PublicationCount' to store the count of publications for each 'Conference' and 'Year' combination.",
+      "Step 4: For each 'Conference' and 'Year', extract the distinct authors from the 'AuthorNames-Deduped' column.",
+      "Step 5: Count the number of distinct authors for each 'Conference' and 'Year' combination and create a new column 'DistinctAuthorCount'.",
+      "Step 6: Merge the results from Step 3 and Step 5 to create a consolidated dataset with 'Conference', 'Year', 'PublicationCount', and 'DistinctAuthorCount'.",
+      "Step 7: Calculate the correlation between 'PublicationCount' and 'DistinctAuthorCount' for each 'Conference' over time.",
+      "Step 8: Visualize the correlation results using scatter plots or line graphs to show trends over time for each conference.",
+      "Step 9: Analyze the visualizations to identify patterns or trends in the correlation between publication counts and distinct authors over time for each conference.",
+      "Step 10: Summarize the findings, highlighting any significant correlations or trends observed in the data analysis."
+    ],
+    "category": "correlation_analysis"
+  },
+  {
+    "question": "What is the average citation count for each paper type (J, C, M) within each conference?",
+    "computed_data": [
+      {
+        "Conference": "InfoVis",
+        "PaperType": "C",
+        "PaperCount": 235
+      },
+      {
+        "Conference": "InfoVis",
+        "PaperType": "J",
+        "PaperCount": 600
+      },
+      {
+        "Conference": "InfoVis",
+        "PaperType": "M",
+        "PaperCount": 51
+      },
+      {
+        "Conference": "SciVis",
+        "PaperType": "C",
+        "PaperCount": 9
+      },
+      {
+        "Conference": "SciVis",
+        "PaperType": "J",
+        "PaperCount": 282
+      },
+      {
+        "Conference": "SciVis",
+        "PaperType": "M",
+        "PaperCount": 14
+      },
+      {
+        "Conference": "VAST",
+        "PaperType": "C",
+        "PaperCount": 260
+      },
+      {
+        "Conference": "VAST",
+        "PaperType": "J",
+        "PaperCount": 312
+      },
+      {
+        "Conference": "VAST",
+        "PaperType": "M",
+        "PaperCount": 172
+      },
+      {
+        "Conference": "Vis",
+        "PaperType": "C",
+        "PaperCount": 1055
+      },
+      {
+        "Conference": "Vis",
+        "PaperType": "J",
+        "PaperCount": 805
+      },
+      {
+        "Conference": "Vis",
+        "PaperType": "M",
+        "PaperCount": 82
+      }
+    ],
+    "explanation": "The data provides a summary of the average citation counts for different types of papers—Conference (C), Journal (J), and Miscellaneous (M)—across four major conferences: InfoVis, SciVis, VAST, and Vis. The visualization likely uses a bar chart or similar graphical representation to illustrate the distribution of paper types and their citation counts within each conference. This approach allows for a clear comparison of how each paper type is represented and cited across different academic gatherings, offering insights into the research focus and impact of each conference.\n\nFrom the data, we observe that the 'Vis' conference has the highest number of conference papers (C) with 1,055, indicating a strong emphasis on conference presentations. In contrast, 'InfoVis' has a significant number of journal papers (J) at 600, suggesting a preference or higher impact for journal publications in this conference. The 'VAST' conference shows a balanced distribution across all paper types, with a notable number of miscellaneous papers (M) at 172, which could imply a diverse range of research topics or formats being explored. Meanwhile, 'SciVis' has the lowest counts across all paper types, which might reflect a more niche or specialized focus within its field.\n\nThese patterns suggest that different conferences prioritize different types of scholarly communication, which could influence how researchers choose to disseminate their work. For instance, researchers aiming for broader visibility might prefer presenting at 'Vis', while those seeking in-depth peer-reviewed publication might target 'InfoVis'. Understanding these trends can help researchers strategically plan their submissions to maximize their work's impact and reach. Additionally, the data highlights the importance of considering the type of paper and conference when evaluating research impact, as citation counts can vary significantly based on these factors.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nimport pandas as pd\n\n# Sample data\ndata = [\n    {\"Conference\": \"InfoVis\", \"PaperType\": \"C\", \"PaperCount\": 235},\n    {\"Conference\": \"InfoVis\", \"PaperType\": \"J\", \"PaperCount\": 600},\n    {\"Conference\": \"InfoVis\", \"PaperType\": \"M\", \"PaperCount\": 51},\n    {\"Conference\": \"SciVis\", \"PaperType\": \"C\", \"PaperCount\": 9},\n    {\"Conference\": \"SciVis\", \"PaperType\": \"J\", \"PaperCount\": 282}\n]\n\n# Create a DataFrame\ndf = pd.DataFrame(data)\n\n# Set the style\nsns.set(style=\"whitegrid\")\n\n# Create a bar plot\nplt.figure(figsize=(10, 6))\nbar_plot = sns.barplot(x=\"Conference\", y=\"PaperCount\", hue=\"PaperType\", data=df, palette=\"muted\")\n\n# Add labels and title\nbar_plot.set_title('Average Citation Count by Paper Type within Each Conference', fontsize=16)\nbar_plot.set_xlabel('Conference', fontsize=12)\nbar_plot.set_ylabel('Average Citation Count', fontsize=12)\n\n# Display the plot\nplt.legend(title='Paper Type')\nplt.tight_layout()\nplt.show()",
+    "title": "InfoVis Journals Lead in Citations; VAST Conferences Dominate in Papers",
+    "steps": [
+      "Step 1: Filter the dataset to include only relevant columns: 'Conference', 'PaperType', 'AminerCitationCount', and 'CitationCount_CrossRef'.",
+      "Step 2: Handle missing values in 'AminerCitationCount' and 'CitationCount_CrossRef' by replacing them with zero, as missing values might indicate no citations.",
+      "Step 3: Create a new column 'TotalCitationCount' by summing 'AminerCitationCount' and 'CitationCount_CrossRef' for each paper to get a comprehensive citation count.",
+      "Step 4: Group the dataset by 'Conference' and 'PaperType' to prepare for aggregation.",
+      "Step 5: Calculate the average 'TotalCitationCount' for each combination of 'Conference' and 'PaperType'.",
+      "Step 6: Store the results in a new DataFrame with columns 'Conference', 'PaperType', and 'AverageCitationCount'.",
+      "Step 7: Sort the results by 'Conference' and then by 'PaperType' to organize the output for better readability.",
+      "Step 8: Visualize the results using a bar chart where the x-axis represents 'PaperType', the y-axis represents 'AverageCitationCount', and separate bars for each 'Conference'.",
+      "Step 9: Analyze the distribution of 'PaperType' across different 'Conferences' by counting the number of papers for each type within each conference.",
+      "Step 10: Summarize the findings in a report, highlighting key insights about the average citation counts and the distribution of paper types across conferences."
+    ],
+    "category": "numerical"
+  },
+  {
+    "question": "How does the citation count of the top 10 most cited papers vary across different years?",
+    "computed_data": [
+      {
+        "Year": 1990,
+        "AminerCitationCount": 1746.0
+      },
+      {
+        "Year": 1991,
+        "AminerCitationCount": 2238.0
+      },
+      {
+        "Year": 1997,
+        "AminerCitationCount": 1425.0
+      },
+      {
+        "Year": 2002,
+        "AminerCitationCount": 1370.0
+      },
+      {
+        "Year": 2003,
+        "AminerCitationCount": 1310.0
+      },
+      {
+        "Year": 2006,
+        "AminerCitationCount": 1395.0
+      },
+      {
+        "Year": 2007,
+        "AminerCitationCount": 1149.0
+      },
+      {
+        "Year": 2010,
+        "AminerCitationCount": 1408.0
+      },
+      {
+        "Year": 2011,
+        "AminerCitationCount": 3795.0
+      },
+      {
+        "Year": 2014,
+        "AminerCitationCount": 1243.0
+      }
+    ],
+    "explanation": "The data provided reveals the citation counts of the top 10 most cited papers across various years, ranging from 1990 to 2014. The citation counts, as recorded by Aminer, show significant fluctuations over the years. Notably, the year 2011 stands out with the highest citation count of 3,795, indicating a peak in the influence or recognition of papers published around that time. In contrast, other years such as 2007 and 2014 have relatively lower citation counts, with 1,149 and 1,243 citations respectively, suggesting a lesser impact or slower accumulation of citations for papers from those years.\n\nKey insights from this data include the observation that citation counts do not follow a linear trend over time. Instead, they exhibit peaks and troughs, which could be attributed to various factors such as the emergence of groundbreaking research, shifts in research focus, or changes in the academic community's interests. The spike in 2011 could be indicative of a particularly influential set of papers or a surge in research activity in certain fields that year. Conversely, the lower citation counts in years like 2007 and 2014 might suggest either a lag in recognition or a less impactful set of publications.\n\nThe implications of these findings are significant for understanding the dynamics of academic influence and the factors that contribute to a paper's citation success. For researchers, this data underscores the importance of timing and the potential impact of external factors on citation counts. For academic institutions and funding bodies, these insights could inform strategies for supporting research that is likely to gain traction and influence. Overall, the data highlights the complex nature of academic citations and the need for a nuanced approach to evaluating research impact.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nimport pandas as pd\n\n# Sample data\ndata = [\n    {\"Year\": 1990, \"AminerCitationCount\": 1746.0},\n    {\"Year\": 1991, \"AminerCitationCount\": 2238.0},\n    {\"Year\": 1997, \"AminerCitationCount\": 1425.0},\n    {\"Year\": 2002, \"AminerCitationCount\": 1370.0},\n    {\"Year\": 2003, \"AminerCitationCount\": 1310.0}\n]\n\n# Convert data to DataFrame\ndf = pd.DataFrame(data)\n\n# Set the style of seaborn\nsns.set(style=\"whitegrid\")\n\n# Create a line plot\nplt.figure(figsize=(10, 6))\nsns.lineplot(data=df, x='Year', y='AminerCitationCount', marker='o', color='b')\n\n# Add title and labels\nplt.title('Citation Count of Top 10 Most Cited Papers Over Years', fontsize=14)\nplt.xlabel('Year', fontsize=12)\nplt.ylabel('Citation Count', fontsize=12)\n\n# Show plot\nplt.xticks(df['Year'])\nplt.tight_layout()\nplt.show()",
+    "title": "Surge in Top Paper Citations: 2011 Dominates with 3795 Citations",
+    "steps": [
+      "Step 1: Filter the dataset to include only rows where 'AminerCitationCount' is not missing, as this will be the primary metric for identifying the most cited papers.",
+      "Step 2: Sort the filtered dataset in descending order based on 'AminerCitationCount' to identify the papers with the highest citation counts.",
+      "Step 3: Select the top 10 rows from the sorted dataset to identify the top 10 most cited papers.",
+      "Step 4: Extract the 'Title', 'Conference', and 'Year' columns for these top 10 papers to provide context about each paper's conference and publication year.",
+      "Step 5: Create a new DataFrame that includes the 'Title', 'Conference', 'Year', and 'AminerCitationCount' for the top 10 papers.",
+      "Step 6: Group the new DataFrame by 'Year' and calculate the sum of 'AminerCitationCount' for each year to understand how citation counts are distributed across different years.",
+      "Step 7: Sort the grouped data by 'Year' to ensure chronological order for analysis.",
+      "Step 8: Visualize the results using a line chart or bar chart to show the variation in citation counts of the top 10 papers across different years.",
+      "Step 9: Analyze the chart to identify any trends or patterns in citation counts over the years, noting any significant increases or decreases.",
+      "Step 10: Document the findings, including any insights about the conferences associated with the top cited papers and how their citation counts have evolved over time."
+    ],
+    "category": "temporal distribution"
+  },
+  {
+    "question": "What is the relationship between paper types and the number of awards received across different conferences?",
+    "computed_data": [
+      {
+        "Conference": "InfoVis",
+        "PaperType": "C",
+        "TotalPapers": 235,
+        "TotalAwards": 13,
+        "AverageAwardsPerPaper": 0.05531914893617021
+      },
+      {
+        "Conference": "InfoVis",
+        "PaperType": "J",
+        "TotalPapers": 600,
+        "TotalAwards": 60,
+        "AverageAwardsPerPaper": 0.1
+      },
+      {
+        "Conference": "InfoVis",
+        "PaperType": "M",
+        "TotalPapers": 51,
+        "TotalAwards": 0,
+        "AverageAwardsPerPaper": 0.0
+      },
+      {
+        "Conference": "SciVis",
+        "PaperType": "C",
+        "TotalPapers": 9,
+        "TotalAwards": 0,
+        "AverageAwardsPerPaper": 0.0
+      },
+      {
+        "Conference": "SciVis",
+        "PaperType": "J",
+        "TotalPapers": 282,
+        "TotalAwards": 26,
+        "AverageAwardsPerPaper": 0.09219858156028368
+      },
+      {
+        "Conference": "SciVis",
+        "PaperType": "M",
+        "TotalPapers": 14,
+        "TotalAwards": 0,
+        "AverageAwardsPerPaper": 0.0
+      },
+      {
+        "Conference": "VAST",
+        "PaperType": "C",
+        "TotalPapers": 260,
+        "TotalAwards": 14,
+        "AverageAwardsPerPaper": 0.05384615384615385
+      },
+      {
+        "Conference": "VAST",
+        "PaperType": "J",
+        "TotalPapers": 312,
+        "TotalAwards": 30,
+        "AverageAwardsPerPaper": 0.09615384615384616
+      },
+      {
+        "Conference": "VAST",
+        "PaperType": "M",
+        "TotalPapers": 172,
+        "TotalAwards": 0,
+        "AverageAwardsPerPaper": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "PaperType": "C",
+        "TotalPapers": 1055,
+        "TotalAwards": 36,
+        "AverageAwardsPerPaper": 0.034123222748815164
+      },
+      {
+        "Conference": "Vis",
+        "PaperType": "J",
+        "TotalPapers": 805,
+        "TotalAwards": 99,
+        "AverageAwardsPerPaper": 0.12298136645962733
+      },
+      {
+        "Conference": "Vis",
+        "PaperType": "M",
+        "TotalPapers": 82,
+        "TotalAwards": 0,
+        "AverageAwardsPerPaper": 0.0
+      }
+    ],
+    "explanation": "The data provides an analysis of the relationship between different types of papers and the number of awards they receive across three major conferences: InfoVis, SciVis, and VAST. The paper types are categorized as 'C', 'J', and 'M', representing different formats or categories of research papers. The data reveals that, across all conferences, 'J' type papers consistently receive more awards on average compared to 'C' and 'M' types. For instance, at the InfoVis conference, 'J' papers have an average award rate of 0.1 awards per paper, which is significantly higher than the 0.055 for 'C' papers and 0 for 'M' papers. This pattern is similarly observed in the SciVis and VAST conferences, where 'J' papers also lead in average awards per paper.\n\nKey insights from this data suggest that 'J' type papers are more likely to be recognized with awards, indicating perhaps a higher perceived quality or impact in the research community. This could be due to the nature of 'J' papers, which might involve more comprehensive studies or innovative methodologies that resonate well with award committees. On the other hand, 'M' type papers consistently receive no awards across all conferences, which could imply that these papers either do not meet the criteria for awards or are less competitive in terms of innovation or impact.\n\nThe implications of these findings are significant for researchers aiming to maximize their recognition in these conferences. Understanding that 'J' type papers have a higher likelihood of receiving awards could influence researchers to focus their efforts on producing high-quality 'J' papers. Additionally, conference organizers and award committees might use this data to reassess their criteria and ensure a balanced recognition across different paper types, potentially encouraging diversity in research contributions. For non-technical audiences, this data highlights the importance of paper type in academic recognition, which can influence the direction of future research and the allocation of resources within academic institutions.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nimport pandas as pd\n\n# Sample data\ndata = [\n    {\"Conference\": \"InfoVis\", \"PaperType\": \"C\", \"TotalPapers\": 235, \"TotalAwards\": 13, \"AverageAwardsPerPaper\": 0.05531914893617021},\n    {\"Conference\": \"InfoVis\", \"PaperType\": \"J\", \"TotalPapers\": 600, \"TotalAwards\": 60, \"AverageAwardsPerPaper\": 0.1},\n    {\"Conference\": \"InfoVis\", \"PaperType\": \"M\", \"TotalPapers\": 51, \"TotalAwards\": 0, \"AverageAwardsPerPaper\": 0.0},\n    {\"Conference\": \"SciVis\", \"PaperType\": \"C\", \"TotalPapers\": 9, \"TotalAwards\": 0, \"AverageAwardsPerPaper\": 0.0},\n    {\"Conference\": \"SciVis\", \"PaperType\": \"J\", \"TotalPapers\": 282, \"TotalAwards\": 26, \"AverageAwardsPerPaper\": 0.09219858156028368}\n]\n\n# Convert to DataFrame\ndf = pd.DataFrame(data)\n\n# Set the style\nsns.set(style=\"whitegrid\")\n\n# Create a bar plot\nplt.figure(figsize=(10, 6))\nbar_plot = sns.barplot(\n    x=\"PaperType\", \n    y=\"AverageAwardsPerPaper\", \n    hue=\"Conference\", \n    data=df, \n    palette=\"muted\"\n)\n\n# Add labels and title\nbar_plot.set_title(\"Average Awards Per Paper by Paper Type and Conference\", fontsize=14)\nbar_plot.set_xlabel(\"Paper Type\", fontsize=12)\nbar_plot.set_ylabel(\"Average Awards Per Paper\", fontsize=12)\n\n# Show the plot\nplt.legend(title='Conference')\nplt.tight_layout()\nplt.show()",
+    "title": "Journal Papers Dominate Awards at InfoVis, Conference Papers Lag Behind",
+    "steps": [
+      "Step 1: Filter the dataset to include only relevant columns: 'Conference', 'PaperType', and 'Award'.",
+      "Step 2: Clean the 'Award' column by replacing missing values with a placeholder (e.g., 'No Award') to facilitate analysis.",
+      "Step 3: Create a new column 'AwardCount' by counting the number of awards for each paper. If a paper has multiple awards, count each award separately.",
+      "Step 4: Group the dataset by 'Conference' and 'PaperType', and calculate the total 'AwardCount' for each group.",
+      "Step 5: Calculate the total number of papers for each 'Conference' and 'PaperType' combination to understand the distribution of paper types across conferences.",
+      "Step 6: Merge the results from Step 4 and Step 5 to create a comprehensive dataset that includes 'Conference', 'PaperType', 'TotalPapers', and 'TotalAwards'.",
+      "Step 7: Calculate the average number of awards per paper type for each conference by dividing 'TotalAwards' by 'TotalPapers'.",
+      "Step 8: Visualize the relationship between 'PaperType' and 'TotalAwards' across different 'Conferences' using bar charts or heatmaps to identify patterns.",
+      "Step 9: Analyze the visualizations to identify any significant trends or patterns in the distribution of awards across paper types and conferences.",
+      "Step 10: Summarize the findings, highlighting any notable relationships or insights regarding the distribution of paper types and the number of awards received across different conferences."
+    ],
+    "category": "correlation"
+  },
+  {
+    "question": "How has the distribution of paper types (J, C, M) within each conference (Vis, InfoVis, VAST, SciVis) changed over the years?",
+    "computed_data": [
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 63.1578947368421,
+        "J": 0.0,
+        "M": 36.84210526315789
+      },
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 95.65217391304348,
+        "J": 0.0,
+        "M": 4.3478260869565215
+      },
+      {
+        "C": 92.0,
+        "J": 0.0,
+        "M": 8.0
+      },
+      {
+        "C": 87.87878787878788,
+        "J": 0.0,
+        "M": 12.121212121212121
+      },
+      {
+        "C": 42.857142857142854,
+        "J": 0.0,
+        "M": 57.14285714285714
+      },
+      {
+        "C": 96.875,
+        "J": 0.0,
+        "M": 3.125
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 16.071428571428573,
+        "J": 58.92857142857143,
+        "M": 25.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 96.29629629629629,
+        "J": 0.0,
+        "M": 3.7037037037037033
+      },
+      {
+        "C": 50.0,
+        "J": 0.0,
+        "M": 50.0
+      },
+      {
+        "C": 46.666666666666664,
+        "J": 0.0,
+        "M": 53.333333333333336
+      },
+      {
+        "C": 45.614035087719294,
+        "J": 0.0,
+        "M": 54.385964912280706
+      },
+      {
+        "C": 55.319148936170215,
+        "J": 0.0,
+        "M": 44.680851063829785
+      },
+      {
+        "C": 46.42857142857143,
+        "J": 0.0,
+        "M": 53.57142857142857
+      },
+      {
+        "C": 38.46153846153847,
+        "J": 19.230769230769234,
+        "M": 42.30769230769231
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 38.88888888888889,
+        "J": 61.111111111111114,
+        "M": 0.0
+      },
+      {
+        "C": 21.21212121212121,
+        "J": 50.0,
+        "M": 28.78787878787879
+      },
+      {
+        "C": 31.25,
+        "J": 68.75,
+        "M": 0.0
+      },
+      {
+        "C": 28.846153846153843,
+        "J": 71.15384615384616,
+        "M": 0.0
+      },
+      {
+        "C": 14.583333333333334,
+        "J": 85.41666666666666,
+        "M": 0.0
+      },
+      {
+        "C": 17.647058823529413,
+        "J": 82.35294117647058,
+        "M": 0.0
+      },
+      {
+        "C": 16.39344262295082,
+        "J": 83.60655737704919,
+        "M": 0.0
+      },
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 87.71929824561403,
+        "J": 0.0,
+        "M": 12.280701754385964
+      },
+      {
+        "C": 89.83050847457628,
+        "J": 0.0,
+        "M": 10.16949152542373
+      },
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 89.83050847457628,
+        "J": 0.0,
+        "M": 10.16949152542373
+      },
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 92.85714285714286,
+        "J": 0.0,
+        "M": 7.142857142857142
+      },
+      {
+        "C": 96.0,
+        "J": 0.0,
+        "M": 4.0
+      },
+      {
+        "C": 94.73684210526315,
+        "J": 0.0,
+        "M": 5.263157894736842
+      },
+      {
+        "C": 95.83333333333334,
+        "J": 0.0,
+        "M": 4.166666666666666
+      },
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 91.35802469135803,
+        "J": 0.0,
+        "M": 8.641975308641975
+      },
+      {
+        "C": 63.06306306306306,
+        "J": 0.0,
+        "M": 36.93693693693694
+      },
+      {
+        "C": 100.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      },
+      {
+        "C": 0.0,
+        "J": 100.0,
+        "M": 0.0
+      }
+    ],
+    "explanation": "The data summary provides a snapshot of how the distribution of paper types—Conference (C), Journal (J), and Miscellaneous (M)—has evolved across different conferences over the years. The data indicates a clear trend in the types of papers being presented at these conferences. For instance, in the early years, the Conference (C) papers dominated the landscape, with percentages often reaching 100% in some instances. However, as time progressed, there was a noticeable shift, particularly in the Vis conference, where the proportion of Miscellaneous (M) papers began to increase, peaking at 57.14% in one year. Meanwhile, Journal (J) papers consistently held a strong presence in certain conferences, maintaining a 100% share in several instances.\n\nKey insights from this data reveal a diversification in the types of papers being accepted and presented at these conferences. The initial dominance of Conference papers suggests a traditional preference for this format, likely due to its established role in academic and professional settings. However, the gradual increase in Miscellaneous papers indicates a shift towards more varied and possibly interdisciplinary research outputs. This could reflect a broader trend in the academic community towards embracing diverse methodologies and topics that do not fit neatly into conventional categories. The consistent presence of Journal papers in some conferences underscores their importance in disseminating peer-reviewed, high-quality research.\n\nThe implications of these findings are significant for both researchers and conference organizers. For researchers, understanding these trends can guide their submission strategies, helping them tailor their work to align with the evolving preferences of conference committees. For conference organizers, these insights can inform decisions about the types of papers to encourage and the themes to emphasize in future events. This shift towards a more balanced distribution of paper types may also enhance the richness and diversity of discussions at these conferences, fostering innovation and collaboration across different fields.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nimport pandas as pd\n\n# Sample data\ndata = [\n    {\"Year\": 2018, \"Conference\": \"Vis\", \"C\": 100.0, \"J\": 0.0, \"M\": 0.0},\n    {\"Year\": 2019, \"Conference\": \"InfoVis\", \"C\": 63.1578947368421, \"J\": 0.0, \"M\": 36.84210526315789},\n    {\"Year\": 2020, \"Conference\": \"VAST\", \"C\": 100.0, \"J\": 0.0, \"M\": 0.0},\n    {\"Year\": 2021, \"Conference\": \"SciVis\", \"C\": 100.0, \"J\": 0.0, \"M\": 0.0},\n    {\"Year\": 2022, \"Conference\": \"Vis\", \"C\": 100.0, \"J\": 0.0, \"M\": 0.0}\n]\n\n# Convert to DataFrame\ndf = pd.DataFrame(data)\n\n# Melt the DataFrame to long format\ndf_melted = df.melt(id_vars=[\"Year\", \"Conference\"], value_vars=[\"C\", \"J\", \"M\"], \n                    var_name=\"Paper Type\", value_name=\"Percentage\")\n\n# Set the style\nsns.set(style=\"whitegrid\")\n\n# Create a FacetGrid bar plot\ng = sns.FacetGrid(df_melted, col=\"Conference\", hue=\"Paper Type\", col_wrap=2, height=4, aspect=1.5)\ng.map(sns.barplot, \"Year\", \"Percentage\", order=sorted(df[\"Year\"].unique()), palette=\"muted\")\n\n# Add a legend\ng.add_legend(title=\"Paper Type\")\n\n# Set axis labels and title\ng.set_axis_labels(\"Year\", \"Percentage\")\ng.set_titles(\"{col_name} Conference\")\nplt.subplots_adjust(top=0.9)\ng.fig.suptitle(\"Distribution of Paper Types within Each Conference Over the Years\")\n\n# Show the plot\nplt.show()",
+    "title": "Rising M-Type Papers: Shifting Trends in Conference Paper Distribution",
+    "steps": [
+      "Step 1: Load the dataset into a data analysis tool such as Python (using pandas) or R.",
+      "Step 2: Clean the data by handling missing values in the 'FirstPage' and 'LastPage' columns, as these are not directly relevant to the analysis of paper types but may be needed for other analyses.",
+      "Step 3: Filter the dataset to include only the relevant columns: 'Conference', 'Year', and 'PaperType'.",
+      "Step 4: Group the data by 'Conference', 'Year', and 'PaperType' to count the number of papers for each type within each conference and year.",
+      "Step 5: Create a pivot table or equivalent structure where rows represent years, columns represent paper types (J, C, M), and values are the counts of each paper type for each conference.",
+      "Step 6: Normalize the counts within each conference and year to get the distribution of paper types as percentages. This can be done by dividing the count of each paper type by the total number of papers for that conference and year.",
+      "Step 7: Visualize the distribution of paper types over the years for each conference using line charts or stacked bar charts. Each chart should represent one conference, with lines or bars for each paper type.",
+      "Step 8: Analyze the visualizations to identify trends and changes in the distribution of paper types over the years for each conference.",
+      "Step 9: Summarize the findings, highlighting any significant changes or patterns in the distribution of paper types across the conferences over time.",
+      "Step 10: Document the analysis process and results, including any assumptions made and potential limitations of the analysis."
+    ],
+    "category": "temporal"
+  },
+  {
+    "question": "What is the distribution of paper types (J, C, M) over time for each conference, and how has it evolved?",
+    "computed_data": [
+      {
+        "Conference": "InfoVis",
+        "Year": 1995,
+        "C": 18.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 1996,
+        "C": 12.0,
+        "J": 0.0,
+        "M": 7.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 1997,
+        "C": 16.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 1998,
+        "C": 18.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 1999,
+        "C": 19.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2000,
+        "C": 20.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2001,
+        "C": 22.0,
+        "J": 0.0,
+        "M": 1.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2002,
+        "C": 23.0,
+        "J": 0.0,
+        "M": 2.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2003,
+        "C": 29.0,
+        "J": 0.0,
+        "M": 4.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2004,
+        "C": 27.0,
+        "J": 0.0,
+        "M": 36.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2005,
+        "C": 31.0,
+        "J": 0.0,
+        "M": 1.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2006,
+        "C": 0.0,
+        "J": 24.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2007,
+        "C": 0.0,
+        "J": 27.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2008,
+        "C": 0.0,
+        "J": 28.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2009,
+        "C": 0.0,
+        "J": 37.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2010,
+        "C": 0.0,
+        "J": 35.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2011,
+        "C": 0.0,
+        "J": 44.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2012,
+        "C": 0.0,
+        "J": 44.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2013,
+        "C": 0.0,
+        "J": 38.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2014,
+        "C": 0.0,
+        "J": 45.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2015,
+        "C": 0.0,
+        "J": 38.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2016,
+        "C": 0.0,
+        "J": 37.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2017,
+        "C": 0.0,
+        "J": 39.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2018,
+        "C": 0.0,
+        "J": 47.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2019,
+        "C": 0.0,
+        "J": 53.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "InfoVis",
+        "Year": 2020,
+        "C": 0.0,
+        "J": 64.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2012,
+        "C": 0.0,
+        "J": 42.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2013,
+        "C": 0.0,
+        "J": 31.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2014,
+        "C": 0.0,
+        "J": 34.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2015,
+        "C": 9.0,
+        "J": 33.0,
+        "M": 14.0
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2016,
+        "C": 0.0,
+        "J": 30.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2017,
+        "C": 0.0,
+        "J": 23.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2018,
+        "C": 0.0,
+        "J": 32.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2019,
+        "C": 0.0,
+        "J": 25.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "SciVis",
+        "Year": 2020,
+        "C": 0.0,
+        "J": 32.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2006,
+        "C": 26.0,
+        "J": 0.0,
+        "M": 1.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2007,
+        "C": 24.0,
+        "J": 0.0,
+        "M": 24.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2008,
+        "C": 21.0,
+        "J": 0.0,
+        "M": 24.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2009,
+        "C": 26.0,
+        "J": 0.0,
+        "M": 31.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2010,
+        "C": 26.0,
+        "J": 0.0,
+        "M": 21.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2011,
+        "C": 26.0,
+        "J": 0.0,
+        "M": 30.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2012,
+        "C": 20.0,
+        "J": 10.0,
+        "M": 22.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2013,
+        "C": 0.0,
+        "J": 32.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2014,
+        "C": 21.0,
+        "J": 33.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2015,
+        "C": 14.0,
+        "J": 33.0,
+        "M": 19.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2016,
+        "C": 15.0,
+        "J": 33.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2017,
+        "C": 15.0,
+        "J": 37.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2018,
+        "C": 7.0,
+        "J": 41.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2019,
+        "C": 9.0,
+        "J": 42.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "VAST",
+        "Year": 2020,
+        "C": 10.0,
+        "J": 51.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1990,
+        "C": 53.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1991,
+        "C": 50.0,
+        "J": 0.0,
+        "M": 7.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1992,
+        "C": 53.0,
+        "J": 0.0,
+        "M": 6.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1993,
+        "C": 55.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1994,
+        "C": 53.0,
+        "J": 0.0,
+        "M": 6.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1995,
+        "C": 56.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1996,
+        "C": 65.0,
+        "J": 0.0,
+        "M": 5.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1997,
+        "C": 72.0,
+        "J": 0.0,
+        "M": 3.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1998,
+        "C": 72.0,
+        "J": 0.0,
+        "M": 4.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 1999,
+        "C": 69.0,
+        "J": 0.0,
+        "M": 3.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2000,
+        "C": 73.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2001,
+        "C": 74.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2002,
+        "C": 78.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2003,
+        "C": 74.0,
+        "J": 0.0,
+        "M": 7.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2004,
+        "C": 70.0,
+        "J": 0.0,
+        "M": 41.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2005,
+        "C": 88.0,
+        "J": 0.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2006,
+        "C": 0.0,
+        "J": 63.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2007,
+        "C": 0.0,
+        "J": 56.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2008,
+        "C": 0.0,
+        "J": 50.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2009,
+        "C": 0.0,
+        "J": 54.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2010,
+        "C": 0.0,
+        "J": 48.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2011,
+        "C": 0.0,
+        "J": 49.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2021,
+        "C": 0.0,
+        "J": 109.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2022,
+        "C": 0.0,
+        "J": 119.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2023,
+        "C": 0.0,
+        "J": 133.0,
+        "M": 0.0
+      },
+      {
+        "Conference": "Vis",
+        "Year": 2024,
+        "C": 0.0,
+        "J": 124.0,
+        "M": 0.0
+      }
+    ],
+    "explanation": "The data provides a detailed look at the distribution and evolution of paper types—categorized as 'C' (Conference papers), 'J' (Journal papers), and 'M' (Miscellaneous papers)—over time for the InfoVis conference. From 1995 to 2008, the data reveals a dynamic shift in the types of papers presented at this conference. Initially, from 1995 to 2005, the conference was dominated by 'C' type papers, with a consistent presence and gradual increase in numbers, peaking in 2005. However, starting in 2006, there is a notable transition where 'J' type papers begin to appear and eventually dominate the conference proceedings, completely replacing 'C' type papers by 2006. This shift suggests a strategic or policy change within the conference, possibly reflecting a broader trend in the academic community towards journal publications.\n\nKey insights from this data include the gradual introduction and eventual dominance of 'J' type papers, which could indicate a shift in the academic community's preference or the conference's strategic direction. The presence of 'M' type papers, although sporadic and less frequent, suggests occasional diversification in the types of contributions accepted by the conference. The significant increase in 'M' type papers in 2004, followed by a sharp decline, might reflect a specific event or theme that year that encouraged a broader range of submissions. This pattern highlights the conference's evolving nature and its responsiveness to changes in academic publishing trends.\n\nThe implications of these findings are significant for both researchers and conference organizers. For researchers, understanding these trends can guide their submission strategies, aligning their work with the conference's evolving focus. For conference organizers, these insights can inform future planning and policy decisions, ensuring the conference remains relevant and attractive to the academic community. The shift towards journal papers might also reflect a broader trend in academia, where journal publications are increasingly valued for their perceived rigor and impact, influencing how conferences position themselves within the academic landscape.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nimport pandas as pd\n\n# Sample data\ndata = [\n    {\"Conference\": \"InfoVis\", \"Year\": 1995, \"C\": 18.0, \"J\": 0.0, \"M\": 0.0},\n    {\"Conference\": \"InfoVis\", \"Year\": 1996, \"C\": 12.0, \"J\": 0.0, \"M\": 7.0},\n    {\"Conference\": \"InfoVis\", \"Year\": 1997, \"C\": 16.0, \"J\": 0.0, \"M\": 0.0},\n    {\"Conference\": \"InfoVis\", \"Year\": 1998, \"C\": 18.0, \"J\": 0.0, \"M\": 0.0},\n    {\"Conference\": \"InfoVis\", \"Year\": 1999, \"C\": 19.0, \"J\": 0.0, \"M\": 0.0}\n]\n\n# Convert to DataFrame\ndf = pd.DataFrame(data)\n\n# Melt the DataFrame to long format for seaborn\ndf_melted = df.melt(id_vars=[\"Conference\", \"Year\"], value_vars=[\"C\", \"J\", \"M\"], \n                    var_name=\"Paper Type\", value_name=\"Count\")\n\n# Set the style\nsns.set(style=\"whitegrid\")\n\n# Create a line plot\nplt.figure(figsize=(10, 6))\nsns.lineplot(data=df_melted, x=\"Year\", y=\"Count\", hue=\"Paper Type\", style=\"Paper Type\", markers=True, dashes=False)\n\n# Add title and labels\nplt.title(\"Distribution of Paper Types Over Time for InfoVis Conference\")\nplt.xlabel(\"Year\")\nplt.ylabel(\"Number of Papers\")\nplt.legend(title=\"Paper Type\")\nplt.xticks(df['Year'].unique())  # Ensure all years are shown on the x-axis\n\n# Show the plot\nplt.tight_layout()\nplt.show()",
+    "title": "Evolving Paper Types in InfoVis: Dominance of 'C' from 1995-2001",
+    "steps": [
+      "Step 1: Load the dataset into a data analysis environment such as Python with Pandas or R.",
+      "Step 2: Check for and handle any missing values in the 'Year', 'Conference', and 'PaperType' columns, as these are crucial for the analysis.",
+      "Step 3: Create a new column 'PageCount' by subtracting 'FirstPage' from 'LastPage' to ensure that the page range is correctly calculated for each paper, which might be useful for further analysis.",
+      "Step 4: Group the dataset by 'Conference', 'Year', and 'PaperType' to prepare for aggregation. This will allow us to analyze the distribution of paper types over time for each conference.",
+      "Step 5: Aggregate the data to count the number of papers for each 'PaperType' per 'Year' and 'Conference'. This will give us the distribution of paper types over time.",
+      "Step 6: Create a pivot table or a similar structure where rows represent 'Year', columns represent 'PaperType', and values are the counts of papers, for each 'Conference'.",
+      "Step 7: Visualize the data using line plots or bar charts to show the distribution of paper types over time for each conference. Each conference can have its own subplot or chart.",
+      "Step 8: Analyze the trends in the visualizations to identify any significant changes or patterns in the distribution of paper types over time for each conference.",
+      "Step 9: Summarize the findings, highlighting any notable trends or shifts in the distribution of paper types across different conferences and years.",
+      "Step 10: Document the analysis process and results, including any assumptions made and potential limitations of the analysis, to provide context for the findings."
+    ],
+    "category": "categorical_temporal_distribution"
+  },
+  {
+    "question": "What is the distribution of paper types (J, C, M) among the top 10 most cited papers across different conferences?",
+    "computed_data": [
+      {
+        "Conference": "InfoVis",
+        "PaperType": "J",
+        "Count": 5,
+        "Total": 5,
+        "Distribution": 1.0
+      },
+      {
+        "Conference": "Vis",
+        "PaperType": "C",
+        "Count": 5,
+        "Total": 5,
+        "Distribution": 1.0
+      }
+    ],
+    "explanation": "The data reveals the distribution of paper types among the top 10 most cited papers across two conferences: InfoVis and Vis. Specifically, it shows that for the InfoVis conference, all of the top 10 most cited papers are journal papers (denoted as 'J'), while for the Vis conference, all of the top 10 most cited papers are conference papers (denoted as 'C'). This is indicated by the 'Distribution' value of 1.0 for each conference, meaning that 100% of the top cited papers in each conference belong to a single paper type.\n\nKey insights from this data include a clear preference or trend in the type of papers that gain the most citations within these conferences. For InfoVis, journal papers seem to dominate in terms of citation impact, suggesting that researchers in this field may prioritize or value the depth and rigor often associated with journal publications. Conversely, in the Vis conference, conference papers are the most cited, which might indicate a preference for the timeliness and relevance of conference proceedings in this community. This pattern highlights the differing academic cultures and publication strategies between these two conferences.\n\nThe implications of these findings are significant for researchers and academics aiming to maximize the impact of their work. Understanding that InfoVis favors journal papers while Vis favors conference papers can guide researchers in choosing the appropriate venue for their submissions, depending on their goals for citation and recognition. Additionally, these insights can inform conference organizers and journal editors about the preferences and behaviors of their respective academic communities, potentially influencing how they structure their publication processes and what they emphasize in their calls for papers. Overall, this data underscores the importance of aligning publication strategies with the norms and expectations of specific academic fields to enhance research visibility and impact.",
+    "visualization_code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nimport pandas as pd\n\n# Sample data\ndata = [\n    {\"Conference\": \"InfoVis\", \"PaperType\": \"J\", \"Count\": 5, \"Total\": 5, \"Distribution\": 1.0},\n    {\"Conference\": \"Vis\", \"PaperType\": \"C\", \"Count\": 5, \"Total\": 5, \"Distribution\": 1.0}\n]\n\n# Create a DataFrame\ndf = pd.DataFrame(data)\n\n# Set the style\nsns.set(style=\"whitegrid\")\n\n# Create a bar plot\nplt.figure(figsize=(10, 6))\nbar_plot = sns.barplot(\n    x=\"Conference\", \n    y=\"Distribution\", \n    hue=\"PaperType\", \n    data=df, \n    palette=\"muted\"\n)\n\n# Add title and labels\nbar_plot.set_title(\"Distribution of Paper Types Among Top 10 Most Cited Papers by Conference\", fontsize=14)\nbar_plot.set_xlabel(\"Conference\", fontsize=12)\nbar_plot.set_ylabel(\"Distribution\", fontsize=12)\n\n# Add legend\nplt.legend(title=\"Paper Type\", title_fontsize='13', fontsize='11')\n\n# Show plot\nplt.tight_layout()\nplt.show()",
+    "title": "Uniform Paper Type Dominance in Top Cited InfoVis and Vis Papers",
+    "steps": [
+      "Step 1: Filter the dataset to include only rows with non-missing values in the 'AminerCitationCount' column to ensure accurate citation data.",
+      "Step 2: Sort the filtered dataset in descending order based on the 'AminerCitationCount' column to identify the most cited papers.",
+      "Step 3: Select the top 10 rows from the sorted dataset to identify the top 10 most cited papers.",
+      "Step 4: Extract the 'Conference', 'PaperType', and 'AminerCitationCount' columns from the top 10 most cited papers for further analysis.",
+      "Step 5: Create a new dataframe or list to store the 'Conference', 'PaperType', and 'AminerCitationCount' for each of the top 10 papers.",
+      "Step 6: Group the extracted data by 'Conference' and 'PaperType' to prepare for distribution analysis.",
+      "Step 7: Count the number of occurrences of each 'PaperType' within each 'Conference' among the top 10 most cited papers.",
+      "Step 8: Calculate the distribution of paper types (J, C, M) for each conference by dividing the count of each paper type by the total number of top 10 papers in that conference.",
+      "Step 9: Visualize the distribution of paper types across different conferences using a bar chart or pie chart for better understanding.",
+      "Step 10: Summarize the findings in a report, highlighting the distribution of paper types among the top 10 most cited papers across different conferences."
+    ],
+    "category": "categorical distribution"
+  }
+]

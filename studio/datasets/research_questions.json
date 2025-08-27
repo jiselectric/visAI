@@ -1,0 +1,114 @@
+[
+  {
+    "question": "How has the number of publications changed over time for each conference?",
+    "parent_question": null,
+    "level": 0,
+    "visualizable": true,
+    "category": "temporal"
+  },
+  {
+    "question": "What is the distribution of paper types across different conferences?",
+    "parent_question": null,
+    "level": 0,
+    "visualizable": true,
+    "category": "categorical"
+  },
+  {
+    "question": "Is there a correlation between the number of downloads and citation counts for papers?",
+    "parent_question": null,
+    "level": 0,
+    "visualizable": true,
+    "category": "correlation"
+  },
+  {
+    "question": "What are the top 10 most cited papers and their respective conferences?",
+    "parent_question": null,
+    "level": 0,
+    "visualizable": true,
+    "category": "distribution"
+  },
+  {
+    "question": "What are the trends in the number of publications for each conference over the last decade, and how do they compare to each other?",
+    "parent_question": "How has the number of publications changed over time for each conference?",
+    "level": 1,
+    "visualizable": true,
+    "category": "temporal_comparison"
+  },
+  {
+    "question": "How do the publication counts for each conference correlate with the number of distinct authors over time?",
+    "parent_question": "How has the number of publications changed over time for each conference?",
+    "level": 2,
+    "visualizable": true,
+    "category": "correlation_analysis"
+  },
+  {
+    "question": "What is the distribution of paper types (J, C, M) over time for each conference, and how has it evolved?",
+    "parent_question": "How has the number of publications changed over time for each conference?",
+    "level": 3,
+    "visualizable": true,
+    "category": "categorical_temporal_distribution"
+  },
+  {
+    "question": "How has the distribution of paper types (J, C, M) within each conference (Vis, InfoVis, VAST, SciVis) changed over the years?",
+    "parent_question": "What is the distribution of paper types across different conferences?",
+    "level": 1,
+    "visualizable": true,
+    "category": "temporal"
+  },
+  {
+    "question": "What is the average citation count for each paper type (J, C, M) within each conference?",
+    "parent_question": "What is the distribution of paper types across different conferences?",
+    "level": 2,
+    "visualizable": true,
+    "category": "numerical"
+  },
+  {
+    "question": "What is the relationship between paper types and the number of awards received across different conferences?",
+    "parent_question": "What is the distribution of paper types across different conferences?",
+    "level": 3,
+    "visualizable": true,
+    "category": "correlation"
+  },
+  {
+    "question": "How does the citation count of the top 10 most cited papers vary across different years?",
+    "parent_question": "What are the top 10 most cited papers and their respective conferences?",
+    "level": 1,
+    "visualizable": true,
+    "category": "temporal distribution"
+  },
+  {
+    "question": "What is the distribution of paper types (J, C, M) among the top 10 most cited papers across different conferences?",
+    "parent_question": "What are the top 10 most cited papers and their respective conferences?",
+    "level": 2,
+    "visualizable": true,
+    "category": "categorical distribution"
+  },
+  {
+    "question": "What is the correlation between the number of downloads and citation counts for the top 10 most cited papers?",
+    "parent_question": "What are the top 10 most cited papers and their respective conferences?",
+    "level": 3,
+    "visualizable": true,
+    "category": "correlation analysis"
+  },
+  {
+    "question": "How does the correlation between downloads and citation counts vary across different conferences (Vis, InfoVis, VAST, SciVis)?",
+    "parent_question": "Is there a correlation between the number of downloads and citation counts for papers?",
+    "level": 1,
+    "visualizable": true,
+    "category": "conference_correlation"
+  },
+  {
+    "question": "Is there a trend in the correlation between downloads and citation counts over the years, and how does it change over time?",
+    "parent_question": "Is there a correlation between the number of downloads and citation counts for papers?",
+    "level": 2,
+    "visualizable": true,
+    "category": "temporal_correlation"
+  },
+  {
+    "question": "Does the correlation between downloads and citation counts differ based on the paper type (J, C, M)?",
+    "parent_question": "Is there a correlation between the number of downloads and citation counts for papers?",
+    "level": 3,
+    "visualizable": true,
+    "category": "paper_type_correlation"
+  }
+]

@@ -107,7 +107,7 @@ You are a **creative data visualization strategist** inspired by the rich exampl
 Please analyze the following dataset and generate queries that can help guide another LLM to produce meaningful visualizations and insights from the dataset.
 
 ```json
-{{visualizable_dataset_json}}
+{{02_generate_visualization_queries}}
 ```
 
 ## ✅ Output Format
