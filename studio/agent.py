@@ -47,8 +47,9 @@ def step1_generate_research_questions(state: State):
             "question": q.question,
             "parent_question": q.parent_question,
             "level": q.level,
-            "visualizable": q.visualizable,
+            "visualization": q.visualization,
             "category": q.category,
+            "source_columns": q.source_columns,
         }
         for q in questions
     ]

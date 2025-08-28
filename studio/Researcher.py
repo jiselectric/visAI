@@ -1,7 +1,7 @@
 import asyncio
 import concurrent.futures
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
@@ -22,8 +22,9 @@ class ResearchQuestion:
     question: str
     parent_question: Optional[str]
     level: int  # 0 for breadth questions, 1+ for depth questions
-    visualizable: bool = True
+    visualization: str = ""
     category: str = ""
+    source_columns: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -58,7 +59,7 @@ class Researcher:
             if cached_questions:
                 print("Using cached research questions")
                 self.research_questions = [
-                    ResearchQuestion(**q) for q in cached_questions
+                    ResearchQuestion(**q) for q in cached_questions  # type: ignore
                 ]
                 return self.research_questions
 
@@ -77,12 +78,13 @@ class Researcher:
                     "question": q.question,
                     "parent_question": q.parent_question,
                     "level": q.level,
-                    "visualizable": q.visualizable,
+                    "visualization": q.visualization,
                     "category": q.category,
+                    "source_columns": q.source_columns,
                 }
                 for q in self.research_questions
             ]
-            save_json_data(questions_dict, "research_questions.json")
+            save_json_data(questions_dict, "research_questions.json")  # type: ignore
 
         print(f"Generated {len(self.research_questions)} total research questions")
         return self.research_questions
@@ -91,38 +93,63 @@ class Researcher:
         """Generate breadth-amount of wide-ranging questions covering different aspects of data"""
         print(f"  Generating {self.config.breadth} breadth questions...")
 
-        dataset_summary = json.dumps(self.dataset_profile, indent=2)
+        dataset_profile_json = json.dumps(self.dataset_profile, indent=2)
 
-        system_prompt = """You are an expert data analyst and researcher. Your task is to generate insightful, 
-        visualizable research questions that explore different aspects of the dataset comprehensively.
-        
-        Generate questions that:
-        1. Cover wide-ranging aspects of the data (temporal, categorical, numerical, relational)
-        2. Are highly visualizable and would produce compelling charts
-        3. Expose meaningful insights about the dataset
-        4. Are answerable using the available data columns
-        5. Would be interesting to both technical and non-technical audiences"""
+        system_prompt = """You are an expert data analyst and researcher.
+
+        Your task: generate insightful, **visualizable research questions** that explore the dataset comprehensively.
+
+        Guidelines:
+        1. Breadth: Cover diverse aspects of the data (temporal, categorical, numerical, correlation, ranking).
+        2. Depth: Some questions may focus on a single column; others should combine multiple columns (e.g., temporal + categorical, categorical + numerical).
+        3. Visualization: Each question must suggest an appropriate visualization diagram type (e.g., line chart, bar chart, pie chart, scatter plot, heat map, keyword chart).
+        4. Insightful: Aim for questions that reveal trends, comparisons, or relationships of interest.
+        5. Generalizable: Do not assume columns beyond those provided in the dataset profile.
+        6. Audience: Questions should be understandable and compelling for both technical and non-technical stakeholders.
+
+        Encouraged visualization mappings:
+        - Temporal → line chart, area chart
+        - Categorical → bar chart, pie chart
+        - Distribution → histogram, box/violin plot
+        - Correlation → scatter plot, bubble chart, heat map
+        - Ranking → bar chart, column chart
+        - Text/keywords → word cloud, keyword chart, topic timeline."""
 
         user_prompt = f"""Based on this dataset profile:
-        
-        {dataset_summary}
-        
-        Generate exactly {self.config.breadth} diverse research questions that cover different aspects of the data.
-        Each question should be:
+
+        {dataset_profile_json}
+
+        Generate exactly {self.config.breadth} diverse research questions.
+
+        Requirements:
+        - Each question must be:
         - Specific and actionable
-        - Visualizable (can be answered with charts/graphs)
+        - Visualizable (with a clear diagram type suggestion)
         - Insightful (reveals meaningful patterns or trends)
-        
-        Return the response as a JSON array with objects containing:
+        - Feasible with the provided columns (no hallucinated fields)
+        - Some questions should combine multiple columns to reveal richer patterns.
+        - Cover a variety of perspectives (temporal, categorical, distribution, correlation, ranking, keywords).
+        - Avoid redundancy — each question should explore a distinct angle.
+        - Suggested visualization types should be provided as **inspiration only**; they are not fixed requirements.
+
+        Return the response as a JSON array of objects with the following keys:
         - "question": the research question
-        - "category": the category/aspect it explores (e.g., "temporal", "categorical", "correlation", "distribution")
-        - "visualizable": true
-        
-        Example format:
+        - "category": the category/aspect it explores (temporal, categorical, distribution, correlation, ranking, keywords, or combinations)
+        - "source_columns": the column(s) used to answer the question
+        - "visualization": the suggested diagram type (e.g., line chart, pie chart, scatter plot, heat map, keyword chart)
+
+        Examples:
         [
-          {{"question": "How has the number of publications changed over time for each conference?", "category": "temporal", "visualizable": true}},
-          {{"question": "What is the distribution of paper types across different conferences?", "category": "categorical", "visualizable": true}}
-        ]"""
+        {{"question": "How has the number of publications changed over time for each Conference?", "category": "temporal+categorical", "source_columns": ["Year", "Conference"], "visualization": "line chart"}},
+        {{"question": "What is the distribution of PaperType (J, C, M) across Conferences?", "category": "categorical", "source_columns": ["PaperType", "Conference"], "visualization": "pie chart"}},
+        {{"question": "How does the distribution of AminerCitationCount differ across Conferences?", "category": "distribution+categorical", "source_columns": ["AminerCitationCount", "Conference"], "visualization": "box plot"}},
+        {{"question": "Is there a correlation between Downloads_Xplore and AminerCitationCount across Years?", "category": "correlation+temporal", "source_columns": ["Downloads_Xplore", "AminerCitationCount", "Year"], "visualization": "scatter plot"}},
+        {{"question": "Which Authors have contributed the most papers overall?", "category": "ranking", "source_columns": ["Authors"], "visualization": "bar chart"}},
+        {{"question": "How have AuthorKeywords evolved over the Years?", "category": "keywords+temporal", "source_columns": ["AuthorKeywords", "Year"], "visualization": "keyword chart"}},
+        {{"question": "Do Award-winning papers tend to have higher CitationCount_CrossRef compared to non-awarded papers?", "category": "correlation+categorical", "source_columns": ["Award", "CitationCount_CrossRef"], "visualization": "violin plot"}},
+        {{"question": "Which Affiliations have the highest number of publications, and how is this distributed across Conferences?", "category": "ranking+categorical", "source_columns": ["AuthorAffiliation", "Conference"], "visualization": "heat map"}}
+        ]
+        """
 
         response = invoke_llm_with_prompt(
             system_content=system_prompt, prompt_template=user_prompt, replacements={}
@@ -137,6 +164,10 @@ class Researcher:
             if isinstance(questions_data, dict) and "error" in questions_data:
                 raise json.JSONDecodeError(questions_data["error"], "", 0)
 
+            # Ensure we have a list after error check
+            if not isinstance(questions_data, list):
+                raise json.JSONDecodeError("Expected list of questions", "", 0)
+
             breadth_questions = []
 
             for i, q_data in enumerate(questions_data[: self.config.breadth]):
@@ -144,8 +175,9 @@ class Researcher:
                     question=q_data["question"],
                     parent_question=None,
                     level=0,
-                    visualizable=q_data.get("visualizable", True),
+                    visualization=q_data.get("visualization", ""),
                     category=q_data.get("category", f"category_{i}"),
+                    source_columns=q_data.get("source_columns", []),
                 )
                 breadth_questions.append(question)
 
@@ -159,8 +191,9 @@ class Researcher:
                     question=f"What are the key patterns in the data for analysis {i}?",
                     parent_question=None,
                     level=0,
-                    visualizable=True,
+                    visualization="bar chart",  # sane fallback
                     category=f"fallback_{i}",
+                    source_columns=[],
                 )
                 for i in range(self.config.breadth)
             ]
@@ -204,30 +237,85 @@ class Researcher:
         self, parent_question: ResearchQuestion
     ) -> List[ResearchQuestion]:
         """Generate depth questions for a specific parent question"""
-        dataset_summary = json.dumps(self.dataset_profile, indent=2)
+        dataset_profile_json = json.dumps(self.dataset_profile, indent=2)
 
-        system_prompt = """You are an expert data analyst. Given a parent research question about a dataset, 
-        generate follow-up questions that dive deeper into the insights the parent question reveals.
-        
-        The follow-up questions should:
-        1. Build upon insights from the parent question
-        2. Be more specific and focused
-        3. Be highly visualizable
-        4. Explore sub-patterns, correlations, or detailed aspects
-        5. Be answerable with the available data"""
+        system_prompt = """You are an expert data analyst.
+
+        Task: Given a parent research question about a dataset, generate follow-up questions that dive deeper into the SAME insight area.
+
+        Requirements
+        1) Build on the parent question (zoom into segments, sub-patterns, exceptions, or mechanisms).
+        2) Be more specific and focused than the parent.
+        3) Each follow-up MUST include a suggested visualization type in a "visualization" field (e.g., line chart, bar chart, scatter plot, heat map, box plot, violin plot, keyword chart, small multiples).
+        4) Use only columns present in the provided dataset profile (no hallucinated fields).
+        5) Treat suggested visualization types as inspiration, NOT strict instructions; analysts may choose alternatives.
+
+        Good depth patterns to consider (choose appropriately; do not list these—use them to inspire the questions)
+        - Segmentation: break the parent analysis down by another category or time bucket.
+        - Normalization: per-capita, per-group share, percentages, rate-of-change, growth rates (where feasible).
+        - Robustness: compare results across subgroups, check stability over time, use rolling windows.
+        - Ranking & extremes: top-k / bottom-k within the parent slice.
+        - Distribution details: spread, skew, outliers, tails, quantiles.
+        - Relationship checks: conditional correlations, interaction effects across a third variable.
+        - Cohorts & periods: early vs. recent years, pre/post windows.
+        - Data quality: missingness patterns that could bias the parent result (only if relevant columns exist).
+        """
 
         user_prompt = f"""Dataset profile:
-        {dataset_summary}
-        
+        {dataset_profile_json}
+
         Parent question: "{parent_question.question}"
         Category: {parent_question.category}
-        
-        Generate exactly {self.config.depth} follow-up questions that dive deeper into this parent question.
-        
-        Return as JSON array with format:
+
+        Generate exactly {self.config.depth} follow-up questions that deepen this parent question.
+
+        Output JSON ONLY as an array. Each item MUST have:
+        - "question": string (specific, focused, and clearly derived from the parent)
+        - "category": string (refined aspect, e.g., temporal+categorical, distribution, correlation, ranking)
+        - "source_columns": array of strings (column names needed to answer the question)
+        - "visualization": string (e.g., line chart, bar chart, scatter plot, heat map, box plot, violin plot, keyword chart, small multiples)
+
+        Do NOT include any extra keys or prose. No trailing commas. Length MUST equal {self.config.depth}.
+
+        Example 1: If parent is temporal (e.g., "How have downloads changed over Year?")
         [
-          {{"question": "specific follow-up question", "category": "refined_category", "visualizable": true}}
-        ]"""
+        {{"question":"Which Conferences show the fastest Year-over-Year growth in Downloads_Xplore?","category":"temporal+ranking","source_columns":["Downloads_Xplore","Year","Conference"],"visualization":"line chart (small multiples)"}},
+        {{"question":"How do Downloads_Xplore trends differ between PaperType (J/C/M) over Year?","category":"temporal+categorical","source_columns":["Downloads_Xplore","Year","PaperType"],"visualization":"line chart"}},
+        {{"question":"What is the 3-year rolling average of Downloads_Xplore by Conference, and which diverge from the overall trend?","category":"temporal+categorical","source_columns":["Downloads_Xplore","Year","Conference"],"visualization":"line chart"}},
+        {{"question":"In which Years do Downloads_Xplore spikes occur, and are they associated with higher AminerCitationCount in the following Year?","category":"temporal+correlation (lag)","source_columns":["Downloads_Xplore","Year","AminerCitationCount"],"visualization":"scatter plot"}},
+        {{"question":"How does the distribution of Downloads_Xplore shift over time (early vs recent Years) by Conference?","category":"temporal+distribution","source_columns":["Downloads_Xplore","Year","Conference"],"visualization":"box plot"}}
+        ]
+
+        Example 2: If parent is categorical (e.g., "What is the distribution of PaperType across Conferences?")
+        [
+        {{"question":"Within each Conference, which PaperType has the highest median AminerCitationCount?","category":"categorical+distribution","source_columns":["Conference","PaperType","AminerCitationCount"],"visualization":"violin plot"}},
+        {{"question":"How does the share of PaperType (J/C/M) evolve across Year for each Conference?","category":"temporal+categorical","source_columns":["PaperType","Year","Conference"],"visualization":"stacked area chart"}},
+        {{"question":"Which Conferences have the largest gap between mean and median Downloads_Xplore within each PaperType?","category":"categorical+distribution","source_columns":["Conference","PaperType","Downloads_Xplore"],"visualization":"box plot"}},
+        {{"question":"Are Awards (where present) concentrated in specific PaperType × Conference combinations?","category":"categorical","source_columns":["Award","PaperType","Conference"],"visualization":"heat map"}},
+        {{"question":"What are the top 10 AuthorAffiliation entries by total papers within each Conference?","category":"ranking+categorical","source_columns":["AuthorAffiliation","Conference"],"visualization":"bar chart (small multiples)"}}
+        ]
+
+        Example 3: If parent is correlation (e.g., "Is there a relationship between Downloads_Xplore and AminerCitationCount?")
+        [
+        {{"question":"Does the Downloads_Xplore ↔ AminerCitationCount relationship differ by PaperType (J/C/M)?","category":"correlation+categorical","source_columns":["Downloads_Xplore","AminerCitationCount","PaperType"],"visualization":"scatter plot (faceted)"}},
+        {{"question":"Is the correlation stronger in recent Years compared to earlier Years?","category":"temporal+correlation","source_columns":["Downloads_Xplore","AminerCitationCount","Year"],"visualization":"heat map (Year × correlation)"}},
+        {{"question":"Do longer papers (LastPage - FirstPage) show a different Downloads_Xplore ↔ CitationCount_CrossRef pattern?","category":"correlation+distribution","source_columns":["LastPage","FirstPage","Downloads_Xplore","CitationCount_CrossRef"],"visualization":"bubble chart"}},
+        {{"question":"Which Conferences have the steepest best-fit slope between Downloads_Xplore and AminerCitationCount?","category":"correlation+ranking","source_columns":["Downloads_Xplore","AminerCitationCount","Conference"],"visualization":"scatter plot (small multiples)"}},
+        {{"question":"Among Awarded papers (where Award present), is the correlation between Downloads_Xplore and CitationCount_CrossRef different from non-awarded?","category":"correlation+categorical","source_columns":["Award","Downloads_Xplore","CitationCount_CrossRef"],"visualization":"scatter plot"}}
+        ]
+
+        Before printing, silently verify:
+        - Output is valid JSON array of length exactly {self.config.depth}.
+        - Each item has keys: question, category, source_columns, visualization.
+        - No extra keys; no prose; no trailing commas.
+
+        Then print ONLY the JSON array.
+
+        Return the response as a JSON array of objects with the following keys:
+        - "question": the research question
+        - "category": the category/aspect it explores (temporal, categorical, distribution, correlation, ranking, keywords, or combinations)
+        - "visualization": the suggested diagram type (e.g., line chart, pie chart, scatter plot, heat map, keyword chart)
+        """
 
         response = invoke_llm_with_prompt(
             system_content=system_prompt, prompt_template=user_prompt, replacements={}
@@ -242,6 +330,10 @@ class Researcher:
             if isinstance(questions_data, dict) and "error" in questions_data:
                 raise json.JSONDecodeError(questions_data["error"], "", 0)
 
+            # Ensure we have a list after error check
+            if not isinstance(questions_data, list):
+                raise json.JSONDecodeError("Expected list of questions", "", 0)
+
             depth_questions = []
 
             for level in range(1, self.config.depth + 1):
@@ -251,8 +343,9 @@ class Researcher:
                         question=q_data["question"],
                         parent_question=parent_question.question,
                         level=level,
-                        visualizable=q_data.get("visualizable", True),
+                        visualization=q_data.get("visualization", ""),
                         category=q_data.get("category", parent_question.category),
+                        source_columns=q_data.get("source_columns", []),
                     )
                     depth_questions.append(question)
 
@@ -268,8 +361,9 @@ class Researcher:
                     question=f"What specific patterns emerge when analyzing {parent_question.category} in detail (level {i})?",
                     parent_question=parent_question.question,
                     level=i,
-                    visualizable=True,
+                    visualization="bar chart",  # sane fallback
                     category=parent_question.category,
+                    source_columns=[],
                 )
                 for i in range(1, self.config.depth + 1)
             ]
