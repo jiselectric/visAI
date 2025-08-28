@@ -31,7 +31,9 @@ def invoke_llm_with_prompt(
     return getattr(response, "content", str(response))
 
 
-def extract_json_from_response(response_content: str) -> Union[Dict[str, Any], List[Any]]:
+def extract_json_from_response(
+    response_content: str,
+) -> Union[Dict[str, Any], List[Any]]:
     """Extract and parse JSON from LLM response with error handling."""
     try:
         # Try to find JSON in markdown code blocks first

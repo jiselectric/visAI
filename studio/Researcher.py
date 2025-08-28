@@ -30,12 +30,12 @@ class ResearchQuestion:
 @dataclass
 class ResearchResult:
     question: str
-    computed_data: Any
-    explanation: str
-    visualization_code: str
-    title: str
-    steps: List[str]
+    computed_data: Any = None
+    explanation: str = ""
+    visualization_code: str = ""
+    title: str = ""
     category: str = ""
+    source_columns: List[str] = field(default_factory=list)
 
 
 class Researcher:
@@ -375,14 +375,6 @@ class Researcher:
         """
         print("Step 2: Conducting Research for All Questions")
 
-        # Check cache first
-        if self.config.use_caching:
-            cached_results = load_cached_json("research_results.json")
-            if cached_results:
-                print("Using cached research results")
-                self.research_results = [ResearchResult(**r) for r in cached_results]
-                return self.research_results
-
         # Conduct research in parallel
         with concurrent.futures.ThreadPoolExecutor(
             max_workers=self.config.max_workers
@@ -417,12 +409,11 @@ class Researcher:
                     "explanation": r.explanation,
                     "visualization_code": r.visualization_code,
                     "title": r.title,
-                    "steps": r.steps,
                     "category": r.category,
                 }
                 for r in self.research_results
             ]
-            save_json_data(results_dict, "research_results.json")
+            save_json_data(results_dict, "research_results.json")  # type: ignore
 
         print(f"Completed research for {len(self.research_results)} questions")
         return self.research_results
@@ -430,27 +421,28 @@ class Researcher:
     def _conduct_research_for_question(
         self, question: ResearchQuestion
     ) -> Optional[ResearchResult]:
-        """Conduct research for a single question with detailed steps"""
+        """Conduct research for a single question with simplified steps"""
         try:
-            # Step 2a: Establish research steps (max 10)
-            steps = self._establish_research_steps(question)
+            # Step 1: Generate pandas code
+            pandas_code = self._generate_pandas_code(question)
+            if not pandas_code:
+                print(f"Failed to generate pandas code for: {question.question}")
+                return None
 
-            # Step 2b: Compute data using pandas
-            computed_data = self._compute_data_for_question(question, steps)
+            # Step 2: Execute pandas code to get computed data
+            computed_data = self._execute_pandas_query_for_computation(pandas_code)
 
-            if not computed_data or len(computed_data) > 1000:
+            if not computed_data or (
+                isinstance(computed_data, list) and len(computed_data) > 10000
+            ):
                 print(
                     f"Skipping question - data too large or empty: {question.question}"
                 )
                 return None
 
-            # Step 2c: Generate Python visualization code
+            # Generate visualization code, explanation, and title (keeping existing methods)
             viz_code = self._generate_visualization_code(question, computed_data)
-
-            # Step 2d: Generate explanation (2-3 paragraphs)
             explanation = self._generate_explanation(question, computed_data, viz_code)
-
-            # Step 2e: Generate precise title
             title = self._generate_title(question, computed_data)
 
             return ResearchResult(
@@ -459,25 +451,200 @@ class Researcher:
                 explanation=explanation,
                 visualization_code=viz_code,
                 title=title,
-                steps=steps,
                 category=question.category,
+                source_columns=question.source_columns,
             )
 
         except Exception as e:
             print(f"Error conducting research for question '{question.question}': {e}")
             return None
 
+    def _generate_pandas_code(self, question: ResearchQuestion) -> str:
+        """Generate pandas code to compute data for the research question"""
+        print(f"Generating pandas code for question: {question.question}")
+
+        # Get sample data for source columns
+        from utils.data_utils import sample_data
+
+        sample_data_dict = sample_data(question.source_columns, sample_size=5)
+        # Convert to safe string format to avoid f-string conflicts
+        sample_data_result = "\n".join(
+            [f"{col}: {values}" for col, values in sample_data_dict.items()]
+        )
+
+        system_prompt = """You are a highly skilled data analyst with expertise in pandas. You are given a research question, target visualization type, visualization category, the source columns and 5 sample data points for each source column. Your task is to generate an executable pandas query to accurately compute the data needed to answer the research question.
+
+        CRITICAL REQUIREMENTS:
+        1. Return ONLY the pandas code - no explanations, no markdown delimiters, no extra text
+        2. The code must use ONLY the provided source columns - do not access or create arbitrary columns
+        3. The code must be executable Python pandas code
+        4. Use 'df' as the DataFrame variable name
+        5. The final result should be stored in a variable that can be converted to records format
+        6. Handle missing/null values appropriately"""
+
+        user_prompt = """Research Question: "{question}"
+        Parent Question Context: {parent_question}
+        Visualization Type: {visualization}
+        Category: {category}
+        Source Columns: {source_columns}
+
+        Sample Data for Source Columns:
+        {sample_data_result}
+
+        Examples:
+
+        Example 1:
+        Question: "How has the number of publications changed over time for each Conference?"
+        Source Columns: ["Year", "Conference"]
+        Code:
+        result = df.groupby(['Year', 'Conference']).size().reset_index(name='publication_count')
+
+        Example 2: 
+        Question: "What is the distribution of PaperType across Conferences?"
+        Source Columns: ["PaperType", "Conference"]
+        Code:
+        result = df.groupby(['Conference', 'PaperType']).size().reset_index(name='count')
+
+        Example 3:
+        Question: "Is there a correlation between Downloads_Xplore and AminerCitationCount?"
+        Source Columns: ["Downloads_Xplore", "AminerCitationCount"]
+        Code:
+        result = df[['Downloads_Xplore', 'AminerCitationCount']].dropna()
+
+        Example 4:
+        Question: "Which Authors have contributed the most papers overall?"
+        Source Columns: ["Authors"]
+        Code:
+        author_counts = df['Authors'].str.split(';').explode().str.strip().value_counts().head(20)
+        result = author_counts.reset_index()
+        result.columns = ['Author', 'paper_count']
+
+        Example 5:
+        Question: "How does the distribution of AminerCitationCount differ across Conferences?"
+        Source Columns: ["AminerCitationCount", "Conference"]
+        Code:
+        result = df[['Conference', 'AminerCitationCount']].dropna()
+
+        Example 6:
+        Question: "What is the year-over-year growth rate of publications for each Conference?"
+        Source Columns: ["Year", "Conference"]
+        Code:
+        yearly_counts = df.groupby(['Conference', 'Year']).size().reset_index(name='count')
+        yearly_counts = yearly_counts.sort_values(['Conference', 'Year'])
+        yearly_counts['growth_rate'] = yearly_counts.groupby('Conference')['count'].pct_change() * 100
+        result = yearly_counts.dropna()
+
+        Example 7:
+        Question: "Which Conferences have the highest average citations per paper across different paper types?"
+        Source Columns: ["Conference", "PaperType", "AminerCitationCount"]
+        Code:
+        avg_citations = df.groupby(['Conference', 'PaperType'])['AminerCitationCount'].agg(['mean', 'count']).reset_index()
+        avg_citations.columns = ['Conference', 'PaperType', 'avg_citations', 'paper_count']
+        result = avg_citations[avg_citations['paper_count'] >= 5].sort_values('avg_citations', ascending=False)
+
+        Example 8:
+        Question: "How do download patterns correlate with citation counts for papers published in different time periods?"
+        Source Columns: ["Year", "Downloads_Xplore", "AminerCitationCount"]
+        Code:
+        df_clean = df[['Year', 'Downloads_Xplore', 'AminerCitationCount']].dropna()
+        df_clean['period'] = pd.cut(df_clean['Year'], bins=[2005, 2010, 2015, 2020, 2025], labels=['2006-2010', '2011-2015', '2016-2020', '2021+'])
+        result = df_clean.groupby('period').agg({
+            'Downloads_Xplore': ['mean', 'std'],
+            'AminerCitationCount': ['mean', 'std']
+        }).round(2).reset_index()
+        result.columns = ['period', 'avg_downloads', 'std_downloads', 'avg_citations', 'std_citations']
+
+        Example 9:
+        Question: "What is the distribution of paper lengths and how does it vary by Conference and PaperType?"
+        Source Columns: ["FirstPage", "LastPage", "Conference", "PaperType"]
+        Code:
+        df_pages = df[['FirstPage', 'LastPage', 'Conference', 'PaperType']].dropna()
+        df_pages['page_length'] = df_pages['LastPage'] - df_pages['FirstPage'] + 1
+        df_pages = df_pages[df_pages['page_length'] > 0]  # Filter valid page lengths
+        result = df_pages.groupby(['Conference', 'PaperType'])['page_length'].agg(['mean', 'median', 'std', 'count']).round(2).reset_index()
+        result.columns = ['Conference', 'PaperType', 'avg_pages', 'median_pages', 'std_pages', 'paper_count']
+
+        Generate pandas code that computes the data needed to answer this research question. The code should:
+        - Use only the specified source columns
+        - Handle data cleaning/filtering as needed
+        - Compute aggregations, groupings, or transformations as required
+        - Return data suitable for the specified visualization type
+        - Store the final result in a variable named 'result'
+
+        Return ONLY the executable pandas code."""
+
+        pandas_code = invoke_llm_with_prompt(
+            system_content=system_prompt,
+            prompt_template=user_prompt,
+            replacements={
+                "{question}": question.question,
+                "{parent_question}": question.parent_question
+                or "None - this is the parent question",
+                "{visualization}": question.visualization,
+                "{category}": question.category,
+                "{source_columns}": str(question.source_columns),
+                "{sample_data_result}": sample_data_result,
+            },
+        )
+
+        # Clean the pandas code
+        pandas_code = self._clean_markdown_output(pandas_code)
+
+        return pandas_code
+
+    def _clean_markdown_output(self, output: str) -> str:
+        """Clean markdown formatting from LLM output"""
+        output = output.strip()
+        if output.startswith("```python"):
+            output = output.split("```python")[1].split("```")[0].strip()
+        elif output.startswith("```"):
+            output = output.split("```")[1].split("```")[0].strip()
+        return output
+
+    def _execute_pandas_query_for_computation(self, pandas_code: str) -> Any:
+        """Execute pandas query and return computed result"""
+        try:
+            import pandas as pd
+
+            df = pd.read_csv("./dataset.csv")
+
+            # Create execution environment
+            local_vars = {"df": df, "pd": pd}
+
+            # Execute the pandas code
+            exec(pandas_code, {"pd": pd}, local_vars)
+
+            # Get the result (should be stored in 'result' variable)
+            if "result" in local_vars:
+                result = local_vars["result"]
+                # Convert to records format if it's a DataFrame
+                if hasattr(result, "to_dict"):
+                    return result.to_dict("records")
+                return result
+            else:
+                print("Warning: No 'result' variable found in pandas code execution")
+                return None
+
+        except Exception as e:
+            print(f"Error executing pandas code: {e}")
+            return None
+
     def _establish_research_steps(self, question: ResearchQuestion) -> List[str]:
         """Establish well-designed steps to effectively answer the research question"""
-        dataset_profile_str = json.dumps(self.dataset_profile, indent=2)
+        filtered_dataset_profile = {
+            k: v
+            for k, v in self.dataset_profile.items()
+            if k in question.source_columns
+        }
+        filtered_dataset_profile_json = json.dumps(filtered_dataset_profile, indent=2)
 
         system_prompt = """You are a methodical data analyst. Given a research question and dataset profile,
         create a step-by-step plan (maximum 10 steps) to effectively answer the question using data analysis.
         
-        You can derive new columns from existing ones (e.g., PageCount = LastPage - FirstPage).
+        You can derive new columns from existing ones (e.g., PageCount = LastPage - FirstPage, TotalCitations = CitationCount_CrossRef + AminerCitationCount).
         Focus on the analytical approach and what computations are needed."""
 
-        user_prompt = f"""Dataset profile: {dataset_profile_str}
+        user_prompt = f"""Dataset profile: {filtered_dataset_profile_json}
         
         Research question: "{question.question}"
         Parent question context: {question.parent_question or "None"}
@@ -581,36 +748,120 @@ class Researcher:
     def _generate_visualization_code(
         self, question: ResearchQuestion, computed_data: Any
     ) -> str:
-        """Generate Python visualization code for the computed data"""
-        data_sample = json.dumps(
-            computed_data[:5] if isinstance(computed_data, list) else computed_data,
-            indent=2,
-        )
+        """Generate Python matplotlib/seaborn code for the computed data"""
+        # Use entire computed data, not just a sample
+        full_data = json.dumps(computed_data, indent=2)
 
-        system_prompt = """You are a data visualization expert. Generate Python code using matplotlib/seaborn 
-        to create an effective visualization for the given data and research question."""
+        system_prompt = """You are a data visualization expert specializing in Python matplotlib and seaborn. You are given a research question, suggested visualization type, category, and computed data. Your task is to generate executable Python code that creates an effective visualization.
 
-        user_prompt = f"""Research question: "{question.question}"
-        
-        Sample computed data: {data_sample}
-        
-        Generate Python visualization code that:
-        1. Uses matplotlib/seaborn
-        2. Creates an appropriate chart type for the question
-        3. Includes proper labels, title, and formatting
-        4. Is complete and executable
-        
-        Return ONLY the Python code without markdown formatting."""
+        CRITICAL REQUIREMENTS:
+        1. Return ONLY executable Python code - no explanations, no markdown delimiters, no extra text
+        2. Use matplotlib and seaborn for visualizations
+        3. The data is already loaded in a variable called 'data' as a list of dictionaries
+        4. Convert the data to a pandas DataFrame using pd.DataFrame(data)
+        5. Save the plot using plt.savefig(chart_path, dpi=150, bbox_inches='tight')
+        6. Include proper titles, axis labels, and legends
+        7. Handle data cleaning and type conversion as needed
+        8. Choose the most appropriate visualization type based on the data structure and research question"""
+
+        user_prompt = """Research Question: "{question}"
+        Suggested Visualization: {visualization}
+        Category: {category}
+
+        Computed Data: {full_data}
+
+        Examples:
+
+        Example 1 - Line Chart (Temporal + Categorical):
+        df = pd.DataFrame(data)
+        plt.figure(figsize=(12, 8))
+        sns.lineplot(data=df, x='Year', y='publication_count', hue='Conference', marker='o')
+        plt.title('Publications Over Time by Conference')
+        plt.xlabel('Year')
+        plt.ylabel('Number of Publications')
+        plt.legend(title='Conference')
+        plt.tight_layout()
+
+        Example 2 - Bar Chart (Categorical):
+        df = pd.DataFrame(data)
+        plt.figure(figsize=(12, 8))
+        sns.barplot(data=df, x='Conference', y='count', hue='PaperType')
+        plt.title('Distribution of Paper Types by Conference')
+        plt.xlabel('Conference')
+        plt.ylabel('Count')
+        plt.legend(title='Paper Type')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+
+        Example 3 - Scatter Plot (Correlation):
+        df = pd.DataFrame(data)
+        plt.figure(figsize=(10, 8))
+        sns.scatterplot(data=df, x='Downloads_Xplore', y='AminerCitationCount', alpha=0.7, s=60)
+        plt.title('Downloads vs Citations Correlation')
+        plt.xlabel('Downloads')
+        plt.ylabel('Citations')
+        plt.tight_layout()
+
+        Example 4 - Horizontal Bar Chart (Ranking):
+        df = pd.DataFrame(data)
+        df = df.sort_values('paper_count', ascending=True)
+        plt.figure(figsize=(10, 8))
+        sns.barplot(data=df, y='Author', x='paper_count', orient='h')
+        plt.title('Top Authors by Publication Count')
+        plt.xlabel('Publication Count')
+        plt.ylabel('Author')
+        plt.tight_layout()
+
+        Example 5 - Box Plot (Distribution):
+        df = pd.DataFrame(data)
+        plt.figure(figsize=(10, 8))
+        sns.boxplot(data=df, x='Conference', y='AminerCitationCount')
+        plt.title('Citation Distribution by Conference')
+        plt.xlabel('Conference')
+        plt.ylabel('Citation Count')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+
+        Example 6 - Histogram (Distribution):
+        df = pd.DataFrame(data)
+        plt.figure(figsize=(10, 6))
+        sns.histplot(data=df, x='AminerCitationCount', bins=20, kde=True)
+        plt.title('Distribution of Citation Counts')
+        plt.xlabel('Citation Count')
+        plt.ylabel('Frequency')
+        plt.tight_layout()
+
+        Example 7 - Heatmap (Correlation Matrix):
+        df = pd.DataFrame(data)
+        pivot_df = df.pivot_table(values='avg_citations', index='Conference', columns='PaperType', fill_value=0)
+        plt.figure(figsize=(10, 8))
+        sns.heatmap(pivot_df, annot=True, cmap='viridis', fmt='.1f')
+        plt.title('Average Citations by Conference and Paper Type')
+        plt.tight_layout()
+
+        Based on the research question, data structure, and suggested visualization type, generate the most appropriate Python matplotlib/seaborn code. The code should:
+        - Convert the data list to a pandas DataFrame
+        - Choose the most suitable chart type for the data and question
+        - Include proper titles, axis labels, and legends
+        - Handle data cleaning and formatting as needed
+        - Use appropriate figure sizes and styling
+        - Save the plot to chart_path with high quality
+
+        Return ONLY the executable Python code."""
 
         viz_code = invoke_llm_with_prompt(
-            system_content=system_prompt, prompt_template=user_prompt, replacements={}
+            system_content=system_prompt, 
+            prompt_template=user_prompt, 
+            replacements={
+                "{question}": question.question,
+                "{visualization}": question.visualization,
+                "{category}": question.category,
+                "{full_data}": full_data,
+            }
         )
 
-        # Clean the code
-        if viz_code.startswith("```python"):
-            viz_code = viz_code.split("```python")[1].split("```")[0].strip()
-        elif viz_code.startswith("```"):
-            viz_code = viz_code.split("```")[1].split("```")[0].strip()
+        # Clean the code to remove markdown formatting
+        viz_code = self._clean_markdown_output(viz_code)
 
         return viz_code
 
@@ -794,7 +1045,6 @@ class Researcher:
                         "visualization_code": r.visualization_code,
                         "computed_data": r.computed_data,
                         "category": r.category,
-                        "steps": r.steps,
                     }
                     for r in category_results
                 ]

@@ -83,8 +83,8 @@ def step2_conduct_research(state: State):
             "explanation": r.explanation,
             "visualization_code": r.visualization_code,
             "title": r.title,
-            "steps": r.steps,
             "category": r.category,
+            "source_columns": r.source_columns,
         }
         for r in results
     ]
@@ -231,17 +231,11 @@ class Agent:
             "    .result-item { margin: 2em 0; padding: 2em; border: 1px solid #dee2e6; border-radius: 8px; background: white; }",
             "    .chart-container { text-align: center; margin: 2em 0; padding: 1em; background: white; border-radius: 8px; }",
             "    .chart-container img { max-width: 100%; height: auto; border: 1px solid #dee2e6; border-radius: 4px; }",
+            "    .chart-container div[id^='vis_'] { margin: 0 auto; display: inline-block; }",
             "    .explanation { margin: 1.5em 0; padding: 1em; background-color: #f1f3f4; border-radius: 6px; }",
-            "    .steps { background-color: #e8f4f8; padding: 1em; border-radius: 6px; margin: 1em 0; }",
-            "    .steps ol { margin: 0; padding-left: 1.5em; }",
             "    .category-badge { display: inline-block; background: #3498db; color: white; padding: 0.3em 0.8em; border-radius: 15px; font-size: 0.8em; margin-bottom: 1em; }",
-            "    .question { font-style: italic; color: #555; background: #f8f9fa; padding: 1em; border-left: 3px solid #3498db; margin: 1em 0; }",
             "    strong { color: #2c3e50; }",
             "    code { background-color: #f1f3f4; padding: 2px 6px; border-radius: 3px; font-family: 'Courier New', monospace; }",
-            "    .summary-stats { display: flex; justify-content: space-around; background: #e8f4f8; padding: 1.5em; border-radius: 8px; margin: 2em 0; }",
-            "    .stat-item { text-align: center; }",
-            "    .stat-number { font-size: 2em; font-weight: bold; color: #3498db; }",
-            "    .stat-label { color: #666; font-size: 0.9em; }",
             "    .error-chart { padding: 2em; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; color: #721c24; text-align: center; }",
             "  </style>",
             "</head>",
@@ -252,35 +246,6 @@ class Agent:
         # Title
         title = final_arrangement.get("title", "Data Analysis Report")
         html_lines.append(f"    <h1>{title}</h1>")
-
-        # Summary statistics
-        total_questions = metadata.get("total_questions", 0)
-        total_results = metadata.get("total_results", 0)
-        dataset_rows = metadata.get("dataset_rows", 0)
-        dataset_columns = metadata.get("dataset_columns", 0)
-
-        html_lines.extend(
-            [
-                "    <div class='summary-stats'>",
-                "      <div class='stat-item'>",
-                f"        <div class='stat-number'>{total_questions}</div>",
-                "        <div class='stat-label'>Research Questions</div>",
-                "      </div>",
-                "      <div class='stat-item'>",
-                f"        <div class='stat-number'>{total_results}</div>",
-                "        <div class='stat-label'>Analyses Completed</div>",
-                "      </div>",
-                "      <div class='stat-item'>",
-                f"        <div class='stat-number'>{dataset_rows:,}</div>",
-                "        <div class='stat-label'>Data Points</div>",
-                "      </div>",
-                "      <div class='stat-item'>",
-                f"        <div class='stat-number'>{dataset_columns}</div>",
-                "        <div class='stat-label'>Data Columns</div>",
-                "      </div>",
-                "    </div>",
-            ]
-        )
 
         # Introduction
         introduction = final_arrangement.get("introduction", "")
@@ -317,7 +282,6 @@ class Agent:
                         "      <div class='result-item'>",
                         f"        <div class='category-badge'>{result.get('category', 'Analysis')}</div>",
                         f"        <h3>{result.get('title', 'Research Finding')}</h3>",
-                        f"        <div class='question'>Research Question: {result.get('question', '')}</div>",
                     ]
                 )
 
@@ -341,24 +305,7 @@ class Agent:
                         ]
                     )
 
-                # Add research steps
-                steps = result.get("steps", [])
-                if steps:
-                    html_lines.extend(
-                        [
-                            "        <div class='steps'>",
-                            "          <strong>Research Methodology:</strong>",
-                            "          <ol>",
-                        ]
-                    )
-                    for step in steps:
-                        html_lines.append(f"            <li>{step}</li>")
-                    html_lines.extend(
-                        [
-                            "          </ol>",
-                            "        </div>",
-                        ]
-                    )
+                # Research steps section removed
 
                 html_lines.append("      </div>")
 
@@ -389,12 +336,12 @@ class Agent:
     def generate_chart_html(
         self, viz_code: str, computed_data: Any, chart_id: str
     ) -> str:
-        """Execute Python visualization code and return HTML img tag with base64 data"""
+        """Generate HTML for visualization - handles Python matplotlib/seaborn code"""
         if not viz_code:
             return '<div class="error-chart">No visualization code available</div>'
 
         try:
-            # Set up the execution environment
+            # Handle as Python matplotlib/seaborn code
             import numpy as np
             import pandas as pd
 
@@ -419,6 +366,7 @@ class Agent:
                 "plt": plt,
                 "sns": sns,
                 "matplotlib": matplotlib,
+                "chart_path": None,  # We'll handle saving directly via buffer
             }
 
             # Execute the visualization code

@@ -1,114 +1,188 @@
 [
   {
-    "question": "How has the number of publications changed over time for each conference?",
+    "question": "How has the number of publications changed over time for each Conference?",
     "parent_question": null,
     "level": 0,
-    "visualizable": true,
-    "category": "temporal"
+    "visualization": "line chart",
+    "category": "temporal+categorical",
+    "source_columns": [
+      "Year",
+      "Conference"
+    ]
   },
   {
-    "question": "What is the distribution of paper types across different conferences?",
+    "question": "What is the distribution of PaperType (J, C, M) across Conferences?",
     "parent_question": null,
     "level": 0,
-    "visualizable": true,
-    "category": "categorical"
+    "visualization": "pie chart",
+    "category": "categorical",
+    "source_columns": [
+      "PaperType",
+      "Conference"
+    ]
   },
   {
-    "question": "Is there a correlation between the number of downloads and citation counts for papers?",
+    "question": "How does the distribution of AminerCitationCount differ across Conferences?",
     "parent_question": null,
     "level": 0,
-    "visualizable": true,
-    "category": "correlation"
+    "visualization": "box plot",
+    "category": "distribution+categorical",
+    "source_columns": [
+      "AminerCitationCount",
+      "Conference"
+    ]
   },
   {
-    "question": "What are the top 10 most cited papers and their respective conferences?",
+    "question": "Is there a correlation between Downloads_Xplore and AminerCitationCount across Years?",
     "parent_question": null,
     "level": 0,
-    "visualizable": true,
-    "category": "distribution"
+    "visualization": "scatter plot",
+    "category": "correlation+temporal",
+    "source_columns": [
+      "Downloads_Xplore",
+      "AminerCitationCount",
+      "Year"
+    ]
   },
   {
-    "question": "What are the trends in the number of publications for each conference over the last decade, and how do they compare to each other?",
-    "parent_question": "How has the number of publications changed over time for each conference?",
+    "question": "How does the distribution of PaperType (J/C/M) vary within each Conference over different Years?",
+    "parent_question": "What is the distribution of PaperType (J, C, M) across Conferences?",
     "level": 1,
-    "visualizable": true,
-    "category": "temporal_comparison"
+    "visualization": "stacked bar chart",
+    "category": "temporal+categorical",
+    "source_columns": [
+      "PaperType",
+      "Conference",
+      "Year"
+    ]
   },
   {
-    "question": "How do the publication counts for each conference correlate with the number of distinct authors over time?",
-    "parent_question": "How has the number of publications changed over time for each conference?",
+    "question": "Which Conference has the highest proportion of PaperType 'J' compared to 'C' and 'M'?",
+    "parent_question": "What is the distribution of PaperType (J, C, M) across Conferences?",
     "level": 2,
-    "visualizable": true,
-    "category": "correlation_analysis"
+    "visualization": "pie chart (small multiples)",
+    "category": "categorical+distribution",
+    "source_columns": [
+      "PaperType",
+      "Conference"
+    ]
   },
   {
-    "question": "What is the distribution of paper types (J, C, M) over time for each conference, and how has it evolved?",
-    "parent_question": "How has the number of publications changed over time for each conference?",
+    "question": "What is the trend in the number of papers for each PaperType (J/C/M) across Conferences over the last decade?",
+    "parent_question": "What is the distribution of PaperType (J, C, M) across Conferences?",
     "level": 3,
-    "visualizable": true,
-    "category": "categorical_temporal_distribution"
+    "visualization": "line chart",
+    "category": "temporal+categorical",
+    "source_columns": [
+      "PaperType",
+      "Conference",
+      "Year"
+    ]
   },
   {
-    "question": "How has the distribution of paper types (J, C, M) within each conference (Vis, InfoVis, VAST, SciVis) changed over the years?",
-    "parent_question": "What is the distribution of paper types across different conferences?",
+    "question": "What is the trend in the number of publications for each Conference over the last decade?",
+    "parent_question": "How has the number of publications changed over time for each Conference?",
     "level": 1,
-    "visualizable": true,
-    "category": "temporal"
+    "visualization": "line chart (small multiples)",
+    "category": "temporal+categorical",
+    "source_columns": [
+      "Year",
+      "Conference"
+    ]
   },
   {
-    "question": "What is the average citation count for each paper type (J, C, M) within each conference?",
-    "parent_question": "What is the distribution of paper types across different conferences?",
+    "question": "How does the distribution of publications across Conferences vary by Year?",
+    "parent_question": "How has the number of publications changed over time for each Conference?",
     "level": 2,
-    "visualizable": true,
-    "category": "numerical"
+    "visualization": "stacked bar chart",
+    "category": "temporal+distribution",
+    "source_columns": [
+      "Year",
+      "Conference"
+    ]
   },
   {
-    "question": "What is the relationship between paper types and the number of awards received across different conferences?",
-    "parent_question": "What is the distribution of paper types across different conferences?",
+    "question": "Which Conference experienced the highest growth rate in publications over the past five years?",
+    "parent_question": "How has the number of publications changed over time for each Conference?",
     "level": 3,
-    "visualizable": true,
-    "category": "correlation"
+    "visualization": "line chart",
+    "category": "temporal+ranking",
+    "source_columns": [
+      "Year",
+      "Conference"
+    ]
   },
   {
-    "question": "How does the citation count of the top 10 most cited papers vary across different years?",
-    "parent_question": "What are the top 10 most cited papers and their respective conferences?",
+    "question": "How does the distribution of AminerCitationCount vary by PaperType within each Conference?",
+    "parent_question": "How does the distribution of AminerCitationCount differ across Conferences?",
     "level": 1,
-    "visualizable": true,
-    "category": "temporal distribution"
+    "visualization": "violin plot",
+    "category": "distribution+categorical",
+    "source_columns": [
+      "AminerCitationCount",
+      "Conference",
+      "PaperType"
+    ]
   },
   {
-    "question": "What is the distribution of paper types (J, C, M) among the top 10 most cited papers across different conferences?",
-    "parent_question": "What are the top 10 most cited papers and their respective conferences?",
+    "question": "What are the top 5 Conferences with the highest average AminerCitationCount, and how do they compare in terms of distribution spread?",
+    "parent_question": "How does the distribution of AminerCitationCount differ across Conferences?",
     "level": 2,
-    "visualizable": true,
-    "category": "categorical distribution"
+    "visualization": "box plot",
+    "category": "ranking+distribution",
+    "source_columns": [
+      "AminerCitationCount",
+      "Conference"
+    ]
   },
   {
-    "question": "What is the correlation between the number of downloads and citation counts for the top 10 most cited papers?",
-    "parent_question": "What are the top 10 most cited papers and their respective conferences?",
+    "question": "Are there any significant outliers in AminerCitationCount within each Conference, and how do they differ by Year?",
+    "parent_question": "How does the distribution of AminerCitationCount differ across Conferences?",
     "level": 3,
-    "visualizable": true,
-    "category": "correlation analysis"
+    "visualization": "scatter plot",
+    "category": "distribution+temporal",
+    "source_columns": [
+      "AminerCitationCount",
+      "Conference",
+      "Year"
+    ]
   },
   {
-    "question": "How does the correlation between downloads and citation counts vary across different conferences (Vis, InfoVis, VAST, SciVis)?",
-    "parent_question": "Is there a correlation between the number of downloads and citation counts for papers?",
+    "question": "How does the correlation between Downloads_Xplore and AminerCitationCount vary across different Conferences over the Years?",
+    "parent_question": "Is there a correlation between Downloads_Xplore and AminerCitationCount across Years?",
     "level": 1,
-    "visualizable": true,
-    "category": "conference_correlation"
+    "visualization": "scatter plot (faceted by Conference)",
+    "category": "temporal+correlation+categorical",
+    "source_columns": [
+      "Downloads_Xplore",
+      "AminerCitationCount",
+      "Year",
+      "Conference"
+    ]
   },
   {
-    "question": "Is there a trend in the correlation between downloads and citation counts over the years, and how does it change over time?",
-    "parent_question": "Is there a correlation between the number of downloads and citation counts for papers?",
+    "question": "Is there a significant change in the correlation between Downloads_Xplore and AminerCitationCount before and after 2010?",
+    "parent_question": "Is there a correlation between Downloads_Xplore and AminerCitationCount across Years?",
     "level": 2,
-    "visualizable": true,
-    "category": "temporal_correlation"
+    "visualization": "line chart (correlation over time)",
+    "category": "temporal+correlation",
+    "source_columns": [
+      "Downloads_Xplore",
+      "AminerCitationCount",
+      "Year"
+    ]
   },
   {
-    "question": "Does the correlation between downloads and citation counts differ based on the paper type (J, C, M)?",
-    "parent_question": "Is there a correlation between the number of downloads and citation counts for papers?",
+    "question": "Do papers with higher AminerCitationCount in recent Years also show higher Downloads_Xplore, and how does this trend differ by PaperType?",
+    "parent_question": "Is there a correlation between Downloads_Xplore and AminerCitationCount across Years?",
     "level": 3,
-    "visualizable": true,
-    "category": "paper_type_correlation"
+    "visualization": "line chart (small multiples by PaperType)",
+    "category": "temporal+correlation+categorical",
+    "source_columns": [
+      "Downloads_Xplore",
+      "AminerCitationCount",
+      "Year",
+      "PaperType"
+    ]
   }
 ]
