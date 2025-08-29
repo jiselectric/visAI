@@ -129,10 +129,10 @@ def execute_pandas_query_for_computation(
 
     # Create unique chart filename
     timestamp = str(int(time.time() * 1000))
-    chart_path = f"charts/chart_{timestamp}.png"
+    chart_path = f"visualizations/chart_{timestamp}.png"
 
-    # Ensure charts directory exists
-    os.makedirs("charts", exist_ok=True)
+    # Ensure visualizations directory exists
+    os.makedirs("visualizations", exist_ok=True)
 
     # Create a local namespace with df and visualization libraries available
     local_namespace = {
@@ -160,7 +160,7 @@ def execute_pandas_query_for_computation(
                     chart_generated = True
                 else:
                     # Save additional figures with different names
-                    additional_path = f"charts/chart_{timestamp}_{i}.png"
+                    additional_path = f"visualizations/chart_{timestamp}_{i}.png"
                     fig.savefig(additional_path, dpi=150, bbox_inches="tight")
                 plt.close(fig)
 

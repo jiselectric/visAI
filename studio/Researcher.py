@@ -7,6 +7,7 @@ from typing import Any, Dict, List, Optional, Tuple
 import pandas as pd
 from utils.file_operation import load_cached_json, load_prompt_template, save_json_data
 from utils.llm_operations import invoke_llm_with_prompt
+from utils.llm_operations import extract_json_from_response
 
 
 @dataclass
@@ -19,9 +20,9 @@ class ResearchConfig:
 
 @dataclass
 class ResearchQuestion:
+    level: int  # 0 for breadth questions, 1+ for depth questions
     question: str
     parent_question: Optional[str]
-    level: int  # 0 for breadth questions, 1+ for depth questions
     visualization: str = ""
     category: str = ""
     source_columns: List[str] = field(default_factory=list)
@@ -46,12 +47,7 @@ class Researcher:
         self.research_results: List[ResearchResult] = []
 
     def step1_generate_research_questions(self) -> List[ResearchQuestion]:
-        """
-        Step 1: Generate Research Questions
-        1a. Generate breadth-amount of wide-ranging questions
-        1b. For each breadth question, recursively generate depth-amount of follow-up questions
-        """
-        print("Step 1: Generating Research Questions")
+        print(" === Step 1: Generating Research Questions === ")
 
         # Check cache first
         if self.config.use_caching:
@@ -63,10 +59,10 @@ class Researcher:
                 ]
                 return self.research_questions
 
-        # Step 1a: Generate breadth questions
+        # Step 1.1: Generate breadth questions
         breadth_questions = self._generate_breadth_questions()
 
-        # Step 1b: Generate depth questions in parallel
+        # Step 1.2: Generate depth questions in parallel
         depth_questions = self._generate_depth_questions_parallel(breadth_questions)
 
         self.research_questions = breadth_questions + depth_questions
@@ -91,73 +87,21 @@ class Researcher:
 
     def _generate_breadth_questions(self) -> List[ResearchQuestion]:
         """Generate breadth-amount of wide-ranging questions covering different aspects of data"""
-        print(f"  Generating {self.config.breadth} breadth questions...")
+        print(
+            f"  === Step 1.1: Generating {self.config.breadth} breadth questions... === "
+        )
+
+        system_prompt = load_prompt_template("sys_prompt_generate_breadth_questions.md")
+        user_prompt = load_prompt_template("user_prompt_generate_breadth_questions.md")
 
         dataset_profile_json = json.dumps(self.dataset_profile, indent=2)
-
-        system_prompt = """You are an expert data analyst and researcher.
-
-        Your task: generate insightful, **visualizable research questions** that explore the dataset comprehensively.
-
-        Guidelines:
-        1. Breadth: Cover diverse aspects of the data (temporal, categorical, numerical, correlation, ranking).
-        2. Depth: Some questions may focus on a single column; others should combine multiple columns (e.g., temporal + categorical, categorical + numerical).
-        3. Visualization: Each question must suggest an appropriate visualization diagram type (e.g., line chart, bar chart, pie chart, scatter plot, heat map, keyword chart).
-        4. Insightful: Aim for questions that reveal trends, comparisons, or relationships of interest.
-        5. Generalizable: Do not assume columns beyond those provided in the dataset profile.
-        6. Audience: Questions should be understandable and compelling for both technical and non-technical stakeholders.
-
-        Encouraged visualization mappings:
-        - Temporal → line chart, area chart
-        - Categorical → bar chart, pie chart
-        - Distribution → histogram, box/violin plot
-        - Correlation → scatter plot, bubble chart, heat map
-        - Ranking → bar chart, column chart
-        - Text/keywords → word cloud, keyword chart, topic timeline."""
-
-        user_prompt = f"""Based on this dataset profile:
-
-        {dataset_profile_json}
-
-        Generate exactly {self.config.breadth} diverse research questions.
-
-        Requirements:
-        - Each question must be:
-        - Specific and actionable
-        - Visualizable (with a clear diagram type suggestion)
-        - Insightful (reveals meaningful patterns or trends)
-        - Feasible with the provided columns (no hallucinated fields)
-        - Some questions should combine multiple columns to reveal richer patterns.
-        - Cover a variety of perspectives (temporal, categorical, distribution, correlation, ranking, keywords).
-        - Avoid redundancy — each question should explore a distinct angle.
-        - Suggested visualization types should be provided as **inspiration only**; they are not fixed requirements.
-
-        Return the response as a JSON array of objects with the following keys:
-        - "question": the research question
-        - "category": the category/aspect it explores (temporal, categorical, distribution, correlation, ranking, keywords, or combinations)
-        - "source_columns": the column(s) used to answer the question
-        - "visualization": the suggested diagram type (e.g., line chart, pie chart, scatter plot, heat map, keyword chart)
-
-        Examples:
-        [
-        {{"question": "How has the number of publications changed over time for each Conference?", "category": "temporal+categorical", "source_columns": ["Year", "Conference"], "visualization": "line chart"}},
-        {{"question": "What is the distribution of PaperType (J, C, M) across Conferences?", "category": "categorical", "source_columns": ["PaperType", "Conference"], "visualization": "pie chart"}},
-        {{"question": "How does the distribution of AminerCitationCount differ across Conferences?", "category": "distribution+categorical", "source_columns": ["AminerCitationCount", "Conference"], "visualization": "box plot"}},
-        {{"question": "Is there a correlation between Downloads_Xplore and AminerCitationCount across Years?", "category": "correlation+temporal", "source_columns": ["Downloads_Xplore", "AminerCitationCount", "Year"], "visualization": "scatter plot"}},
-        {{"question": "Which Authors have contributed the most papers overall?", "category": "ranking", "source_columns": ["Authors"], "visualization": "bar chart"}},
-        {{"question": "How have AuthorKeywords evolved over the Years?", "category": "keywords+temporal", "source_columns": ["AuthorKeywords", "Year"], "visualization": "keyword chart"}},
-        {{"question": "Do Award-winning papers tend to have higher CitationCount_CrossRef compared to non-awarded papers?", "category": "correlation+categorical", "source_columns": ["Award", "CitationCount_CrossRef"], "visualization": "violin plot"}},
-        {{"question": "Which Affiliations have the highest number of publications, and how is this distributed across Conferences?", "category": "ranking+categorical", "source_columns": ["AuthorAffiliation", "Conference"], "visualization": "heat map"}}
-        ]
-        """
-
         response = invoke_llm_with_prompt(
-            system_content=system_prompt, prompt_template=user_prompt, replacements={}
+            system_content=system_prompt,
+            prompt_template=user_prompt,
+            replacements={"dataset_profile_json": dataset_profile_json},
         )
 
         try:
-            from utils.llm_operations import extract_json_from_response
-
             questions_data = extract_json_from_response(response)
 
             # Check if it's an error response
@@ -172,9 +116,9 @@ class Researcher:
 
             for i, q_data in enumerate(questions_data[: self.config.breadth]):
                 question = ResearchQuestion(
+                    level=0,
                     question=q_data["question"],
                     parent_question=None,
-                    level=0,
                     visualization=q_data.get("visualization", ""),
                     category=q_data.get("category", f"category_{i}"),
                     source_columns=q_data.get("source_columns", []),
@@ -191,7 +135,7 @@ class Researcher:
                     question=f"What are the key patterns in the data for analysis {i}?",
                     parent_question=None,
                     level=0,
-                    visualization="bar chart",  # sane fallback
+                    visualization="scatter plot",  # better fallback than bar chart
                     category=f"fallback_{i}",
                     source_columns=[],
                 )
@@ -203,7 +147,7 @@ class Researcher:
     ) -> List[ResearchQuestion]:
         """Generate depth questions in parallel for each breadth question"""
         print(
-            f"  Generating {self.config.depth} follow-up questions for each breadth question in parallel..."
+            f"  === Step 1.2: Generating {self.config.depth} follow-up questions for each breadth question in parallel... === "
         )
 
         depth_questions = []
@@ -237,93 +181,23 @@ class Researcher:
         self, parent_question: ResearchQuestion
     ) -> List[ResearchQuestion]:
         """Generate depth questions for a specific parent question"""
+
+        system_prompt = load_prompt_template("sys_prompt_generate_depth_questions.md")
+        user_prompt = load_prompt_template("user_prompt_generate_depth_questions.md")
+
         dataset_profile_json = json.dumps(self.dataset_profile, indent=2)
-
-        system_prompt = """You are an expert data analyst.
-
-        Task: Given a parent research question about a dataset, generate follow-up questions that dive deeper into the SAME insight area.
-
-        Requirements
-        1) Build on the parent question (zoom into segments, sub-patterns, exceptions, or mechanisms).
-        2) Be more specific and focused than the parent.
-        3) Each follow-up MUST include a suggested visualization type in a "visualization" field (e.g., line chart, bar chart, scatter plot, heat map, box plot, violin plot, keyword chart, small multiples).
-        4) Use only columns present in the provided dataset profile (no hallucinated fields).
-        5) Treat suggested visualization types as inspiration, NOT strict instructions; analysts may choose alternatives.
-
-        Good depth patterns to consider (choose appropriately; do not list these—use them to inspire the questions)
-        - Segmentation: break the parent analysis down by another category or time bucket.
-        - Normalization: per-capita, per-group share, percentages, rate-of-change, growth rates (where feasible).
-        - Robustness: compare results across subgroups, check stability over time, use rolling windows.
-        - Ranking & extremes: top-k / bottom-k within the parent slice.
-        - Distribution details: spread, skew, outliers, tails, quantiles.
-        - Relationship checks: conditional correlations, interaction effects across a third variable.
-        - Cohorts & periods: early vs. recent years, pre/post windows.
-        - Data quality: missingness patterns that could bias the parent result (only if relevant columns exist).
-        """
-
-        user_prompt = f"""Dataset profile:
-        {dataset_profile_json}
-
-        Parent question: "{parent_question.question}"
-        Category: {parent_question.category}
-
-        Generate exactly {self.config.depth} follow-up questions that deepen this parent question.
-
-        Output JSON ONLY as an array. Each item MUST have:
-        - "question": string (specific, focused, and clearly derived from the parent)
-        - "category": string (refined aspect, e.g., temporal+categorical, distribution, correlation, ranking)
-        - "source_columns": array of strings (column names needed to answer the question)
-        - "visualization": string (e.g., line chart, bar chart, scatter plot, heat map, box plot, violin plot, keyword chart, small multiples)
-
-        Do NOT include any extra keys or prose. No trailing commas. Length MUST equal {self.config.depth}.
-
-        Example 1: If parent is temporal (e.g., "How have downloads changed over Year?")
-        [
-        {{"question":"Which Conferences show the fastest Year-over-Year growth in Downloads_Xplore?","category":"temporal+ranking","source_columns":["Downloads_Xplore","Year","Conference"],"visualization":"line chart (small multiples)"}},
-        {{"question":"How do Downloads_Xplore trends differ between PaperType (J/C/M) over Year?","category":"temporal+categorical","source_columns":["Downloads_Xplore","Year","PaperType"],"visualization":"line chart"}},
-        {{"question":"What is the 3-year rolling average of Downloads_Xplore by Conference, and which diverge from the overall trend?","category":"temporal+categorical","source_columns":["Downloads_Xplore","Year","Conference"],"visualization":"line chart"}},
-        {{"question":"In which Years do Downloads_Xplore spikes occur, and are they associated with higher AminerCitationCount in the following Year?","category":"temporal+correlation (lag)","source_columns":["Downloads_Xplore","Year","AminerCitationCount"],"visualization":"scatter plot"}},
-        {{"question":"How does the distribution of Downloads_Xplore shift over time (early vs recent Years) by Conference?","category":"temporal+distribution","source_columns":["Downloads_Xplore","Year","Conference"],"visualization":"box plot"}}
-        ]
-
-        Example 2: If parent is categorical (e.g., "What is the distribution of PaperType across Conferences?")
-        [
-        {{"question":"Within each Conference, which PaperType has the highest median AminerCitationCount?","category":"categorical+distribution","source_columns":["Conference","PaperType","AminerCitationCount"],"visualization":"violin plot"}},
-        {{"question":"How does the share of PaperType (J/C/M) evolve across Year for each Conference?","category":"temporal+categorical","source_columns":["PaperType","Year","Conference"],"visualization":"stacked area chart"}},
-        {{"question":"Which Conferences have the largest gap between mean and median Downloads_Xplore within each PaperType?","category":"categorical+distribution","source_columns":["Conference","PaperType","Downloads_Xplore"],"visualization":"box plot"}},
-        {{"question":"Are Awards (where present) concentrated in specific PaperType × Conference combinations?","category":"categorical","source_columns":["Award","PaperType","Conference"],"visualization":"heat map"}},
-        {{"question":"What are the top 10 AuthorAffiliation entries by total papers within each Conference?","category":"ranking+categorical","source_columns":["AuthorAffiliation","Conference"],"visualization":"bar chart (small multiples)"}}
-        ]
-
-        Example 3: If parent is correlation (e.g., "Is there a relationship between Downloads_Xplore and AminerCitationCount?")
-        [
-        {{"question":"Does the Downloads_Xplore ↔ AminerCitationCount relationship differ by PaperType (J/C/M)?","category":"correlation+categorical","source_columns":["Downloads_Xplore","AminerCitationCount","PaperType"],"visualization":"scatter plot (faceted)"}},
-        {{"question":"Is the correlation stronger in recent Years compared to earlier Years?","category":"temporal+correlation","source_columns":["Downloads_Xplore","AminerCitationCount","Year"],"visualization":"heat map (Year × correlation)"}},
-        {{"question":"Do longer papers (LastPage - FirstPage) show a different Downloads_Xplore ↔ CitationCount_CrossRef pattern?","category":"correlation+distribution","source_columns":["LastPage","FirstPage","Downloads_Xplore","CitationCount_CrossRef"],"visualization":"bubble chart"}},
-        {{"question":"Which Conferences have the steepest best-fit slope between Downloads_Xplore and AminerCitationCount?","category":"correlation+ranking","source_columns":["Downloads_Xplore","AminerCitationCount","Conference"],"visualization":"scatter plot (small multiples)"}},
-        {{"question":"Among Awarded papers (where Award present), is the correlation between Downloads_Xplore and CitationCount_CrossRef different from non-awarded?","category":"correlation+categorical","source_columns":["Award","Downloads_Xplore","CitationCount_CrossRef"],"visualization":"scatter plot"}}
-        ]
-
-        Before printing, silently verify:
-        - Output is valid JSON array of length exactly {self.config.depth}.
-        - Each item has keys: question, category, source_columns, visualization.
-        - No extra keys; no prose; no trailing commas.
-
-        Then print ONLY the JSON array.
-
-        Return the response as a JSON array of objects with the following keys:
-        - "question": the research question
-        - "category": the category/aspect it explores (temporal, categorical, distribution, correlation, ranking, keywords, or combinations)
-        - "visualization": the suggested diagram type (e.g., line chart, pie chart, scatter plot, heat map, keyword chart)
-        """
-
         response = invoke_llm_with_prompt(
-            system_content=system_prompt, prompt_template=user_prompt, replacements={}
+            system_content=system_prompt,
+            prompt_template=user_prompt,
+            replacements={
+                "dataset_profile_json": dataset_profile_json,
+                "parent_question": parent_question.question,
+                "parent_question_category": parent_question.category,
+                "parent_question_visualization": parent_question.visualization,
+            },
         )
 
         try:
-            from utils.llm_operations import extract_json_from_response
-
             questions_data = extract_json_from_response(response)
 
             # Check if it's an error response
@@ -361,7 +235,7 @@ class Researcher:
                     question=f"What specific patterns emerge when analyzing {parent_question.category} in detail (level {i})?",
                     parent_question=parent_question.question,
                     level=i,
-                    visualization="bar chart",  # sane fallback
+                    visualization="scatter plot",  # better fallback than bar chart
                     category=parent_question.category,
                     source_columns=[],
                 )
@@ -436,7 +310,7 @@ class Researcher:
                 isinstance(computed_data, list) and len(computed_data) > 10000
             ):
                 print(
-                    f"Skipping question - data too large or empty: {question.question}"
+                    f"Skipping question - data too large or empty: {question.question} | Size {len(computed_data)}"
                 )
                 return None
 
@@ -762,7 +636,9 @@ class Researcher:
         5. Save the plot using plt.savefig(chart_path, dpi=150, bbox_inches='tight')
         6. Include proper titles, axis labels, and legends
         7. Handle data cleaning and type conversion as needed
-        8. Choose the most appropriate visualization type based on the data structure and research question"""
+        8. Choose the most appropriate visualization type based on the data structure and research question
+        9. CRITICAL: For frequency analysis (keyword charts), NEVER use traditional bar charts - use text size to represent frequency instead
+        10. CRITICAL: When the suggested visualization is 'keyword chart', create a visualization where text size represents frequency, not bar height"""
 
         user_prompt = """Research Question: "{question}"
         Suggested Visualization: {visualization}
@@ -839,6 +715,42 @@ class Researcher:
         plt.title('Average Citations by Conference and Paper Type')
         plt.tight_layout()
 
+        Example 8 - Word Cloud (Text Frequency Analysis):
+        df = pd.DataFrame(data)
+        from wordcloud import WordCloud
+        import re
+        
+        # Sort by frequency
+        df_sorted = df.sort_values('count', ascending=False).head(50)
+        
+        # Prepare text data with frequency weighting
+        text_data = []
+        for _, row in df_sorted.iterrows():
+            text = str(row.iloc[0]).strip()
+            count = int(row['count'])
+            
+            # Clean text
+            cleaned_text = re.sub(r'[^a-zA-Z0-9\s]', ' ', text)
+            cleaned_text = re.sub(r'\s+', ' ', cleaned_text).strip()
+            
+            # Weight by frequency
+            for _ in range(min(count, 20)):
+                text_data.append(cleaned_text)
+        
+        # Create word cloud
+        full_text = ' '.join(text_data)
+        plt.figure(figsize=(12, 8))
+        wordcloud = WordCloud(
+            width=1200, height=800, background_color='white',
+            colormap='viridis', max_words=50, relative_scaling=0.5,
+            min_font_size=12, max_font_size=80
+        ).generate(full_text)
+        
+        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.axis('off')
+        plt.title('Word Cloud (Size Represents Frequency)')
+        plt.tight_layout()
+
         Based on the research question, data structure, and suggested visualization type, generate the most appropriate Python matplotlib/seaborn code. The code should:
         - Convert the data list to a pandas DataFrame
         - Choose the most suitable chart type for the data and question
@@ -846,22 +758,85 @@ class Researcher:
         - Handle data cleaning and formatting as needed
         - Use appropriate figure sizes and styling
         - Save the plot to chart_path with high quality
+        - For keyword charts: Use text size to represent frequency, not traditional bar charts
 
         Return ONLY the executable Python code."""
 
         viz_code = invoke_llm_with_prompt(
-            system_content=system_prompt, 
-            prompt_template=user_prompt, 
+            system_content=system_prompt,
+            prompt_template=user_prompt,
             replacements={
                 "{question}": question.question,
                 "{visualization}": question.visualization,
                 "{category}": question.category,
                 "{full_data}": full_data,
-            }
+            },
         )
 
         # Clean the code to remove markdown formatting
         viz_code = self._clean_markdown_output(viz_code)
+
+        # Validate that keyword charts don't use traditional bar charts
+        if question.visualization.lower() == "keyword chart":
+            viz_code = self._validate_keyword_chart(viz_code)
+
+        return viz_code
+
+    def _validate_keyword_chart(self, viz_code: str) -> str:
+        """Ensure keyword charts don't use traditional bar charts"""
+        # Check if the code contains bar chart elements
+        if any(
+            term in viz_code.lower()
+            for term in ["barplot", "bar(", "plt.bar", "sns.bar"]
+        ):
+            # Replace with proper keyword chart implementation
+            replacement_code = """df = pd.DataFrame(data)
+# Create proper word cloud using WordCloud library
+from wordcloud import WordCloud
+import re
+
+# Sort by frequency
+df_sorted = df.sort_values('count', ascending=False).head(50)  # Top 50 items
+
+# Prepare text data with frequency weighting
+text_data = []
+for _, row in df_sorted.iterrows():
+    # Get text and frequency
+    text = str(row.iloc[0]).strip()
+    count = int(row['count'])
+    
+    # Clean text (remove special characters, normalize)
+    cleaned_text = re.sub(r'[^a-zA-Z0-9\s]', ' ', text)
+    cleaned_text = re.sub(r'\s+', ' ', cleaned_text).strip()
+    
+    # Add text multiple times based on frequency for proper weighting
+    for _ in range(min(count, 20)):  # Cap repetition at 20 to avoid memory issues
+        text_data.append(cleaned_text)
+
+# Join all text
+full_text = ' '.join(text_data)
+
+# Create WordCloud with proper parameters
+plt.figure(figsize=(12, 8))
+wordcloud = WordCloud(
+    width=1200,
+    height=800,
+    background_color='white',
+    colormap='viridis',
+    max_words=50,
+    relative_scaling=0.5,
+    min_font_size=12,
+    max_font_size=80,
+    prefer_horizontal=0.7,
+    collocation_threshold=30
+).generate(full_text)
+
+# Display the word cloud
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.title('Most Frequent Items (Word Size Represents Frequency)', fontsize=16, fontweight='bold')
+plt.tight_layout()"""
+            return replacement_code
 
         return viz_code
 

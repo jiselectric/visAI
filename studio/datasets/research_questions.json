@@ -1,188 +1,177 @@
 [
   {
-    "question": "How has the number of publications changed over time for each Conference?",
+    "question": "How has the distribution of `PaperType` varied across different `Conference` venues over the years?",
     "parent_question": null,
     "level": 0,
-    "visualization": "line chart",
-    "category": "temporal+categorical",
+    "visualization": "stacked area chart",
+    "category": "composition+temporal",
     "source_columns": [
       "Year",
-      "Conference"
+      "Conference",
+      "PaperType"
     ]
   },
   {
-    "question": "What is the distribution of PaperType (J, C, M) across Conferences?",
-    "parent_question": null,
-    "level": 0,
-    "visualization": "pie chart",
-    "category": "categorical",
-    "source_columns": [
-      "PaperType",
-      "Conference"
-    ]
-  },
-  {
-    "question": "How does the distribution of AminerCitationCount differ across Conferences?",
-    "parent_question": null,
-    "level": 0,
-    "visualization": "box plot",
-    "category": "distribution+categorical",
-    "source_columns": [
-      "AminerCitationCount",
-      "Conference"
-    ]
-  },
-  {
-    "question": "Is there a correlation between Downloads_Xplore and AminerCitationCount across Years?",
+    "question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount`?",
     "parent_question": null,
     "level": 0,
     "visualization": "scatter plot",
-    "category": "correlation+temporal",
+    "category": "correlation",
     "source_columns": [
       "Downloads_Xplore",
+      "AminerCitationCount"
+    ]
+  },
+  {
+    "question": "Which `AuthorNames` appear most frequently in the dataset?",
+    "parent_question": null,
+    "level": 0,
+    "visualization": "word cloud",
+    "category": "keyword",
+    "source_columns": [
+      "AuthorNames"
+    ]
+  },
+  {
+    "question": "How does the `AminerCitationCount` distribution differ across `Conference` venues?",
+    "parent_question": null,
+    "level": 0,
+    "visualization": "box plot",
+    "category": "distribution",
+    "source_columns": [
       "AminerCitationCount",
-      "Year"
-    ]
-  },
-  {
-    "question": "How does the distribution of PaperType (J/C/M) vary within each Conference over different Years?",
-    "parent_question": "What is the distribution of PaperType (J, C, M) across Conferences?",
-    "level": 1,
-    "visualization": "stacked bar chart",
-    "category": "temporal+categorical",
-    "source_columns": [
-      "PaperType",
-      "Conference",
-      "Year"
-    ]
-  },
-  {
-    "question": "Which Conference has the highest proportion of PaperType 'J' compared to 'C' and 'M'?",
-    "parent_question": "What is the distribution of PaperType (J, C, M) across Conferences?",
-    "level": 2,
-    "visualization": "pie chart (small multiples)",
-    "category": "categorical+distribution",
-    "source_columns": [
-      "PaperType",
       "Conference"
     ]
   },
   {
-    "question": "What is the trend in the number of papers for each PaperType (J/C/M) across Conferences over the last decade?",
-    "parent_question": "What is the distribution of PaperType (J, C, M) across Conferences?",
-    "level": 3,
+    "question": "How does the distribution of `Downloads_Xplore` vary across different `PaperType` categories?",
+    "parent_question": "How does the `AminerCitationCount` distribution differ across `Conference` venues?",
+    "level": 1,
+    "visualization": "box plot",
+    "category": "distribution+categorical",
+    "source_columns": [
+      "Downloads_Xplore",
+      "PaperType"
+    ]
+  },
+  {
+    "question": "What is the trend of `CitationCount_CrossRef` over the years?",
+    "parent_question": "How does the `AminerCitationCount` distribution differ across `Conference` venues?",
+    "level": 2,
     "visualization": "line chart",
-    "category": "temporal+categorical",
+    "category": "temporal+numeric",
     "source_columns": [
-      "PaperType",
-      "Conference",
+      "CitationCount_CrossRef",
       "Year"
     ]
   },
   {
-    "question": "What is the trend in the number of publications for each Conference over the last decade?",
-    "parent_question": "How has the number of publications changed over time for each Conference?",
-    "level": 1,
-    "visualization": "line chart (small multiples)",
-    "category": "temporal+categorical",
-    "source_columns": [
-      "Year",
-      "Conference"
-    ]
-  },
-  {
-    "question": "How does the distribution of publications across Conferences vary by Year?",
-    "parent_question": "How has the number of publications changed over time for each Conference?",
-    "level": 2,
-    "visualization": "stacked bar chart",
-    "category": "temporal+distribution",
-    "source_columns": [
-      "Year",
-      "Conference"
-    ]
-  },
-  {
-    "question": "Which Conference experienced the highest growth rate in publications over the past five years?",
-    "parent_question": "How has the number of publications changed over time for each Conference?",
+    "question": "Which `AuthorAffiliation` appears most frequently in the dataset?",
+    "parent_question": "How does the `AminerCitationCount` distribution differ across `Conference` venues?",
     "level": 3,
+    "visualization": "word cloud",
+    "category": "keyword+frequency",
+    "source_columns": [
+      "AuthorAffiliation"
+    ]
+  },
+  {
+    "question": "How do the average citation counts (AminerCitationCount) differ across different AuthorAffiliations?",
+    "parent_question": "How has the distribution of `PaperType` varied across different `Conference` venues over the years?",
+    "level": 1,
+    "visualization": "bar chart",
+    "category": "ranking+institution",
+    "source_columns": [
+      "AminerCitationCount",
+      "AuthorAffiliation"
+    ]
+  },
+  {
+    "question": "What is the trend in the number of Downloads_Xplore over the years?",
+    "parent_question": "How has the distribution of `PaperType` varied across different `Conference` venues over the years?",
+    "level": 2,
+    "visualization": "line chart",
+    "category": "temporal+numeric",
+    "source_columns": [
+      "Year",
+      "Downloads_Xplore"
+    ]
+  },
+  {
+    "question": "Which AuthorKeywords are most frequently associated with award-winning papers?",
+    "parent_question": "How has the distribution of `PaperType` varied across different `Conference` venues over the years?",
+    "level": 3,
+    "visualization": "word cloud",
+    "category": "keyword+categorical",
+    "source_columns": [
+      "AuthorKeywords",
+      "Award"
+    ]
+  },
+  {
+    "question": "How do the most frequent AuthorAffiliations compare in terms of the average number of Downloads_Xplore?",
+    "parent_question": "Which `AuthorNames` appear most frequently in the dataset?",
+    "level": 1,
+    "visualization": "bar chart",
+    "category": "ranking+numeric",
+    "source_columns": [
+      "AuthorAffiliation",
+      "Downloads_Xplore"
+    ]
+  },
+  {
+    "question": "What is the trend in the number of papers published by the top AuthorAffiliations over the years?",
+    "parent_question": "Which `AuthorNames` appear most frequently in the dataset?",
+    "level": 2,
     "visualization": "line chart",
     "category": "temporal+ranking",
     "source_columns": [
-      "Year",
-      "Conference"
+      "AuthorAffiliation",
+      "Year"
     ]
   },
   {
-    "question": "How does the distribution of AminerCitationCount vary by PaperType within each Conference?",
-    "parent_question": "How does the distribution of AminerCitationCount differ across Conferences?",
-    "level": 1,
-    "visualization": "violin plot",
-    "category": "distribution+categorical",
-    "source_columns": [
-      "AminerCitationCount",
-      "Conference",
-      "PaperType"
-    ]
-  },
-  {
-    "question": "What are the top 5 Conferences with the highest average AminerCitationCount, and how do they compare in terms of distribution spread?",
-    "parent_question": "How does the distribution of AminerCitationCount differ across Conferences?",
-    "level": 2,
-    "visualization": "box plot",
-    "category": "ranking+distribution",
-    "source_columns": [
-      "AminerCitationCount",
-      "Conference"
-    ]
-  },
-  {
-    "question": "Are there any significant outliers in AminerCitationCount within each Conference, and how do they differ by Year?",
-    "parent_question": "How does the distribution of AminerCitationCount differ across Conferences?",
+    "question": "Which AuthorKeywords are most frequently associated with award-winning papers?",
+    "parent_question": "Which `AuthorNames` appear most frequently in the dataset?",
     "level": 3,
+    "visualization": "word cloud",
+    "category": "keyword+categorical",
+    "source_columns": [
+      "AuthorKeywords",
+      "Award"
+    ]
+  },
+  {
+    "question": "How does the number of InternalReferences relate to the number of PubsCited_CrossRef?",
+    "parent_question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount`?",
+    "level": 1,
     "visualization": "scatter plot",
-    "category": "distribution+temporal",
+    "category": "correlation+numeric",
     "source_columns": [
-      "AminerCitationCount",
-      "Conference",
-      "Year"
+      "InternalReferences",
+      "PubsCited_CrossRef"
     ]
   },
   {
-    "question": "How does the correlation between Downloads_Xplore and AminerCitationCount vary across different Conferences over the Years?",
-    "parent_question": "Is there a correlation between Downloads_Xplore and AminerCitationCount across Years?",
-    "level": 1,
-    "visualization": "scatter plot (faceted by Conference)",
-    "category": "temporal+correlation+categorical",
-    "source_columns": [
-      "Downloads_Xplore",
-      "AminerCitationCount",
-      "Year",
-      "Conference"
-    ]
-  },
-  {
-    "question": "Is there a significant change in the correlation between Downloads_Xplore and AminerCitationCount before and after 2010?",
-    "parent_question": "Is there a correlation between Downloads_Xplore and AminerCitationCount across Years?",
+    "question": "What is the trend of CitationCount_CrossRef over the years?",
+    "parent_question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount`?",
     "level": 2,
-    "visualization": "line chart (correlation over time)",
-    "category": "temporal+correlation",
+    "visualization": "line chart",
+    "category": "temporal+numeric",
     "source_columns": [
-      "Downloads_Xplore",
-      "AminerCitationCount",
+      "CitationCount_CrossRef",
       "Year"
     ]
   },
   {
-    "question": "Do papers with higher AminerCitationCount in recent Years also show higher Downloads_Xplore, and how does this trend differ by PaperType?",
-    "parent_question": "Is there a correlation between Downloads_Xplore and AminerCitationCount across Years?",
+    "question": "Which AuthorAffiliations have the highest average number of Downloads_Xplore?",
+    "parent_question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount`?",
     "level": 3,
-    "visualization": "line chart (small multiples by PaperType)",
-    "category": "temporal+correlation+categorical",
+    "visualization": "bar chart",
+    "category": "ranking+institution",
     "source_columns": [
-      "Downloads_Xplore",
-      "AminerCitationCount",
-      "Year",
-      "PaperType"
+      "AuthorAffiliation",
+      "Downloads_Xplore"
     ]
   }
 ]

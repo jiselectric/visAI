@@ -30,12 +30,11 @@ class State(TypedDict):
     final_arrangement: JSONType
 
 
-def step1_generate_research_questions(state: State):
+def generate_research_questions(state: State):
     """Step 1: Generate Research Questions using Researcher class"""
-    print("=== Step 1: Generate Research Questions ===")
 
     # Initialize Researcher
-    config = ResearchConfig(depth=3, breadth=4, max_workers=6, use_caching=True)
+    config = ResearchConfig(depth=3, breadth=4, max_workers=8, use_caching=True)
     researcher = Researcher(config, state["dataset_profile"])  # type: ignore
 
     # Generate questions
@@ -57,7 +56,7 @@ def step1_generate_research_questions(state: State):
     return {"research_questions": questions_data}
 
 
-def step2_conduct_research(state: State):
+def conduct_research(state: State):
     """Step 2: Conduct Research for all questions with parallel processing"""
     print("=== Step 2: Conduct Research ===")
 
@@ -92,7 +91,7 @@ def step2_conduct_research(state: State):
     return {"research_results": results_data}
 
 
-def step3_arrange_results(state: State):
+def arrange_results(state: State):
     """Step 3: Arrange and organize research results with complete structure for HTML generation"""
     print("=== Step 3: Arrange Results ===")
 
@@ -132,17 +131,15 @@ def create_workflow():
     builder = StateGraph(State)
 
     # Add nodes for LLM-based steps only
-    builder.add_node(
-        "step1_generate_research_questions", step1_generate_research_questions
-    )
-    builder.add_node("step2_conduct_research", step2_conduct_research)
-    builder.add_node("step3_arrange_results", step3_arrange_results)
+    builder.add_node("generate_research_questions", generate_research_questions)
+    builder.add_node("conduct_research", conduct_research)
+    builder.add_node("arrange_results", arrange_results)
 
     # Define the workflow edges
-    builder.add_edge(START, "step1_generate_research_questions")
-    builder.add_edge("step1_generate_research_questions", "step2_conduct_research")
-    builder.add_edge("step2_conduct_research", "step3_arrange_results")
-    builder.add_edge("step3_arrange_results", END)
+    builder.add_edge(START, "generate_research_questions")
+    builder.add_edge("generate_research_questions", "conduct_research")
+    builder.add_edge("conduct_research", "arrange_results")
+    builder.add_edge("arrange_results", END)
 
     return builder.compile()
 
