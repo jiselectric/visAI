@@ -10,7 +10,7 @@ def invoke_llm_with_prompt(
     system_content: str,
     prompt_template: str,
     replacements: Dict[str, str],
-    temperature: float = 0,
+    temperature: float = 0.3,
     max_tokens: int = 4096,
 ) -> str:
     """Standardized LLM invocation with prompt template replacement."""

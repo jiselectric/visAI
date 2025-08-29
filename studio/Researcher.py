@@ -306,12 +306,14 @@ class Researcher:
             # Step 2: Execute pandas code to get computed data
             computed_data = self._execute_pandas_query_for_computation(pandas_code)
 
-            if not computed_data or (
-                isinstance(computed_data, list) and len(computed_data) > 10000
-            ):
-                print(
-                    f"Skipping question - data too large or empty: {question.question} | Size {len(computed_data)}"
-                )
+            # Check if data is empty
+            if not computed_data:
+                print(f"Skipping question - no data returned: {question.question}")
+                return None
+                
+            # Check if data is too large
+            if len(computed_data) > 10000:
+                print(f"Skipping question - data too large: {question.question} | Size {len(computed_data)}")
                 return None
 
             # Generate visualization code, explanation, and title (keeping existing methods)
@@ -354,7 +356,9 @@ class Researcher:
         3. The code must be executable Python pandas code
         4. Use 'df' as the DataFrame variable name
         5. The final result should be stored in a variable that can be converted to records format
-        6. Handle missing/null values appropriately"""
+        6. Handle missing/null values appropriately
+        7. IMPORTANT: For frequency analysis with word cloud visualization, limit to top 50 items using .head(50)
+        8. IMPORTANT: For ranking analysis with bar chart visualization, limit to top 20 items using .head(20) for readability"""
 
         user_prompt = """Research Question: "{question}"
         Parent Question Context: {parent_question}
@@ -475,7 +479,7 @@ class Researcher:
             output = output.split("```")[1].split("```")[0].strip()
         return output
 
-    def _execute_pandas_query_for_computation(self, pandas_code: str) -> Any:
+    def _execute_pandas_query_for_computation(self, pandas_code: str) -> List[Dict]:
         """Execute pandas query and return computed result"""
         try:
             import pandas as pd
@@ -494,14 +498,19 @@ class Researcher:
                 # Convert to records format if it's a DataFrame
                 if hasattr(result, "to_dict"):
                     return result.to_dict("records")
-                return result
+                # If result is already a list, return it
+                elif isinstance(result, list):
+                    return result
+                # Otherwise, wrap single values or other types in a list
+                else:
+                    return [{"value": result}] if result is not None else []
             else:
                 print("Warning: No 'result' variable found in pandas code execution")
-                return None
+                return []
 
         except Exception as e:
             print(f"Error executing pandas code: {e}")
-            return None
+            return []
 
     def _establish_research_steps(self, question: ResearchQuestion) -> List[str]:
         """Establish well-designed steps to effectively answer the research question"""
@@ -681,11 +690,13 @@ class Researcher:
         Example 4 - Horizontal Bar Chart (Ranking):
         df = pd.DataFrame(data)
         df = df.sort_values('paper_count', ascending=True)
-        plt.figure(figsize=(10, 8))
-        sns.barplot(data=df, y='Author', x='paper_count', orient='h')
-        plt.title('Top Authors by Publication Count')
-        plt.xlabel('Publication Count')
-        plt.ylabel('Author')
+        # Truncate long labels for readability
+        df.iloc[:, 0] = df.iloc[:, 0].astype(str).str[:60] + '...' if df.iloc[:, 0].astype(str).str.len().max() > 60 else df.iloc[:, 0]
+        plt.figure(figsize=(12, max(8, len(df) * 0.4)))
+        sns.barplot(data=df, y=df.columns[0], x=df.columns[1], orient='h')
+        plt.title(f'Top {len(df)} Items by Count')
+        plt.xlabel('Count')
+        plt.ylabel('')
         plt.tight_layout()
 
         Example 5 - Box Plot (Distribution):
@@ -846,23 +857,29 @@ plt.tight_layout()"""
         """Generate 2-3 paragraph explanation of the data and visualization"""
         data_summary = str(computed_data)[:1000] if computed_data else "No data"
 
-        system_prompt = """You are a data storytelling expert. Generate a clear, insightful explanation 
-        (2-3 paragraphs) that describes what the data reveals and what insights can be drawn from the visualization."""
+        system_prompt = """You are a senior research analyst writing professional explanations for academic research papers. Write in formal academic prose with highly varied narrative structures and compelling insights.
 
-        user_prompt = f"""Research question: "{question.question}"
+        CRITICAL REQUIREMENTS:
+        1. Write 2-3 paragraphs in professional academic tone
+        2. NEVER start with formulaic phrases like "The data shows...", "This analysis reveals...", "The results indicate...", "Our findings demonstrate...", "The visualization displays..."
+        3. Use DRAMATICALLY different opening approaches: start with implications, lead with surprising findings, open with contextual significance, begin with methodology insights, start with comparative statements, etc.
+        4. Employ sophisticated academic vocabulary and varied sentence structures 
+        5. Focus on analytical insights, statistical significance, and research implications rather than descriptions
+        6. Use **bold** for key findings and *italics* for important terminology
+        7. Write each explanation with a completely unique narrative voice and structure
+        8. Prioritize creativity in expression while maintaining academic rigor"""
+
+        user_prompt = f"""Research Question: "{question.question}"
+
+        Data Summary: {data_summary}
         
-        Computed data summary: {data_summary}
-        Visualization approach: {viz_code[:200]}...
-        
-        Write 2-3 paragraphs explaining:
-        1. What the data shows/reveals
-        2. Key insights and patterns
-        3. Implications or significance of the findings
-        
-        Make it accessible to both technical and non-technical audiences."""
+        Write a professional academic explanation that analyzes these research findings. Vary your narrative structure from previous analyses. Use **bold** for key findings and *italics* for important terms. Focus on analytical insights and research implications rather than simple descriptions."""
 
         explanation = invoke_llm_with_prompt(
-            system_content=system_prompt, prompt_template=user_prompt, replacements={}
+            system_content=system_prompt, 
+            prompt_template=user_prompt, 
+            replacements={},
+            temperature=0.8  # Higher temperature for more creative and varied explanations
         )
 
         return explanation

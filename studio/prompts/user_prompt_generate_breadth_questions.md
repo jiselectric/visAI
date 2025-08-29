@@ -15,16 +15,18 @@ Based on the `dataset_profile_json`, generate exactly **{{self.config.breadth}}*
 
 3. **MANDATORY Visualization Diversity Requirements:**
    - **Minimum 6 different visualization types** across all questions
-   - **Balanced distribution**: No visualization type should exceed 30% of total questions
+   - **CRITICAL LIMIT**: Maximum 2 questions per visualization type (EXCEPT `word cloud` which has no limit)
    - **Required types**: Must include at least one of each:
-     * `scatter plot` (for numeric relationships between 2 variables)
-     * `heatmap` (for categorical/numeric matrix)
-     * `box plot` or `violin plot` (for distribution of ONE variable across categories)
-     * `word cloud` (for text frequency analysis)  
-     * `stacked bar chart` or `stacked area chart` (for compositions)
-     * `line chart` or `area chart` (for temporal trends)
-     * `bubble plot` (for multi-dimensional analysis)
-     * `treemap` (for hierarchical data)
+     * `scatter plot` (for numeric relationships between 2 variables) - MAX 2 uses
+     * `heatmap` (for categorical/numeric matrix) - MAX 2 uses
+     * `box plot` or `violin plot` (for distribution of ONE variable across categories) - MAX 2 uses total
+     * `word cloud` (for text frequency analysis) - UNLIMITED uses
+     * `stacked bar chart` or `stacked area chart` (for compositions) - MAX 2 uses total
+     * `line chart` or `area chart` (for temporal trends) - MAX 2 uses total
+     * `bubble plot` (for multi-dimensional analysis) - MAX 2 uses
+     * `treemap` (for hierarchical data) - MAX 2 uses
+     * `histogram` (for distribution analysis) - MAX 2 uses
+     * `pie chart` (for proportional data) - MAX 2 uses
 
    **CRITICAL Visualization Quality Rules:**
    - **Box plot restrictions**: Only use for distribution of a SINGLE variable across categories. Never for comparing two related variables simultaneously.

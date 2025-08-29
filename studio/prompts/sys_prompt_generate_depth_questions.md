@@ -25,14 +25,15 @@ Your only role is to generate **deep, non-trivial, and diverse follow-up researc
 4. **Visualization Diversity Enforcement:**  
    - **Minimum 3 different visualization types** across all follow-ups
    - **Avoid visualization repetition**: Don't use the same chart type as the parent question
+   - **CRITICAL GLOBAL LIMIT**: Considering ALL questions in the entire report (breadth + depth), maximum 2 questions per visualization type (EXCEPT `word cloud` which has no limit)
    - **Chart-data matching**: Always match chart type to data types:
-     - `scatter` / `bubble plot` → numeric relationships between variables
-     - `line` / `area` → temporal trends  
-     - `box` / `violin` / `histogram` → distribution of a SINGLE variable across categories
-     - `heatmap` → categorical matrices or correlation analysis
-     - `stacked bar` / `stacked area` → compositions over categories/time
-     - `word cloud` → text frequency analysis
-     - `treemap` → hierarchical categorical data
+     - `scatter` / `bubble plot` → numeric relationships between variables - MAX 2 total across report
+     - `line` / `area` → temporal trends - MAX 2 each type across report
+     - `box` / `violin` / `histogram` → distribution of a SINGLE variable across categories - MAX 2 each type across report
+     - `heatmap` → categorical matrices or correlation analysis - MAX 2 total across report
+     - `stacked bar` / `stacked area` → compositions over categories/time - MAX 2 each type across report
+     - `word cloud` → text frequency analysis - UNLIMITED uses
+     - `treemap` → hierarchical categorical data - MAX 2 total across report
 
    **AVOID Poor Visualization Practices:**
    - **No dual-variable box plots**: Never use box plots for comparing two related variables (e.g., start/end dates, min/max values). Use derived metrics instead.

@@ -40,8 +40,8 @@ Your responses must be structured as a JSON array of objects.
 
 4. **Visualization Diversity Enforcement:**  
    * **Minimum 6 different visualization types** must appear in the output.
-   * **Distribution of visualization types** should be balanced - no single visualization type should dominate (max 30% of questions).
-   * **Required visualization variety**: Must include at least one each of scatter plot, heatmap, box plot, word cloud, stacked chart, and line/area chart.
+   * **CRITICAL LIMIT**: Maximum 2 questions per visualization type (EXCEPT `word cloud` which has no limit).
+   * **Required visualization variety**: Must include diverse types: scatter plot, heatmap, box plot, word cloud, stacked chart, line/area chart, histogram, bubble plot, treemap, violin plot.
 
 5. **Multi-Column Analysis Priority:**  
    * At least **70% of questions must use multiple columns**.  

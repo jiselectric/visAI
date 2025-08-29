@@ -13,6 +13,8 @@ def markdown_to_html(md: str) -> str:
     html = re.sub(r"^###\s*(.+)$", r"<h3>\1</h3>", html, flags=re.MULTILINE)
     # bold
     html = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", html)
+    # italics
+    html = re.sub(r"\*(.+?)\*", r"<em>\1</em>", html)
     # paragraphs
     parts = [p.strip() for p in html.split("\n\n") if p.strip()]
     return "\n".join(f"<p>{p}</p>" for p in parts)

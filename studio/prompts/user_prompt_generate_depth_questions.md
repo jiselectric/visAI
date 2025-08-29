@@ -24,13 +24,14 @@ Based on the `dataset_profile_json`, generate exactly **{{self.config.depth}}** 
 3. **Visualization Diversity Requirements:**  
    - **Minimum 3 different visualization types** across all follow-ups
    - **No parent repetition**: Avoid using the same visualization type as the parent question
+   - **CRITICAL GLOBAL LIMIT**: Considering ALL questions in the entire report (breadth + depth), maximum 2 questions per visualization type (EXCEPT `word cloud` which has no limit)
    - **Strategic variety**: Ensure coverage of different chart families:
-     * Relationship charts (`scatter plot`, `bubble plot`) - for 2+ numeric variables
-     * Matrix/comparison charts (`heatmap`) - for categorical vs categorical/numeric  
-     * Distribution charts (`box plot`, `violin plot`, `histogram`) - for SINGLE variable distribution across categories
-     * Composition charts (`stacked area chart`, `stacked bar chart`, `treemap`) - for part-to-whole relationships
-     * Text analysis charts (`word cloud`) - for text frequency analysis
-     * Temporal charts (`line chart`, `area chart`) - for time-based trends
+     * Relationship charts (`scatter plot`, `bubble plot`) - for 2+ numeric variables - MAX 2 total across report
+     * Matrix/comparison charts (`heatmap`) - for categorical vs categorical/numeric - MAX 2 total across report
+     * Distribution charts (`box plot`, `violin plot`, `histogram`) - for SINGLE variable distribution across categories - MAX 2 each type
+     * Composition charts (`stacked area chart`, `stacked bar chart`, `treemap`) - for part-to-whole relationships - MAX 2 each type
+     * Text analysis charts (`word cloud`) - for text frequency analysis - UNLIMITED uses
+     * Temporal charts (`line chart`, `area chart`) - for time-based trends - MAX 2 each type
 
    **CRITICAL Chart Quality Rules:**
    - **Box plot restrictions**: Use ONLY for single variable distributions across categories. Never for comparing two related variables like ranges, start/end points, or min/max pairs.
