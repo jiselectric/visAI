@@ -366,25 +366,26 @@ class Agent:
                 "chart_path": None,  # We'll handle saving directly via buffer
             }
 
+            # Debug: Print the visualization code being executed
+            print(f"Executing visualization code for {chart_id}:")
+            print(f"Code: {viz_code[:200]}...")
+            
             # Execute the visualization code
             exec(viz_code, exec_env)
 
-            # Save plot to base64 string
-            buffer = io.BytesIO()
+            # Save plot to visualizations directory
+            chart_filename = f"chart_{chart_id}.png"
+            chart_path = f"./visualizations/{chart_filename}"
+            
             plt.savefig(
-                buffer, format="png", dpi=150, bbox_inches="tight", facecolor="white"
+                chart_path, format="png", dpi=150, bbox_inches="tight", facecolor="white"
             )
-            buffer.seek(0)
-
-            # Convert to base64
-            image_data = base64.b64encode(buffer.getvalue()).decode()
-            buffer.close()
 
             # Clear the plot
             plt.clf()
             plt.close()
 
-            return f'<img src="data:image/png;base64,{image_data}" alt="Chart {chart_id}" style="max-width: 100%; height: auto;">'
+            return f'<img src="{chart_path}" alt="Chart {chart_id}" style="max-width: 100%; height: auto;">'
 
         except Exception as e:
             print(f"Error generating chart {chart_id}: {e}")

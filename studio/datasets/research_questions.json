@@ -3,7 +3,7 @@
     "question": "How has the distribution of `PaperType` varied across different `Conference` venues over the years?",
     "parent_question": null,
     "level": 0,
-    "visualization": "stacked bar chart",
+    "visualization": "stacked area chart",
     "category": "composition+temporal",
     "source_columns": [
       "Year",
@@ -12,7 +12,7 @@
     ]
   },
   {
-    "question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount` for papers?",
+    "question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount`?",
     "parent_question": null,
     "level": 0,
     "visualization": "scatter plot",
@@ -23,20 +23,20 @@
     ]
   },
   {
-    "question": "Which `AuthorNames-Deduped` appear most frequently in the dataset?",
+    "question": "What are the most frequent `AuthorKeywords` used in the papers?",
     "parent_question": null,
     "level": 0,
     "visualization": "word cloud",
     "category": "keyword",
     "source_columns": [
-      "AuthorNames-Deduped"
+      "AuthorKeywords"
     ]
   },
   {
-    "question": "How does the `AminerCitationCount` distribution vary across different `PaperType` categories?",
+    "question": "How does the `AminerCitationCount` distribution differ across `PaperType` categories?",
     "parent_question": null,
     "level": 0,
-    "visualization": "box plot",
+    "visualization": "violin plot",
     "category": "distribution",
     "source_columns": [
       "AminerCitationCount",
@@ -44,8 +44,75 @@
     ]
   },
   {
-    "question": "How does the distribution of `Downloads_Xplore` vary across different `Conference` categories?",
-    "parent_question": "How does the `AminerCitationCount` distribution vary across different `PaperType` categories?",
+    "question": "How do the most frequent AuthorKeywords vary across different Conferences?",
+    "parent_question": "What are the most frequent `AuthorKeywords` used in the papers?",
+    "level": 1,
+    "visualization": "word cloud",
+    "category": "keyword+categorical",
+    "source_columns": [
+      "AuthorKeywords",
+      "Conference"
+    ]
+  },
+  {
+    "question": "What is the trend of AuthorKeywords usage over different Years?",
+    "parent_question": "What are the most frequent `AuthorKeywords` used in the papers?",
+    "level": 2,
+    "visualization": "line chart",
+    "category": "temporal+keyword",
+    "source_columns": [
+      "AuthorKeywords",
+      "Year"
+    ]
+  },
+  {
+    "question": "Which AuthorAffiliations are associated with the most diverse set of AuthorKeywords?",
+    "parent_question": "What are the most frequent `AuthorKeywords` used in the papers?",
+    "level": 3,
+    "visualization": "network graph",
+    "category": "network+institutions",
+    "source_columns": [
+      "AuthorKeywords",
+      "AuthorAffiliation"
+    ]
+  },
+  {
+    "question": "How does the distribution of paper lengths (LastPage - FirstPage) vary across different Conferences?",
+    "parent_question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount`?",
+    "level": 1,
+    "visualization": "box plot",
+    "category": "distribution+categorical",
+    "source_columns": [
+      "FirstPage",
+      "LastPage",
+      "Conference"
+    ]
+  },
+  {
+    "question": "What is the trend in the number of publications per year for each PaperType?",
+    "parent_question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount`?",
+    "level": 2,
+    "visualization": "stacked area chart",
+    "category": "temporal+categorical",
+    "source_columns": [
+      "Year",
+      "PaperType"
+    ]
+  },
+  {
+    "question": "Which AuthorAffiliations have the highest average citation count according to CrossRef?",
+    "parent_question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount`?",
+    "level": 3,
+    "visualization": "bar chart",
+    "category": "ranking+institution",
+    "source_columns": [
+      "AuthorAffiliation",
+      "CitationCount_CrossRef"
+    ]
+  },
+  {
+    "question": "How does the distribution of Downloads_Xplore differ across different Conferences?",
+    "parent_question": "How does the `AminerCitationCount` distribution differ across `PaperType` categories?",
     "level": 1,
     "visualization": "violin plot",
     "category": "distribution+categorical",
@@ -55,19 +122,9 @@
     ]
   },
   {
-    "question": "What are the most frequent `AuthorAffiliation` entries in the dataset?",
-    "parent_question": "How does the `AminerCitationCount` distribution vary across different `PaperType` categories?",
+    "question": "What is the trend of CitationCount_CrossRef over the years?",
+    "parent_question": "How does the `AminerCitationCount` distribution differ across `PaperType` categories?",
     "level": 2,
-    "visualization": "word cloud",
-    "category": "keyword+affiliation",
-    "source_columns": [
-      "AuthorAffiliation"
-    ]
-  },
-  {
-    "question": "How has the `CitationCount_CrossRef` changed over the years?",
-    "parent_question": "How does the `AminerCitationCount` distribution vary across different `PaperType` categories?",
-    "level": 3,
     "visualization": "line chart",
     "category": "temporal+numeric",
     "source_columns": [
@@ -76,32 +133,8 @@
     ]
   },
   {
-    "question": "How has the average number of pages (LastPage - FirstPage) per paper varied across different Conferences over the years?",
-    "parent_question": "How has the distribution of `PaperType` varied across different `Conference` venues over the years?",
-    "level": 1,
-    "visualization": "line chart",
-    "category": "temporal+derived",
-    "source_columns": [
-      "LastPage",
-      "FirstPage",
-      "Conference",
-      "Year"
-    ]
-  },
-  {
-    "question": "What are the most common AuthorKeywords used in papers with high AminerCitationCount?",
-    "parent_question": "How has the distribution of `PaperType` varied across different `Conference` venues over the years?",
-    "level": 2,
-    "visualization": "word cloud",
-    "category": "keyword+ranking",
-    "source_columns": [
-      "AuthorKeywords",
-      "AminerCitationCount"
-    ]
-  },
-  {
-    "question": "Which AuthorAffiliations have the highest average Downloads_Xplore per paper?",
-    "parent_question": "How has the distribution of `PaperType` varied across different `Conference` venues over the years?",
+    "question": "Which AuthorAffiliations have the highest average number of Downloads_Xplore?",
+    "parent_question": "How does the `AminerCitationCount` distribution differ across `PaperType` categories?",
     "level": 3,
     "visualization": "bar chart",
     "category": "ranking+institution",
@@ -111,67 +144,36 @@
     ]
   },
   {
-    "question": "How do the most frequently occurring AuthorAffiliations compare in terms of the number of papers published?",
-    "parent_question": "Which `AuthorNames-Deduped` appear most frequently in the dataset?",
+    "question": "How has the average number of Downloads_Xplore per paper changed over the years?",
+    "parent_question": "How has the distribution of `PaperType` varied across different `Conference` venues over the years?",
     "level": 1,
-    "visualization": "word cloud",
-    "category": "ranking+institution",
-    "source_columns": [
-      "AuthorAffiliation"
-    ]
-  },
-  {
-    "question": "What is the trend of the number of publications over time for each Conference?",
-    "parent_question": "Which `AuthorNames-Deduped` appear most frequently in the dataset?",
-    "level": 2,
     "visualization": "line chart",
-    "category": "temporal+categorical",
+    "category": "temporal+numeric",
     "source_columns": [
       "Year",
-      "Conference"
+      "Downloads_Xplore"
     ]
   },
   {
-    "question": "Which AuthorKeywords appear most frequently in papers with the highest citation counts?",
-    "parent_question": "Which `AuthorNames-Deduped` appear most frequently in the dataset?",
-    "level": 3,
-    "visualization": "word cloud",
-    "category": "keyword+ranking",
+    "question": "Which AuthorAffiliations have the highest average AminerCitationCount?",
+    "parent_question": "How has the distribution of `PaperType` varied across different `Conference` venues over the years?",
+    "level": 2,
+    "visualization": "bar chart",
+    "category": "ranking+institution",
     "source_columns": [
-      "AuthorKeywords",
+      "AuthorAffiliation",
       "AminerCitationCount"
     ]
   },
   {
-    "question": "How do the number of `InternalReferences` and `PubsCited_CrossRef` relate to each other for papers?",
-    "parent_question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount` for papers?",
-    "level": 1,
-    "visualization": "scatter plot",
-    "category": "correlation+numeric",
-    "source_columns": [
-      "InternalReferences",
-      "PubsCited_CrossRef"
-    ]
-  },
-  {
-    "question": "What is the trend of `CitationCount_CrossRef` over the years?",
-    "parent_question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount` for papers?",
-    "level": 2,
-    "visualization": "line chart",
-    "category": "temporal+numeric",
-    "source_columns": [
-      "CitationCount_CrossRef",
-      "Year"
-    ]
-  },
-  {
-    "question": "Which `AuthorAffiliation` appears most frequently in the dataset?",
-    "parent_question": "What is the relationship between the number of `Downloads_Xplore` and `AminerCitationCount` for papers?",
+    "question": "What is the distribution of AminerCitationCount across different PaperTypes?",
+    "parent_question": "How has the distribution of `PaperType` varied across different `Conference` venues over the years?",
     "level": 3,
-    "visualization": "word cloud",
-    "category": "keyword+institution",
+    "visualization": "box plot",
+    "category": "distribution+categorical",
     "source_columns": [
-      "AuthorAffiliation"
+      "AminerCitationCount",
+      "PaperType"
     ]
   }
 ]

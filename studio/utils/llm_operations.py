@@ -9,7 +9,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 def invoke_llm_with_prompt(
     system_content: str,
     prompt_template: str,
-    replacements: Dict[str, str],
+    replacements: Dict[str, Any],
     temperature: float = 0.3,
     max_tokens: int = 4096,
 ) -> str:
@@ -17,7 +17,7 @@ def invoke_llm_with_prompt(
     # Replace template variables in prompt
     formatted_prompt = prompt_template
     for key, value in replacements.items():
-        formatted_prompt = formatted_prompt.replace(key, value)
+        formatted_prompt = formatted_prompt.replace(key, str(value))
 
     llm = get_llm(temperature=temperature, max_tokens=max_tokens)
 
