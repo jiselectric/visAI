@@ -22,23 +22,22 @@ JSONType = Union[str, int, float, bool, None, Dict[str, "JSONType"], List["JSONT
 
 
 class State(TypedDict):
-    message: str
     dataset_info: JSONType
     dataset_profile: JSONType
     research_questions: JSONType
     research_results: JSONType
     final_arrangement: JSONType
+    _agent: Any  # Agent instance for accessing researcher
 
 
+# Step 1: Generate Research Questions using Researcher class
 def generate_research_questions(state: State):
-    """Step 1: Generate Research Questions using Researcher class"""
-
-    # Initialize Researcher
-    config = ResearchConfig(depth=3, breadth=4, max_workers=8, use_caching=True)
-    researcher = Researcher(config, state["dataset_profile"])  # type: ignore
+    agent = state.get("_agent")
+    if not agent or not agent.researcher:
+        raise RuntimeError("Researcher not initialized. Call agent.initialize() first.")
 
     # Generate questions
-    questions = researcher.step1_generate_research_questions()
+    questions = agent.researcher.generate_research_questions()
 
     # Convert to serializable format
     questions_data = [
@@ -56,23 +55,21 @@ def generate_research_questions(state: State):
     return {"research_questions": questions_data}
 
 
+# Step 2: Conduct Research using Researcher class
 def conduct_research(state: State):
-    """Step 2: Conduct Research for all questions with parallel processing"""
-    print("=== Step 2: Conduct Research ===")
-
-    # Initialize Researcher with existing questions
-    config = ResearchConfig(depth=3, breadth=4, max_workers=6, use_caching=True)
-    researcher = Researcher(config, state["dataset_profile"])  # type: ignore
+    agent = state.get("_agent")
+    if not agent or not agent.researcher:
+        raise RuntimeError("Researcher not initialized. Call agent.initialize() first.")
 
     # Restore research questions from state
     from Researcher import ResearchQuestion
 
-    researcher.research_questions = [
+    agent.researcher.research_questions = [
         ResearchQuestion(**q) for q in state["research_questions"]  # type: ignore
     ]
 
     # Conduct research
-    results = researcher.step2_conduct_research()
+    research_results = agent.researcher.conduct_research()
 
     # Convert to serializable format
     results_data = [
@@ -85,29 +82,31 @@ def conduct_research(state: State):
             "category": r.category,
             "source_columns": r.source_columns,
         }
-        for r in results
+        for r in research_results
     ]
 
     return {"research_results": results_data}
 
 
-def arrange_results(state: State):
-    """Step 3: Arrange and organize research results with complete structure for HTML generation"""
-    print("=== Step 3: Arrange Results ===")
-
-    # Initialize Researcher with existing data
-    config = ResearchConfig(depth=3, breadth=4, max_workers=6, use_caching=True)
-    researcher = Researcher(config, state["dataset_profile"])  # type: ignore
+# Step 3: Generate Final Report using Researcher class
+def generate_final_report(state: State):
+    agent = state.get("_agent")
+    if not agent or not agent.researcher:
+        raise RuntimeError("Researcher not initialized. Call agent.initialize() first.")
 
     # Restore research results from state
     from Researcher import ResearchResult
 
-    researcher.research_results = [
+    agent.researcher.research_results = [
         ResearchResult(**r) for r in state["research_results"]  # type: ignore
     ]
 
-    # Arrange results
-    final_arrangement = researcher.step3_arrange_results()
+    # Generate final arrangement
+    final_arrangement = agent.researcher.generate_final_report()
+
+    # arranged_research_sections are already dictionaries, just use them directly
+    arranged_sections = final_arrangement.get("arranged_research_sections", [])
+    results_dicts = arranged_sections  # Already in the correct format
 
     # Ensure the final arrangement has all necessary structure for deterministic HTML generation
     structured_output = {
@@ -120,36 +119,42 @@ def arrange_results(state: State):
         "title": final_arrangement.get("title", "Comprehensive Data Analysis Report"),
         "introduction": final_arrangement.get("introduction", ""),
         "conclusion": final_arrangement.get("conclusion", ""),
-        "results": final_arrangement.get("results", []),
+        "results": results_dicts,
     }
 
     return {"final_arrangement": structured_output}
 
 
 def create_workflow():
-    """Create the agentic workflow using LangGraph (Steps 1-3 only)"""
+    # create the agentic workflow using LangGraph
     builder = StateGraph(State)
-
-    # Add nodes for LLM-based steps only
     builder.add_node("generate_research_questions", generate_research_questions)
     builder.add_node("conduct_research", conduct_research)
-    builder.add_node("arrange_results", arrange_results)
+    builder.add_node("generate_final_report", generate_final_report)
 
-    # Define the workflow edges
     builder.add_edge(START, "generate_research_questions")
     builder.add_edge("generate_research_questions", "conduct_research")
-    builder.add_edge("conduct_research", "arrange_results")
-    builder.add_edge("arrange_results", END)
-
+    builder.add_edge("conduct_research", "generate_final_report")
+    builder.add_edge("generate_final_report", END)
     return builder.compile()
 
 
 class Agent:
     def __init__(self):
         self.workflow = None
+        self.researcher = None
+        self.config = None
 
     def initialize(self):
+        """Initialize the workflow and researcher instance"""
         self.workflow = create_workflow()
+
+        # Initialize ResearcherConfig and Researcher instance
+        self.config = ResearchConfig(
+            depth=3, breadth=4, max_workers=8, use_caching=True
+        )
+
+        # Note: researcher will be initialized with dataset_profile in initialize_state_from_csv
 
     def initialize_state_from_csv(self) -> dict:
         """Initialize state with dataset profile and info"""
@@ -161,6 +166,12 @@ class Agent:
 
         if cached_info and cached_profile:
             print("Using cached dataset info and profile")
+            # Initialize researcher with cached profile
+            if self.config is None:
+                self.config = ResearchConfig(
+                    depth=3, breadth=4, max_workers=8, use_caching=True
+                )
+            self.researcher = Researcher(self.config, cached_profile)
             return {"dataset_info": cached_info, "dataset_profile": cached_profile}
 
         # Generate dataset info
@@ -179,6 +190,13 @@ class Agent:
         df = pd.read_csv(path)
         dataset_profile = generate_dataset_profile(df)
         save_json_data(dataset_profile, "dataset_profile.json", "./datasets")
+
+        # Initialize researcher with generated profile
+        if self.config is None:
+            self.config = ResearchConfig(
+                depth=3, breadth=4, max_workers=8, use_caching=True
+            )
+        self.researcher = Researcher(self.config, dataset_profile)
 
         print(
             f"Dataset initialized: {dataset_info['num_rows']} rows, {len(dataset_info['attributes'])} columns"
@@ -302,8 +320,6 @@ class Agent:
                         ]
                     )
 
-                # Research steps section removed
-
                 html_lines.append("      </div>")
 
             html_lines.append("    </div>")
@@ -369,23 +385,26 @@ class Agent:
             # Debug: Print the visualization code being executed
             print(f"Executing visualization code for {chart_id}:")
             print(f"Code: {viz_code[:200]}...")
-            
+
             # Execute the visualization code
             exec(viz_code, exec_env)
 
-            # Save plot to visualizations directory
-            chart_filename = f"chart_{chart_id}.png"
-            chart_path = f"./visualizations/{chart_filename}"
-            
+            # Save plot to base64 string
+            buffer = io.BytesIO()
             plt.savefig(
-                chart_path, format="png", dpi=150, bbox_inches="tight", facecolor="white"
+                buffer, format="png", dpi=150, bbox_inches="tight", facecolor="white"
             )
+            buffer.seek(0)
+
+            # Convert to base64
+            image_data = base64.b64encode(buffer.getvalue()).decode()
+            buffer.close()
 
             # Clear the plot
             plt.clf()
             plt.close()
 
-            return f'<img src="{chart_path}" alt="Chart {chart_id}" style="max-width: 100%; height: auto;">'
+            return f'<img src="data:image/png;base64,{image_data}" alt="Chart {chart_id}" style="max-width: 100%; height: auto;">'
 
         except Exception as e:
             print(f"Error generating chart {chart_id}: {e}")
@@ -431,9 +450,12 @@ class Agent:
         print("Initializing dataset...")
         state = self.initialize_state_from_csv()
 
+        # Add agent instance to state for workflow access
+        state["_agent"] = self
+
         # Invoke the workflow (Steps 1-3)
         print("Starting research workflow...")
-        output_state = self.workflow.invoke(state)
+        output_state = self.workflow.invoke(state)  # type: ignore
 
         # Flatten the output
         def _flatten(value):

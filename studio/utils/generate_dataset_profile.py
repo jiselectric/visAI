@@ -2,13 +2,6 @@ from typing import Any, Dict, Union
 
 import numpy as np
 import pandas as pd
-from pandas.api.types import (
-    is_bool_dtype,
-    is_datetime64_dtype,
-    is_numeric_dtype,
-    is_object_dtype,
-    is_string_dtype,
-)
 
 
 def extract_dtype_info(series: pd.Series) -> Dict[str, Any]:

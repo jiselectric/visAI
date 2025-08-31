@@ -1,12 +1,16 @@
-Research Question: "{question}"
-Suggested Visualization: {visualization}
-Category: {category}
+## Instructions
+Generate executable Python matplotlib/seaborn code to create the most appropriate visualization for the given research question and data.
 
-Computed Data: {full_data}
+## Input Data:
+- **Question**: {{question}}
+- **Visualization**: {{visualization}}
+- **Category**: {{category}}
+- **Computed Data**: {{computed_data}}
 
-Examples:
+## Examples
 
-Example 1 - Line Chart (Temporal + Categorical):
+### Example 1: Line Chart (Temporal + Categorical)
+```python
 df = pd.DataFrame(data)
 plt.figure(figsize=(12, 8))
 sns.lineplot(data=df, x='Year', y='publication_count', hue='Conference', marker='o')
@@ -15,8 +19,10 @@ plt.xlabel('Year')
 plt.ylabel('Number of Publications')
 plt.legend(title='Conference')
 plt.tight_layout()
+```
 
-Example 2 - Bar Chart (Categorical):
+### Example 2: Bar Chart (Categorical)
+```python
 df = pd.DataFrame(data)
 plt.figure(figsize=(12, 8))
 sns.barplot(data=df, x='Conference', y='count', hue='PaperType')
@@ -26,8 +32,10 @@ plt.ylabel('Count')
 plt.legend(title='Paper Type')
 plt.xticks(rotation=45)
 plt.tight_layout()
+```
 
-Example 3 - Scatter Plot (Correlation):
+### Example 3: Scatter Plot (Correlation)
+```python
 df = pd.DataFrame(data)
 plt.figure(figsize=(10, 8))
 sns.scatterplot(data=df, x='Downloads_Xplore', y='AminerCitationCount', alpha=0.7, s=60)
@@ -35,8 +43,10 @@ plt.title('Downloads vs Citations Correlation')
 plt.xlabel('Downloads')
 plt.ylabel('Citations')
 plt.tight_layout()
+```
 
-Example 4 - Horizontal Bar Chart (Ranking):
+### Example 4: Horizontal Bar Chart (Ranking)
+```python
 df = pd.DataFrame(data)
 df = df.sort_values('paper_count', ascending=True)
 plt.figure(figsize=(12, max(8, len(df) * 0.4)))
@@ -45,8 +55,10 @@ plt.title(f'Top {len(df)} Items by Count')
 plt.xlabel('Count')
 plt.ylabel('')
 plt.tight_layout()
+```
 
-Example 5 - Box Plot (Distribution):
+### Example 5: Box Plot (Distribution)
+```python
 df = pd.DataFrame(data)
 plt.figure(figsize=(10, 8))
 sns.boxplot(data=df, x='Conference', y='AminerCitationCount')
@@ -55,8 +67,10 @@ plt.xlabel('Conference')
 plt.ylabel('Citation Count')
 plt.xticks(rotation=45)
 plt.tight_layout()
+```
 
-Example 6 - Histogram (Distribution):
+### Example 6: Histogram (Distribution)
+```python
 df = pd.DataFrame(data)
 plt.figure(figsize=(10, 6))
 sns.histplot(data=df, x='AminerCitationCount', bins=20, kde=True)
@@ -64,16 +78,20 @@ plt.title('Distribution of Citation Counts')
 plt.xlabel('Citation Count')
 plt.ylabel('Frequency')
 plt.tight_layout()
+```
 
-Example 7 - Heatmap (Correlation Matrix):
+### Example 7: Heatmap (Correlation Matrix)
+```python
 df = pd.DataFrame(data)
 pivot_df = df.pivot_table(values='avg_citations', index='Conference', columns='PaperType', fill_value=0)
 plt.figure(figsize=(10, 8))
 sns.heatmap(pivot_df, annot=True, cmap='viridis', fmt='.1f')
 plt.title('Average Citations by Conference and Paper Type')
 plt.tight_layout()
+```
 
-Example 8 - Word Cloud (Text Frequency Analysis):
+### Example 8: Word Cloud (Text Frequency Analysis)
+```python
 df = pd.DataFrame(data)
 from wordcloud import WordCloud
 import re
@@ -108,13 +126,16 @@ plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis('off')
 plt.title('Word Cloud (Size Represents Frequency)')
 plt.tight_layout()
+```
 
-Based on the research question, data structure, and suggested visualization type, generate the most appropriate Python matplotlib/seaborn code. The code should:
-- Convert the data list to a pandas DataFrame
-- Choose the most suitable chart type for the data and question
-- Include proper titles, axis labels, and legends
-- Handle data cleaning and formatting as needed
-- Use appropriate figure sizes and styling
-- DO NOT include plt.savefig() - this is handled automatically
+## Output Format
+Return **ONLY** the executable Python code as a single code block.
 
-Return ONLY the executable Python code.
+## Final Checklist
+- [ ] **ONLY** the executable Python code as a single code block
+- [ ] Convert the data list to a pandas DataFrame using `pd.DataFrame(data)`
+- [ ] Choose the most suitable chart type for the data and question
+- [ ] Include proper titles, axis labels, and legends
+- [ ] Handle data cleaning and formatting as needed
+- [ ] Use appropriate figure sizes and styling
+- [ ] DO NOT include `plt.savefig()` - this is handled automatically

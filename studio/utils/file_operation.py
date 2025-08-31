@@ -46,16 +46,16 @@ def save_json_data(
         json.dump(clean_data, f, indent=2, ensure_ascii=False)
 
 
-def load_prompt_template(prompt_path: str) -> str:
+def load_prompt_template(directory: str, file_name: str) -> str:
     """Load prompt template with proper encoding."""
     curr_dir = os.path.dirname(os.path.abspath(__file__))
-    prompt_dir = os.path.join(os.path.dirname((curr_dir)), "prompts")
-    full_path = os.path.join(prompt_dir, prompt_path)
+    prompt_dir = os.path.join(os.path.dirname((curr_dir)), "prompts", directory)
+    full_path = os.path.join(prompt_dir, file_name)
     try:
         with open(full_path, "r", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
-        raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
+        raise FileNotFoundError(f"Prompt file not found: {full_path}")
 
 
 def read_csv_data(csv_path: str) -> Dict[str, Any]:
