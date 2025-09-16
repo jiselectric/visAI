@@ -30,9 +30,6 @@ The system generates several output files during execution:
 * `datasets/final_arrangement.json`: Final report structure and arrangement
 * `datasets/computed_data.json`: Computed data from pandas operations
 
-The template generates visualization reports with both charts and narrative (right part of the image).
-<img src="./public/challenge.png" style="background-color: white; width: 70%; display: block; margin-left: auto; margin-right: auto;">
-
 Please follow the instructions below to get started.
 - [0 - Prerequisites](#0-prerequisites)
 - [1 - Configure local API](#1-configure-api)
