@@ -1,7 +1,5 @@
 import base64
 import io
-import json
-import os
 from typing import Any, Dict, List, Union
 
 import matplotlib
@@ -10,7 +8,6 @@ matplotlib.use("Agg")  # Use non-interactive backend
 import matplotlib.pyplot as plt
 import seaborn as sns
 from helpers import get_llm
-from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.graph import END, START, StateGraph
 from Researcher import ResearchConfig, Researcher
 from typing_extensions import TypedDict
@@ -227,9 +224,6 @@ class Agent:
         self, final_arrangement: Dict[str, Any]
     ) -> str:
         """Generate HTML report with Python visualizations rendered as images"""
-
-        metadata = final_arrangement.get("metadata", {})
-
         html_lines = [
             "<!DOCTYPE html>",
             "<html lang='en'>",
@@ -381,10 +375,6 @@ class Agent:
                 "matplotlib": matplotlib,
                 "chart_path": None,  # We'll handle saving directly via buffer
             }
-
-            # Debug: Print the visualization code being executed
-            print(f"Executing visualization code for {chart_id}:")
-            print(f"Code: {viz_code[:200]}...")
 
             # Execute the visualization code
             exec(viz_code, exec_env)

@@ -2,16 +2,17 @@ import concurrent.futures
 import json
 import os
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 import pandas as pd
-from utils.data_utils import sample_data, execute_pandas_query_for_computation
-from utils.llm_operations import extract_json_from_response, invoke_llm_with_prompt
+from utils.data_utils import execute_pandas_query_for_computation, sample_data
 from utils.file_operation import (
+    clean_markdown_output,
+    load_cached_json,
     load_prompt_template,
     save_json_data,
-    clean_markdown_output,
 )
+from utils.llm_operations import extract_json_from_response, invoke_llm_with_prompt
 
 
 @dataclass
@@ -58,6 +59,16 @@ class Researcher:
     def generate_research_questions(self):
         print(" === Step 1: Generating Research Questions... ===")
 
+        # Check cache first
+        if self.config.use_caching:
+            cached_questions = load_cached_json("research_questions.json", "./datasets")
+            if cached_questions:
+                print("Using cached research questions")
+                self.research_questions = [
+                    ResearchQuestion(**q) for q in cached_questions["questions"]
+                ]
+                return self.research_questions
+
         # Step 1.1: Questions that explore the overall dataset
         breadth_questions = self._generate_breadth_questions()
 
@@ -89,6 +100,16 @@ class Researcher:
     # Step 2: Conduct research
     def conduct_research(self):
         print(" === Step 2: Conducting Research... ===")
+
+        # Check cache first
+        if self.config.use_caching:
+            cached_results = load_cached_json("research_results.json", "./datasets")
+            if cached_results:
+                print("Using cached research results")
+                self.research_results = [
+                    ResearchResult(**r) for r in cached_results["results"]
+                ]
+                return self.research_results
 
         # Conduct research in parallel
         with concurrent.futures.ThreadPoolExecutor(
@@ -140,6 +161,15 @@ class Researcher:
     # Step 3: Generate final report
     def generate_final_report(self):
         print(" === Step 3: Generating Final Report... ===")
+
+        # Check cache first
+        if self.config.use_caching:
+            cached_arrangement = load_cached_json(
+                "final_arrangement.json", "./datasets"
+            )
+            if cached_arrangement:
+                print("Using cached final arrangement")
+                return cached_arrangement
 
         filtered_research_sections = self._filter_research_sections(
             self.research_results

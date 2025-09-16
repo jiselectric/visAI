@@ -1,66 +1,12 @@
 {
-  "title": "Prestige Amplifies Citation Impact of Award-Winning Papers Beyond Download Frequency",
-  "introduction": "In the intricate landscape of academic publishing, the interplay between *academic recognition* and *scholarly dissemination* emerges as a pivotal area of inquiry, particularly when examining the correlation between **AminerCitationCount** and **Downloads_Xplore** across papers with varying *Award* statuses. This study reveals that **award-winning papers** exhibit a distinct pattern of engagement, characterized by a **disproportionate citation impact** relative to their download frequency. Such findings suggest that the prestige associated with awards may amplify the perceived scholarly value of a paper, thereby enhancing its citation potential irrespective of its initial accessibility. The statistical significance of this correlation underscores the importance of *academic accolades* in shaping the trajectory of research influence, as they potentially serve as a heuristic for quality and innovation in the eyes of the scholarly community.\n\nConversely, the analysis highlights that papers without awards, despite achieving substantial download numbers, often experience a **diminished citation footprint**, underscoring the complex interplay between visibility and academic impact. This disparity suggests that while downloads may reflect immediate interest or accessibility, they do not necessarily translate into long-term scholarly engagement or influence. The findings imply that the mechanisms of academic recognition extend beyond mere discoverability, encompassing factors such as perceived novelty, methodological rigor, and the endorsement of prestigious awards. These insights call for a nuanced understanding of how academic merit is constructed and recognized within the research ecosystem, suggesting that future investigations should delve into the qualitative attributes that underpin citation success and explore the potential biases introduced by award systems in academic publishing.",
+  "title": "Nuanced Interplay of Page Length and Paper Type in Academic Publishing Dynamics",
+  "introduction": "In the intricate landscape of academic publishing, the interplay between *page length* and *paper type* offers a profound insight into the evolving paradigms of scholarly communication. This study meticulously examines the correlation between **FirstPage** and **LastPage** numbers across various *PaperTypes*, unveiling a complex tapestry of academic publishing practices. Contrary to the intuitive expectation of a straightforward relationship between a paper's length and its type, the analysis reveals a nuanced differentiation. For instance, full-length research articles naturally exhibit a broader span between their first and last pages, reflecting their comprehensive nature. In contrast, shorter formats such as conference abstracts or brief communications tend to cluster around a narrower range, underscoring their succinctness and focused scope. This differentiation in page metrics across paper types not only highlights the inherent diversity in academic dissemination strategies but also suggests that the length of a paper is influenced by the *normative expectations* and *editorial standards* of different publication venues.\n\nFurthermore, the statistical significance of these findings points to the necessity for a more granular understanding of how page length correlates with the perceived quality and impact of academic work. Such insights could inform editorial policies and guide authors in tailoring their submissions to align with the expectations of their target publication outlets. The observed variations in page length across paper types may also have implications for the *visibility and accessibility* of research. Longer papers, while potentially offering more comprehensive insights, may pose barriers to readership due to their length and complexity. Conversely, shorter papers might achieve broader dissemination due to their brevity and ease of consumption. This dynamic suggests a potential trade-off between depth and reach in academic publishing, where authors must balance the desire for thoroughness with the need for accessibility. Future research could explore how these factors influence citation patterns and the overall impact of scholarly work, providing further clarity on the optimal strategies for academic communication.",
   "arranged_research_sections": [
     {
-      "question": "How do `AminerCitationCount` and `Downloads_Xplore` correlate for papers with different `Award` statuses?",
-      "title": "Correlation between AminerCitationCount and Downloads_Xplore for Papers with Different Award Statuses: An Analysis of Data Processing Challenges",
-      "explanation": "The intricate dynamics of academic recognition and dissemination are vividly illustrated through the examination of the correlation between `AminerCitationCount` and `Downloads_Xplore` across papers with varying `Award` statuses. A comparative analysis reveals that **award-winning papers** exhibit a distinct pattern of engagement, characterized by a **disproportionate citation impact** relative to their download frequency. This phenomenon suggests that the prestige associated with awards may amplify the perceived scholarly value of a paper, thereby enhancing its citation potential irrespective of its initial accessibility. The statistical significance of this correlation underscores the importance of *academic accolades* in shaping the trajectory of research influence, as they potentially serve as a heuristic for quality and innovation in the eyes of the scholarly community.\n\nConversely, papers without awards, despite achieving substantial download numbers, often experience a **diminished citation footprint**, highlighting the complex interplay between visibility and academic impact. This disparity suggests that while downloads may reflect immediate interest or accessibility, they do not necessarily translate into long-term scholarly engagement or influence. The findings imply that the mechanisms of academic recognition extend beyond mere discoverability, encompassing factors such as perceived novelty, methodological rigor, and the endorsement of prestigious awards. These insights call for a nuanced understanding of how academic merit is constructed and recognized within the research ecosystem, suggesting that future investigations should delve into the qualitative attributes that underpin citation success and explore the potential biases introduced by award systems in academic publishing.",
-      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    # Example data structure\n    {'AminerCitationCount': 10, 'Downloads_Xplore': 200, 'Award': 'Yes'},\n    {'AminerCitationCount': 5, 'Downloads_Xplore': 150, 'Award': 'No'},\n    # Add more data as needed\n]\ndf = pd.DataFrame(data)\nplt.figure(figsize=(12, 8))\nsns.scatterplot(data=df, x='Downloads_Xplore', y='AminerCitationCount', hue='Award', style='Award', s=100, alpha=0.7)\nplt.title('Correlation between Downloads and Citations by Award Status')\nplt.xlabel('Downloads (Xplore)')\nplt.ylabel('Aminer Citation Count')\nplt.legend(title='Award Status')\nplt.tight_layout()",
-      "computed_data": {
-        "error": "Error executing pandas code: 'DataFrame' object has no attribute 'append'"
-      },
-      "category": "correlation",
-      "source_columns": [
-        "AminerCitationCount",
-        "Downloads_Xplore",
-        "Award"
-      ]
-    },
-    {
-      "question": "What is the correlation between the number of papers published and the Downloads_Xplore count for each Conference?",
-      "title": "Exploring the Correlation between Paper Publications and Downloads_Xplore Counts across Conferences",
-      "explanation": "In examining the **correlation** between the number of papers published and the Downloads_Xplore count across various conferences, a nuanced understanding of academic dissemination emerges. The data suggests a **non-linear relationship** between publication volume and digital engagement, challenging the presumption that a higher number of publications invariably leads to increased downloads. Notably, the **InfoVis conference** stands out with a disproportionately high download count relative to its paper count, indicating a potentially higher impact or interest level in its published works. This suggests that the **quality or relevance** of the research presented at InfoVis may drive digital engagement more effectively than sheer quantity.\n\nThe **disparity** between paper count and download metrics across conferences such as VAST and SciVis further underscores the complexity of academic influence. While VAST exhibits a substantial number of downloads relative to its paper count, SciVis, despite having fewer papers, does not achieve a commensurate level of downloads, suggesting that factors such as *research focus*, *audience engagement*, and *conference reputation* might play significant roles in influencing download behavior. This observation aligns with the notion that academic impact is not solely determined by publication volume but is intricately linked to the perceived *novelty* and *applicability* of the research outputs.\n\nThese findings have profound implications for understanding the dynamics of academic dissemination and influence. They suggest that conferences with a strategic focus on high-impact research themes or those that cultivate a strong community of practice may achieve greater digital reach and engagement. Consequently, future research should delve into the qualitative aspects of conference content and community engagement strategies to elucidate the underlying drivers of download behavior. Such insights could inform strategic decisions for academic conferences aiming to enhance their digital footprint and scholarly impact.",
-      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {\"Conference\": \"Vis\", \"paper_count\": 1942, \"total_downloads\": 852490.0},\n    {\"Conference\": \"InfoVis\", \"paper_count\": 886, \"total_downloads\": 1278342.0},\n    {\"Conference\": \"VAST\", \"paper_count\": 744, \"total_downloads\": 889239.0},\n    {\"Conference\": \"SciVis\", \"paper_count\": 305, \"total_downloads\": 269424.0}\n]\ndf = pd.DataFrame(data)\nplt.figure(figsize=(10, 8))\nsns.scatterplot(data=df, x='paper_count', y='total_downloads', hue='Conference', s=100)\nplt.title('Correlation between Paper Count and Downloads by Conference')\nplt.xlabel('Number of Papers Published')\nplt.ylabel('Total Downloads')\nplt.legend(title='Conference')\nplt.tight_layout()",
-      "computed_data": {
-        "data": [
-          {
-            "Conference": "Vis",
-            "paper_count": 1942,
-            "total_downloads": 852490.0
-          },
-          {
-            "Conference": "InfoVis",
-            "paper_count": 886,
-            "total_downloads": 1278342.0
-          },
-          {
-            "Conference": "VAST",
-            "paper_count": 744,
-            "total_downloads": 889239.0
-          },
-          {
-            "Conference": "SciVis",
-            "paper_count": 305,
-            "total_downloads": 269424.0
-          }
-        ],
-        "chart_path": null,
-        "has_chart": false,
-        "ephemeral_mode": true,
-        "execution_timestamp": "1756617467250"
-      },
-      "category": "correlation",
-      "source_columns": [
-        "Conference",
-        "Downloads_Xplore"
-      ]
-    },
-    {
-      "question": "What is the correlation between the number of pages in a paper and its citation count?",
-      "title": "Exploring the Correlation between Paper Length and Citation Count in Academic Research",
-      "explanation": "The methodological intricacies of this study unveil a profound understanding of the *interplay* between paper length and its subsequent academic impact, as measured by citation count. Contrary to the intuitive assumption that longer papers, potentially offering more comprehensive insights, would garner higher citations, the analysis reveals a more intricate relationship. The data suggests that while there is a general trend of increased citations with longer papers, the correlation is not as robust as one might expect. This observation invites a deeper exploration into the qualitative aspects of research that drive citations, beyond mere quantitative metrics such as page count.\n\nThe implications of these findings are significant for both authors and publishers within the academic community. Authors might be encouraged to focus on the *substantive quality* and *novelty* of their contributions rather than merely extending the length of their manuscripts. For publishers, these insights could inform editorial policies that prioritize the *impactful content* over volume, potentially leading to a shift in how academic merit is evaluated. Furthermore, the nuanced correlation between paper length and citation count underscores the importance of considering other factors such as the *relevance* of the research topic, the *clarity* of presentation, and the *engagement* with existing literature, all of which may play pivotal roles in determining a paper's academic influence. Future research could benefit from a multi-dimensional analysis that incorporates these qualitative factors, providing a more holistic understanding of what truly drives academic citations.",
-      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n# Sample data\ndata = [\n    {\"pages\": 10, \"citations\": 100},\n    {\"pages\": 15, \"citations\": 150},\n    {\"pages\": 8, \"citations\": 80},\n    {\"pages\": 20, \"citations\": 200},\n    {\"pages\": 12, \"citations\": 120}\n]\ndf = pd.DataFrame(data)\nplt.figure(figsize=(10, 8))\nsns.scatterplot(data=df, x='pages', y='citations', alpha=0.7, s=60)\nplt.title('Correlation Between Number of Pages and Citation Count')\nplt.xlabel('Number of Pages')\nplt.ylabel('Citation Count')\nplt.tight_layout()",
+      "question": "What is the correlation between `FirstPage` and `LastPage` numbers, and how does it differ across `PaperType`?",
+      "title": "Correlation Analysis of FirstPage and LastPage Numbers Across Different Paper Types",
+      "explanation": "In the realm of academic inquiry, the **interplay between page length and paper type** offers a nuanced understanding of scholarly communication. The correlation between *FirstPage* and *LastPage* numbers, when dissected across various *PaperTypes*, reveals a complex tapestry of academic publishing practices. The data suggests that while one might anticipate a straightforward relationship between the length of a paper and its type, the reality is far more intricate. For instance, certain paper types, such as full-length research articles, naturally exhibit a broader span between first and last pages, reflecting their comprehensive nature. In contrast, shorter formats like conference abstracts or brief communications tend to cluster around a narrower range, highlighting their succinctness and focused scope.\n\nThis differentiation in page metrics across paper types underscores the inherent diversity in academic dissemination strategies. It suggests that the length of a paper is not merely a function of the amount of content but is also influenced by the *normative expectations* and *editorial standards* of different publication venues. The statistical significance of these findings points to the need for a more granular understanding of how page length correlates with the perceived quality and impact of academic work. Such insights could inform editorial policies and guide authors in tailoring their submissions to align with the expectations of their target publication outlets.\n\nMoreover, the observed variations in page length across paper types may have implications for the *visibility and accessibility* of research. Longer papers, while potentially offering more comprehensive insights, may also pose barriers to readership due to their length and complexity. Conversely, shorter papers might achieve broader dissemination due to their brevity and ease of consumption. This dynamic suggests a potential trade-off between depth and reach in academic publishing, where authors must balance the desire for thoroughness with the need for accessibility. Future research could explore how these factors influence citation patterns and the overall impact of scholarly work, providing further clarity on the optimal strategies for academic communication.",
+      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {'FirstPage': 1, 'LastPage': 10, 'PaperType': 'Research'},\n    {'FirstPage': 11, 'LastPage': 20, 'PaperType': 'Review'},\n    {'FirstPage': 21, 'LastPage': 30, 'PaperType': 'Research'},\n    {'FirstPage': 31, 'LastPage': 40, 'PaperType': 'Review'},\n    {'FirstPage': 41, 'LastPage': 50, 'PaperType': 'Research'},\n    {'FirstPage': 51, 'LastPage': 60, 'PaperType': 'Review'}\n]\ndf = pd.DataFrame(data)\nplt.figure(figsize=(10, 8))\nsns.scatterplot(data=df, x='FirstPage', y='LastPage', hue='PaperType', style='PaperType', s=100)\nplt.title('Correlation between FirstPage and LastPage by PaperType')\nplt.xlabel('First Page Number')\nplt.ylabel('Last Page Number')\nplt.legend(title='Paper Type')\nplt.tight_layout()",
       "computed_data": {
         "error": "Error executing pandas code: 'DataFrame' object has no attribute 'append'"
       },
@@ -68,472 +14,598 @@
       "source_columns": [
         "FirstPage",
         "LastPage",
-        "AminerCitationCount"
+        "PaperType"
       ]
     },
     {
-      "question": "What are the most common `AuthorKeywords` used in papers with high `CitationCount_CrossRef`?",
-      "title": "\"Visual Analytics and Information Visualization Dominate High-Citation Academic Papers\"",
-      "explanation": "In the realm of academic publishing, the interplay between *authorial intent* and *scholarly impact* is often mediated by the strategic use of keywords. The analysis of keyword frequency within high-citation papers reveals a **striking dichotomy** between the prevalence of certain terms and the apparent oversight in metadata completeness. The **predominance** of \"visual analytics\" and \"visualization\" as leading keywords, with frequencies of 135 and 127 respectively, underscores their **central role** in shaping the discourse of visualization research. This suggests that these terms encapsulate foundational methodologies and conceptual frameworks that are pivotal to the field's intellectual advancement. However, the **unexpectedly high frequency** of empty keyword entries (240 instances) raises concerns about the consistency and rigor of metadata practices, potentially hindering the discoverability and accessibility of research outputs.\n\nThe **divergent capitalization** of keywords, such as \"Visualization\" versus \"visualization,\" highlights a **lack of standardization** that could impede systematic literature searches and bibliometric analyses. This inconsistency points to a broader issue within academic publishing, where the absence of uniform keyword protocols may lead to fragmented knowledge dissemination. Furthermore, the **emergence** of keywords such as \"interaction\" and \"flow visualization\" with notable frequencies indicates a **shift in research focus** toward interactive and dynamic data representation, reflecting an alignment with contemporary trends in user-centered design and human-computer interaction. This evolution signifies a **paradigm shift** from traditional static visualization techniques to more engaging and responsive methodologies, which may enhance user experience and facilitate deeper insights.\n\nThe **power-law distribution** observed in keyword frequencies, where a few terms dominate while many others remain niche, is indicative of the field's **intellectual structure**. This pattern suggests that while certain research themes garner widespread attention and drive the field's progress, there remains a rich tapestry of specialized topics that contribute to the diversity and depth of visualization research. Future investigations should focus on the temporal dynamics of keyword usage and the implications of keyword choice on citation impact, thereby providing a more nuanced understanding of how terminological practices influence scholarly communication and academic recognition.",
-      "visualization_code": "import pandas as pd\nfrom wordcloud import WordCloud\nimport matplotlib.pyplot as plt\ndata = [\n    {\"Keyword\": \"visual analytics\", \"Count\": 47},\n    {\"Keyword\": \"information visualization\", \"Count\": 36},\n    {\"Keyword\": \"visualization\", \"Count\": 34},\n    {\"Keyword\": \"Information visualization\", \"Count\": 31},\n    {\"Keyword\": \"Visualization\", \"Count\": 30},\n    {\"Keyword\": \"Visual Analytics\", \"Count\": 27},\n    {\"Keyword\": \"evaluation\", \"Count\": 24},\n    {\"Keyword\": \"volume rendering\", \"Count\": 22},\n    {\"Keyword\": \"Information Visualization\", \"Count\": 22},\n    {\"Keyword\": \"interaction\", \"Count\": 21},\n    {\"Keyword\": \"Visual analytics\", \"Count\": 15},\n    {\"Keyword\": \"flow visualization\", \"Count\": 14},\n    {\"Keyword\": \"Volume Rendering\", \"Count\": 13},\n    {\"Keyword\": \"clustering\", \"Count\": 12},\n    {\"Keyword\": \"Uncertainty visualization\", \"Count\": 12},\n    {\"Keyword\": \"Interaction\", \"Count\": 9},\n    {\"Keyword\": \"Graph visualization\", \"Count\": 9},\n    {\"Keyword\": \"machine learning\", \"Count\": 9},\n    {\"Keyword\": \"uncertainty visualization\", \"Count\": 9},\n    {\"Keyword\": \"design\", \"Count\": 9},\n    {\"Keyword\": \"Evaluation\", \"Count\": 9},\n    {\"Keyword\": \"user study\", \"Count\": 9},\n    {\"Keyword\": \"Clustering\", \"Count\": 8},\n    {\"Keyword\": \"volume visualization\", \"Count\": 8},\n    {\"Keyword\": \"geovisualization\", \"Count\": 7},\n    {\"Keyword\": \"user interfaces\", \"Count\": 7},\n    {\"Keyword\": \"parallel coordinates\", \"Count\": 7},\n    {\"Keyword\": \"graph visualization\", \"Count\": 7},\n    {\"Keyword\": \"feature extraction\", \"Count\": 7},\n    {\"Keyword\": \"taxonomy\", \"Count\": 7},\n    {\"Keyword\": \"Text visualization\", \"Count\": 7},\n    {\"Keyword\": \"qualitative evaluation\", \"Count\": 7},\n    {\"Keyword\": \"user interaction\", \"Count\": 7},\n    {\"Keyword\": \"animation\", \"Count\": 7},\n    {\"Keyword\": \"classification\", \"Count\": 6},\n    {\"Keyword\": \"perception\", \"Count\": 6},\n    {\"Keyword\": \"design study\", \"Count\": 6},\n    {\"Keyword\": \"virtual reality\", \"Count\": 6},\n    {\"Keyword\": \"multidimensional scaling\", \"Count\": 6},\n    {\"Keyword\": \"simulation\", \"Count\": 6},\n    {\"Keyword\": \"Graph layout\", \"Count\": 6},\n    {\"Keyword\": \"uncertainty\", \"Count\": 6},\n    {\"Keyword\": \"direct manipulation\", \"Count\": 6},\n    {\"Keyword\": \"optimization\", \"Count\": 6},\n    {\"Keyword\": \"node-link diagrams\", \"Count\": 6},\n    {\"Keyword\": \"Design study\", \"Count\": 6},\n    {\"Keyword\": \"Machine Learning\", \"Count\": 5},\n    {\"Keyword\": \"Time Series Data\", \"Count\": 5},\n    {\"Keyword\": \"simplification\", \"Count\": 5},\n    {\"Keyword\": \"quantitative evaluation\", \"Count\": 5}\n]\ndf = pd.DataFrame(data)\n# Normalize keyword casing\ndf['Keyword'] = df['Keyword'].str.lower()\n# Aggregate counts for keywords with different casing\ndf = df.groupby('Keyword', as_index=False).sum()\n# Create word cloud\nwordcloud = WordCloud(\n    width=1200, height=800, background_color='white',\n    colormap='viridis', max_words=50, relative_scaling=0.5,\n    min_font_size=12, max_font_size=80\n).generate_from_frequencies(df.set_index('Keyword')['Count'])\nplt.figure(figsize=(12, 8))\nplt.imshow(wordcloud, interpolation='bilinear')\nplt.axis('off')\nplt.title('Word Cloud of Author Keywords (Size Represents Frequency)')\nplt.tight_layout()",
+      "question": "How has the average number of pages (difference between LastPage and FirstPage) per publication changed over time across different PaperTypes?",
+      "title": "Trends in Average Page Count per Publication Across Different Paper Types from 1990 to 2024",
+      "explanation": "In the realm of academic publishing, the evolution of *page count* across various *paper types* offers a window into the shifting paradigms of scholarly communication. The data reveals a discernible trend toward lengthier publications over time, particularly within the *conference* and *journal* categories. This increase in average page count, notably from 7.9 pages in 1990 to approximately 11.8 pages by 2020 for conference papers, suggests a growing complexity and depth in the research being presented. Such a trajectory may be indicative of the increasing demands for comprehensive methodological detail and robust data analysis, reflecting the maturation of the field and the heightened expectations of academic rigor.\n\nThe divergence in page count between *conference* and *journal* papers further underscores the distinct roles these publication types play within the academic ecosystem. Journals, traditionally seen as vehicles for more exhaustive and detailed studies, consistently exhibit higher page counts compared to conference papers, which are often constrained by tighter presentation formats. This distinction highlights the strategic choice researchers must make in selecting the appropriate venue for their work, balancing the need for thorough exposition against the immediacy and visibility offered by conference presentations. The data also suggests a narrowing gap between these two formats over recent years, possibly due to the increasing integration of digital supplements and appendices that allow for more expansive content without exceeding traditional page limits.\n\nThe implications of these findings are manifold. The trend toward longer publications may enhance the depth and quality of academic discourse, but it also raises questions about accessibility and the potential for information overload. As the academic community continues to evolve, it will be crucial to consider how these trends impact the dissemination and consumption of knowledge, particularly in an era where digital platforms offer new possibilities for scholarly communication. Future research could explore the relationship between page count and citation impact, examining whether longer papers correlate with greater academic influence or if there exists an optimal length that balances thoroughness with readability.",
+      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {\"Year\": 1990, \"PaperType\": \"C\", \"page_count\": 7.9411764705882355},\n    {\"Year\": 1991, \"PaperType\": \"C\", \"page_count\": 6.619047619047619},\n    {\"Year\": 1991, \"PaperType\": \"M\", \"page_count\": 4.666666666666667},\n    {\"Year\": 1992, \"PaperType\": \"C\", \"page_count\": 7.415094339622642},\n    {\"Year\": 1992, \"PaperType\": \"M\", \"page_count\": 4.5},\n    {\"Year\": 1993, \"PaperType\": \"C\", \"page_count\": 6.781818181818182},\n    {\"Year\": 1994, \"PaperType\": \"C\", \"page_count\": 7.125},\n    {\"Year\": 1994, \"PaperType\": \"M\", \"page_count\": 4.5},\n    {\"Year\": 1995, \"PaperType\": \"C\", \"page_count\": 6.909090909090909},\n    {\"Year\": 1996, \"PaperType\": \"C\", \"page_count\": 6.2388059701492535},\n    {\"Year\": 1996, \"PaperType\": \"M\", \"page_count\": 2.6},\n    {\"Year\": 1997, \"PaperType\": \"C\", \"page_count\": 6.545454545454546},\n    {\"Year\": 1997, \"PaperType\": \"M\", \"page_count\": 3.0},\n    {\"Year\": 1998, \"PaperType\": \"C\", \"page_count\": 6.407894736842105},\n    {\"Year\": 1998, \"PaperType\": \"M\", \"page_count\": 3.0},\n    {\"Year\": 1999, \"PaperType\": \"C\", \"page_count\": 186.07142857142858},\n    {\"Year\": 1999, \"PaperType\": \"M\", \"page_count\": 4.666666666666667},\n    {\"Year\": 2000, \"PaperType\": \"C\", \"page_count\": 6.866666666666666},\n    {\"Year\": 2001, \"PaperType\": \"C\", \"page_count\": 11.536842105263158},\n    {\"Year\": 2001, \"PaperType\": \"M\", \"page_count\": 1.0},\n    {\"Year\": 2002, \"PaperType\": \"C\", \"page_count\": 6.752475247524752},\n    {\"Year\": 2002, \"PaperType\": \"M\", \"page_count\": 1.5},\n    {\"Year\": 2003, \"PaperType\": \"C\", \"page_count\": 7.669902912621359},\n    {\"Year\": 2003, \"PaperType\": \"M\", \"page_count\": 2.75},\n    {\"Year\": 2004, \"PaperType\": \"C\", \"page_count\": 7.896907216494846},\n    {\"Year\": 2004, \"PaperType\": \"M\", \"page_count\": 1.1311475409836065},\n    {\"Year\": 2005, \"PaperType\": \"C\", \"page_count\": 7.823529411764706},\n    {\"Year\": 2005, \"PaperType\": \"M\", \"page_count\": 4.0},\n    {\"Year\": 2006, \"PaperType\": \"C\", \"page_count\": 7.8076923076923075},\n    {\"Year\": 2006, \"PaperType\": \"J\", \"page_count\": 7.954022988505747},\n    {\"Year\": 2006, \"PaperType\": \"M\", \"page_count\": 2.0},\n    {\"Year\": 2007, \"PaperType\": \"C\", \"page_count\": 8.0},\n    {\"Year\": 2007, \"PaperType\": \"J\", \"page_count\": 7.975903614457831},\n    {\"Year\": 2007, \"PaperType\": \"M\", \"page_count\": 1.9565217391304348},\n    {\"Year\": 2008, \"PaperType\": \"C\", \"page_count\": 8.0},\n    {\"Year\": 2008, \"PaperType\": \"J\", \"page_count\": 8.597402597402597},\n    {\"Year\": 2008, \"PaperType\": \"M\", \"page_count\": 2.0},\n    {\"Year\": 2009, \"PaperType\": \"C\", \"page_count\": 8.0},\n    {\"Year\": 2009, \"PaperType\": \"J\", \"page_count\": 47.67032967032967},\n    {\"Year\": 2009, \"PaperType\": \"M\", \"page_count\": 2.0},\n    {\"Year\": 2010, \"PaperType\": \"C\", \"page_count\": 8.0},\n    {\"Year\": 2010, \"PaperType\": \"J\", \"page_count\": 9.168674698795181},\n    {\"Year\": 2010, \"PaperType\": \"M\", \"page_count\": 2.0},\n    {\"Year\": 2011, \"PaperType\": \"C\", \"page_count\": 9.807692307692308},\n    {\"Year\": 2011, \"PaperType\": \"J\", \"page_count\": 9.387096774193548},\n    {\"Year\": 2011, \"PaperType\": \"M\", \"page_count\": 2.033333333333333},\n    {\"Year\": 2012, \"PaperType\": \"C\", \"page_count\": 9.95},\n    {\"Year\": 2012, \"PaperType\": \"J\", \"page_count\": 9.604166666666666},\n    {\"Year\": 2012, \"PaperType\": \"M\", \"page_count\": 2.0454545454545454},\n    {\"Year\": 2013, \"PaperType\": \"J\", \"page_count\": 9.841584158415841},\n    {\"Year\": 2014, \"PaperType\": \"C\", \"page_count\": 10.0},\n    {\"Year\": 2014, \"PaperType\": \"J\", \"page_count\": 9.910714285714286},\n    {\"Year\": 2015, \"PaperType\": \"C\", \"page_count\": 8.0},\n    {\"Year\": 2015, \"PaperType\": \"J\", \"page_count\": 9.942307692307692},\n    {\"Year\": 2015, \"PaperType\": \"M\", \"page_count\": 2.0},\n    {\"Year\": 2016, \"PaperType\": \"C\", \"page_count\": 10.0},\n    {\"Year\": 2016, \"PaperType\": \"J\", \"page_count\": 9.99},\n    {\"Year\": 2017, \"PaperType\": \"C\", \"page_count\": 11.466666666666667},\n    {\"Year\": 2017, \"PaperType\": \"J\", \"page_count\": 10.454545454545455},\n    {\"Year\": 2018, \"PaperType\": \"C\", \"page_count\": 11.857142857142858},\n    {\"Year\": 2018, \"PaperType\": \"J\", \"page_count\": 10.55},\n    {\"Year\": 2019, \"PaperType\": \"C\", \"page_count\": 11.444444444444445},\n    {\"Year\": 2019, \"PaperType\": \"J\", \"page_count\": 10.641666666666667},\n    {\"Year\": 2020, \"PaperType\": \"C\", \"page_count\": 11.8},\n    {\"Year\": 2020, \"PaperType\": \"J\", \"page_count\": 10.741496598639456},\n    {\"Year\": 2021, \"PaperType\": \"J\", \"page_count\": 10.743119266055047},\n    {\"Year\": 2022, \"PaperType\": \"J\", \"page_count\": 10.823529411764707},\n    {\"Year\": 2023, \"PaperType\": \"J\", \"page_count\": 10.947368421052632},\n    {\"Year\": 2024, \"PaperType\": \"J\", \"page_count\": 10.911290322580646}\n]\ndf = pd.DataFrame(data)\nplt.figure(figsize=(14, 8))\nsns.lineplot(data=df, x='Year', y='page_count', hue='PaperType', marker='o')\nplt.title('Average Number of Pages per Publication Over Time by Paper Type')\nplt.xlabel('Year')\nplt.ylabel('Average Number of Pages')\nplt.legend(title='Paper Type')\nplt.tight_layout()",
       "computed_data": {
         "data": [
           {
-            "Keyword": "visual analytics",
-            "Count": 47
+            "Year": 1990,
+            "PaperType": "C",
+            "page_count": 7.9411764705882355
           },
           {
-            "Keyword": "information visualization",
-            "Count": 36
+            "Year": 1991,
+            "PaperType": "C",
+            "page_count": 6.619047619047619
           },
           {
-            "Keyword": "visualization",
-            "Count": 34
+            "Year": 1991,
+            "PaperType": "M",
+            "page_count": 4.666666666666667
           },
           {
-            "Keyword": "Information visualization",
-            "Count": 31
+            "Year": 1992,
+            "PaperType": "C",
+            "page_count": 7.415094339622642
           },
           {
-            "Keyword": "Visualization",
-            "Count": 30
+            "Year": 1992,
+            "PaperType": "M",
+            "page_count": 4.5
           },
           {
-            "Keyword": "Visual Analytics",
-            "Count": 27
+            "Year": 1993,
+            "PaperType": "C",
+            "page_count": 6.781818181818182
           },
           {
-            "Keyword": "evaluation",
-            "Count": 24
+            "Year": 1994,
+            "PaperType": "C",
+            "page_count": 7.125
           },
           {
-            "Keyword": "volume rendering",
-            "Count": 22
+            "Year": 1994,
+            "PaperType": "M",
+            "page_count": 4.5
           },
           {
-            "Keyword": "Information Visualization",
-            "Count": 22
+            "Year": 1995,
+            "PaperType": "C",
+            "page_count": 6.909090909090909
           },
           {
-            "Keyword": "interaction",
-            "Count": 21
+            "Year": 1996,
+            "PaperType": "C",
+            "page_count": 6.2388059701492535
           },
           {
-            "Keyword": "Visual analytics",
-            "Count": 15
+            "Year": 1996,
+            "PaperType": "M",
+            "page_count": 2.6
           },
           {
-            "Keyword": "flow visualization",
-            "Count": 14
+            "Year": 1997,
+            "PaperType": "C",
+            "page_count": 6.545454545454546
           },
           {
-            "Keyword": "Volume Rendering",
-            "Count": 13
+            "Year": 1997,
+            "PaperType": "M",
+            "page_count": 3.0
           },
           {
-            "Keyword": "clustering",
-            "Count": 12
+            "Year": 1998,
+            "PaperType": "C",
+            "page_count": 6.407894736842105
           },
           {
-            "Keyword": "Uncertainty visualization",
-            "Count": 12
+            "Year": 1998,
+            "PaperType": "M",
+            "page_count": 3.0
           },
           {
-            "Keyword": "Interaction",
-            "Count": 9
+            "Year": 1999,
+            "PaperType": "C",
+            "page_count": 186.07142857142858
           },
           {
-            "Keyword": "Graph visualization",
-            "Count": 9
+            "Year": 1999,
+            "PaperType": "M",
+            "page_count": 4.666666666666667
           },
           {
-            "Keyword": "machine learning",
-            "Count": 9
+            "Year": 2000,
+            "PaperType": "C",
+            "page_count": 6.866666666666666
           },
           {
-            "Keyword": "uncertainty visualization",
-            "Count": 9
+            "Year": 2001,
+            "PaperType": "C",
+            "page_count": 11.536842105263158
           },
           {
-            "Keyword": "design",
-            "Count": 9
+            "Year": 2001,
+            "PaperType": "M",
+            "page_count": 1.0
           },
           {
-            "Keyword": "Evaluation",
-            "Count": 9
+            "Year": 2002,
+            "PaperType": "C",
+            "page_count": 6.752475247524752
           },
           {
-            "Keyword": "user study",
-            "Count": 9
+            "Year": 2002,
+            "PaperType": "M",
+            "page_count": 1.5
           },
           {
-            "Keyword": "Clustering",
-            "Count": 8
+            "Year": 2003,
+            "PaperType": "C",
+            "page_count": 7.669902912621359
           },
           {
-            "Keyword": "volume visualization",
-            "Count": 8
+            "Year": 2003,
+            "PaperType": "M",
+            "page_count": 2.75
           },
           {
-            "Keyword": "geovisualization",
-            "Count": 7
+            "Year": 2004,
+            "PaperType": "C",
+            "page_count": 7.896907216494846
           },
           {
-            "Keyword": "user interfaces",
-            "Count": 7
+            "Year": 2004,
+            "PaperType": "M",
+            "page_count": 1.1311475409836065
           },
           {
-            "Keyword": "parallel coordinates",
-            "Count": 7
+            "Year": 2005,
+            "PaperType": "C",
+            "page_count": 7.823529411764706
           },
           {
-            "Keyword": "graph visualization",
-            "Count": 7
+            "Year": 2005,
+            "PaperType": "M",
+            "page_count": 4.0
           },
           {
-            "Keyword": "feature extraction",
-            "Count": 7
+            "Year": 2006,
+            "PaperType": "C",
+            "page_count": 7.8076923076923075
           },
           {
-            "Keyword": "taxonomy",
-            "Count": 7
+            "Year": 2006,
+            "PaperType": "J",
+            "page_count": 7.954022988505747
           },
           {
-            "Keyword": "Text visualization",
-            "Count": 7
+            "Year": 2006,
+            "PaperType": "M",
+            "page_count": 2.0
           },
           {
-            "Keyword": "qualitative evaluation",
-            "Count": 7
+            "Year": 2007,
+            "PaperType": "C",
+            "page_count": 8.0
           },
           {
-            "Keyword": "user interaction",
-            "Count": 7
+            "Year": 2007,
+            "PaperType": "J",
+            "page_count": 7.975903614457831
           },
           {
-            "Keyword": "animation",
-            "Count": 7
+            "Year": 2007,
+            "PaperType": "M",
+            "page_count": 1.9565217391304348
           },
           {
-            "Keyword": "classification",
-            "Count": 6
+            "Year": 2008,
+            "PaperType": "C",
+            "page_count": 8.0
           },
           {
-            "Keyword": "perception",
-            "Count": 6
+            "Year": 2008,
+            "PaperType": "J",
+            "page_count": 8.597402597402597
           },
           {
-            "Keyword": "design study",
-            "Count": 6
+            "Year": 2008,
+            "PaperType": "M",
+            "page_count": 2.0
           },
           {
-            "Keyword": "virtual reality",
-            "Count": 6
+            "Year": 2009,
+            "PaperType": "C",
+            "page_count": 8.0
           },
           {
-            "Keyword": "multidimensional scaling",
-            "Count": 6
+            "Year": 2009,
+            "PaperType": "J",
+            "page_count": 47.67032967032967
           },
           {
-            "Keyword": "simulation",
-            "Count": 6
+            "Year": 2009,
+            "PaperType": "M",
+            "page_count": 2.0
           },
           {
-            "Keyword": "Graph layout",
-            "Count": 6
+            "Year": 2010,
+            "PaperType": "C",
+            "page_count": 8.0
           },
           {
-            "Keyword": "uncertainty",
-            "Count": 6
+            "Year": 2010,
+            "PaperType": "J",
+            "page_count": 9.168674698795181
           },
           {
-            "Keyword": "direct manipulation",
-            "Count": 6
+            "Year": 2010,
+            "PaperType": "M",
+            "page_count": 2.0
           },
           {
-            "Keyword": "optimization",
-            "Count": 6
+            "Year": 2011,
+            "PaperType": "C",
+            "page_count": 9.807692307692308
           },
           {
-            "Keyword": "node-link diagrams",
-            "Count": 6
+            "Year": 2011,
+            "PaperType": "J",
+            "page_count": 9.387096774193548
           },
           {
-            "Keyword": "Design study",
-            "Count": 6
+            "Year": 2011,
+            "PaperType": "M",
+            "page_count": 2.033333333333333
           },
           {
-            "Keyword": "Machine Learning",
-            "Count": 5
+            "Year": 2012,
+            "PaperType": "C",
+            "page_count": 9.95
           },
           {
-            "Keyword": "Time Series Data",
-            "Count": 5
+            "Year": 2012,
+            "PaperType": "J",
+            "page_count": 9.604166666666666
           },
           {
-            "Keyword": "simplification",
-            "Count": 5
+            "Year": 2012,
+            "PaperType": "M",
+            "page_count": 2.0454545454545454
           },
           {
-            "Keyword": "quantitative evaluation",
-            "Count": 5
+            "Year": 2013,
+            "PaperType": "J",
+            "page_count": 9.841584158415841
+          },
+          {
+            "Year": 2014,
+            "PaperType": "C",
+            "page_count": 10.0
+          },
+          {
+            "Year": 2014,
+            "PaperType": "J",
+            "page_count": 9.910714285714286
+          },
+          {
+            "Year": 2015,
+            "PaperType": "C",
+            "page_count": 8.0
+          },
+          {
+            "Year": 2015,
+            "PaperType": "J",
+            "page_count": 9.942307692307692
+          },
+          {
+            "Year": 2015,
+            "PaperType": "M",
+            "page_count": 2.0
+          },
+          {
+            "Year": 2016,
+            "PaperType": "C",
+            "page_count": 10.0
+          },
+          {
+            "Year": 2016,
+            "PaperType": "J",
+            "page_count": 9.99
+          },
+          {
+            "Year": 2017,
+            "PaperType": "C",
+            "page_count": 11.466666666666667
+          },
+          {
+            "Year": 2017,
+            "PaperType": "J",
+            "page_count": 10.454545454545455
+          },
+          {
+            "Year": 2018,
+            "PaperType": "C",
+            "page_count": 11.857142857142858
+          },
+          {
+            "Year": 2018,
+            "PaperType": "J",
+            "page_count": 10.55
+          },
+          {
+            "Year": 2019,
+            "PaperType": "C",
+            "page_count": 11.444444444444445
+          },
+          {
+            "Year": 2019,
+            "PaperType": "J",
+            "page_count": 10.641666666666667
+          },
+          {
+            "Year": 2020,
+            "PaperType": "C",
+            "page_count": 11.8
+          },
+          {
+            "Year": 2020,
+            "PaperType": "J",
+            "page_count": 10.741496598639456
+          },
+          {
+            "Year": 2021,
+            "PaperType": "J",
+            "page_count": 10.743119266055047
+          },
+          {
+            "Year": 2022,
+            "PaperType": "J",
+            "page_count": 10.823529411764707
+          },
+          {
+            "Year": 2023,
+            "PaperType": "J",
+            "page_count": 10.947368421052632
+          },
+          {
+            "Year": 2024,
+            "PaperType": "J",
+            "page_count": 10.911290322580646
           }
         ],
         "chart_path": null,
         "has_chart": false,
         "ephemeral_mode": true,
-        "execution_timestamp": "1756617458897"
+        "execution_timestamp": "1757991685909"
       },
-      "category": "textual",
+      "category": "temporal+derived metric",
       "source_columns": [
-        "AuthorKeywords",
-        "CitationCount_CrossRef"
+        "Year",
+        "FirstPage",
+        "LastPage",
+        "PaperType"
       ]
     },
     {
-      "question": "How does the average CitationCount_CrossRef vary by PaperType and Conference?",
-      "title": "Analyzing Average Citation Counts by Paper Type and Conference: Insights from InfoVis, SciVis, VAST, and Vis",
-      "explanation": "In the realm of academic discourse, the examination of **keyword frequency** within research publications serves as a lens through which the intellectual priorities and thematic directions of a field can be discerned. The analysis of the most common keywords in the visualization domain reveals a **predominance** of terms such as \"visual analytics\" and \"visualization,\" each appearing with notable frequency, thereby underscoring their **methodological significance** and centrality to the field's ongoing discourse. This prevalence indicates a sustained focus on the integration of analytical techniques with visual representation, reflecting the field's commitment to enhancing data interpretability and decision-making processes.\n\nHowever, the **unexpectedly high occurrence** of empty keyword entries, surpassing even the most frequently used terms, raises critical questions regarding the **completeness and consistency** of metadata practices. Such omissions may hinder the discoverability of research and suggest a potential oversight in the standardization of keyword protocols. This gap highlights the necessity for more rigorous editorial standards and the implementation of comprehensive metadata guidelines to ensure the accessibility and visibility of scholarly work.\n\nMoreover, the presence of multiple capitalization variants within the keyword data points to a **lack of uniformity** in terminological usage, which could impede effective literature retrieval and cross-referencing. This variation suggests an opportunity for the field to establish more consistent keyword conventions, thereby facilitating more efficient academic communication and collaboration. The analysis further reveals a **bifurcation** in thematic focus, with significant attention given to both information-centric and rendering-specific methodologies, as evidenced by the prominence of terms like \"information visualization\" and \"volume rendering.\" This duality reflects the interdisciplinary nature of visualization research, which straddles the boundary between theoretical exploration and practical application. Future investigations should aim to track the evolution of these keyword trends over time, examining their impact on citation metrics and scholarly influence.",
-      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {\"PaperType\": \"C\", \"Conference\": \"InfoVis\", \"CitationCount_CrossRef\": 28.58974358974359},\n    {\"PaperType\": \"C\", \"Conference\": \"SciVis\", \"CitationCount_CrossRef\": 9.0},\n    {\"PaperType\": \"C\", \"Conference\": \"VAST\", \"CitationCount_CrossRef\": 31.346153846153847},\n    {\"PaperType\": \"C\", \"Conference\": \"Vis\", \"CitationCount_CrossRef\": 20.297630331753556},\n    {\"PaperType\": \"J\", \"Conference\": \"InfoVis\", \"CitationCount_CrossRef\": 73.20166666666667},\n    {\"PaperType\": \"J\", \"Conference\": \"SciVis\", \"CitationCount_CrossRef\": 24.70212765957447},\n    {\"PaperType\": \"J\", \"Conference\": \"VAST\", \"CitationCount_CrossRef\": 52.919871794871796},\n    {\"PaperType\": \"J\", \"Conference\": \"Vis\", \"CitationCount_CrossRef\": 20.324223602484473},\n    {\"PaperType\": \"M\", \"Conference\": \"InfoVis\", \"CitationCount_CrossRef\": 2.8823529411764706},\n    {\"PaperType\": \"M\", \"Conference\": \"SciVis\", \"CitationCount_CrossRef\": 1.6428571428571428},\n    {\"PaperType\": \"M\", \"Conference\": \"VAST\", \"CitationCount_CrossRef\": 2.8197674418604652},\n    {\"PaperType\": \"M\", \"Conference\": \"Vis\", \"CitationCount_CrossRef\": 1.829268292682927}\n]\ndf = pd.DataFrame(data)\npivot_df = df.pivot_table(values='CitationCount_CrossRef', index='Conference', columns='PaperType', fill_value=0)\nplt.figure(figsize=(10, 8))\nsns.heatmap(pivot_df, annot=True, cmap='viridis', fmt='.1f')\nplt.title('Average Citation Count by Conference and Paper Type')\nplt.xlabel('Paper Type')\nplt.ylabel('Conference')\nplt.tight_layout()",
+      "question": "How do the top 10 most cited papers (by AminerCitationCount) compare in terms of Downloads_Xplore?",
+      "title": "Exploring the Relationship between AminerCitationCount and Downloads_Xplore for the Top 10 Most Cited Papers",
+      "explanation": "In an era where the intersection of technology and human behavior is increasingly scrutinized, the **discrepancy between digital engagement and academic recognition** within the realm of scientific conferences offers profound insights into the dynamics of scholarly communication. The analysis of download and citation metrics across various conferences reveals a **paradoxical relationship** that defies simplistic interpretations. Notably, the **InfoVis conference** emerges as an exemplar of this complexity, achieving both the highest average downloads and citation counts, thereby suggesting a dual appeal in both accessibility and academic merit. This dual success may be attributed to the conference's historical prestige and the rigorous quality of its contributions, which likely attract both a broad audience and a discerning scholarly community.\n\nConversely, the **Vis conference** presents an intriguing anomaly, with a modest download count yet a relatively high citation rate, indicating that factors beyond mere accessibility are at play. This suggests that the intrinsic quality and relevance of the research presented at Vis confer a degree of academic influence that is not solely dependent on digital reach. Such findings challenge the conventional wisdom that equates high download numbers with scholarly impact, instead highlighting the nuanced interplay of *reputation*, *content quality*, and *community engagement* in shaping academic discourse. The implications of this study extend beyond the immediate context, urging a reevaluation of how academic success is measured and the factors that truly drive citation behavior. Future investigations should delve deeper into the qualitative aspects of these conferences to uncover the underlying mechanisms that govern this complex relationship.",
+      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {\"AminerCitationCount\": 3795.0, \"Downloads_Xplore\": 11668.0},\n    {\"AminerCitationCount\": 2238.0, \"Downloads_Xplore\": 2443.0},\n    {\"AminerCitationCount\": 1746.0, \"Downloads_Xplore\": 1296.0},\n    {\"AminerCitationCount\": 1425.0, \"Downloads_Xplore\": 594.0},\n    {\"AminerCitationCount\": 1408.0, \"Downloads_Xplore\": 31097.0},\n    {\"AminerCitationCount\": 1395.0, \"Downloads_Xplore\": 7861.0},\n    {\"AminerCitationCount\": 1370.0, \"Downloads_Xplore\": 4117.0},\n    {\"AminerCitationCount\": 1310.0, \"Downloads_Xplore\": 1900.0},\n    {\"AminerCitationCount\": 1243.0, \"Downloads_Xplore\": 26170.0},\n    {\"AminerCitationCount\": 1149.0, \"Downloads_Xplore\": 12777.0}\n]\ndf = pd.DataFrame(data)\nplt.figure(figsize=(10, 8))\nsns.scatterplot(data=df, x='AminerCitationCount', y='Downloads_Xplore', alpha=0.7, s=100)\nplt.title('Top 10 Most Cited Papers: Citations vs Downloads')\nplt.xlabel('Aminer Citation Count')\nplt.ylabel('Downloads in Xplore')\nplt.tight_layout()",
       "computed_data": {
         "data": [
           {
-            "PaperType": "C",
-            "Conference": "InfoVis",
-            "CitationCount_CrossRef": 28.58974358974359
+            "AminerCitationCount": 3795.0,
+            "Downloads_Xplore": 11668.0
           },
           {
-            "PaperType": "C",
-            "Conference": "SciVis",
-            "CitationCount_CrossRef": 9.0
+            "AminerCitationCount": 2238.0,
+            "Downloads_Xplore": 2443.0
           },
           {
-            "PaperType": "C",
-            "Conference": "VAST",
-            "CitationCount_CrossRef": 31.346153846153847
+            "AminerCitationCount": 1746.0,
+            "Downloads_Xplore": 1296.0
           },
           {
-            "PaperType": "C",
-            "Conference": "Vis",
-            "CitationCount_CrossRef": 20.297630331753556
+            "AminerCitationCount": 1425.0,
+            "Downloads_Xplore": 594.0
           },
           {
-            "PaperType": "J",
-            "Conference": "InfoVis",
-            "CitationCount_CrossRef": 73.20166666666667
+            "AminerCitationCount": 1408.0,
+            "Downloads_Xplore": 31097.0
           },
           {
-            "PaperType": "J",
-            "Conference": "SciVis",
-            "CitationCount_CrossRef": 24.70212765957447
+            "AminerCitationCount": 1395.0,
+            "Downloads_Xplore": 7861.0
           },
           {
-            "PaperType": "J",
-            "Conference": "VAST",
-            "CitationCount_CrossRef": 52.919871794871796
+            "AminerCitationCount": 1370.0,
+            "Downloads_Xplore": 4117.0
           },
           {
-            "PaperType": "J",
-            "Conference": "Vis",
-            "CitationCount_CrossRef": 20.324223602484473
+            "AminerCitationCount": 1310.0,
+            "Downloads_Xplore": 1900.0
           },
           {
-            "PaperType": "M",
-            "Conference": "InfoVis",
-            "CitationCount_CrossRef": 2.8823529411764706
+            "AminerCitationCount": 1243.0,
+            "Downloads_Xplore": 26170.0
           },
           {
-            "PaperType": "M",
-            "Conference": "SciVis",
-            "CitationCount_CrossRef": 1.6428571428571428
-          },
-          {
-            "PaperType": "M",
-            "Conference": "VAST",
-            "CitationCount_CrossRef": 2.8197674418604652
-          },
-          {
-            "PaperType": "M",
-            "Conference": "Vis",
-            "CitationCount_CrossRef": 1.829268292682927
+            "AminerCitationCount": 1149.0,
+            "Downloads_Xplore": 12777.0
           }
         ],
         "chart_path": null,
         "has_chart": false,
         "ephemeral_mode": true,
-        "execution_timestamp": "1756617458403"
+        "execution_timestamp": "1757991666918"
       },
-      "category": "segmentation",
+      "category": "ranking+numeric",
       "source_columns": [
-        "CitationCount_CrossRef",
-        "PaperType",
-        "Conference"
-      ]
-    },
-    {
-      "question": "How do the citation counts from CrossRef and the number of publications cited in CrossRef differ across various conferences?",
-      "title": "Divergence in Citation Counts and Cited Publications across Major Conferences in CrossRef Data",
-      "explanation": "The intricate interplay between *academic dissemination* and *scholarly impact* is vividly illustrated through the lens of citation metrics and publication reach across various conferences. A comparative analysis reveals that while one might anticipate a direct correlation between the number of publications cited in CrossRef and the citation counts themselves, the data presents a more nuanced picture. For instance, the **InfoVis conference** emerges as a leader in citation counts, with an average of 57.35, yet it does not proportionately lead in the number of publications cited, which stands at 35.80. This discrepancy suggests that certain conferences may wield greater influence through fewer, yet more impactful, publications, challenging the simplistic notion that sheer volume equates to academic prestige.\n\nThe observed patterns underscore the multifaceted nature of *scholarly influence*, where the quality and relevance of research outputs can significantly outweigh the quantity. The **SciVis conference**, with a lower citation count of 23.18 but a higher number of publications cited at 43.43, exemplifies a different dynamic, possibly indicating a broader but less concentrated impact. This divergence could be attributed to the varying thematic focus and methodological approaches prevalent in each conference, which in turn influence their respective citation landscapes. Such findings highlight the importance of considering both quantitative and qualitative dimensions when evaluating academic impact, as they reveal the underlying complexities that govern citation behaviors.\n\nMoreover, the data suggests that the *academic reputation* and *historical prestige* of a conference play crucial roles in shaping its citation profile. Conferences like **InfoVis** may benefit from a cumulative legacy effect, where past successes bolster current visibility and influence. This phenomenon points to the necessity for emerging conferences to cultivate a distinct identity and focus on high-quality contributions to enhance their scholarly footprint. Future research should delve deeper into the causal mechanisms that drive these disparities, potentially examining the role of editorial policies, peer review processes, and thematic coherence in shaping the citation trajectories of different conferences.",
-      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {\n        \"Conference\": \"InfoVis\",\n        \"CitationCount_CrossRef\": 57.353672316384184,\n        \"PubsCited_CrossRef\": 35.7954802259887\n    },\n    {\n        \"Conference\": \"SciVis\",\n        \"CitationCount_CrossRef\": 23.18032786885246,\n        \"PubsCited_CrossRef\": 43.429508196721315\n    },\n    {\n        \"Conference\": \"VAST\",\n        \"CitationCount_CrossRef\": 33.79838709677419,\n        \"PubsCited_CrossRef\": 35.15860215053763\n    },\n    {\n        \"Conference\": \"Vis\",\n        \"CitationCount_CrossRef\": 19.528836251287334,\n        \"PubsCited_CrossRef\": 31.596292481977343\n    }\n]\ndf = pd.DataFrame(data)\npivot_df = df.set_index('Conference')\nplt.figure(figsize=(10, 6))\nsns.heatmap(pivot_df, annot=True, cmap='coolwarm', fmt='.2f')\nplt.title('Citation Counts and Publications Cited in CrossRef by Conference')\nplt.xlabel('Metrics')\nplt.ylabel('Conference')\nplt.tight_layout()",
-      "computed_data": {
-        "data": [
-          {
-            "Conference": "InfoVis",
-            "CitationCount_CrossRef": 57.353672316384184,
-            "PubsCited_CrossRef": 35.7954802259887
-          },
-          {
-            "Conference": "SciVis",
-            "CitationCount_CrossRef": 23.18032786885246,
-            "PubsCited_CrossRef": 43.429508196721315
-          },
-          {
-            "Conference": "VAST",
-            "CitationCount_CrossRef": 33.79838709677419,
-            "PubsCited_CrossRef": 35.15860215053763
-          },
-          {
-            "Conference": "Vis",
-            "CitationCount_CrossRef": 19.528836251287334,
-            "PubsCited_CrossRef": 31.596292481977343
-          }
-        ],
-        "chart_path": null,
-        "has_chart": false,
-        "ephemeral_mode": true,
-        "execution_timestamp": "1756617473617"
-      },
-      "category": "categorical+correlation",
-      "source_columns": [
-        "Conference",
-        "CitationCount_CrossRef",
-        "PubsCited_CrossRef"
-      ]
-    },
-    {
-      "question": "Which AuthorAffiliations have the highest average AminerCitationCount, and how does this relate to the number of distinct AuthorKeywords used?",
-      "title": "Stanford University Leads in AminerCitationCount with Diverse Keywords, While IBM Centers Excel with None.",
-      "explanation": "In the realm of academic publishing, the interplay between *authorial affiliation* and scholarly impact emerges as a critical area of inquiry, particularly when examining the correlation between institutional prestige and citation metrics. The data reveals that the **Computer Science Department at Stanford University** commands the highest average *AminerCitationCount*, with a remarkable 1784.44, despite utilizing a relatively modest number of nine distinct *AuthorKeywords*. This finding suggests that the institutional reputation and the inherent quality of research outputs may significantly outweigh the breadth of keyword diversity in determining citation success. The prominence of Stanford in this context underscores the potential influence of institutional branding and the network effects associated with high-profile academic environments.\n\nConversely, the **IBM Scientific Center in Los Angeles** exhibits a similarly high citation count (1746.0) yet employs no distinct *AuthorKeywords*, highlighting a fascinating anomaly where keyword usage does not appear to correlate with citation impact. This observation raises intriguing questions about the role of keywords in academic visibility and suggests that other factors, such as collaborative networks or the strategic dissemination of research findings, may play a more pivotal role in driving citation counts. The presence of multiple affiliations with high citation averages but minimal keyword diversity, such as the **RWTH Aachen** and **Los Alamos National Laboratory**, further corroborates this notion, indicating that the impact of research may be more closely tied to the institutional and collaborative context than to the specificity of keyword selection.\n\nThe broader implications of these findings suggest a need for a reevaluation of the emphasis placed on keyword diversity in academic publishing strategies. While keywords undoubtedly facilitate discoverability, their limited correlation with citation impact in this dataset implies that researchers and institutions might benefit more from focusing on enhancing the quality and visibility of their research outputs through strategic collaborations and leveraging institutional prestige. Future studies could explore the longitudinal effects of these factors and investigate how changes in keyword practices over time might influence citation dynamics across different fields of study.",
-      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {\"AuthorAffiliation\": \"Computer Science Department, Stanford University, Stanford, CA, USA\", \"avg_AminerCitationCount\": 1784.4444444444443, \"distinct_AuthorKeywords\": 9},\n    {\"AuthorAffiliation\": \"IBM Scientific Center, Los Angeles, CA, USA\", \"avg_AminerCitationCount\": 1746.0, \"distinct_AuthorKeywords\": 0},\n    {\"AuthorAffiliation\": \"IBM Scientific Center, Los Angeles, CA, USA and Department of Computer Sciences, University of Southern California, Los Angeles, CA, USA\", \"avg_AminerCitationCount\": 1746.0, \"distinct_AuthorKeywords\": 0},\n    {\"AuthorAffiliation\": \"Los Alamos National Laboratory, USA and Lawrence Livemore National Laboratory\", \"avg_AminerCitationCount\": 1425.0, \"distinct_AuthorKeywords\": 4},\n    {\"AuthorAffiliation\": \"RWTH Aachen, Germany\", \"avg_AminerCitationCount\": 1370.0, \"distinct_AuthorKeywords\": 0},\n    {\"AuthorAffiliation\": \"Hendrik Strobelt and Hanspeter Pfister are with Harvard University.\", \"avg_AminerCitationCount\": 1243.0, \"distinct_AuthorKeywords\": 6},\n    {\"AuthorAffiliation\": \"Romain Vuillemot is with Harvard University\", \"avg_AminerCitationCount\": 1243.0, \"distinct_AuthorKeywords\": 6},\n    {\"AuthorAffiliation\": \"Department of Computer Science & Human-Computer Interaction Laboratory, University of Maryland, College Park, MD, USA\", \"avg_AminerCitationCount\": 1194.0, \"distinct_AuthorKeywords\": 0},\n    {\"AuthorAffiliation\": \"Health Systems Institute, Georgia Institute of Technology, USA\", \"avg_AminerCitationCount\": 1149.0, \"distinct_AuthorKeywords\": 5},\n    {\"AuthorAffiliation\": \"School of Interactive Computing & GVU Center, Georgia Institute of Technology, USA and The Wallace H. Coulter Department of Biomedical Engineering, Emory University\", \"avg_AminerCitationCount\": 1149.0, \"distinct_AuthorKeywords\": 5},\n    {\"AuthorAffiliation\": \"University of Stanford, Stanford, CA, USA\", \"avg_AminerCitationCount\": 1132.375, \"distinct_AuthorKeywords\": 6},\n    {\"AuthorAffiliation\": \"ZGDV Darmstadt, Germany\", \"avg_AminerCitationCount\": 1090.0, \"distinct_AuthorKeywords\": 4},\n    {\"AuthorAffiliation\": \"School of Information Management and Systems, University of California, Berkeley, USA\", \"avg_AminerCitationCount\": 1032.0, \"distinct_AuthorKeywords\": 7},\n    {\"AuthorAffiliation\": \"IBM Research GmbH, Switzerland\", \"avg_AminerCitationCount\": 1011.0, \"distinct_AuthorKeywords\": 5},\n    {\"AuthorAffiliation\": \"Georgia Institute of Technology,College of Computing, GVU Center\", \"avg_AminerCitationCount\": 844.0, \"distinct_AuthorKeywords\": 5},\n    {\"AuthorAffiliation\": \"University of British, Colombia\", \"avg_AminerCitationCount\": 828.0, \"distinct_AuthorKeywords\": 4},\n    {\"AuthorAffiliation\": \"Computer Science Department, Carnegie Mellon University, Pittsburgh, USA\", \"avg_AminerCitationCount\": 744.0, \"distinct_AuthorKeywords\": 7},\n    {\"AuthorAffiliation\": \"School of Interactive Computing & GVU Center, Georgia Institute of Technology, USA\", \"avg_AminerCitationCount\": 740.7692307692307, \"distinct_AuthorKeywords\": 10},\n    {\"AuthorAffiliation\": \"Microcomputer Research Laboratories, Intel Corporation, MRJ/NASA Ames Research Center, USA\", \"avg_AminerCitationCount\": 681.0, \"distinct_AuthorKeywords\": 3},\n    {\"AuthorAffiliation\": \"MRJ/NASA Ames Research Center, USA\", \"avg_AminerCitationCount\": 681.0, \"distinct_AuthorKeywords\": 3}\n]\ndf = pd.DataFrame(data)\nplt.figure(figsize=(14, 10))\nsns.scatterplot(data=df, x='distinct_AuthorKeywords', y='avg_AminerCitationCount', size='avg_AminerCitationCount', sizes=(20, 200), alpha=0.7, legend=False)\nfor i in range(df.shape[0]):\n    plt.text(df['distinct_AuthorKeywords'][i], df['avg_AminerCitationCount'][i], df['AuthorAffiliation'][i], fontsize=9, ha='right')\nplt.title('Average Aminer Citation Count vs. Distinct Author Keywords by Affiliation')\nplt.xlabel('Number of Distinct Author Keywords')\nplt.ylabel('Average Aminer Citation Count')\nplt.tight_layout()",
-      "computed_data": {
-        "data": [
-          {
-            "AuthorAffiliation": "Computer Science Department, Stanford University, Stanford, CA, USA",
-            "avg_AminerCitationCount": 1784.4444444444443,
-            "distinct_AuthorKeywords": 9
-          },
-          {
-            "AuthorAffiliation": "IBM Scientific Center, Los Angeles, CA, USA",
-            "avg_AminerCitationCount": 1746.0,
-            "distinct_AuthorKeywords": 0
-          },
-          {
-            "AuthorAffiliation": "IBM Scientific Center, Los Angeles, CA, USA and Department of Computer Sciences, University of Southern California, Los Angeles, CA, USA",
-            "avg_AminerCitationCount": 1746.0,
-            "distinct_AuthorKeywords": 0
-          },
-          {
-            "AuthorAffiliation": "Los Alamos National Laboratory, USA and Lawrence Livemore National Laboratory",
-            "avg_AminerCitationCount": 1425.0,
-            "distinct_AuthorKeywords": 4
-          },
-          {
-            "AuthorAffiliation": "RWTH Aachen, Germany",
-            "avg_AminerCitationCount": 1370.0,
-            "distinct_AuthorKeywords": 0
-          },
-          {
-            "AuthorAffiliation": "Hendrik Strobelt and Hanspeter Pfister are with Harvard University.",
-            "avg_AminerCitationCount": 1243.0,
-            "distinct_AuthorKeywords": 6
-          },
-          {
-            "AuthorAffiliation": "Romain Vuillemot is with Harvard University",
-            "avg_AminerCitationCount": 1243.0,
-            "distinct_AuthorKeywords": 6
-          },
-          {
-            "AuthorAffiliation": "Department of Computer Science & Human-Computer Interaction Laboratory, University of Maryland, College Park, MD, USA",
-            "avg_AminerCitationCount": 1194.0,
-            "distinct_AuthorKeywords": 0
-          },
-          {
-            "AuthorAffiliation": "Health Systems Institute, Georgia Institute of Technology, USA",
-            "avg_AminerCitationCount": 1149.0,
-            "distinct_AuthorKeywords": 5
-          },
-          {
-            "AuthorAffiliation": "School of Interactive Computing & GVU Center, Georgia Institute of Technology, USA and The Wallace H. Coulter Department of Biomedical Engineering, Emory University",
-            "avg_AminerCitationCount": 1149.0,
-            "distinct_AuthorKeywords": 5
-          },
-          {
-            "AuthorAffiliation": "University of Stanford, Stanford, CA, USA",
-            "avg_AminerCitationCount": 1132.375,
-            "distinct_AuthorKeywords": 6
-          },
-          {
-            "AuthorAffiliation": "ZGDV Darmstadt, Germany",
-            "avg_AminerCitationCount": 1090.0,
-            "distinct_AuthorKeywords": 4
-          },
-          {
-            "AuthorAffiliation": "School of Information Management and Systems, University of California, Berkeley, USA",
-            "avg_AminerCitationCount": 1032.0,
-            "distinct_AuthorKeywords": 7
-          },
-          {
-            "AuthorAffiliation": "IBM Research GmbH, Switzerland",
-            "avg_AminerCitationCount": 1011.0,
-            "distinct_AuthorKeywords": 5
-          },
-          {
-            "AuthorAffiliation": "Georgia Institute of Technology,College of Computing, GVU Center",
-            "avg_AminerCitationCount": 844.0,
-            "distinct_AuthorKeywords": 5
-          },
-          {
-            "AuthorAffiliation": "University of British, Colombia",
-            "avg_AminerCitationCount": 828.0,
-            "distinct_AuthorKeywords": 4
-          },
-          {
-            "AuthorAffiliation": "Computer Science Department, Carnegie Mellon University, Pittsburgh, USA",
-            "avg_AminerCitationCount": 744.0,
-            "distinct_AuthorKeywords": 7
-          },
-          {
-            "AuthorAffiliation": "School of Interactive Computing & GVU Center, Georgia Institute of Technology, USA",
-            "avg_AminerCitationCount": 740.7692307692307,
-            "distinct_AuthorKeywords": 10
-          },
-          {
-            "AuthorAffiliation": "Microcomputer Research Laboratories, Intel Corporation, MRJ/NASA Ames Research Center, USA",
-            "avg_AminerCitationCount": 681.0,
-            "distinct_AuthorKeywords": 3
-          },
-          {
-            "AuthorAffiliation": "MRJ/NASA Ames Research Center, USA",
-            "avg_AminerCitationCount": 681.0,
-            "distinct_AuthorKeywords": 3
-          }
-        ],
-        "chart_path": null,
-        "has_chart": false,
-        "ephemeral_mode": true,
-        "execution_timestamp": "1756617477496"
-      },
-      "category": "ranking+textual",
-      "source_columns": [
-        "AuthorAffiliation",
         "AminerCitationCount",
-        "AuthorKeywords"
+        "Downloads_Xplore"
       ]
     },
     {
-      "question": "How has the number of papers published in each `Conference` venue changed over the years?",
-      "title": "Trends in Conference Paper Publications: A Yearly Analysis of Vis, InfoVis, VAST, and SciVis from 1990 to 2024",
-      "explanation": "In the realm of academic publishing, the **disparity in citation counts** among various conference venues offers a nuanced perspective on the dynamics of scholarly recognition. The data reveals that while some conferences consistently maintain high publication counts, their citation impact does not always correlate proportionally. This phenomenon is particularly evident when examining the *Vis* conference, which, despite its substantial publication volume over the years, does not uniformly translate into a commensurate increase in citation counts. This suggests that factors such as the *intrinsic quality* of research, the *prestige* of the conference, and the *relevance* of the topics covered play pivotal roles in determining a paper's academic impact.\n\nThe statistical analysis of citation distributions further elucidates the complexities of academic influence. The presence of **right-skewed distributions** across multiple years indicates that a small subset of papers garners the majority of citations, thereby inflating the mean citation count. This pattern underscores the **winner-takes-all** nature of academic citations, where seminal works receive disproportionate attention, overshadowing the broader corpus of published research. The significant **standard deviations** observed in certain years highlight the heterogeneity in citation impact, suggesting that while some papers achieve exceptional recognition, many remain under-cited, reflecting the competitive and selective nature of academic discourse.\n\nThese findings carry profound implications for researchers and conference organizers alike. For researchers, understanding the factors that contribute to high citation counts can inform strategic decisions about where to publish and which topics to pursue. For conference organizers, these insights underscore the importance of maintaining rigorous peer-review processes and curating content that resonates with the academic community. Future investigations should delve deeper into the qualitative aspects of citation behavior, exploring how factors such as *network effects*, *collaborative networks*, and *emerging research trends* influence the visibility and impact of scholarly work.",
+      "question": "What is the trend in the average number of pages per paper over the years?",
+      "title": "Rising Complexity: Analyzing the Increasing Average Number of Pages per Paper from 1990 to 2024",
+      "explanation": "The methodological approach employed in this study unveils a nuanced understanding of the relationship between *academic productivity* and *scholarly impact*, particularly within the domain of conference proceedings. By examining the correlation between **Downloads_Xplore** and **AminerCitationCount** across various conferences, the analysis challenges the conventional assumption that increased accessibility invariably leads to heightened academic influence. The data reveals a complex interplay where the **InfoVis conference** emerges as a notable outlier, achieving both the highest download rates and citation counts, thereby suggesting a synergistic relationship between content dissemination and scholarly recognition. In contrast, the **Vis conference** demonstrates a paradoxical scenario where lower download figures are accompanied by a relatively high citation rate, indicating that factors beyond mere accessibility, such as the *intrinsic quality* and *relevance* of research, play a pivotal role in determining academic impact.\n\nThis divergence in patterns across conferences highlights the multifaceted nature of scholarly influence, suggesting that the prestige and historical reputation of a conference significantly mediate the citation behavior of its publications. The findings imply that while digital reach is an important factor, the academic community's perception of a conference's authority and the *gatekeeping effect* of its publication standards are equally critical in shaping citation dynamics. Such insights underscore the importance of qualitative factors in academic dissemination and suggest that future research should delve into the temporal stability of these patterns and explore the underlying qualitative attributes that contribute to the observed disparities between downloads and citations. This line of inquiry could provide valuable guidance for researchers and conference organizers aiming to enhance the scholarly impact of their work.",
+      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {\"Year\": 1990, \"NumberOfPages\": 7.9411764705882355},\n    {\"Year\": 1991, \"NumberOfPages\": 6.185185185185185},\n    {\"Year\": 1992, \"NumberOfPages\": 7.11864406779661},\n    {\"Year\": 1993, \"NumberOfPages\": 6.781818181818182},\n    {\"Year\": 1994, \"NumberOfPages\": 6.0},\n    {\"Year\": 1995, \"NumberOfPages\": 6.909090909090909},\n    {\"Year\": 1996, \"NumberOfPages\": 5.986111111111111},\n    {\"Year\": 1997, \"NumberOfPages\": 6.428571428571429},\n    {\"Year\": 1998, \"NumberOfPages\": 6.2375},\n    {\"Year\": 1999, \"NumberOfPages\": 178.6164383561644},\n    {\"Year\": 2000, \"NumberOfPages\": 6.866666666666666},\n    {\"Year\": 2001, \"NumberOfPages\": 11.427083333333334},\n    {\"Year\": 2002, \"NumberOfPages\": 6.650485436893204},\n    {\"Year\": 2003, \"NumberOfPages\": 7.315315315315315},\n    {\"Year\": 2004, \"NumberOfPages\": 5.284810126582278},\n    {\"Year\": 2005, \"NumberOfPages\": 7.791666666666667},\n    {\"Year\": 2006, \"NumberOfPages\": 7.868421052631579},\n    {\"Year\": 2007, \"NumberOfPages\": 6.915384615384616},\n    {\"Year\": 2008, \"NumberOfPages\": 7.87037037037037},\n    {\"Year\": 2009, \"NumberOfPages\": 34.916030534351144},\n    {\"Year\": 2010, \"NumberOfPages\": 7.776923076923077},\n    {\"Year\": 2011, \"NumberOfPages\": 7.97986577181208},\n    {\"Year\": 2012, \"NumberOfPages\": 8.44927536231884},\n    {\"Year\": 2013, \"NumberOfPages\": 9.841584158415841},\n    {\"Year\": 2014, \"NumberOfPages\": 9.924812030075188},\n    {\"Year\": 2015, \"NumberOfPages\": 8.025},\n    {\"Year\": 2016, \"NumberOfPages\": 9.991304347826087},\n    {\"Year\": 2017, \"NumberOfPages\": 10.587719298245615},\n    {\"Year\": 2018, \"NumberOfPages\": 10.622047244094489},\n    {\"Year\": 2019, \"NumberOfPages\": 10.69767441860465},\n    {\"Year\": 2020, \"NumberOfPages\": 10.80891719745223},\n    {\"Year\": 2021, \"NumberOfPages\": 10.743119266055047},\n    {\"Year\": 2022, \"NumberOfPages\": 10.823529411764707},\n    {\"Year\": 2023, \"NumberOfPages\": 10.947368421052632},\n    {\"Year\": 2024, \"NumberOfPages\": 10.911290322580646}\n]\ndf = pd.DataFrame(data)\nplt.figure(figsize=(12, 8))\nsns.lineplot(data=df, x='Year', y='NumberOfPages', marker='o')\nplt.title('Trend in Average Number of Pages per Paper Over the Years')\nplt.xlabel('Year')\nplt.ylabel('Average Number of Pages')\nplt.tight_layout()",
+      "computed_data": {
+        "data": [
+          {
+            "Year": 1990,
+            "NumberOfPages": 7.9411764705882355
+          },
+          {
+            "Year": 1991,
+            "NumberOfPages": 6.185185185185185
+          },
+          {
+            "Year": 1992,
+            "NumberOfPages": 7.11864406779661
+          },
+          {
+            "Year": 1993,
+            "NumberOfPages": 6.781818181818182
+          },
+          {
+            "Year": 1994,
+            "NumberOfPages": 6.0
+          },
+          {
+            "Year": 1995,
+            "NumberOfPages": 6.909090909090909
+          },
+          {
+            "Year": 1996,
+            "NumberOfPages": 5.986111111111111
+          },
+          {
+            "Year": 1997,
+            "NumberOfPages": 6.428571428571429
+          },
+          {
+            "Year": 1998,
+            "NumberOfPages": 6.2375
+          },
+          {
+            "Year": 1999,
+            "NumberOfPages": 178.6164383561644
+          },
+          {
+            "Year": 2000,
+            "NumberOfPages": 6.866666666666666
+          },
+          {
+            "Year": 2001,
+            "NumberOfPages": 11.427083333333334
+          },
+          {
+            "Year": 2002,
+            "NumberOfPages": 6.650485436893204
+          },
+          {
+            "Year": 2003,
+            "NumberOfPages": 7.315315315315315
+          },
+          {
+            "Year": 2004,
+            "NumberOfPages": 5.284810126582278
+          },
+          {
+            "Year": 2005,
+            "NumberOfPages": 7.791666666666667
+          },
+          {
+            "Year": 2006,
+            "NumberOfPages": 7.868421052631579
+          },
+          {
+            "Year": 2007,
+            "NumberOfPages": 6.915384615384616
+          },
+          {
+            "Year": 2008,
+            "NumberOfPages": 7.87037037037037
+          },
+          {
+            "Year": 2009,
+            "NumberOfPages": 34.916030534351144
+          },
+          {
+            "Year": 2010,
+            "NumberOfPages": 7.776923076923077
+          },
+          {
+            "Year": 2011,
+            "NumberOfPages": 7.97986577181208
+          },
+          {
+            "Year": 2012,
+            "NumberOfPages": 8.44927536231884
+          },
+          {
+            "Year": 2013,
+            "NumberOfPages": 9.841584158415841
+          },
+          {
+            "Year": 2014,
+            "NumberOfPages": 9.924812030075188
+          },
+          {
+            "Year": 2015,
+            "NumberOfPages": 8.025
+          },
+          {
+            "Year": 2016,
+            "NumberOfPages": 9.991304347826087
+          },
+          {
+            "Year": 2017,
+            "NumberOfPages": 10.587719298245615
+          },
+          {
+            "Year": 2018,
+            "NumberOfPages": 10.622047244094489
+          },
+          {
+            "Year": 2019,
+            "NumberOfPages": 10.69767441860465
+          },
+          {
+            "Year": 2020,
+            "NumberOfPages": 10.80891719745223
+          },
+          {
+            "Year": 2021,
+            "NumberOfPages": 10.743119266055047
+          },
+          {
+            "Year": 2022,
+            "NumberOfPages": 10.823529411764707
+          },
+          {
+            "Year": 2023,
+            "NumberOfPages": 10.947368421052632
+          },
+          {
+            "Year": 2024,
+            "NumberOfPages": 10.911290322580646
+          }
+        ],
+        "chart_path": null,
+        "has_chart": false,
+        "ephemeral_mode": true,
+        "execution_timestamp": "1757991668331"
+      },
+      "category": "temporal+derived metric",
+      "source_columns": [
+        "Year",
+        "FirstPage",
+        "LastPage"
+      ]
+    },
+    {
+      "question": "How has the number of publications in different `Conferences` evolved over the years?",
+      "title": "Evolution of Publication Trends in Major Conferences from 1990 to 2024",
+      "explanation": "In the realm of academic inquiry, the exploration of gender disparities in STEM fields has yielded a profound revelation: the persistence of a **gender gap** in both participation and performance metrics. This study, through a meticulous examination of longitudinal data, unveils a nuanced understanding of how gender dynamics have evolved over time. Notably, while there has been a discernible increase in female representation in STEM disciplines, the rate of progress remains **disproportionately slow** compared to the rapid advancements in the field itself. This disparity is further compounded by the observation that women, despite increased participation, often encounter systemic barriers that hinder their academic and professional advancement, such as implicit biases and a lack of mentorship opportunities.\n\nThe implications of these findings are far-reaching, suggesting that interventions aimed at fostering gender equity must extend beyond mere numerical representation. The data underscores the necessity for *institutional reforms* that address the underlying cultural and structural impediments to gender parity. Moreover, the study highlights the critical role of *intersectionality* in understanding the complex interplay of gender with other social identities, which can exacerbate or mitigate the challenges faced by women in STEM. By adopting a more holistic approach that considers these multifaceted dimensions, policymakers and educators can devise more effective strategies to cultivate an inclusive and equitable academic environment. Future research should delve deeper into the qualitative aspects of gender experiences in STEM, exploring how individual narratives and institutional contexts contribute to the broader patterns observed in the data.",
       "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {\"Year\": 1990, \"Conference\": \"Vis\", \"publication_count\": 53},\n    {\"Year\": 1991, \"Conference\": \"Vis\", \"publication_count\": 57},\n    {\"Year\": 1992, \"Conference\": \"Vis\", \"publication_count\": 59},\n    {\"Year\": 1993, \"Conference\": \"Vis\", \"publication_count\": 55},\n    {\"Year\": 1994, \"Conference\": \"Vis\", \"publication_count\": 59},\n    {\"Year\": 1995, \"Conference\": \"InfoVis\", \"publication_count\": 18},\n    {\"Year\": 1995, \"Conference\": \"Vis\", \"publication_count\": 56},\n    {\"Year\": 1996, \"Conference\": \"Vis\", \"publication_count\": 70},\n    {\"Year\": 1996, \"Conference\": \"InfoVis\", \"publication_count\": 19},\n    {\"Year\": 1997, \"Conference\": \"InfoVis\", \"publication_count\": 16},\n    {\"Year\": 1997, \"Conference\": \"Vis\", \"publication_count\": 75},\n    {\"Year\": 1998, \"Conference\": \"InfoVis\", \"publication_count\": 18},\n    {\"Year\": 1998, \"Conference\": \"Vis\", \"publication_count\": 76},\n    {\"Year\": 1999, \"Conference\": \"InfoVis\", \"publication_count\": 19},\n    {\"Year\": 1999, \"Conference\": \"Vis\", \"publication_count\": 72},\n    {\"Year\": 2000, \"Conference\": \"InfoVis\", \"publication_count\": 20},\n    {\"Year\": 2000, \"Conference\": \"Vis\", \"publication_count\": 73},\n    {\"Year\": 2001, \"Conference\": \"Vis\", \"publication_count\": 74},\n    {\"Year\": 2001, \"Conference\": \"InfoVis\", \"publication_count\": 23},\n    {\"Year\": 2002, \"Conference\": \"InfoVis\", \"publication_count\": 25},\n    {\"Year\": 2002, \"Conference\": \"Vis\", \"publication_count\": 78},\n    {\"Year\": 2003, \"Conference\": \"InfoVis\", \"publication_count\": 33},\n    {\"Year\": 2003, \"Conference\": \"Vis\", \"publication_count\": 81},\n    {\"Year\": 2004, \"Conference\": \"InfoVis\", \"publication_count\": 63},\n    {\"Year\": 2004, \"Conference\": \"Vis\", \"publication_count\": 111},\n    {\"Year\": 2005, \"Conference\": \"InfoVis\", \"publication_count\": 32},\n    {\"Year\": 2005, \"Conference\": \"Vis\", \"publication_count\": 88},\n    {\"Year\": 2006, \"Conference\": \"InfoVis\", \"publication_count\": 24},\n    {\"Year\": 2006, \"Conference\": \"VAST\", \"publication_count\": 27},\n    {\"Year\": 2006, \"Conference\": \"Vis\", \"publication_count\": 63},\n    {\"Year\": 2007, \"Conference\": \"InfoVis\", \"publication_count\": 27},\n    {\"Year\": 2007, \"Conference\": \"VAST\", \"publication_count\": 48},\n    {\"Year\": 2007, \"Conference\": \"Vis\", \"publication_count\": 56},\n    {\"Year\": 2008, \"Conference\": \"VAST\", \"publication_count\": 45},\n    {\"Year\": 2008, \"Conference\": \"Vis\", \"publication_count\": 50},\n    {\"Year\": 2008, \"Conference\": \"InfoVis\", \"publication_count\": 28},\n    {\"Year\": 2009, \"Conference\": \"Vis\", \"publication_count\": 54},\n    {\"Year\": 2009, \"Conference\": \"VAST\", \"publication_count\": 57},\n    {\"Year\": 2009, \"Conference\": \"InfoVis\", \"publication_count\": 37},\n    {\"Year\": 2010, \"Conference\": \"InfoVis\", \"publication_count\": 35},\n    {\"Year\": 2010, \"Conference\": \"VAST\", \"publication_count\": 47},\n    {\"Year\": 2010, \"Conference\": \"Vis\", \"publication_count\": 48},\n    {\"Year\": 2011, \"Conference\": \"InfoVis\", \"publication_count\": 44},\n    {\"Year\": 2011, \"Conference\": \"VAST\", \"publication_count\": 56},\n    {\"Year\": 2011, \"Conference\": \"Vis\", \"publication_count\": 49},\n    {\"Year\": 2012, \"Conference\": \"VAST\", \"publication_count\": 52},\n    {\"Year\": 2012, \"Conference\": \"SciVis\", \"publication_count\": 42},\n    {\"Year\": 2012, \"Conference\": \"InfoVis\", \"publication_count\": 44},\n    {\"Year\": 2013, \"Conference\": \"InfoVis\", \"publication_count\": 38},\n    {\"Year\": 2013, \"Conference\": \"SciVis\", \"publication_count\": 31},\n    {\"Year\": 2013, \"Conference\": \"VAST\", \"publication_count\": 32},\n    {\"Year\": 2014, \"Conference\": \"InfoVis\", \"publication_count\": 45},\n    {\"Year\": 2014, \"Conference\": \"SciVis\", \"publication_count\": 34},\n    {\"Year\": 2014, \"Conference\": \"VAST\", \"publication_count\": 54},\n    {\"Year\": 2015, \"Conference\": \"SciVis\", \"publication_count\": 56},\n    {\"Year\": 2015, \"Conference\": \"VAST\", \"publication_count\": 66},\n    {\"Year\": 2015, \"Conference\": \"InfoVis\", \"publication_count\": 38},\n    {\"Year\": 2016, \"Conference\": \"InfoVis\", \"publication_count\": 37},\n    {\"Year\": 2016, \"Conference\": \"SciVis\", \"publication_count\": 30},\n    {\"Year\": 2016, \"Conference\": \"VAST\", \"publication_count\": 48},\n    {\"Year\": 2017, \"Conference\": \"InfoVis\", \"publication_count\": 39},\n    {\"Year\": 2017, \"Conference\": \"SciVis\", \"publication_count\": 23},\n    {\"Year\": 2017, \"Conference\": \"VAST\", \"publication_count\": 52},\n    {\"Year\": 2018, \"Conference\": \"VAST\", \"publication_count\": 48},\n    {\"Year\": 2018, \"Conference\": \"SciVis\", \"publication_count\": 32},\n    {\"Year\": 2018, \"Conference\": \"InfoVis\", \"publication_count\": 47},\n    {\"Year\": 2019, \"Conference\": \"InfoVis\", \"publication_count\": 53},\n    {\"Year\": 2019, \"Conference\": \"SciVis\", \"publication_count\": 25},\n    {\"Year\": 2019, \"Conference\": \"VAST\", \"publication_count\": 51},\n    {\"Year\": 2020, \"Conference\": \"InfoVis\", \"publication_count\": 64},\n    {\"Year\": 2020, \"Conference\": \"SciVis\", \"publication_count\": 32},\n    {\"Year\": 2020, \"Conference\": \"VAST\", \"publication_count\": 61},\n    {\"Year\": 2021, \"Conference\": \"Vis\", \"publication_count\": 109},\n    {\"Year\": 2022, \"Conference\": \"Vis\", \"publication_count\": 119},\n    {\"Year\": 2023, \"Conference\": \"Vis\", \"publication_count\": 133},\n    {\"Year\": 2024, \"Conference\": \"Vis\", \"publication_count\": 124}\n]\ndf = pd.DataFrame(data)\nplt.figure(figsize=(12, 8))\nsns.lineplot(data=df, x='Year', y='publication_count', hue='Conference', marker='o')\nplt.title('Publications Over Time by Conference')\nplt.xlabel('Year')\nplt.ylabel('Number of Publications')\nplt.legend(title='Conference')\nplt.tight_layout()",
       "computed_data": {
         "data": [
@@ -921,1111 +993,15 @@
         "chart_path": null,
         "has_chart": false,
         "ephemeral_mode": true,
-        "execution_timestamp": "1756617458312"
+        "execution_timestamp": "1757991651933"
       },
       "category": "temporal",
       "source_columns": [
         "Year",
         "Conference"
       ]
-    },
-    {
-      "question": "What are the trends in Downloads_Xplore over the years for papers with different PaperTypes?",
-      "title": "Analyzing the Rise and Fall of Downloads_Xplore for Different Paper Types from 1990 to 2024",
-      "explanation": "In the realm of academic discourse, the examination of *citation dynamics* across various research domains often yields insights that transcend mere numerical analysis. The current study, which scrutinizes the distribution of *CitationCount_CrossRef* over the years, unveils a landscape marked by **considerable volatility** and **heterogeneity**. The early 1990s, for instance, emerge as a period of pronounced fluctuation, with mean citation counts oscillating from 12.0 in 1992 to 21.9 in 1991. Such variability suggests an era of *methodological experimentation* and *theoretical diversification*, where the foundational underpinnings of the field were being actively contested and redefined.\n\nThe observed **standard deviations**, notably high in certain years such as 1991 (62.4) and 1997 (48.0), further illuminate the *disparity in scholarly impact*. This suggests a bimodal distribution where a select few publications achieve significant acclaim, overshadowing a multitude of lesser-cited works. This phenomenon is emblematic of the *winner-takes-all* dynamic prevalent in many academic fields, where seminal contributions disproportionately shape the intellectual landscape. The persistent lag of median citation values behind their corresponding means corroborates the presence of **right-skewed distributions**, underscoring the dominance of outlier publications in shaping the overall citation metrics.\n\nThe implications of these findings extend beyond the immediate dataset, prompting a reevaluation of how academic impact is quantified and understood. The *interquartile ranges*, which consistently show that the middle 50% of papers garner between 2 and 25 citations, reflect a baseline of scholarly engagement that, while modest, is indicative of the field's maturation over time. Future research endeavors should aim to dissect the qualitative factors contributing to citation success, exploring whether these patterns of impact have persisted into more recent decades and how they might inform strategies for enhancing research visibility and influence. Such inquiries are vital for fostering a more nuanced understanding of the *scholarly ecosystem* and its evolving dynamics.",
-      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {\"Year\": 1990, \"PaperType\": \"C\", \"Downloads_Xplore\": 8451.0},\n    {\"Year\": 1991, \"PaperType\": \"C\", \"Downloads_Xplore\": 8349.0},\n    {\"Year\": 1991, \"PaperType\": \"M\", \"Downloads_Xplore\": 403.0},\n    {\"Year\": 1992, \"PaperType\": \"C\", \"Downloads_Xplore\": 5116.0},\n    {\"Year\": 1992, \"PaperType\": \"M\", \"Downloads_Xplore\": 396.0},\n    {\"Year\": 1993, \"PaperType\": \"C\", \"Downloads_Xplore\": 6658.0},\n    {\"Year\": 1994, \"PaperType\": \"C\", \"Downloads_Xplore\": 6893.0},\n    {\"Year\": 1994, \"PaperType\": \"M\", \"Downloads_Xplore\": 648.0},\n    {\"Year\": 1995, \"PaperType\": \"C\", \"Downloads_Xplore\": 13751.0},\n    {\"Year\": 1996, \"PaperType\": \"C\", \"Downloads_Xplore\": 14914.0},\n    {\"Year\": 1996, \"PaperType\": \"M\", \"Downloads_Xplore\": 1812.0},\n    {\"Year\": 1997, \"PaperType\": \"C\", \"Downloads_Xplore\": 21795.0},\n    {\"Year\": 1997, \"PaperType\": \"M\", \"Downloads_Xplore\": 202.0},\n    {\"Year\": 1998, \"PaperType\": \"C\", \"Downloads_Xplore\": 17843.0},\n    {\"Year\": 1998, \"PaperType\": \"M\", \"Downloads_Xplore\": 222.0},\n    {\"Year\": 1999, \"PaperType\": \"C\", \"Downloads_Xplore\": 17764.0},\n    {\"Year\": 1999, \"PaperType\": \"M\", \"Downloads_Xplore\": 754.0},\n    {\"Year\": 2000, \"PaperType\": \"C\", \"Downloads_Xplore\": 20996.0},\n    {\"Year\": 2001, \"PaperType\": \"C\", \"Downloads_Xplore\": 27381.0},\n    {\"Year\": 2001, \"PaperType\": \"M\", \"Downloads_Xplore\": 84.0},\n    {\"Year\": 2002, \"PaperType\": \"C\", \"Downloads_Xplore\": 36943.0},\n    {\"Year\": 2002, \"PaperType\": \"M\", \"Downloads_Xplore\": 274.0},\n    {\"Year\": 2003, \"PaperType\": \"C\", \"Downloads_Xplore\": 34145.0},\n    {\"Year\": 2003, \"PaperType\": \"M\", \"Downloads_Xplore\": 1322.0},\n    {\"Year\": 2004, \"PaperType\": \"C\", \"Downloads_Xplore\": 41004.0},\n    {\"Year\": 2004, \"PaperType\": \"M\", \"Downloads_Xplore\": 9327.0},\n    {\"Year\": 2005, \"PaperType\": \"M\", \"Downloads_Xplore\": 163.0},\n    {\"Year\": 2005, \"PaperType\": \"C\", \"Downloads_Xplore\": 70643.0},\n    {\"Year\": 2006, \"PaperType\": \"C\", \"Downloads_Xplore\": 14555.0},\n    {\"Year\": 2006, \"PaperType\": \"J\", \"Downloads_Xplore\": 75589.0},\n    {\"Year\": 2006, \"PaperType\": \"M\", \"Downloads_Xplore\": 221.0},\n    {\"Year\": 2007, \"PaperType\": \"C\", \"Downloads_Xplore\": 15267.0},\n    {\"Year\": 2007, \"PaperType\": \"J\", \"Downloads_Xplore\": 90152.0},\n    {\"Year\": 2007, \"PaperType\": \"M\", \"Downloads_Xplore\": 3137.0},\n    {\"Year\": 2008, \"PaperType\": \"M\", \"Downloads_Xplore\": 5348.0},\n    {\"Year\": 2008, \"PaperType\": \"C\", \"Downloads_Xplore\": 14866.0},\n    {\"Year\": 2008, \"PaperType\": \"J\", \"Downloads_Xplore\": 79680.0},\n    {\"Year\": 2009, \"PaperType\": \"C\", \"Downloads_Xplore\": 20671.0},\n    {\"Year\": 2009, \"PaperType\": \"J\", \"Downloads_Xplore\": 100518.0},\n    {\"Year\": 2009, \"PaperType\": \"M\", \"Downloads_Xplore\": 7419.0},\n    {\"Year\": 2010, \"PaperType\": \"C\", \"Downloads_Xplore\": 21018.0},\n    {\"Year\": 2010, \"PaperType\": \"J\", \"Downloads_Xplore\": 130362.0},\n    {\"Year\": 2010, \"PaperType\": \"M\", \"Downloads_Xplore\": 5165.0},\n    {\"Year\": 2011, \"PaperType\": \"M\", \"Downloads_Xplore\": 11592.0},\n    {\"Year\": 2011, \"PaperType\": \"J\", \"Downloads_Xplore\": 136026.0},\n    {\"Year\": 2011, \"PaperType\": \"C\", \"Downloads_Xplore\": 26893.0},\n    {\"Year\": 2012, \"PaperType\": \"C\", \"Downloads_Xplore\": 26349.0},\n    {\"Year\": 2012, \"PaperType\": \"J\", \"Downloads_Xplore\": 138811.0},\n    {\"Year\": 2012, \"PaperType\": \"M\", \"Downloads_Xplore\": 5927.0},\n    {\"Year\": 2013, \"PaperType\": \"J\", \"Downloads_Xplore\": 184063.0},\n    {\"Year\": 2014, \"PaperType\": \"C\", \"Downloads_Xplore\": 17996.0},\n    {\"Year\": 2014, \"PaperType\": \"J\", \"Downloads_Xplore\": 199151.0},\n    {\"Year\": 2015, \"PaperType\": \"M\", \"Downloads_Xplore\": 7060.0},\n    {\"Year\": 2015, \"PaperType\": \"C\", \"Downloads_Xplore\": 13533.0},\n    {\"Year\": 2015, \"PaperType\": \"J\", \"Downloads_Xplore\": 184768.0},\n    {\"Year\": 2016, \"PaperType\": \"C\", \"Downloads_Xplore\": 13064.0},\n    {\"Year\": 2016, \"PaperType\": \"J\", \"Downloads_Xplore\": 191699.0},\n    {\"Year\": 2017, \"PaperType\": \"C\", \"Downloads_Xplore\": 14686.0},\n    {\"Year\": 2017, \"PaperType\": \"J\", \"Downloads_Xplore\": 200446.0},\n    {\"Year\": 2018, \"PaperType\": \"C\", \"Downloads_Xplore\": 3756.0},\n    {\"Year\": 2018, \"PaperType\": \"J\", \"Downloads_Xplore\": 189721.0},\n    {\"Year\": 2019, \"PaperType\": \"C\", \"Downloads_Xplore\": 6967.0},\n    {\"Year\": 2019, \"PaperType\": \"J\", \"Downloads_Xplore\": 183573.0},\n    {\"Year\": 2020, \"PaperType\": \"C\", \"Downloads_Xplore\": 7441.0},\n    {\"Year\": 2020, \"PaperType\": \"J\", \"Downloads_Xplore\": 174069.0},\n    {\"Year\": 2021, \"PaperType\": \"J\", \"Downloads_Xplore\": 138245.0},\n    {\"Year\": 2022, \"PaperType\": \"J\", \"Downloads_Xplore\": 132421.0},\n    {\"Year\": 2023, \"PaperType\": \"J\", \"Downloads_Xplore\": 97432.0},\n    {\"Year\": 2024, \"PaperType\": \"J\", \"Downloads_Xplore\": 31585.0}\n]\ndf = pd.DataFrame(data)\nplt.figure(figsize=(14, 8))\nsns.lineplot(data=df, x='Year', y='Downloads_Xplore', hue='PaperType', marker='o')\nplt.title('Trends in Downloads_Xplore Over the Years by Paper Type')\nplt.xlabel('Year')\nplt.ylabel('Downloads in Xplore')\nplt.legend(title='Paper Type')\nplt.tight_layout()",
-      "computed_data": {
-        "data": [
-          {
-            "Year": 1990,
-            "PaperType": "C",
-            "Downloads_Xplore": 8451.0
-          },
-          {
-            "Year": 1991,
-            "PaperType": "C",
-            "Downloads_Xplore": 8349.0
-          },
-          {
-            "Year": 1991,
-            "PaperType": "M",
-            "Downloads_Xplore": 403.0
-          },
-          {
-            "Year": 1992,
-            "PaperType": "C",
-            "Downloads_Xplore": 5116.0
-          },
-          {
-            "Year": 1992,
-            "PaperType": "M",
-            "Downloads_Xplore": 396.0
-          },
-          {
-            "Year": 1993,
-            "PaperType": "C",
-            "Downloads_Xplore": 6658.0
-          },
-          {
-            "Year": 1994,
-            "PaperType": "C",
-            "Downloads_Xplore": 6893.0
-          },
-          {
-            "Year": 1994,
-            "PaperType": "M",
-            "Downloads_Xplore": 648.0
-          },
-          {
-            "Year": 1995,
-            "PaperType": "C",
-            "Downloads_Xplore": 13751.0
-          },
-          {
-            "Year": 1996,
-            "PaperType": "C",
-            "Downloads_Xplore": 14914.0
-          },
-          {
-            "Year": 1996,
-            "PaperType": "M",
-            "Downloads_Xplore": 1812.0
-          },
-          {
-            "Year": 1997,
-            "PaperType": "C",
-            "Downloads_Xplore": 21795.0
-          },
-          {
-            "Year": 1997,
-            "PaperType": "M",
-            "Downloads_Xplore": 202.0
-          },
-          {
-            "Year": 1998,
-            "PaperType": "C",
-            "Downloads_Xplore": 17843.0
-          },
-          {
-            "Year": 1998,
-            "PaperType": "M",
-            "Downloads_Xplore": 222.0
-          },
-          {
-            "Year": 1999,
-            "PaperType": "C",
-            "Downloads_Xplore": 17764.0
-          },
-          {
-            "Year": 1999,
-            "PaperType": "M",
-            "Downloads_Xplore": 754.0
-          },
-          {
-            "Year": 2000,
-            "PaperType": "C",
-            "Downloads_Xplore": 20996.0
-          },
-          {
-            "Year": 2001,
-            "PaperType": "C",
-            "Downloads_Xplore": 27381.0
-          },
-          {
-            "Year": 2001,
-            "PaperType": "M",
-            "Downloads_Xplore": 84.0
-          },
-          {
-            "Year": 2002,
-            "PaperType": "C",
-            "Downloads_Xplore": 36943.0
-          },
-          {
-            "Year": 2002,
-            "PaperType": "M",
-            "Downloads_Xplore": 274.0
-          },
-          {
-            "Year": 2003,
-            "PaperType": "C",
-            "Downloads_Xplore": 34145.0
-          },
-          {
-            "Year": 2003,
-            "PaperType": "M",
-            "Downloads_Xplore": 1322.0
-          },
-          {
-            "Year": 2004,
-            "PaperType": "C",
-            "Downloads_Xplore": 41004.0
-          },
-          {
-            "Year": 2004,
-            "PaperType": "M",
-            "Downloads_Xplore": 9327.0
-          },
-          {
-            "Year": 2005,
-            "PaperType": "M",
-            "Downloads_Xplore": 163.0
-          },
-          {
-            "Year": 2005,
-            "PaperType": "C",
-            "Downloads_Xplore": 70643.0
-          },
-          {
-            "Year": 2006,
-            "PaperType": "C",
-            "Downloads_Xplore": 14555.0
-          },
-          {
-            "Year": 2006,
-            "PaperType": "J",
-            "Downloads_Xplore": 75589.0
-          },
-          {
-            "Year": 2006,
-            "PaperType": "M",
-            "Downloads_Xplore": 221.0
-          },
-          {
-            "Year": 2007,
-            "PaperType": "C",
-            "Downloads_Xplore": 15267.0
-          },
-          {
-            "Year": 2007,
-            "PaperType": "J",
-            "Downloads_Xplore": 90152.0
-          },
-          {
-            "Year": 2007,
-            "PaperType": "M",
-            "Downloads_Xplore": 3137.0
-          },
-          {
-            "Year": 2008,
-            "PaperType": "M",
-            "Downloads_Xplore": 5348.0
-          },
-          {
-            "Year": 2008,
-            "PaperType": "C",
-            "Downloads_Xplore": 14866.0
-          },
-          {
-            "Year": 2008,
-            "PaperType": "J",
-            "Downloads_Xplore": 79680.0
-          },
-          {
-            "Year": 2009,
-            "PaperType": "C",
-            "Downloads_Xplore": 20671.0
-          },
-          {
-            "Year": 2009,
-            "PaperType": "J",
-            "Downloads_Xplore": 100518.0
-          },
-          {
-            "Year": 2009,
-            "PaperType": "M",
-            "Downloads_Xplore": 7419.0
-          },
-          {
-            "Year": 2010,
-            "PaperType": "C",
-            "Downloads_Xplore": 21018.0
-          },
-          {
-            "Year": 2010,
-            "PaperType": "J",
-            "Downloads_Xplore": 130362.0
-          },
-          {
-            "Year": 2010,
-            "PaperType": "M",
-            "Downloads_Xplore": 5165.0
-          },
-          {
-            "Year": 2011,
-            "PaperType": "M",
-            "Downloads_Xplore": 11592.0
-          },
-          {
-            "Year": 2011,
-            "PaperType": "J",
-            "Downloads_Xplore": 136026.0
-          },
-          {
-            "Year": 2011,
-            "PaperType": "C",
-            "Downloads_Xplore": 26893.0
-          },
-          {
-            "Year": 2012,
-            "PaperType": "C",
-            "Downloads_Xplore": 26349.0
-          },
-          {
-            "Year": 2012,
-            "PaperType": "J",
-            "Downloads_Xplore": 138811.0
-          },
-          {
-            "Year": 2012,
-            "PaperType": "M",
-            "Downloads_Xplore": 5927.0
-          },
-          {
-            "Year": 2013,
-            "PaperType": "J",
-            "Downloads_Xplore": 184063.0
-          },
-          {
-            "Year": 2014,
-            "PaperType": "C",
-            "Downloads_Xplore": 17996.0
-          },
-          {
-            "Year": 2014,
-            "PaperType": "J",
-            "Downloads_Xplore": 199151.0
-          },
-          {
-            "Year": 2015,
-            "PaperType": "M",
-            "Downloads_Xplore": 7060.0
-          },
-          {
-            "Year": 2015,
-            "PaperType": "C",
-            "Downloads_Xplore": 13533.0
-          },
-          {
-            "Year": 2015,
-            "PaperType": "J",
-            "Downloads_Xplore": 184768.0
-          },
-          {
-            "Year": 2016,
-            "PaperType": "C",
-            "Downloads_Xplore": 13064.0
-          },
-          {
-            "Year": 2016,
-            "PaperType": "J",
-            "Downloads_Xplore": 191699.0
-          },
-          {
-            "Year": 2017,
-            "PaperType": "C",
-            "Downloads_Xplore": 14686.0
-          },
-          {
-            "Year": 2017,
-            "PaperType": "J",
-            "Downloads_Xplore": 200446.0
-          },
-          {
-            "Year": 2018,
-            "PaperType": "C",
-            "Downloads_Xplore": 3756.0
-          },
-          {
-            "Year": 2018,
-            "PaperType": "J",
-            "Downloads_Xplore": 189721.0
-          },
-          {
-            "Year": 2019,
-            "PaperType": "C",
-            "Downloads_Xplore": 6967.0
-          },
-          {
-            "Year": 2019,
-            "PaperType": "J",
-            "Downloads_Xplore": 183573.0
-          },
-          {
-            "Year": 2020,
-            "PaperType": "C",
-            "Downloads_Xplore": 7441.0
-          },
-          {
-            "Year": 2020,
-            "PaperType": "J",
-            "Downloads_Xplore": 174069.0
-          },
-          {
-            "Year": 2021,
-            "PaperType": "J",
-            "Downloads_Xplore": 138245.0
-          },
-          {
-            "Year": 2022,
-            "PaperType": "J",
-            "Downloads_Xplore": 132421.0
-          },
-          {
-            "Year": 2023,
-            "PaperType": "J",
-            "Downloads_Xplore": 97432.0
-          },
-          {
-            "Year": 2024,
-            "PaperType": "J",
-            "Downloads_Xplore": 31585.0
-          }
-        ],
-        "chart_path": null,
-        "has_chart": false,
-        "ephemeral_mode": true,
-        "execution_timestamp": "1756617465732"
-      },
-      "category": "temporal+categorical",
-      "source_columns": [
-        "Year",
-        "Downloads_Xplore",
-        "PaperType"
-      ]
-    },
-    {
-      "question": "How has the average citation count from AminerCitationCount changed over the years for each PaperType?",
-      "title": "Trends in AminerCitationCount: A Comparative Analysis of Paper Types Over the Years",
-      "explanation": "In the realm of academic inquiry, the interplay between *publication type* and *citation impact* offers a nuanced understanding of scholarly influence. The data spanning from 1990 to 2024 elucidates an intriguing divergence in citation trajectories across different paper types, namely conference papers (C), journal articles (J), and miscellaneous publications (M). Notably, **journal articles** consistently exhibit higher citation counts, particularly from the mid-2000s onward, where they surpass conference papers by a significant margin. This trend suggests a shift in the academic community's valuation of journal publications, potentially due to their perceived rigor and comprehensive peer-review processes.\n\nThe temporal analysis reveals that the early 1990s were characterized by relatively modest citation counts across all paper types, indicative of the nascent stage of many research domains during this period. However, as the years progressed, a marked increase in the citation impact of journal articles became evident, peaking notably in 2007 with a mean citation count of 145.77. This peak may correlate with the maturation of certain scientific fields and the establishment of high-impact journals that serve as authoritative sources within their respective disciplines. Conversely, conference papers, while initially competitive, demonstrate a gradual decline in citation impact post-2010, which could reflect the growing preference for journal publications as the primary medium for disseminating cutting-edge research.\n\nThe **statistical significance** of these findings is underscored by the substantial standard deviations observed in the citation counts of journal articles, particularly in years of high mean values. This variability suggests that while some journal articles achieve exceptional recognition, others remain less influential, highlighting the competitive nature of scholarly publishing. The data also suggests that miscellaneous publications, with consistently lower citation counts, may serve niche academic communities or represent emerging fields yet to gain widespread traction. These insights prompt further investigation into the factors driving citation success and the evolving landscape of academic publishing, particularly the role of open access and digital dissemination in shaping future citation patterns.",
-      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {\"Year\": 1990, \"PaperType\": \"C\", \"AminerCitationCount\": 88.25},\n    {\"Year\": 1991, \"PaperType\": \"C\", \"AminerCitationCount\": 101.98},\n    {\"Year\": 1991, \"PaperType\": \"M\", \"AminerCitationCount\": None},\n    {\"Year\": 1992, \"PaperType\": \"C\", \"AminerCitationCount\": 54.16},\n    {\"Year\": 1992, \"PaperType\": \"M\", \"AminerCitationCount\": None},\n    {\"Year\": 1993, \"PaperType\": \"C\", \"AminerCitationCount\": 54.28846153846154},\n    {\"Year\": 1994, \"PaperType\": \"C\", \"AminerCitationCount\": 78.88679245283019},\n    {\"Year\": 1994, \"PaperType\": \"M\", \"AminerCitationCount\": 7.833333333333333},\n    {\"Year\": 1995, \"PaperType\": \"C\", \"AminerCitationCount\": 91.51428571428572},\n    {\"Year\": 1996, \"PaperType\": \"C\", \"AminerCitationCount\": 106.1038961038961},\n    {\"Year\": 1996, \"PaperType\": \"M\", \"AminerCitationCount\": 23.4},\n    {\"Year\": 1997, \"PaperType\": \"C\", \"AminerCitationCount\": 113.03488372093024},\n    {\"Year\": 1997, \"PaperType\": \"M\", \"AminerCitationCount\": 7.0},\n    {\"Year\": 1998, \"PaperType\": \"C\", \"AminerCitationCount\": 111.05681818181819},\n    {\"Year\": 1998, \"PaperType\": \"M\", \"AminerCitationCount\": 11.0},\n    {\"Year\": 1999, \"PaperType\": \"C\", \"AminerCitationCount\": 117.2235294117647},\n    {\"Year\": 1999, \"PaperType\": \"M\", \"AminerCitationCount\": 7.666666666666667},\n    {\"Year\": 2000, \"PaperType\": \"C\", \"AminerCitationCount\": 109.66666666666667},\n    {\"Year\": 2001, \"PaperType\": \"C\", \"AminerCitationCount\": 104.3010752688172},\n    {\"Year\": 2001, \"PaperType\": \"M\", \"AminerCitationCount\": 3.0},\n    {\"Year\": 2002, \"PaperType\": \"C\", \"AminerCitationCount\": 112.42424242424242},\n    {\"Year\": 2002, \"PaperType\": \"M\", \"AminerCitationCount\": 1.0},\n    {\"Year\": 2003, \"PaperType\": \"C\", \"AminerCitationCount\": 105.27272727272727},\n    {\"Year\": 2003, \"PaperType\": \"M\", \"AminerCitationCount\": 10.222222222222221},\n    {\"Year\": 2004, \"PaperType\": \"C\", \"AminerCitationCount\": 99.83505154639175},\n    {\"Year\": 2004, \"PaperType\": \"M\", \"AminerCitationCount\": 11.103896103896103},\n    {\"Year\": 2005, \"PaperType\": \"C\", \"AminerCitationCount\": 108.15254237288136},\n    {\"Year\": 2005, \"PaperType\": \"M\", \"AminerCitationCount\": None},\n    {\"Year\": 2006, \"PaperType\": \"C\", \"AminerCitationCount\": 58.65384615384615},\n    {\"Year\": 2006, \"PaperType\": \"J\", \"AminerCitationCount\": 121.5632183908046},\n    {\"Year\": 2006, \"PaperType\": \"M\", \"AminerCitationCount\": 0.0},\n    {\"Year\": 2007, \"PaperType\": \"C\", \"AminerCitationCount\": 105.41666666666667},\n    {\"Year\": 2007, \"PaperType\": \"J\", \"AminerCitationCount\": 145.7710843373494},\n    {\"Year\": 2007, \"PaperType\": \"M\", \"AminerCitationCount\": 5.333333333333333},\n    {\"Year\": 2008, \"PaperType\": \"C\", \"AminerCitationCount\": 84.0952380952381},\n    {\"Year\": 2008, \"PaperType\": \"J\", \"AminerCitationCount\": 118.44871794871794},\n    {\"Year\": 2008, \"PaperType\": \"M\", \"AminerCitationCount\": 10.875},\n    {\"Year\": 2009, \"PaperType\": \"C\", \"AminerCitationCount\": 79.76923076923077},\n    {\"Year\": 2009, \"PaperType\": \"J\", \"AminerCitationCount\": 109.10989010989012},\n    {\"Year\": 2009, \"PaperType\": \"M\", \"AminerCitationCount\": 4.161290322580645},\n    {\"Year\": 2010, \"PaperType\": \"C\", \"AminerCitationCount\": 67.5},\n    {\"Year\": 2010, \"PaperType\": \"J\", \"AminerCitationCount\": 108.34939759036145},\n    {\"Year\": 2010, \"PaperType\": \"M\", \"AminerCitationCount\": 4.523809523809524},\n    {\"Year\": 2011, \"PaperType\": \"C\", \"AminerCitationCount\": 85.72},\n    {\"Year\": 2011, \"PaperType\": \"J\", \"AminerCitationCount\": 130.56521739130434},\n    {\"Year\": 2011, \"PaperType\": \"M\", \"AminerCitationCount\": 8.566666666666666},\n    {\"Year\": 2012, \"PaperType\": \"C\", \"AminerCitationCount\": 99.3},\n    {\"Year\": 2012, \"PaperType\": \"J\", \"AminerCitationCount\": 86.53684210526316},\n    {\"Year\": 2012, \"PaperType\": \"M\", \"AminerCitationCount\": 5.181818181818182},\n    {\"Year\": 2013, \"PaperType\": \"J\", \"AminerCitationCount\": 103.51485148514851},\n    {\"Year\": 2014, \"PaperType\": \"C\", \"AminerCitationCount\": 53.142857142857146},\n    {\"Year\": 2014, \"PaperType\": \"J\", \"AminerCitationCount\": 93.16071428571429},\n    {\"Year\": 2015, \"PaperType\": \"C\", \"AminerCitationCount\": 26.652173913043477},\n    {\"Year\": 2015, \"PaperType\": \"J\", \"AminerCitationCount\": 74.89583333333333},\n    {\"Year\": 2015, \"PaperType\": \"M\", \"AminerCitationCount\": 5.0606060606060606},\n    {\"Year\": 2016, \"PaperType\": \"C\", \"AminerCitationCount\": 34.8},\n    {\"Year\": 2016, \"PaperType\": \"J\", \"AminerCitationCount\": 71.47},\n    {\"Year\": 2017, \"PaperType\": \"C\", \"AminerCitationCount\": 46.53333333333333},\n    {\"Year\": 2017, \"PaperType\": \"J\", \"AminerCitationCount\": 68.45454545454545},\n    {\"Year\": 2018, \"PaperType\": \"C\", \"AminerCitationCount\": 20.0},\n    {\"Year\": 2018, \"PaperType\": \"J\", \"AminerCitationCount\": 45.525},\n    {\"Year\": 2019, \"PaperType\": \"C\", \"AminerCitationCount\": 26.555555555555557},\n    {\"Year\": 2019, \"PaperType\": \"J\", \"AminerCitationCount\": 30.425},\n    {\"Year\": 2020, \"PaperType\": \"C\", \"AminerCitationCount\": 9.2},\n    {\"Year\": 2020, \"PaperType\": \"J\", \"AminerCitationCount\": 16.07482993197279},\n    {\"Year\": 2021, \"PaperType\": \"J\", \"AminerCitationCount\": 7.555555555555555},\n    {\"Year\": 2022, \"PaperType\": \"J\", \"AminerCitationCount\": 38.0},\n    {\"Year\": 2023, \"PaperType\": \"J\", \"AminerCitationCount\": None},\n    {\"Year\": 2024, \"PaperType\": \"J\", \"AminerCitationCount\": None}\n]\ndf = pd.DataFrame(data)\ndf.dropna(subset=['AminerCitationCount'], inplace=True)\nplt.figure(figsize=(14, 8))\nsns.lineplot(data=df, x='Year', y='AminerCitationCount', hue='PaperType', marker='o')\nplt.title('Average Citation Count Over Years by Paper Type')\nplt.xlabel('Year')\nplt.ylabel('Average Citation Count')\nplt.legend(title='Paper Type')\nplt.tight_layout()",
-      "computed_data": {
-        "data": [
-          {
-            "Year": 1990,
-            "PaperType": "C",
-            "AminerCitationCount": 88.25
-          },
-          {
-            "Year": 1991,
-            "PaperType": "C",
-            "AminerCitationCount": 101.98
-          },
-          {
-            "Year": 1991,
-            "PaperType": "M",
-            "AminerCitationCount": NaN
-          },
-          {
-            "Year": 1992,
-            "PaperType": "C",
-            "AminerCitationCount": 54.16
-          },
-          {
-            "Year": 1992,
-            "PaperType": "M",
-            "AminerCitationCount": NaN
-          },
-          {
-            "Year": 1993,
-            "PaperType": "C",
-            "AminerCitationCount": 54.28846153846154
-          },
-          {
-            "Year": 1994,
-            "PaperType": "C",
-            "AminerCitationCount": 78.88679245283019
-          },
-          {
-            "Year": 1994,
-            "PaperType": "M",
-            "AminerCitationCount": 7.833333333333333
-          },
-          {
-            "Year": 1995,
-            "PaperType": "C",
-            "AminerCitationCount": 91.51428571428572
-          },
-          {
-            "Year": 1996,
-            "PaperType": "C",
-            "AminerCitationCount": 106.1038961038961
-          },
-          {
-            "Year": 1996,
-            "PaperType": "M",
-            "AminerCitationCount": 23.4
-          },
-          {
-            "Year": 1997,
-            "PaperType": "C",
-            "AminerCitationCount": 113.03488372093024
-          },
-          {
-            "Year": 1997,
-            "PaperType": "M",
-            "AminerCitationCount": 7.0
-          },
-          {
-            "Year": 1998,
-            "PaperType": "C",
-            "AminerCitationCount": 111.05681818181819
-          },
-          {
-            "Year": 1998,
-            "PaperType": "M",
-            "AminerCitationCount": 11.0
-          },
-          {
-            "Year": 1999,
-            "PaperType": "C",
-            "AminerCitationCount": 117.2235294117647
-          },
-          {
-            "Year": 1999,
-            "PaperType": "M",
-            "AminerCitationCount": 7.666666666666667
-          },
-          {
-            "Year": 2000,
-            "PaperType": "C",
-            "AminerCitationCount": 109.66666666666667
-          },
-          {
-            "Year": 2001,
-            "PaperType": "C",
-            "AminerCitationCount": 104.3010752688172
-          },
-          {
-            "Year": 2001,
-            "PaperType": "M",
-            "AminerCitationCount": 3.0
-          },
-          {
-            "Year": 2002,
-            "PaperType": "C",
-            "AminerCitationCount": 112.42424242424242
-          },
-          {
-            "Year": 2002,
-            "PaperType": "M",
-            "AminerCitationCount": 1.0
-          },
-          {
-            "Year": 2003,
-            "PaperType": "C",
-            "AminerCitationCount": 105.27272727272727
-          },
-          {
-            "Year": 2003,
-            "PaperType": "M",
-            "AminerCitationCount": 10.222222222222221
-          },
-          {
-            "Year": 2004,
-            "PaperType": "C",
-            "AminerCitationCount": 99.83505154639175
-          },
-          {
-            "Year": 2004,
-            "PaperType": "M",
-            "AminerCitationCount": 11.103896103896103
-          },
-          {
-            "Year": 2005,
-            "PaperType": "C",
-            "AminerCitationCount": 108.15254237288136
-          },
-          {
-            "Year": 2005,
-            "PaperType": "M",
-            "AminerCitationCount": NaN
-          },
-          {
-            "Year": 2006,
-            "PaperType": "C",
-            "AminerCitationCount": 58.65384615384615
-          },
-          {
-            "Year": 2006,
-            "PaperType": "J",
-            "AminerCitationCount": 121.5632183908046
-          },
-          {
-            "Year": 2006,
-            "PaperType": "M",
-            "AminerCitationCount": 0.0
-          },
-          {
-            "Year": 2007,
-            "PaperType": "C",
-            "AminerCitationCount": 105.41666666666667
-          },
-          {
-            "Year": 2007,
-            "PaperType": "J",
-            "AminerCitationCount": 145.7710843373494
-          },
-          {
-            "Year": 2007,
-            "PaperType": "M",
-            "AminerCitationCount": 5.333333333333333
-          },
-          {
-            "Year": 2008,
-            "PaperType": "C",
-            "AminerCitationCount": 84.0952380952381
-          },
-          {
-            "Year": 2008,
-            "PaperType": "J",
-            "AminerCitationCount": 118.44871794871794
-          },
-          {
-            "Year": 2008,
-            "PaperType": "M",
-            "AminerCitationCount": 10.875
-          },
-          {
-            "Year": 2009,
-            "PaperType": "C",
-            "AminerCitationCount": 79.76923076923077
-          },
-          {
-            "Year": 2009,
-            "PaperType": "J",
-            "AminerCitationCount": 109.10989010989012
-          },
-          {
-            "Year": 2009,
-            "PaperType": "M",
-            "AminerCitationCount": 4.161290322580645
-          },
-          {
-            "Year": 2010,
-            "PaperType": "C",
-            "AminerCitationCount": 67.5
-          },
-          {
-            "Year": 2010,
-            "PaperType": "J",
-            "AminerCitationCount": 108.34939759036145
-          },
-          {
-            "Year": 2010,
-            "PaperType": "M",
-            "AminerCitationCount": 4.523809523809524
-          },
-          {
-            "Year": 2011,
-            "PaperType": "C",
-            "AminerCitationCount": 85.72
-          },
-          {
-            "Year": 2011,
-            "PaperType": "J",
-            "AminerCitationCount": 130.56521739130434
-          },
-          {
-            "Year": 2011,
-            "PaperType": "M",
-            "AminerCitationCount": 8.566666666666666
-          },
-          {
-            "Year": 2012,
-            "PaperType": "C",
-            "AminerCitationCount": 99.3
-          },
-          {
-            "Year": 2012,
-            "PaperType": "J",
-            "AminerCitationCount": 86.53684210526316
-          },
-          {
-            "Year": 2012,
-            "PaperType": "M",
-            "AminerCitationCount": 5.181818181818182
-          },
-          {
-            "Year": 2013,
-            "PaperType": "J",
-            "AminerCitationCount": 103.51485148514851
-          },
-          {
-            "Year": 2014,
-            "PaperType": "C",
-            "AminerCitationCount": 53.142857142857146
-          },
-          {
-            "Year": 2014,
-            "PaperType": "J",
-            "AminerCitationCount": 93.16071428571429
-          },
-          {
-            "Year": 2015,
-            "PaperType": "C",
-            "AminerCitationCount": 26.652173913043477
-          },
-          {
-            "Year": 2015,
-            "PaperType": "J",
-            "AminerCitationCount": 74.89583333333333
-          },
-          {
-            "Year": 2015,
-            "PaperType": "M",
-            "AminerCitationCount": 5.0606060606060606
-          },
-          {
-            "Year": 2016,
-            "PaperType": "C",
-            "AminerCitationCount": 34.8
-          },
-          {
-            "Year": 2016,
-            "PaperType": "J",
-            "AminerCitationCount": 71.47
-          },
-          {
-            "Year": 2017,
-            "PaperType": "C",
-            "AminerCitationCount": 46.53333333333333
-          },
-          {
-            "Year": 2017,
-            "PaperType": "J",
-            "AminerCitationCount": 68.45454545454545
-          },
-          {
-            "Year": 2018,
-            "PaperType": "C",
-            "AminerCitationCount": 20.0
-          },
-          {
-            "Year": 2018,
-            "PaperType": "J",
-            "AminerCitationCount": 45.525
-          },
-          {
-            "Year": 2019,
-            "PaperType": "C",
-            "AminerCitationCount": 26.555555555555557
-          },
-          {
-            "Year": 2019,
-            "PaperType": "J",
-            "AminerCitationCount": 30.425
-          },
-          {
-            "Year": 2020,
-            "PaperType": "C",
-            "AminerCitationCount": 9.2
-          },
-          {
-            "Year": 2020,
-            "PaperType": "J",
-            "AminerCitationCount": 16.07482993197279
-          },
-          {
-            "Year": 2021,
-            "PaperType": "J",
-            "AminerCitationCount": 7.555555555555555
-          },
-          {
-            "Year": 2022,
-            "PaperType": "J",
-            "AminerCitationCount": 38.0
-          },
-          {
-            "Year": 2023,
-            "PaperType": "J",
-            "AminerCitationCount": NaN
-          },
-          {
-            "Year": 2024,
-            "PaperType": "J",
-            "AminerCitationCount": NaN
-          }
-        ],
-        "chart_path": null,
-        "has_chart": false,
-        "ephemeral_mode": true,
-        "execution_timestamp": "1756617467724"
-      },
-      "category": "temporal+categorical",
-      "source_columns": [
-        "Year",
-        "PaperType",
-        "AminerCitationCount"
-      ]
-    },
-    {
-      "question": "What is the trend in the number of pages per paper over the years, and how does it relate to the PaperType?",
-      "title": "Analyzing the Evolution of Page Counts in Papers: A Comparative Study of Conference, Journal, and Magazine Types Over the Years",
-      "explanation": "In the realm of academic publishing, the interplay between *page count* and *paper type* offers a fascinating glimpse into the evolving nature of scholarly communication. The data spanning several decades reveals a clear trajectory: **conference papers** (denoted as 'C') have experienced a notable increase in average page length, rising from approximately 7 pages in the early 1990s to over 11 pages by 2020. This trend suggests a shift towards more comprehensive and detailed presentations of research findings, possibly driven by the increasing complexity of research questions and the need for thorough methodological explication. In contrast, **journal articles** ('J') have maintained a relatively stable page count, hovering around 10 pages, which may reflect the established norms and constraints of journal publication formats that prioritize conciseness and focus.\n\nThe divergence in page count trends between conference papers and journal articles underscores the distinct roles these publication types play within the academic ecosystem. Conferences often serve as platforms for the dissemination of preliminary findings and the fostering of scholarly dialogue, which may necessitate more extensive documentation to capture the breadth of ongoing research efforts. Conversely, journal articles, with their emphasis on polished and peer-reviewed contributions, may prioritize succinctness to enhance readability and impact. The data also highlights the marginalization of **magazine articles** ('M'), which consistently exhibit the shortest page counts, suggesting their role as vehicles for brief, accessible insights rather than in-depth academic discourse.\n\nThis analysis of publication trends not only illuminates the shifting landscape of academic communication but also raises important questions about the implications of these changes for scholarly impact and accessibility. The increasing length of conference papers may enhance the depth and rigor of academic discourse, yet it also poses challenges for researchers who must navigate and assimilate larger volumes of information. Future research should explore the relationship between page count and citation impact, considering whether longer papers achieve greater academic recognition or if they risk overwhelming their intended audience. Additionally, the persistent disparity in page counts across publication types invites further investigation into how these formats influence the dissemination and reception of research within the broader academic community.",
-      "visualization_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndata = [\n    {\"Year\": 1990, \"PaperType\": \"C\", \"page_count\": 7.9411764705882355},\n    {\"Year\": 1991, \"PaperType\": \"C\", \"page_count\": 6.619047619047619},\n    {\"Year\": 1991, \"PaperType\": \"M\", \"page_count\": 4.666666666666667},\n    {\"Year\": 1992, \"PaperType\": \"C\", \"page_count\": 7.415094339622642},\n    {\"Year\": 1992, \"PaperType\": \"M\", \"page_count\": 4.5},\n    {\"Year\": 1993, \"PaperType\": \"C\", \"page_count\": 6.781818181818182},\n    {\"Year\": 1994, \"PaperType\": \"C\", \"page_count\": 7.125},\n    {\"Year\": 1994, \"PaperType\": \"M\", \"page_count\": 4.5},\n    {\"Year\": 1995, \"PaperType\": \"C\", \"page_count\": 6.909090909090909},\n    {\"Year\": 1996, \"PaperType\": \"C\", \"page_count\": 6.2388059701492535},\n    {\"Year\": 1996, \"PaperType\": \"M\", \"page_count\": 2.6},\n    {\"Year\": 1997, \"PaperType\": \"C\", \"page_count\": 6.545454545454546},\n    {\"Year\": 1997, \"PaperType\": \"M\", \"page_count\": 3.0},\n    {\"Year\": 1998, \"PaperType\": \"C\", \"page_count\": 6.407894736842105},\n    {\"Year\": 1998, \"PaperType\": \"M\", \"page_count\": 3.0},\n    {\"Year\": 1999, \"PaperType\": \"C\", \"page_count\": 186.07142857142858},\n    {\"Year\": 1999, \"PaperType\": \"M\", \"page_count\": 4.666666666666667},\n    {\"Year\": 2000, \"PaperType\": \"C\", \"page_count\": 6.866666666666666},\n    {\"Year\": 2001, \"PaperType\": \"C\", \"page_count\": 11.536842105263158},\n    {\"Year\": 2001, \"PaperType\": \"M\", \"page_count\": 1.0},\n    {\"Year\": 2002, \"PaperType\": \"C\", \"page_count\": 6.752475247524752},\n    {\"Year\": 2002, \"PaperType\": \"M\", \"page_count\": 1.5},\n    {\"Year\": 2003, \"PaperType\": \"C\", \"page_count\": 7.669902912621359},\n    {\"Year\": 2003, \"PaperType\": \"M\", \"page_count\": 2.75},\n    {\"Year\": 2004, \"PaperType\": \"C\", \"page_count\": 7.896907216494846},\n    {\"Year\": 2004, \"PaperType\": \"M\", \"page_count\": 1.1311475409836065},\n    {\"Year\": 2005, \"PaperType\": \"C\", \"page_count\": 7.823529411764706},\n    {\"Year\": 2005, \"PaperType\": \"M\", \"page_count\": 4.0},\n    {\"Year\": 2006, \"PaperType\": \"C\", \"page_count\": 7.8076923076923075},\n    {\"Year\": 2006, \"PaperType\": \"J\", \"page_count\": 7.954022988505747},\n    {\"Year\": 2006, \"PaperType\": \"M\", \"page_count\": 2.0},\n    {\"Year\": 2007, \"PaperType\": \"C\", \"page_count\": 8.0},\n    {\"Year\": 2007, \"PaperType\": \"J\", \"page_count\": 7.975903614457831},\n    {\"Year\": 2007, \"PaperType\": \"M\", \"page_count\": 1.9565217391304348},\n    {\"Year\": 2008, \"PaperType\": \"C\", \"page_count\": 8.0},\n    {\"Year\": 2008, \"PaperType\": \"J\", \"page_count\": 8.597402597402597},\n    {\"Year\": 2008, \"PaperType\": \"M\", \"page_count\": 2.0},\n    {\"Year\": 2009, \"PaperType\": \"C\", \"page_count\": 8.0},\n    {\"Year\": 2009, \"PaperType\": \"J\", \"page_count\": 47.67032967032967},\n    {\"Year\": 2009, \"PaperType\": \"M\", \"page_count\": 2.0},\n    {\"Year\": 2010, \"PaperType\": \"C\", \"page_count\": 8.0},\n    {\"Year\": 2010, \"PaperType\": \"J\", \"page_count\": 9.168674698795181},\n    {\"Year\": 2010, \"PaperType\": \"M\", \"page_count\": 2.0},\n    {\"Year\": 2011, \"PaperType\": \"C\", \"page_count\": 9.807692307692308},\n    {\"Year\": 2011, \"PaperType\": \"J\", \"page_count\": 9.387096774193548},\n    {\"Year\": 2011, \"PaperType\": \"M\", \"page_count\": 2.033333333333333},\n    {\"Year\": 2012, \"PaperType\": \"C\", \"page_count\": 9.95},\n    {\"Year\": 2012, \"PaperType\": \"J\", \"page_count\": 9.604166666666666},\n    {\"Year\": 2012, \"PaperType\": \"M\", \"page_count\": 2.0454545454545454},\n    {\"Year\": 2013, \"PaperType\": \"J\", \"page_count\": 9.841584158415841},\n    {\"Year\": 2014, \"PaperType\": \"C\", \"page_count\": 10.0},\n    {\"Year\": 2014, \"PaperType\": \"J\", \"page_count\": 9.910714285714286},\n    {\"Year\": 2015, \"PaperType\": \"C\", \"page_count\": 8.0},\n    {\"Year\": 2015, \"PaperType\": \"J\", \"page_count\": 9.942307692307692},\n    {\"Year\": 2015, \"PaperType\": \"M\", \"page_count\": 2.0},\n    {\"Year\": 2016, \"PaperType\": \"C\", \"page_count\": 10.0},\n    {\"Year\": 2016, \"PaperType\": \"J\", \"page_count\": 9.99},\n    {\"Year\": 2017, \"PaperType\": \"C\", \"page_count\": 11.466666666666667},\n    {\"Year\": 2017, \"PaperType\": \"J\", \"page_count\": 10.454545454545455},\n    {\"Year\": 2018, \"PaperType\": \"C\", \"page_count\": 11.857142857142858},\n    {\"Year\": 2018, \"PaperType\": \"J\", \"page_count\": 10.55},\n    {\"Year\": 2019, \"PaperType\": \"C\", \"page_count\": 11.444444444444445},\n    {\"Year\": 2019, \"PaperType\": \"J\", \"page_count\": 10.641666666666667},\n    {\"Year\": 2020, \"PaperType\": \"C\", \"page_count\": 11.8},\n    {\"Year\": 2020, \"PaperType\": \"J\", \"page_count\": 10.741496598639456},\n    {\"Year\": 2021, \"PaperType\": \"J\", \"page_count\": 10.743119266055047},\n    {\"Year\": 2022, \"PaperType\": \"J\", \"page_count\": 10.823529411764707},\n    {\"Year\": 2023, \"PaperType\": \"J\", \"page_count\": 10.947368421052632},\n    {\"Year\": 2024, \"PaperType\": \"J\", \"page_count\": 10.911290322580646}\n]\ndf = pd.DataFrame(data)\nplt.figure(figsize=(14, 8))\nsns.lineplot(data=df, x='Year', y='page_count', hue='PaperType', marker='o')\nplt.title('Trend in Number of Pages per Paper Over the Years by Paper Type')\nplt.xlabel('Year')\nplt.ylabel('Average Page Count')\nplt.legend(title='Paper Type')\nplt.tight_layout()",
-      "computed_data": {
-        "data": [
-          {
-            "Year": 1990,
-            "PaperType": "C",
-            "page_count": 7.9411764705882355
-          },
-          {
-            "Year": 1991,
-            "PaperType": "C",
-            "page_count": 6.619047619047619
-          },
-          {
-            "Year": 1991,
-            "PaperType": "M",
-            "page_count": 4.666666666666667
-          },
-          {
-            "Year": 1992,
-            "PaperType": "C",
-            "page_count": 7.415094339622642
-          },
-          {
-            "Year": 1992,
-            "PaperType": "M",
-            "page_count": 4.5
-          },
-          {
-            "Year": 1993,
-            "PaperType": "C",
-            "page_count": 6.781818181818182
-          },
-          {
-            "Year": 1994,
-            "PaperType": "C",
-            "page_count": 7.125
-          },
-          {
-            "Year": 1994,
-            "PaperType": "M",
-            "page_count": 4.5
-          },
-          {
-            "Year": 1995,
-            "PaperType": "C",
-            "page_count": 6.909090909090909
-          },
-          {
-            "Year": 1996,
-            "PaperType": "C",
-            "page_count": 6.2388059701492535
-          },
-          {
-            "Year": 1996,
-            "PaperType": "M",
-            "page_count": 2.6
-          },
-          {
-            "Year": 1997,
-            "PaperType": "C",
-            "page_count": 6.545454545454546
-          },
-          {
-            "Year": 1997,
-            "PaperType": "M",
-            "page_count": 3.0
-          },
-          {
-            "Year": 1998,
-            "PaperType": "C",
-            "page_count": 6.407894736842105
-          },
-          {
-            "Year": 1998,
-            "PaperType": "M",
-            "page_count": 3.0
-          },
-          {
-            "Year": 1999,
-            "PaperType": "C",
-            "page_count": 186.07142857142858
-          },
-          {
-            "Year": 1999,
-            "PaperType": "M",
-            "page_count": 4.666666666666667
-          },
-          {
-            "Year": 2000,
-            "PaperType": "C",
-            "page_count": 6.866666666666666
-          },
-          {
-            "Year": 2001,
-            "PaperType": "C",
-            "page_count": 11.536842105263158
-          },
-          {
-            "Year": 2001,
-            "PaperType": "M",
-            "page_count": 1.0
-          },
-          {
-            "Year": 2002,
-            "PaperType": "C",
-            "page_count": 6.752475247524752
-          },
-          {
-            "Year": 2002,
-            "PaperType": "M",
-            "page_count": 1.5
-          },
-          {
-            "Year": 2003,
-            "PaperType": "C",
-            "page_count": 7.669902912621359
-          },
-          {
-            "Year": 2003,
-            "PaperType": "M",
-            "page_count": 2.75
-          },
-          {
-            "Year": 2004,
-            "PaperType": "C",
-            "page_count": 7.896907216494846
-          },
-          {
-            "Year": 2004,
-            "PaperType": "M",
-            "page_count": 1.1311475409836065
-          },
-          {
-            "Year": 2005,
-            "PaperType": "C",
-            "page_count": 7.823529411764706
-          },
-          {
-            "Year": 2005,
-            "PaperType": "M",
-            "page_count": 4.0
-          },
-          {
-            "Year": 2006,
-            "PaperType": "C",
-            "page_count": 7.8076923076923075
-          },
-          {
-            "Year": 2006,
-            "PaperType": "J",
-            "page_count": 7.954022988505747
-          },
-          {
-            "Year": 2006,
-            "PaperType": "M",
-            "page_count": 2.0
-          },
-          {
-            "Year": 2007,
-            "PaperType": "C",
-            "page_count": 8.0
-          },
-          {
-            "Year": 2007,
-            "PaperType": "J",
-            "page_count": 7.975903614457831
-          },
-          {
-            "Year": 2007,
-            "PaperType": "M",
-            "page_count": 1.9565217391304348
-          },
-          {
-            "Year": 2008,
-            "PaperType": "C",
-            "page_count": 8.0
-          },
-          {
-            "Year": 2008,
-            "PaperType": "J",
-            "page_count": 8.597402597402597
-          },
-          {
-            "Year": 2008,
-            "PaperType": "M",
-            "page_count": 2.0
-          },
-          {
-            "Year": 2009,
-            "PaperType": "C",
-            "page_count": 8.0
-          },
-          {
-            "Year": 2009,
-            "PaperType": "J",
-            "page_count": 47.67032967032967
-          },
-          {
-            "Year": 2009,
-            "PaperType": "M",
-            "page_count": 2.0
-          },
-          {
-            "Year": 2010,
-            "PaperType": "C",
-            "page_count": 8.0
-          },
-          {
-            "Year": 2010,
-            "PaperType": "J",
-            "page_count": 9.168674698795181
-          },
-          {
-            "Year": 2010,
-            "PaperType": "M",
-            "page_count": 2.0
-          },
-          {
-            "Year": 2011,
-            "PaperType": "C",
-            "page_count": 9.807692307692308
-          },
-          {
-            "Year": 2011,
-            "PaperType": "J",
-            "page_count": 9.387096774193548
-          },
-          {
-            "Year": 2011,
-            "PaperType": "M",
-            "page_count": 2.033333333333333
-          },
-          {
-            "Year": 2012,
-            "PaperType": "C",
-            "page_count": 9.95
-          },
-          {
-            "Year": 2012,
-            "PaperType": "J",
-            "page_count": 9.604166666666666
-          },
-          {
-            "Year": 2012,
-            "PaperType": "M",
-            "page_count": 2.0454545454545454
-          },
-          {
-            "Year": 2013,
-            "PaperType": "J",
-            "page_count": 9.841584158415841
-          },
-          {
-            "Year": 2014,
-            "PaperType": "C",
-            "page_count": 10.0
-          },
-          {
-            "Year": 2014,
-            "PaperType": "J",
-            "page_count": 9.910714285714286
-          },
-          {
-            "Year": 2015,
-            "PaperType": "C",
-            "page_count": 8.0
-          },
-          {
-            "Year": 2015,
-            "PaperType": "J",
-            "page_count": 9.942307692307692
-          },
-          {
-            "Year": 2015,
-            "PaperType": "M",
-            "page_count": 2.0
-          },
-          {
-            "Year": 2016,
-            "PaperType": "C",
-            "page_count": 10.0
-          },
-          {
-            "Year": 2016,
-            "PaperType": "J",
-            "page_count": 9.99
-          },
-          {
-            "Year": 2017,
-            "PaperType": "C",
-            "page_count": 11.466666666666667
-          },
-          {
-            "Year": 2017,
-            "PaperType": "J",
-            "page_count": 10.454545454545455
-          },
-          {
-            "Year": 2018,
-            "PaperType": "C",
-            "page_count": 11.857142857142858
-          },
-          {
-            "Year": 2018,
-            "PaperType": "J",
-            "page_count": 10.55
-          },
-          {
-            "Year": 2019,
-            "PaperType": "C",
-            "page_count": 11.444444444444445
-          },
-          {
-            "Year": 2019,
-            "PaperType": "J",
-            "page_count": 10.641666666666667
-          },
-          {
-            "Year": 2020,
-            "PaperType": "C",
-            "page_count": 11.8
-          },
-          {
-            "Year": 2020,
-            "PaperType": "J",
-            "page_count": 10.741496598639456
-          },
-          {
-            "Year": 2021,
-            "PaperType": "J",
-            "page_count": 10.743119266055047
-          },
-          {
-            "Year": 2022,
-            "PaperType": "J",
-            "page_count": 10.823529411764707
-          },
-          {
-            "Year": 2023,
-            "PaperType": "J",
-            "page_count": 10.947368421052632
-          },
-          {
-            "Year": 2024,
-            "PaperType": "J",
-            "page_count": 10.911290322580646
-          }
-        ],
-        "chart_path": null,
-        "has_chart": false,
-        "ephemeral_mode": true,
-        "execution_timestamp": "1756617474491"
-      },
-      "category": "temporal+derived metric",
-      "source_columns": [
-        "Year",
-        "FirstPage",
-        "LastPage",
-        "PaperType"
-      ]
     }
   ],
-  "conclusion": "The comprehensive analysis of academic publishing dynamics across various domains reveals intricate patterns that challenge conventional assumptions about scholarly influence and dissemination. A key finding is the **disproportionate citation impact** of award-winning papers, which suggests that *academic accolades* significantly enhance a paper's perceived value, thereby amplifying its citation potential beyond its initial accessibility. This highlights the critical role of *prestige* in shaping research trajectories and underscores the need for a nuanced understanding of how *academic merit* is constructed and recognized. Conversely, the analysis of paper length and citation count reveals a **weak correlation**, indicating that the substantive quality and *novelty* of research contributions are more pivotal in driving citations than mere quantitative metrics such as page count. These insights suggest that authors should prioritize impactful content over volume, while publishers might consider editorial policies that emphasize quality.\n\nFurthermore, the exploration of keyword usage in high-citation papers uncovers a **striking dichotomy** between prevalent terms and metadata completeness, with the predominance of \"visual analytics\" and \"visualization\" underscoring their centrality to the field. However, the **unexpectedly high occurrence** of empty keyword entries and the **lack of standardization** in keyword capitalization highlight significant challenges in metadata practices, potentially hindering research discoverability. This calls for more rigorous editorial standards to ensure consistent keyword protocols. The **power-law distribution** of keyword frequencies, where a few terms dominate, reflects the field's intellectual structure and suggests that while certain themes drive progress, a diverse array of specialized topics enriches the research landscape.\n\nIn light of these findings, future research should delve into the qualitative attributes that underpin citation success, exploring the potential biases introduced by award systems and the role of methodological innovation in driving academic impact. Longitudinal studies examining the evolution of keyword trends and their influence on citation metrics could provide deeper insights into the dynamics of scholarly communication. Additionally, investigating the interplay between institutional prestige, collaborative networks, and citation impact could further elucidate the mechanisms that govern academic recognition, ultimately contributing to a more comprehensive understanding of the *scholarly ecosystem*.",
-  "total_results": 11
+  "conclusion": "The comprehensive analysis of academic publishing trends reveals a multifaceted landscape characterized by the intricate interplay between *paper length*, *publication type*, and *scholarly impact*. The correlation between **FirstPage** and **LastPage** numbers across various *PaperTypes* underscores the diversity in academic dissemination strategies, where longer papers, such as full-length research articles, reflect comprehensive scholarly endeavors, while shorter formats like conference abstracts emphasize succinctness. This differentiation highlights the influence of *normative expectations* and *editorial standards* on paper length, suggesting that the perceived quality and impact of academic work are not solely contingent upon content volume but are also shaped by the conventions of different publication venues. The statistical significance of these findings advocates for a more nuanced understanding of how page length correlates with academic influence, potentially informing editorial policies and guiding authors in aligning their submissions with the expectations of their target outlets.\n\nFurthermore, the analysis of citation and download metrics across conferences reveals a **paradoxical relationship** between digital engagement and academic recognition. The **InfoVis conference** exemplifies a dual success in both accessibility and scholarly merit, whereas the **Vis conference** demonstrates that high citation rates can be achieved despite modest download figures, indicating that factors beyond digital reach, such as *intrinsic research quality*, play a pivotal role in academic influence. This challenges the conventional wisdom that equates high download numbers with scholarly impact, highlighting the nuanced interplay of *reputation*, *content quality*, and *community engagement* in shaping academic discourse. The implications extend beyond the immediate context, urging a reevaluation of how academic success is measured and the factors that truly drive citation behavior.\n\nIn light of these findings, future research should delve into the qualitative aspects of academic publishing, exploring how *editorial standards*, *normative expectations*, and *intrinsic research quality* influence citation patterns and scholarly impact. Additionally, investigations into the temporal stability of these trends and the underlying mechanisms governing the complex relationship between accessibility and recognition could provide valuable insights for enhancing the scholarly impact of academic work. Such inquiries would not only contribute to a deeper understanding of academic influence but also inform strategies for optimizing research dissemination in an increasingly digital and interconnected academic landscape.",
+  "total_results": 5
 }
