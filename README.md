@@ -2,6 +2,8 @@
 
 An AI-powered system that automatically generates comprehensive research papers with data visualizations from datasets.
 
+This work was submitted to the [1st Workshop on GenAI, Agents, and the Future of VIS](https://visxgenai.github.io/) at IEEE VIS 2025.
+
 ## Repository Structure
 
 * `studio/`: Complete development environment
