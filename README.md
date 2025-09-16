@@ -1,17 +1,34 @@
-# Mini Challenge Template
+# VisAI: Automated Research Paper Generation
 
-Welcome! This repo provides: 
+An AI-powered system that automatically generates comprehensive research papers with data visualizations from datasets.
 
-* `studio/`: **A complete development playground** for building and testing agent with LangGraph Studio UI. Please run the template locally in this folder. 
-    * `agent.py`: Core agent configuration. 
-    * `dataset.csv`: Dataset for visualization.
-    * `run.py`: Test `agent.py` locally.
-    * `report_html.py`, `report_pdf.py`, `helpers.py`: Supplimentary files. 
-    * `langgraph.json`: Configuration file for LangGraph Studio.
-* `submission/`: **The minimal submission structure** you’ll package, compress in ZIP file, and submit via challenge website(only what’s required to submit to evaluation server). 
-    * `agent.py` - your Agent implementation (Required)
-    * `requirements.txt` - all dependencies needed  (Required)
-    * All supplimentary files if any, e.g., `helpers.py`, `report_html.py`, `report_pdf.py`, etc.
+## Repository Structure
+
+* `studio/`: Complete development environment
+    * `agent.py`: Core agent implementation with LangGraph workflow
+    * `Researcher.py`: Main research engine with parallel processing
+    * `dataset.csv`: Sample dataset for analysis
+    * `run.py`: Local testing script
+    * `helpers.py`: Utility functions and LLM configuration
+    * `utils/`: Data processing, file operations, and LLM utilities
+    * `prompts/`: System and user prompts for all LLM operations
+    * `datasets/`: Generated research questions, results, and dataset profiles
+    * `visualizations/`: Generated chart images
+    * `outputs/`: Generated PDF reports and final outputs
+    * `langgraph.json`: LangGraph Studio configuration
+* `public/`: Challenge images and documentation assets
+* `technical-report/`: A technical report of the project
+
+## Output Files
+
+The system generates several output files during execution:
+
+* `output.html`: Interactive HTML research report with embedded visualizations
+* `outputs/Research Data Analysis Report.pdf`: Generated PDF research report
+* `datasets/research_questions.json`: Generated research questions (breadth and depth)
+* `datasets/research_results.json`: Analysis results with computed data
+* `datasets/final_arrangement.json`: Final report structure and arrangement
+* `datasets/computed_data.json`: Computed data from pandas operations
 
 The template generates visualization reports with both charts and narrative (right part of the image).
 <img src="./public/challenge.png" style="background-color: white; width: 70%; display: block; margin-left: auto; margin-right: auto;">
@@ -20,7 +37,6 @@ Please follow the instructions below to get started.
 - [0 - Prerequisites](#0-prerequisites)
 - [1 - Configure local API](#1-configure-api)
 - [2 - Begin the Template and Studio](#2-begin-the-template-and-studio)
-- [3 - Submission](#3-Submission)
 
 ## 0 Prerequisites
 
@@ -111,47 +127,6 @@ npx @langchain/langgraph-cli dev
 Feel free to customize the `agent.py` and its companion files to craft your own agentic configuration, and try to make your designs and results outperform the template baseline, by demonstrating your solution's **generalizability to other datasets**, **efficiency in running**, and **effectiveness in generating effective and engaging narrative-driven visualization reports**.
 
 Please ensure you **refer the dataset** as `dataset.csv` or `https://raw.githubusercontent.com/demoPlz/mini-template/main/studio/dataset.csv` as the file path to access the data, e.g., specifying in the prompt; and refer to `output.html` or `output.pdf` as the output file, and include every dependency needed in `requirements.txt`
-
-
-## 3 Submission 
-
-### 3.1 Preparing Your Submission
-
-1. **Verify the codes.** Please make sure the codes execute without errors before packing your submission.
-
-```
-python run.py
-```
-
-
-2. **Package the files.** Please copy all related files from `studio/` into the `submission/` folder (replace any files if needed).
-* `agent.py` - your Agent implementation (Required)
-* `requirements.txt` - all dependencies needed  (Required)
-* All supplimentary files if any, e.g., `helpers.py`, `report_html.py`, `report_pdf.py`, etc.
-
-3. **Compress in ZIP file.** ZIP the `submission/` folder (do not include any extra files or foler) as `submission.zip`
-
-<img src="./public/compress.png" style="background-color: white; width: 80%; display: block; margin-left: auto; margin-right: auto;" alt="VisAgent challenge site login page">
-
-### 3.2 Submit for the Challenge
-
-#### 1. Go to https://www.visagent.org/, sign in or register:
-<img src="./public/login.png" style="background-color: white; width: 50%; display: block; margin-left: auto; margin-right: auto;" alt="VisAgent challenge site login page">
-
-#### 2. Navigate to your submission page and upload your submission.zip file:
-
-<img src="./public/upload.png" style="background-color: white; width: 80%; display: block; margin-left: auto; margin-right: auto;" alt="Upload interface for submission.zip on VisAgent">
-
-#### 3. View all your submissions with their status and results, then select one entry as your finalized submission for the public leaderboard:
-
-<img width="1039" alt="running" src="https://github.com/user-attachments/assets/e1a9592f-7e03-4b18-befa-615f8bfc53e0" style="background-color: white; width: 80%; display: block; margin-left: auto; margin-right: auto; margin-bottom: 5px;" alt="Dashboard showing a submission in progress" />
-<img width="1037" alt="success" src="https://github.com/user-attachments/assets/ade38524-b827-467f-964c-9cbc2ebdd6d1" style="background-color: white; width: 80%; display: block; margin-left: auto; margin-right: auto;" alt="Dashboard showing a successful submission"/>
-<img width="1033" alt="finalize" src="https://github.com/user-attachments/assets/1ed4bf81-868b-4601-81f6-905de9558be6" style="background-color: white; width: 80%; display: block; margin-right: auto; margin-top: 5px;" alt="Interface to finalize a submission for the leaderboard"/>
-
-
-#### 4. Reference the links for your finalized output with the same submission ID in your technical paper to be submitted to PCS:
-
-<img src="./public/links.png" style="background-color: white; width: 70%; display: block; margin-left: auto; margin-right: auto; margin-top: 5px;" alt="Links to the finalized output files for a submission">
 
 ## References
 - [Langchain Academy](https://github.com/langchain-ai/langchain-academy)
