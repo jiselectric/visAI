@@ -4,6 +4,9 @@ import numpy as np
 import pandas as pd
 from utils.file_operation import save_json_data
 
+# Dataset Path
+DATASET_PATH = "./input_datasets/Insurance_dataset.csv"
+
 
 def convert_numpy_types(obj):
     """Convert numpy types to Python native types for JSON serialization"""
@@ -83,10 +86,7 @@ def sample_data(columns, sample_size):
     # Use main dataset
     import os
 
-    if os.path.exists("dataset.csv"):
-        df = pd.read_csv("dataset.csv")
-    else:
-        df = pd.read_csv("synthetic_dataset.csv")
+    df = pd.read_csv(DATASET_PATH)
 
     samples = {}
     for col in columns:
@@ -125,7 +125,7 @@ def execute_pandas_query_for_computation(
     import seaborn as sns
 
     # Load the dataset
-    df = pd.read_csv("dataset.csv")
+    df = pd.read_csv(DATASET_PATH)
 
     # Create unique chart filename
     timestamp = str(int(time.time() * 1000))

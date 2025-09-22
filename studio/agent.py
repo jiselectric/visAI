@@ -17,6 +17,9 @@ from utils.generate_dataset_profile import generate_dataset_profile
 # Type alias for JSON-compatible types
 JSONType = Union[str, int, float, bool, None, Dict[str, "JSONType"], List["JSONType"]]
 
+# Dataset Path
+DATASET_PATH = "./input_datasets/Insurance_dataset.csv"
+
 
 class State(TypedDict):
     dataset_info: JSONType
@@ -155,7 +158,7 @@ class Agent:
 
     def initialize_state_from_csv(self) -> dict:
         """Initialize state with dataset profile and info"""
-        path = "./dataset.csv"
+        path = DATASET_PATH
 
         # Check if cached data exists
         cached_info = load_cached_json("dataset_info.json", "./datasets")

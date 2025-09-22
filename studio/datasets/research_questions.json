@@ -1,185 +1,185 @@
 {
   "questions": [
     {
-      "question": "How has the number of publications in different `Conferences` evolved over the years?",
+      "question": "How does the average `charges` vary across different `region` categories?",
       "parent_question": null,
       "level": 0,
-      "visualization": "line",
-      "category": "temporal",
+      "visualization": "box",
+      "category": "categorical",
       "source_columns": [
-        "Year",
-        "Conference"
+        "charges",
+        "region"
       ]
     },
     {
-      "question": "What is the correlation between `FirstPage` and `LastPage` numbers, and how does it differ across `PaperType`?",
+      "question": "What is the distribution of `bmi` values across the dataset?",
+      "parent_question": null,
+      "level": 0,
+      "visualization": "histogram",
+      "category": "distribution",
+      "source_columns": [
+        "bmi"
+      ]
+    },
+    {
+      "question": "What is the correlation between `age` and `charges` for smokers and non-smokers?",
       "parent_question": null,
       "level": 0,
       "visualization": "scatter",
       "category": "correlation",
       "source_columns": [
-        "FirstPage",
-        "LastPage",
-        "PaperType"
+        "age",
+        "charges",
+        "smoker"
       ]
     },
     {
-      "question": "What is the distribution of `Downloads_Xplore` across different `PaperType` categories?",
+      "question": "How do the `charges` change with the number of `children`?",
       "parent_question": null,
       "level": 0,
-      "visualization": "box",
-      "category": "distribution",
+      "visualization": "stacked bar",
+      "category": "composition",
       "source_columns": [
-        "Downloads_Xplore",
-        "PaperType"
+        "charges",
+        "children"
       ]
     },
     {
-      "question": "What are the most common `AuthorKeywords` used in the dataset?",
-      "parent_question": null,
-      "level": 0,
-      "visualization": "word cloud",
-      "category": "textual",
-      "source_columns": [
-        "AuthorKeywords"
-      ]
-    },
-    {
-      "question": "How do the most common AuthorKeywords differ across Conferences?",
-      "parent_question": "What are the most common `AuthorKeywords` used in the dataset?",
+      "question": "How does the average `charges` vary by `region` for different `bmi` categories?",
+      "parent_question": "What is the correlation between `age` and `charges` for smokers and non-smokers?",
       "level": 1,
       "visualization": "heatmap",
       "category": "segmentation+categorical",
       "source_columns": [
-        "Conference",
-        "AuthorKeywords"
+        "region",
+        "bmi",
+        "charges"
       ]
     },
     {
-      "question": "What is the correlation between the number of Downloads_Xplore and the frequency of specific AuthorKeywords?",
-      "parent_question": "What are the most common `AuthorKeywords` used in the dataset?",
+      "question": "What is the distribution of `charges` for different `sex` and `children` combinations?",
+      "parent_question": "What is the correlation between `age` and `charges` for smokers and non-smokers?",
       "level": 2,
-      "visualization": "scatter plot",
-      "category": "correlation+numeric",
+      "visualization": "violin plot",
+      "category": "distribution+categorical",
       "source_columns": [
-        "Downloads_Xplore",
-        "AuthorKeywords"
+        "sex",
+        "children",
+        "charges"
       ]
     },
     {
-      "question": "How has the usage of AuthorKeywords changed over the years?",
-      "parent_question": "What are the most common `AuthorKeywords` used in the dataset?",
-      "level": 3,
-      "visualization": "line chart",
-      "category": "temporal+text",
-      "source_columns": [
-        "Year",
-        "AuthorKeywords"
-      ]
-    },
-    {
-      "question": "What is the trend of average Downloads_Xplore over the years for each Conference?",
-      "parent_question": "What is the distribution of `Downloads_Xplore` across different `PaperType` categories?",
-      "level": 1,
-      "visualization": "line chart",
-      "category": "temporal+segmentation",
-      "source_columns": [
-        "Year",
-        "Conference",
-        "Downloads_Xplore"
-      ]
-    },
-    {
-      "question": "How do the top 10 most cited papers (by AminerCitationCount) compare in terms of Downloads_Xplore?",
-      "parent_question": "What is the distribution of `Downloads_Xplore` across different `PaperType` categories?",
-      "level": 2,
-      "visualization": "scatter plot",
-      "category": "ranking+numeric",
-      "source_columns": [
-        "AminerCitationCount",
-        "Downloads_Xplore"
-      ]
-    },
-    {
-      "question": "What are the most common AuthorKeywords associated with papers having high Downloads_Xplore?",
-      "parent_question": "What is the distribution of `Downloads_Xplore` across different `PaperType` categories?",
+      "question": "What are the most common `bmi` values among smokers and non-smokers?",
+      "parent_question": "What is the correlation between `age` and `charges` for smokers and non-smokers?",
       "level": 3,
       "visualization": "word cloud",
-      "category": "textual+numeric",
+      "category": "textual+frequency",
       "source_columns": [
-        "AuthorKeywords",
-        "Downloads_Xplore"
+        "bmi",
+        "smoker"
       ]
     },
     {
-      "question": "How does the correlation between the number of citations from Aminer and CrossRef vary by Conference?",
-      "parent_question": "What is the correlation between `FirstPage` and `LastPage` numbers, and how does it differ across `PaperType`?",
+      "question": "How does the average BMI vary across different age groups?",
+      "parent_question": "What is the distribution of `bmi` values across the dataset?",
+      "level": 1,
+      "visualization": "bar chart",
+      "category": "segmentation",
+      "source_columns": [
+        "age",
+        "bmi"
+      ]
+    },
+    {
+      "question": "What is the correlation between BMI and insurance charges?",
+      "parent_question": "What is the distribution of `bmi` values across the dataset?",
+      "level": 2,
+      "visualization": "scatter plot",
+      "category": "correlation",
+      "source_columns": [
+        "bmi",
+        "charges"
+      ]
+    },
+    {
+      "question": "How does the distribution of BMI differ between smokers and non-smokers?",
+      "parent_question": "What is the distribution of `bmi` values across the dataset?",
+      "level": 3,
+      "visualization": "violin plot",
+      "category": "subgroup comparison",
+      "source_columns": [
+        "bmi",
+        "smoker"
+      ]
+    },
+    {
+      "question": "How do the average `charges` vary by `region` and `smoker` status?",
+      "parent_question": "How do the `charges` change with the number of `children`?",
       "level": 1,
       "visualization": "heatmap",
-      "category": "correlation+categorical",
+      "category": "segmentation",
       "source_columns": [
-        "AminerCitationCount",
-        "CitationCount_CrossRef",
-        "Conference"
+        "charges",
+        "region",
+        "smoker"
       ]
     },
     {
-      "question": "What is the trend in the average number of pages per paper over the years?",
-      "parent_question": "What is the correlation between `FirstPage` and `LastPage` numbers, and how does it differ across `PaperType`?",
+      "question": "What is the correlation between `bmi` and `charges` across different `sex` categories?",
+      "parent_question": "How do the `charges` change with the number of `children`?",
       "level": 2,
-      "visualization": "line chart",
-      "category": "temporal+derived metric",
-      "source_columns": [
-        "Year",
-        "FirstPage",
-        "LastPage"
-      ]
-    },
-    {
-      "question": "Which keywords are most frequently associated with high citation counts?",
-      "parent_question": "What is the correlation between `FirstPage` and `LastPage` numbers, and how does it differ across `PaperType`?",
-      "level": 3,
-      "visualization": "word cloud",
-      "category": "textual+ranking",
-      "source_columns": [
-        "AuthorKeywords",
-        "AminerCitationCount"
-      ]
-    },
-    {
-      "question": "What is the correlation between the number of Downloads_Xplore and the number of citations from AminerCitationCount over the years?",
-      "parent_question": "How has the number of publications in different `Conferences` evolved over the years?",
-      "level": 1,
       "visualization": "scatter plot",
-      "category": "correlation+temporal",
+      "category": "correlation",
       "source_columns": [
-        "Year",
-        "Downloads_Xplore",
-        "AminerCitationCount"
+        "bmi",
+        "charges",
+        "sex"
       ]
     },
     {
-      "question": "How has the average number of pages (difference between LastPage and FirstPage) per publication changed over time across different PaperTypes?",
-      "parent_question": "How has the number of publications in different `Conferences` evolved over the years?",
-      "level": 2,
-      "visualization": "line chart",
-      "category": "temporal+derived metric",
-      "source_columns": [
-        "Year",
-        "FirstPage",
-        "LastPage",
-        "PaperType"
-      ]
-    },
-    {
-      "question": "What are the most frequently used AuthorKeywords in publications with the highest CitationCount_CrossRef?",
-      "parent_question": "How has the number of publications in different `Conferences` evolved over the years?",
+      "question": "How does the distribution of `charges` differ across `age` groups?",
+      "parent_question": "How do the `charges` change with the number of `children`?",
       "level": 3,
-      "visualization": "word cloud",
-      "category": "ranking+textual",
+      "visualization": "violin plot",
+      "category": "distribution",
       "source_columns": [
-        "CitationCount_CrossRef",
-        "AuthorKeywords"
+        "charges",
+        "age"
+      ]
+    },
+    {
+      "question": "How does the average `charges` for smokers and non-smokers vary across different `age` groups?",
+      "parent_question": "How does the average `charges` vary across different `region` categories?",
+      "level": 1,
+      "visualization": "heatmap",
+      "category": "segmentation",
+      "source_columns": [
+        "charges",
+        "smoker",
+        "age"
+      ]
+    },
+    {
+      "question": "What is the correlation between `bmi` and `charges` for individuals with different numbers of `children`?",
+      "parent_question": "How does the average `charges` vary across different `region` categories?",
+      "level": 2,
+      "visualization": "scatter plot",
+      "category": "correlation",
+      "source_columns": [
+        "bmi",
+        "charges",
+        "children"
+      ]
+    },
+    {
+      "question": "How does the distribution of `charges` differ between `sex` categories?",
+      "parent_question": "How does the average `charges` vary across different `region` categories?",
+      "level": 3,
+      "visualization": "violin plot",
+      "category": "distribution",
+      "source_columns": [
+        "charges",
+        "sex"
       ]
     }
   ]
