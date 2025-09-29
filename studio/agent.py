@@ -18,7 +18,7 @@ from utils.generate_dataset_profile import generate_dataset_profile
 JSONType = Union[str, int, float, bool, None, Dict[str, "JSONType"], List["JSONType"]]
 
 # Dataset Path
-DATASET_PATH = "./input_datasets/Insurance_dataset.csv"
+DATASET_PATH = "./input_datasets/dataset.csv"
 
 
 class State(TypedDict):

@@ -2,6 +2,11 @@
 
 As a senior research analyst, your task is to write a professional and insightful explanation for a visualized research finding. Your explanation should be suitable for an academic research paper and should provide compelling analysis beyond a simple description of the data.
 
+## Input Data:
+question: {{question}}
+category: {{category}}
+computed_data: {{computed_data}}
+
 ## Requirements
 - **Tone & Style**: Write in a formal academic prose with a sophisticated and varied narrative structure.
 - **Paragraphs**: The explanation must consist of 2 to 3 paragraphs.
