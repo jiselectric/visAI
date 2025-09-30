@@ -7,24 +7,28 @@ from langchain_core.messages import HumanMessage, SystemMessage
 
 
 def invoke_llm_with_prompt(
-    system_content: str,
-    prompt_template: str,
-    replacements: Dict[str, Any],
+    system_prompt: str,
+    user_prompt: str,
+    system_prompt_replacements: Dict[str, Any],
+    user_prompt_replacements: Dict[str, Any],
     temperature: float = 0.3,
     max_tokens: int = 4096,
 ) -> str:
     """Standardized LLM invocation with prompt template replacement."""
-    # Replace template variables in prompt
-    formatted_prompt = prompt_template
-    for key, value in replacements.items():
-        formatted_prompt = formatted_prompt.replace(key, str(value))
+    # Replace template variables in system prompt
+    for key, value in system_prompt_replacements.items():
+        system_prompt = system_prompt.replace(key, str(value))
+
+    # Replace template variables in user prompt
+    for key, value in user_prompt_replacements.items():
+        user_prompt = user_prompt.replace(key, str(value))
 
     llm = get_llm(temperature=temperature, max_tokens=max_tokens)
 
     response = llm.invoke(
         [
-            SystemMessage(content=system_content),
-            HumanMessage(content=formatted_prompt),
+            SystemMessage(content=system_prompt),
+            HumanMessage(content=user_prompt),
         ]
     )
 

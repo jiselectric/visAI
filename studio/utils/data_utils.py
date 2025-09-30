@@ -5,21 +5,27 @@ import pandas as pd
 from utils.file_operation import save_json_data
 
 # Dataset Path
-DATASET_PATH = "./input_datasets/Insurance_dataset.csv"
+DATASET_PATH = "./input_datasets/dataset.csv"
 
 
 def convert_numpy_types(obj):
-    """Convert numpy types to Python native types for JSON serialization"""
-    if isinstance(obj, np.integer):
+    """Convert numpy types and pandas objects to Python native types for JSON serialization"""
+    if isinstance(obj, (np.integer, pd.Int64Dtype, pd.Int32Dtype)):
         return int(obj)
-    elif isinstance(obj, np.floating):
+    elif isinstance(obj, (np.floating, pd.Float64Dtype)):
         return float(obj)
     elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, pd.DataFrame):
+        return obj.to_dict('records')
+    elif isinstance(obj, pd.Series):
         return obj.tolist()
     elif isinstance(obj, dict):
         return {key: convert_numpy_types(value) for key, value in obj.items()}
     elif isinstance(obj, list):
         return [convert_numpy_types(item) for item in obj]
+    elif pd.isna(obj):
+        return None
     else:
         return obj
 
@@ -238,47 +244,3 @@ def execute_pandas_query_for_computation(
         if ephemeral:
             gc.collect()
         return {"error": f"Error executing pandas code: {str(e)}"}
-
-
-def execute_pandas_query_for_synthetic_dataset(
-    dataset: pd.DataFrame, query: str
-) -> pd.DataFrame:
-    """
-    Execute pandas code on the given dataset to add synthetic columns
-
-    Args:
-        dataset: DataFrame to modify (passed by reference, will be modified in-place)
-        query: Pandas code to execute (should create new column(s) in df)
-
-    Returns:
-        pd.DataFrame: The modified dataset with new synthetic column(s)
-    """
-    import json
-
-    import numpy as np
-    import pandas as pd
-
-    # Create execution environment with the passed dataset
-    local_namespace = {"df": dataset, "pd": pd, "np": np, "json": json}
-
-    try:
-        # Execute the pandas code (modifies df in-place)
-        exec(query, globals(), local_namespace)
-
-        # Get the modified DataFrame
-        result_df = local_namespace["df"]
-
-        # Convert numpy types to avoid JSON serialization issues later
-        for col in result_df.columns:
-            if result_df[col].dtype == "int64":
-                result_df[col] = result_df[col].astype("object")
-            elif result_df[col].dtype == "float64":
-                result_df[col] = result_df[col].astype("object")
-
-        return result_df
-
-    except Exception as e:
-        print(f"Error executing pandas query: {str(e)}")
-        print(f"Query was: {query}")
-        # Return the dataset unchanged if execution fails
-        return dataset

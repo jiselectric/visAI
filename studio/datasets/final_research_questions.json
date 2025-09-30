@@ -1,0 +1,115 @@
+{
+  "questions": [
+    {
+      "question": "How has the distribution of paper types (J, C, M) evolved over the years across different conferences?",
+      "parent_question": null,
+      "level": 0,
+      "visualization": "Stacked Area Chart",
+      "category": "Temporal Analysis",
+      "source_columns": [
+        "Year",
+        "PaperType",
+        "Conference"
+      ]
+    },
+    {
+      "question": "What is the correlation between the number of downloads and citation counts across different conferences?",
+      "parent_question": null,
+      "level": 0,
+      "visualization": "Scatter Plot with Regression Line",
+      "category": "Correlation Analysis",
+      "source_columns": [
+        "Downloads_Xplore",
+        "AminerCitationCount",
+        "CitationCount_CrossRef",
+        "Conference"
+      ]
+    },
+    {
+      "question": "What are the trends in the number of awards given over the years, and how do they vary by conference?",
+      "parent_question": null,
+      "level": 0,
+      "visualization": "Line Chart",
+      "category": "Trend Analysis",
+      "source_columns": [
+        "Year",
+        "Award",
+        "Conference"
+      ]
+    },
+    {
+      "question": "What is the correlation between the number of downloads (Downloads_Xplore) and citation counts (AminerCitationCount, CitationCount_CrossRef) for papers across different conferences?",
+      "parent_question": "How has the distribution of paper types (J, C, M) evolved over the years across different conferences?",
+      "level": 1,
+      "visualization": "Scatter Plot",
+      "category": "Correlation Analysis",
+      "source_columns": [
+        "Downloads_Xplore",
+        "AminerCitationCount",
+        "CitationCount_CrossRef",
+        "Conference"
+      ]
+    },
+    {
+      "question": "How does the average number of pages per paper (calculated from FirstPage and LastPage) vary across different conferences and years?",
+      "parent_question": "How has the distribution of paper types (J, C, M) evolved over the years across different conferences?",
+      "level": 2,
+      "visualization": "Line Chart with Error Bars",
+      "category": "Temporal and Composition Analysis",
+      "source_columns": [
+        "FirstPage",
+        "LastPage",
+        "Conference",
+        "Year"
+      ]
+    },
+    {
+      "question": "How does the average number of downloads per paper vary across different paper types and years?",
+      "parent_question": "What is the correlation between the number of downloads and citation counts across different conferences?",
+      "level": 1,
+      "visualization": "Heatmap",
+      "category": "How does the average number of downloads per paper vary across different paper types and years?_category",
+      "source_columns": [
+        "Downloads_Xplore",
+        "PaperType",
+        "Year"
+      ]
+    },
+    {
+      "question": "What is the distribution of citation counts across different award categories?",
+      "parent_question": "What is the correlation between the number of downloads and citation counts across different conferences?",
+      "level": 2,
+      "visualization": "Box Plot",
+      "category": "What is the distribution of citation counts across different award categories?_category",
+      "source_columns": [
+        "CitationCount_CrossRef",
+        "Award"
+      ]
+    },
+    {
+      "question": "How does the average citation count per paper type change over the years?",
+      "parent_question": "What are the trends in the number of awards given over the years, and how do they vary by conference?",
+      "level": 1,
+      "visualization": "Line Chart",
+      "category": "Temporal Analysis",
+      "source_columns": [
+        "Year",
+        "PaperType",
+        "AminerCitationCount"
+      ]
+    },
+    {
+      "question": "What is the distribution of downloads across different paper types, and how does it relate to the number of pages?",
+      "parent_question": "What are the trends in the number of awards given over the years, and how do they vary by conference?",
+      "level": 2,
+      "visualization": "Box Plot",
+      "category": "Distribution Analysis",
+      "source_columns": [
+        "PaperType",
+        "Downloads_Xplore",
+        "FirstPage",
+        "LastPage"
+      ]
+    }
+  ]
+}

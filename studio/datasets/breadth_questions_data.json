@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "question": "How has the distribution of paper types (J, C, M) evolved over the years across different conferences?",
+      "category": "Temporal Analysis",
+      "source_columns": [
+        "Year",
+        "PaperType",
+        "Conference"
+      ],
+      "visualization": "Stacked Area Chart"
+    },
+    {
+      "question": "What is the correlation between the number of downloads and citation counts across different conferences?",
+      "category": "Correlation Analysis",
+      "source_columns": [
+        "Downloads_Xplore",
+        "AminerCitationCount",
+        "CitationCount_CrossRef",
+        "Conference"
+      ],
+      "visualization": "Scatter Plot with Regression Line"
+    },
+    {
+      "question": "What are the trends in the number of awards given over the years, and how do they vary by conference?",
+      "category": "Trend Analysis",
+      "source_columns": [
+        "Year",
+        "Award",
+        "Conference"
+      ],
+      "visualization": "Line Chart"
+    }
+  ]
+}

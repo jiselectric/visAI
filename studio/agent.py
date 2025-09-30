@@ -149,12 +149,10 @@ class Agent:
         """Initialize the workflow and researcher instance"""
         self.workflow = create_workflow()
 
-        # Initialize ResearcherConfig and Researcher instance
-        self.config = ResearchConfig(
-            depth=3, breadth=4, max_workers=8, use_caching=True
-        )
+        if not hasattr(self, "config") or self.config is None:
+            self.config = ResearchConfig()  # Use defaults from Researcher.py
 
-        # Note: researcher will be initialized with dataset_profile in initialize_state_from_csv
+        # Config should be set before calling initialize()
 
     def initialize_state_from_csv(self) -> dict:
         """Initialize state with dataset profile and info"""
@@ -166,11 +164,8 @@ class Agent:
 
         if cached_info and cached_profile:
             print("Using cached dataset info and profile")
-            # Initialize researcher with cached profile
             if self.config is None:
-                self.config = ResearchConfig(
-                    depth=3, breadth=4, max_workers=8, use_caching=True
-                )
+                self.config = ResearchConfig()  # Fallback to defaults
             self.researcher = Researcher(self.config, cached_profile)
             return {"dataset_info": cached_info, "dataset_profile": cached_profile}
 
@@ -191,11 +186,9 @@ class Agent:
         dataset_profile = generate_dataset_profile(df)
         save_json_data(dataset_profile, "dataset_profile.json", "./datasets")
 
-        # Initialize researcher with generated profile
+        # Initialize researcher with config already set
         if self.config is None:
-            self.config = ResearchConfig(
-                depth=3, breadth=4, max_workers=8, use_caching=True
-            )
+            self.config = ResearchConfig()  # Fallback to defaults
         self.researcher = Researcher(self.config, dataset_profile)
 
         print(
@@ -208,7 +201,7 @@ class Agent:
         Step 4: Deterministic HTML generation from structured final_arrangement
         This is where the Agent class handles the final HTML output generation
         """
-        print("=== Step 4: Generate HTML Output ===")
+        print("Step 4: Generate HTML Output")
 
         final_arrangement = output_state.get("final_arrangement", {})
 
