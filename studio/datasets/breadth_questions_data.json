@@ -2,7 +2,7 @@
   "questions": [
     {
       "question": "How has the distribution of paper types (J, C, M) changed over the years across different conferences?",
-      "category": "Trend Analysis",
+      "category": "Temporal Analysis",
       "source_columns": [
         "Year",
         "PaperType",
@@ -11,23 +11,23 @@
       "visualization": "Stacked Area Chart"
     },
     {
-      "question": "What is the relationship between the number of downloads and citation counts for papers with awards?",
+      "question": "What is the relationship between the number of downloads and citation counts across different conferences?",
       "category": "Correlation Analysis",
       "source_columns": [
         "Downloads_Xplore",
         "AminerCitationCount",
         "CitationCount_CrossRef",
-        "Award"
+        "Conference"
       ],
-      "visualization": "Scatter Plot with Regression Line"
+      "visualization": "Scatter Plot with Trend Line"
     },
     {
-      "question": "Which authors and affiliations have the highest citation impact in terms of average citation count per paper?",
-      "category": "Impact Analysis",
+      "question": "Which authors and affiliations have the highest number of award-winning papers?",
+      "category": "Author and Affiliation Analysis",
       "source_columns": [
         "AuthorNames-Deduped",
         "AuthorAffiliation",
-        "AminerCitationCount"
+        "Award"
       ],
       "visualization": "Bar Chart"
     }

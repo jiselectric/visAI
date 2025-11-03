@@ -5,7 +5,7 @@
       "parent_question": null,
       "level": 0,
       "visualization": "Stacked Area Chart",
-      "category": "Trend Analysis",
+      "category": "Temporal Analysis",
       "source_columns": [
         "Year",
         "PaperType",
@@ -13,33 +13,57 @@
       ]
     },
     {
-      "question": "What is the relationship between the number of downloads and citation counts for papers with awards?",
+      "question": "What is the relationship between the number of downloads and citation counts across different conferences?",
       "parent_question": null,
       "level": 0,
-      "visualization": "Scatter Plot with Regression Line",
+      "visualization": "Scatter Plot with Trend Line",
       "category": "Correlation Analysis",
       "source_columns": [
         "Downloads_Xplore",
         "AminerCitationCount",
         "CitationCount_CrossRef",
+        "Conference"
+      ]
+    },
+    {
+      "question": "Which authors and affiliations have the highest number of award-winning papers?",
+      "parent_question": null,
+      "level": 0,
+      "visualization": "Bar Chart",
+      "category": "Author and Affiliation Analysis",
+      "source_columns": [
+        "AuthorNames-Deduped",
+        "AuthorAffiliation",
         "Award"
       ]
     },
     {
-      "question": "Which authors and affiliations have the highest citation impact in terms of average citation count per paper?",
-      "parent_question": null,
-      "level": 0,
-      "visualization": "Bar Chart",
-      "category": "Impact Analysis",
+      "question": "How does the number of award-winning papers vary across different conferences over the years?",
+      "parent_question": "Which authors and affiliations have the highest number of award-winning papers?",
+      "level": 1,
+      "visualization": "Stacked area chart",
+      "category": "Temporal analysis of award-winning papers across conferences",
       "source_columns": [
-        "AuthorNames-Deduped",
-        "AuthorAffiliation",
-        "AminerCitationCount"
+        "Conference",
+        "Year",
+        "Award"
       ]
     },
     {
-      "question": "How does the number of downloads on Xplore correlate with the citation count from CrossRef across different conferences?",
-      "parent_question": "Which authors and affiliations have the highest citation impact in terms of average citation count per paper?",
+      "question": "What is the correlation between the number of downloads and citation counts for award-winning papers?",
+      "parent_question": "Which authors and affiliations have the highest number of award-winning papers?",
+      "level": 2,
+      "visualization": "Scatter plot",
+      "category": "Correlation between downloads and citations for award-winning papers",
+      "source_columns": [
+        "Downloads_Xplore",
+        "AminerCitationCount",
+        "Award"
+      ]
+    },
+    {
+      "question": "What is the correlation between the number of downloads and the number of citations for papers across different conferences?",
+      "parent_question": "How has the distribution of paper types (J, C, M) changed over the years across different conferences?",
       "level": 1,
       "visualization": "Scatter Plot",
       "category": "Correlation Analysis",
@@ -50,63 +74,39 @@
       ]
     },
     {
-      "question": "What is the distribution of paper types across different years and their average citation counts?",
-      "parent_question": "Which authors and affiliations have the highest citation impact in terms of average citation count per paper?",
+      "question": "How does the average citation count vary by author affiliation and paper type?",
+      "parent_question": "How has the distribution of paper types (J, C, M) changed over the years across different conferences?",
       "level": 2,
       "visualization": "Box Plot",
-      "category": "Distribution Analysis",
+      "category": "Segmentation Analysis",
       "source_columns": [
-        "PaperType",
-        "Year",
-        "CitationCount_CrossRef"
-      ]
-    },
-    {
-      "question": "How do the citation counts from Aminer and CrossRef compare across different conferences and paper types?",
-      "parent_question": "How has the distribution of paper types (J, C, M) changed over the years across different conferences?",
-      "level": 1,
-      "visualization": "Scatter plot with trend lines",
-      "category": "Comparison of citation counts across conferences and paper types",
-      "source_columns": [
-        "Conference",
-        "PaperType",
+        "AuthorAffiliation",
         "AminerCitationCount",
-        "CitationCount_CrossRef"
+        "PaperType"
       ]
     },
     {
-      "question": "What is the trend in the number of downloads over the years for papers that received awards?",
-      "parent_question": "How has the distribution of paper types (J, C, M) changed over the years across different conferences?",
-      "level": 2,
-      "visualization": "Line chart",
-      "category": "Temporal trend of downloads for awarded papers",
-      "source_columns": [
-        "Year",
-        "Downloads_Xplore",
-        "Award"
-      ]
-    },
-    {
-      "question": "How do citation counts vary across different conferences over the years?",
-      "parent_question": "What is the relationship between the number of downloads and citation counts for papers with awards?",
+      "question": "How does the average number of downloads per paper vary by paper type and year?",
+      "parent_question": "What is the relationship between the number of downloads and citation counts across different conferences?",
       "level": 1,
       "visualization": "Line chart",
-      "category": "Temporal distribution of citation counts across conferences",
+      "category": "Temporal and categorical analysis",
       "source_columns": [
-        "CitationCount_CrossRef",
-        "Conference",
+        "Downloads_Xplore",
+        "PaperType",
         "Year"
       ]
     },
     {
-      "question": "What is the distribution of paper types across different conferences?",
-      "parent_question": "What is the relationship between the number of downloads and citation counts for papers with awards?",
+      "question": "What is the correlation between the number of pages and the citation counts?",
+      "parent_question": "What is the relationship between the number of downloads and citation counts across different conferences?",
       "level": 2,
-      "visualization": "Stacked bar chart",
-      "category": "Composition of paper types by conference",
+      "visualization": "Scatter plot",
+      "category": "Correlation analysis",
       "source_columns": [
-        "PaperType",
-        "Conference"
+        "FirstPage",
+        "LastPage",
+        "AminerCitationCount"
       ]
     }
   ]
