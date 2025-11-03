@@ -17,7 +17,7 @@ def convert_numpy_types(obj):
     elif isinstance(obj, np.ndarray):
         return obj.tolist()
     elif isinstance(obj, pd.DataFrame):
-        return obj.to_dict('records')
+        return obj.to_dict("records")
     elif isinstance(obj, pd.Series):
         return obj.tolist()
     elif isinstance(obj, dict):

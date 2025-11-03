@@ -203,14 +203,27 @@ class Researcher:
 
         final_report_json = extract_json_from_response(final_report)
 
+        # Get the arranged indices from the LLM response
+        arranged_indices = final_report_json.get("arranged_research_sections", [])  # type: ignore
+
+        valid_arranged_sections = []
+        for idx in arranged_indices:
+            if isinstance(idx, int) and 0 <= idx < len(research_results_array):
+                valid_arranged_sections.append(research_results_array[idx])
+            elif idx == -1:
+                continue
+            else:
+                print(
+                    f"Warning: Invalid index {idx} in arranged_research_sections, skipping..."
+                )
+                continue
+
         final_report = {
             "title": final_report_json.get("title", ""),  # type: ignore
             "introduction": final_report_json.get("introduction", ""),  # type: ignore
-            "arranged_research_sections": [
-                research_results_array[idx] for idx in final_report_json.get("arranged_research_sections", [])  # type: ignore
-            ],
+            "arranged_research_sections": valid_arranged_sections,
             "conclusion": final_report_json.get("conclusion", ""),  # type: ignore
-            "total_results": len(final_report_json.get("arranged_research_sections", [])),  # type: ignore
+            "total_results": len(valid_arranged_sections),
         }
 
         # Save final report to JSON
@@ -388,12 +401,10 @@ class Researcher:
         )
 
         system_prompt = load_prompt_template("sys_prompts", "generate_pandas_code.md")
-        user_prompt = load_prompt_template("user_prompts", "generate_pandas_code.md")
 
         pandas_code = invoke_llm_with_prompt(
             system_prompt,
-            user_prompt,
-            {},
+            "",
             {
                 "question": question.question,
                 "visualization": question.visualization,
@@ -401,6 +412,7 @@ class Researcher:
                 "source_columns": question.source_columns,
                 "sampled_data": sample_data_stringified,
             },
+            {},
         )
 
         pandas_code = clean_markdown_output(pandas_code)

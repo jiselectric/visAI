@@ -343,6 +343,13 @@ class Agent:
         if not viz_code:
             return '<div class="error-chart">No visualization code available</div>'
 
+        # Issue 1 fix: Check if viz_code is executable Python string
+        if not isinstance(viz_code, str):
+            print(
+                f"Warning: visualization_code for chart {chart_id} is not a string (type: {type(viz_code).__name__})"
+            )
+            return '<div class="error-chart">Visualization code is not executable Python code (received JSON/dict instead)</div>'
+
         try:
             # Handle as Python matplotlib/seaborn code
             import numpy as np
@@ -351,6 +358,10 @@ class Agent:
             # Clear any existing plots
             plt.clf()
             plt.figure(figsize=(10, 6))
+
+            # Check if computed_data is an error
+            if isinstance(computed_data, dict) and "error" in computed_data:
+                return f'<div class="error-chart">Data computation error: {computed_data["error"]}</div>'
 
             # Prepare the data
             if isinstance(computed_data, list) and computed_data:

@@ -49,7 +49,20 @@ Research Results: {{research_results}}
 - Arrange the research sections in a way that creates a persuasive and impactful research paper.
 - Arrange the research sections in a way that creates a memorable and impactful research paper.
 
-### Task 4. Write a conclusion for the research report.
+### Task 4. Filter invalid or redundant research results.
+- Quality Control: Review the arranged research results and identify any that should be excluded:
+    - Redundant: Duplicate questions or highly similar findings already covered by other results
+    - Invalid: Missing visualizations, erroneous data, or malformed outputs
+    - Low-quality: Unclear explanations or inappropriate visualizations
+- Filtering Mechanism: For results that should be excluded, replace their index with -1 in the arranged array.
+    - Example: If arranged order is [0, 3, 2, 1, 4] and items at original indices 2 and 4 are redundant:
+    - Output: [0, 3, -1, 1, -1] (items 2 and 4 marked for removal)
+
+
+### Task 5. Write a conclusion for the research report.
+- The conclusion should summarize the key findings and their implications.
+- The conclusion should be written in a formal academic tone.
+- The conclusion should provide closure and suggest future research directions if appropriate.
 
 ## Output Format
 Return a JSON object with the following fields. The output JSON format is:
@@ -64,5 +77,5 @@ Return a JSON object with the following fields. The output JSON format is:
 Where:
 - [A]: The title in Task 1
 - [B]: The introduction in Task 2
-- [C]: The indices of the arranged research sections in Task 3
-- [D]: The conclusion in Task 4
+- [C]: Array of indices from Task 3, with invalid/redundant items marked as -1 in Task 4. The array length must equal the total number of input research results.
+- [D]: The conclusion in Task 5.

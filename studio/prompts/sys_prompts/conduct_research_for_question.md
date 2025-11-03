@@ -8,7 +8,7 @@ Computed Data: {{computed_data}}
 
 ## Step-by-Step Tasks
 
-### Task 1. Draw a Python visualization schema for the given research question and computed data.
+### Task 1. Generate an executable Python visualization schema for the given research question and computed data.
 - The visualization should effectively answer the research question and visualize the computed data.
 - The visualization schema should be a valid Python visualization schema.
 - You must choose the most appropriate visualization type for the given research question and computed data.
